@@ -1,0 +1,89 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Episode {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  title        String
+  img          String
+  link         String
+  featured     Boolean  @default(false)
+  description  String?
+  preparedBy   String?
+  presenter    String?
+  featureTitle String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  published    Boolean  @default(false)
+  author       Author   @relation(fields: [authorId], references: [id])
+  categoryId   String   @db.ObjectId
+  category     Category @relation(fields: [categoryId], references: [id])
+  authorId     String   @db.ObjectId
+}
+
+model Author {
+  id         String     @id @default(auto()) @map("_id") @db.ObjectId
+  name       String
+  episodes   Episode[]
+  posts      Post[]
+  Categories Category[]
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+}
+
+model Category {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  img       String
+  month     String
+  authorId  String    @db.ObjectId
+  author    Author    @relation(fields: [authorId], references: [id])
+  year      String
+  episodes  Episode[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Post {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  image     String
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  published Boolean  @default(false)
+  author    Author   @relation(fields: [authorId], references: [id])
+  authorId  String   @db.ObjectId
+}
+
+model Admin {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  email     String   @unique
+  image     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Video {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  image     String
+  link      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Year {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  year      String
+  months    String[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
