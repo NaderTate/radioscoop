@@ -70,10 +70,8 @@ const Contact = () => {
           <span className="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600" />
           <div className="justify-between sm:flex">
             <div>
-              <h3 className="text-xl font-bold text-gray-100">
-                Radio Scoop App
-              </h3>
-              <p className="mt-1 text-xs font-medium text-gray-50">
+              <h3 className="text-xl font-bold ">Radio Scoop App</h3>
+              <p className="mt-1 text-xs font-medium ">
                 حمل تطبيق راديو سكووب الان من جوجل بلاي
               </p>
             </div>

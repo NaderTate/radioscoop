@@ -4,11 +4,11 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import prisma from "@/lib/prisma";
 const emails: Array<string> = [];
 // get the emails of all users
-prisma.admin.findMany().then((admins) => {
-  admins.forEach((admin) => {
-    emails.push(admin.email);
-  });
-});
+// prisma.admin.findMany().then((admins) => {
+//   admins.forEach((admin) => {
+//     emails.push(admin.email);
+//   });
+// });
 const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
@@ -21,10 +21,11 @@ const authOptions: NextAuthOptions = {
   callbacks: {
     async session({ session, user }: any) {
       // only return a session if the user is in the database
-      if (emails.includes(user.email)) {
-        session.user.id = user.id;
-        return session;
-      }
+      return session;
+      // if (emails.includes(user.email)) {
+      //   session.user.id = user.id;
+      //   return session;
+      // }
     },
   },
 

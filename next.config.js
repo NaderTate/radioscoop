@@ -5,7 +5,7 @@ const nextConfig = {
     defaultLocale: "ar",
   },
   images: {
-    domains: ["telegra.ph", "res.cloudinary.com"],
+    domains: ["telegra.ph", "res.cloudinary.com", "images.unsplash.com"],
   },
 };
 

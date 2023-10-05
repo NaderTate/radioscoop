@@ -6,11 +6,11 @@ interface Episodee extends Episode {
 }
 function EpisodeCard({ ep }: { ep: Episodee }) {
   return (
-    <div className="hover:scale-[1.01] transition flex-1 w-[160px] sm:w-[200px] ">
+    <div className="hover:scale-[1.01] transition w-full aspect-square ">
       <a
         href={`/ep/${ep.id}`}
         style={{ backgroundImage: `url(${ep.img})` }}
-        className="relative block overflow-hidden h-40 sm:h-auto bg-center bg-no-repeat bg-cover rounded-xl"
+        className="relative block overflow-hidden h-full bg-center bg-no-repeat bg-cover rounded-xl"
       >
         {!ep.featured && (
           <span className="absolute z-10 inline-flex items-center px-3 py-1 text-xs font-semibold text-white bg-black/50 rounded-full right-4 top-4">

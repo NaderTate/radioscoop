@@ -18,19 +18,17 @@ async function page() {
   return (
     <div>
       <Contact />
-      <div className="grid grid-cols-4 justify-between min-h-screen  lg:border-r">
-        <div>
+      <div className="grid grid-cols-1 lg:grid-cols-5">
+        <div className="p-2 hidden lg:block">
           <SidePanel />
         </div>
-        <div className="col-span-3 flex flex-col flex-grow lg:border-r border-gray-800 dark:border-gray-300 ">
-          <div className="">
-            <EpisodesSection
-              title="أحدث الحلقات"
-              data={Episodes}
-              seeAll="/ep"
-            />
-            <Schedule />
-          </div>
+
+        <div className="lg:col-span-4 lg:border-r border-gray-800 dark:border-gray-300 ">
+          <EpisodesSection title="أحدث الحلقات" data={Episodes} seeAll="/ep" />
+          <Schedule />
+        </div>
+        <div className="p-2 lg:hidden">
+          <SidePanel />
         </div>
       </div>
     </div>

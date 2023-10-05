@@ -24,10 +24,10 @@ function EpisodesSection({
   seeAll: string;
 }) {
   return (
-    <section className="p-1 sm:p-3 max-w-screen-xl 3xl:mx-auto mb-10">
-      <div className="px-4 py-5 mx-auto max-w-screen-2xl sm:px-6 lg:px-8 rounded-lg border border-gray-300/30 bg-slate-100/5">
+    <section className="p-1 sm:p-3 w-full m-auto mb-10">
+      <div className="px-4 py-5 mx-auto sm:px-6 lg:px-8 rounded-lg border border-gray-300/30 bg-slate-100/5">
         <div className=" justify-between flex bg-slate-400/25 rounded-3xl items-center p-2 mb-5">
-          <div className="max-w-xl ">
+          <div className=" ">
             <h2 className="text-base font-bold tracking-tight sm:text-2xl md:text-2xl">
               {title}
             </h2>

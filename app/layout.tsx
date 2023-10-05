@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <SessionProv session={session}>
-        <body dir="rtl" className={changa.className + " overflow-x-hidden"}>
+        <body dir="rtl" className={changa.className}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <Header />
             {children}

@@ -281,7 +281,7 @@ const Header = () => {
   const [weather, setWeather] = useState<any>(null);
 
   return (
-    <header className="bg-[#194F88]">
+    <header className="bg-[#194F88]  overflow-x-hidden">
       <div className="max-w-screen-xl px-4 py-8 mx-auto sm:px-10 lg:px-[1.5%]">
         <div className="my-2 flex sm:flex-row justify-between">
           <div className="w-8/12">
@@ -304,7 +304,7 @@ const Header = () => {
             className={`flex flex-col lg:hidden space-y-1 gap-2 grow w-full lg:w-auto duration-300 bg-[#00000060] p-2 rounded-xl transition ${
               open
                 ? "opacity-100 translate-x-0"
-                : "opacity-0 -translate-x-full h-0"
+                : "opacity-0 -translate-x-full h-0 hidden"
             } `}
           >
             {data.map((item, index) => (

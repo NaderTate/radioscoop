@@ -4,6 +4,7 @@ import { Navigation, FreeMode } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/free-mode";
+import Image from "next/image";
 function Day({ Day, Images }: { Day: string; Images: Array<string> }) {
   return (
     <div className="">
@@ -37,13 +38,14 @@ function Day({ Day, Images }: { Day: string; Images: Array<string> }) {
           }}
         >
           {Images.length > 0 &&
-            Images.map((star) => {
+            Images.map((Img) => {
               return (
-                <SwiperSlide className="" key={star}>
-                  <img
-                    loading="lazy"
-                    className="w-48 rounded-md hover:scale-[1.01]"
-                    src={star}
+                <SwiperSlide className="w-full" key={Img}>
+                  <Image
+                    width={200}
+                    height={200}
+                    className="w-full rounded-md hover:scale-[1.01]"
+                    src={Img}
                     alt=""
                   />
                 </SwiperSlide>
