@@ -73,7 +73,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
     };
   }
 }
-async function Episode({ params: { id } }: { params: { id: string } }) {
+async function page({ params: { id } }: { params: { id: string } }) {
   const Episode = await prisma.episode.findUnique({
     where: {
       id,
@@ -95,7 +95,6 @@ async function Episode({ params: { id } }: { params: { id: string } }) {
       author: { select: { name: true } },
     },
   });
-  console.log(related);
   return (
     <div>
       <div>
@@ -191,4 +190,4 @@ async function Episode({ params: { id } }: { params: { id: string } }) {
   );
 }
 
-export default Episode;
+export default page;

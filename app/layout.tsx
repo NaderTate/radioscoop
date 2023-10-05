@@ -1,7 +1,6 @@
 import Header from "@/components/Header";
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import { Changa } from "next/font/google";
 import SessionProv from "@/components/SessionProvider";
 import { ThemeProvider } from "@/components/theme-porvider";

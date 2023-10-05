@@ -175,10 +175,12 @@ const Contact = () => {
           rel="noopener noreferrer"
         >
           Threads
-          <img
+          <Image
+            width={20}
+            height={20}
             src="https://res.cloudinary.com/dqkyatgoy/image/upload/v1688896764/Radio/Frame_1_rtanbo.jpg"
-            className="rounded-full mr-2 w-5"
-            alt=""
+            className="rounded-full mr-2"
+            alt="Threads"
           />
         </a>
       </div>

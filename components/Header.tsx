@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import Search from "./Search";
 import ThemeToggle from "./ThemeToggle";
-import { BiSearch } from "react-icons/bi";
 import Link from "next/link";
 const data = [
   { title: "الصفحة الرئيسية", link: "/", content: [] },
