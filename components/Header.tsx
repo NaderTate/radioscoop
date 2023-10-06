@@ -9,31 +9,31 @@ const data = [
   { title: "الصفحة الرئيسية", link: "/", content: [] },
   {
     title: "اكاديمية الراديو",
-    link: "/radio-ac",
+    link: "/articles",
     content: [
       {
         title: "ورشة التعليق الصوتي الاقوي والافضل",
-        link: "/radio-ac/6339d8b3eb8c933b9fd29f0f",
+        link: "/articles/6339d8b3eb8c933b9fd29f0f",
         content: [],
       },
       {
         title: "الكورس المكثف مع احمد اسماعيل",
-        link: "/radio-ac/6339d8e5eb8c933b9fd29f12",
+        link: "/articles/6339d8e5eb8c933b9fd29f12",
         content: [],
       },
       {
         title: "ورشة التمثيل الاذاعي",
-        link: "/radio-ac/6339d91beb8c933b9fd29f15",
+        link: "/articles/6339d91beb8c933b9fd29f15",
         content: [],
       },
       {
         title: "الكورس الشامل",
-        link: "/radio-ac/6339d957eb8c933b9fd29f18",
+        link: "/articles/6339d957eb8c933b9fd29f18",
         content: [],
       },
       {
         title: "ليه اختار التدريب في راديو سكووب",
-        link: "/radio-ac/6339d9aaeb8c933b9fd29f1e",
+        link: "/articles/6339d9aaeb8c933b9fd29f1e",
         content: [],
       },
     ],
@@ -264,7 +264,7 @@ const data = [
     ],
   },
   { title: "للاستماع والتعليق", link: "/comment", content: [] },
-  { title: "تواصل معنا", link: "/Contact", content: [] },
+  { title: "تواصل معنا", link: "/contact", content: [] },
 ];
 
 const Header = () => {
@@ -281,7 +281,7 @@ const Header = () => {
   const [weather, setWeather] = useState<any>(null);
 
   return (
-    <header className="bg-[#194F88]  overflow-x-hidden">
+    <header className="bg-[#194F88]">
       <div className="max-w-screen-xl px-4 py-8 mx-auto sm:px-10 lg:px-[1.5%]">
         <div className="my-2 flex sm:flex-row justify-between">
           <div className="w-8/12">

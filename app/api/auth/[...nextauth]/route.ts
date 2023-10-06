@@ -3,12 +3,12 @@ import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import prisma from "@/lib/prisma";
 const emails: Array<string> = [];
-// get the emails of all users
-// prisma.admin.findMany().then((admins) => {
-//   admins.forEach((admin) => {
-//     emails.push(admin.email);
-//   });
-// });
+// get the emails of all admins
+prisma.user.findMany().then((users) => {
+  users.forEach((user) => {
+    emails.push(user.email);
+  });
+});
 const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
@@ -21,11 +21,10 @@ const authOptions: NextAuthOptions = {
   callbacks: {
     async session({ session, user }: any) {
       // only return a session if the user is in the database
-      return session;
-      // if (emails.includes(user.email)) {
-      //   session.user.id = user.id;
-      //   return session;
-      // }
+      if (emails.includes(user.email)) {
+        session.user.id = user.id;
+        return session;
+      }
     },
   },
 
