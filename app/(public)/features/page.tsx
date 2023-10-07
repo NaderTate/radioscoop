@@ -1,7 +1,6 @@
-import Pagination from "../comment/Pagination";
+import Pagination from "../../../components/Pagination";
 import prisma from "@/lib/prisma";
 import { pagination } from "@/lib/utils";
-
 async function page({
   searchParams,
 }: {
@@ -31,8 +30,7 @@ async function page({
       type: type ? type : undefined,
     },
   });
-  const { Arr } = await pagination(count, itemsToShow, sk);
-  const { pages } = await pagination(count, itemsToShow, sk);
+  const { Arr, pages } = pagination(count, sk, itemsToShow);
   return (
     <div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-10 px-4">

@@ -14,9 +14,9 @@ function Pagination({
   const style =
     "inline-flex items-center justify-center w-8 h-8 border border-gray-100 rounded-full hover:bg-slate-400/50 transition bg-white dark:bg-inherit";
   return (
-    <div>
+    <div dir="ltr">
       {pages && Arr && (
-        <ol className="flex justify-center gap-1 mt-16 text-sm font-medium">
+        <ol className="flex justify-center gap-1 my-16 text-sm font-medium">
           <li>
             <Link
               href={{

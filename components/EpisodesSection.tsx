@@ -10,8 +10,8 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "swiper/css/grid";
 interface data extends Episode {
-  author: { name: string };
-  category: { name: string };
+  author?: { name: string } | null;
+  category?: { name: string } | null;
 }
 
 function EpisodesSection({
@@ -35,7 +35,7 @@ function EpisodesSection({
           {seeAll && (
             <Link
               className="inline-flex  items-center flex-shrink-0 px-2 py-2 font-medium text-gray-800 border transition border-gray-100 rounded-full  hover:text-white hover:bg-gray-500 dark:hover:bg-gray-100 dark:hover:text-gray-800 dark:text-white"
-              href={seeAll}
+              href={{ pathname: seeAll }}
             >
               مشاهدة الكل
             </Link>

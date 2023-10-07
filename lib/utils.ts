@@ -3,11 +3,7 @@ import { twMerge } from "tailwind-merge";
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
-export async function pagination(
-  count: number,
-  sk: number,
-  itemsToShow: number
-) {
+export function pagination(count: number, sk: number, itemsToShow: number) {
   const pages = Array.from(
     { length: Math.ceil(count / itemsToShow) },
     (_, i) => i + 1

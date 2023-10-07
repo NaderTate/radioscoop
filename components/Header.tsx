@@ -45,17 +45,17 @@ const data = [
       // { title: "الفيتشرات الاذاعيه", link: "/features", content: [] },
       {
         title: "فيتشرات رمضان 2023",
-        link: "/feature?type=ramadan-2023",
+        link: "/features?type=ramadan-2023",
         content: [],
       },
       {
         title: "فيتشرات العيد",
-        link: "/feature?type=eid-fetr-2023",
+        link: "/features?type=eid-fetr-2023",
         content: [],
       },
       {
         title: "فيتشرات صيف 2023",
-        link: "/feature?type=summer-2023",
+        link: "/features?type=summer-2023",
         content: [],
       },
       {

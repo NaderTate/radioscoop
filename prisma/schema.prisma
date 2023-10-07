@@ -9,33 +9,38 @@ datasource db {
 }
 
 model Episode {
-  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  id           String    @id @default(auto()) @map("_id") @db.ObjectId
   title        String
   img          String
   link         String
-  featured     Boolean  @default(false)
+  featured     Boolean   @default(false)
   description  String?
-  preparedBy   String?
-  presenter    String?
+  preparedBy   Author?   @relation("preparedFeature", fields: [preparedById], references: [id])
+  preparedById String?   @db.ObjectId
+  presenter    Author?   @relation("presentedFeature", fields: [presenterId], references: [id])
+  presenterId  String?   @db.ObjectId
   featureTitle String?
   type         String?
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  published    Boolean  @default(false)
-  author       Author   @relation(fields: [authorId], references: [id])
-  categoryId   String   @db.ObjectId
-  category     Category @relation(fields: [categoryId], references: [id])
-  authorId     String   @db.ObjectId
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  published    Boolean   @default(false)
+  author       Author?   @relation(fields: [authorId], references: [id])
+  categoryId   String?   @db.ObjectId
+  category     Category? @relation(fields: [categoryId], references: [id])
+  authorId     String?   @db.ObjectId
 }
 
 model Author {
-  id         String     @id @default(auto()) @map("_id") @db.ObjectId
-  name       String
-  episodes   Episode[]
-  posts      Post[]
-  Categories Category[]
-  createdAt  DateTime   @default(now())
-  updatedAt  DateTime   @updatedAt
+  id                String     @id @default(auto()) @map("_id") @db.ObjectId
+  label             String
+  value             String
+  episodes          Episode[]
+  posts             Post[]
+  Categories        Category[]
+  PreparedFeatures  Episode[]  @relation("preparedFeature")
+  PresentedFeatures Episode[]  @relation("presentedFeature")
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
 }
 
 model Category {

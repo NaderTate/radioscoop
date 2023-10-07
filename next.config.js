@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    typedRoutes: true,
+    serverActions: true,
+  },
   i18n: {
     locales: ["ar"],
     defaultLocale: "ar",

@@ -1,4 +1,6 @@
+import ProtectedRoute from "@/components/ProtectedRoute";
 import type { Metadata } from "next";
+import AdminHeader from "../../components/AdminHeader";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -10,5 +12,15 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <div>{children}</div>;
+  return (
+    // @ts-ignore
+    <ProtectedRoute>
+      <div dir="rtl" className=" px-5 mt-10">
+        <div className="fixed z-10 top-5 right-5">
+          <AdminHeader />
+        </div>
+        {children}
+      </div>
+    </ProtectedRoute>
+  );
 }

@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import "./globals.css";
 import type { Metadata } from "next";
 import { Changa } from "next/font/google";
@@ -23,7 +22,6 @@ export default function RootLayout({
       <SessionProv session={session}>
         <body dir="rtl" className={changa.className}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <Header />
             {children}
           </ThemeProvider>
         </body>
