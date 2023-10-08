@@ -11,13 +11,12 @@ import Image from "next/image";
 import DeleteButton from "./DeleteButton";
 import { FiEdit } from "react-icons/fi";
 import Link from "next/link";
-import { Category } from "@prisma/client";
+import { Video } from "@prisma/client";
 import { deleteEpisode } from "@/lib/_actions";
-interface ProgramsTableProps extends Category {
-  author: { label: string } | null;
-  episodes: { id: string }[] | null;
+interface VideosTableProps extends Video {
+  presenter: { label: string } | null;
 }
-function ProgramsTable({ data }: { data: ProgramsTableProps[] }) {
+function VideosTable({ data }: { data: VideosTableProps[] }) {
   return (
     <div>
       <Table>
@@ -25,38 +24,30 @@ function ProgramsTable({ data }: { data: ProgramsTableProps[] }) {
         <TableHeader>
           <TableRow>
             <TableHead className="text-right">البوستر</TableHead>
-            <TableHead className="text-right">البرنامج</TableHead>
-            <TableHead className="text-right">الموسم</TableHead>
+            <TableHead className="text-right">الاسم</TableHead>
             <TableHead className="text-right">تقديم</TableHead>
-            <TableHead className="text-right">عدد الحلقات</TableHead>
             <TableHead className="text-right">التاريخ</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data.map((program) => (
-            <TableRow key={program.id}>
+          {data.map((video) => (
+            <TableRow key={video.id}>
               <TableCell>
-                <Link
-                  href={{ pathname: `/program/${program.id}` }}
-                  target="_blank"
-                >
+                <Link href={{ pathname: video.link }} target="_blank">
                   <Image
                     alt="logo"
-                    src={program.img}
+                    src={video.image}
                     width={100}
                     height={100}
                     className="rounded-xl"
                   />
                 </Link>
               </TableCell>
-              <TableCell>{program.name}</TableCell>
+              <TableCell>{video.title}</TableCell>
+              <TableCell>{video.presenter?.label}</TableCell>
+
               <TableCell>
-                {program?.year} - {program.month}
-              </TableCell>
-              <TableCell>{program?.author?.label}</TableCell>
-              <TableCell>{program?.episodes?.length}</TableCell>
-              <TableCell>
-                {new Date(program.createdAt).toLocaleDateString("ar-EG", {
+                {new Date(video.createdAt).toLocaleDateString("ar-EG", {
                   year: "numeric",
                   month: "long",
                   day: "numeric",
@@ -68,14 +59,13 @@ function ProgramsTable({ data }: { data: ProgramsTableProps[] }) {
                     className="cursor-pointer"
                     href={{
                       pathname: "/edit",
-                      query: { content: "video", id: program.id },
+                      query: { content: "video", id: video.id },
                     }}
                     target="_blank"
                   >
                     <FiEdit size={20} />
                   </Link>
-                  |{" "}
-                  <DeleteButton deleteAction={deleteEpisode} id={program.id} />{" "}
+                  | <DeleteButton deleteAction={deleteEpisode} id={video.id} />
                 </div>
               </TableCell>
             </TableRow>
@@ -86,4 +76,4 @@ function ProgramsTable({ data }: { data: ProgramsTableProps[] }) {
   );
 }
 
-export default ProgramsTable;
+export default VideosTable;

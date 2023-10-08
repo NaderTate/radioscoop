@@ -18,3 +18,18 @@ export const deleteEpisode = async (id: string) => {
   });
   return episode;
 };
+// update the schedule
+export const updateSchedule = async (
+  data: {
+    id: number;
+    name: string;
+    images: { id: string; link: string }[];
+  }[]
+) => {
+  await prisma.schedule.deleteMany();
+  await prisma.schedule.create({
+    data: {
+      Days: data,
+    },
+  });
+};

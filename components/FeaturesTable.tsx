@@ -21,7 +21,7 @@ function FeaturesTable({ data }: { data: FeaturesTableProps[] }) {
   return (
     <div>
       <Table>
-        <TableCaption>أحدث الحلقات</TableCaption>
+        <TableCaption>أحدث الفيتشرات</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead className="text-right">البوستر</TableHead>

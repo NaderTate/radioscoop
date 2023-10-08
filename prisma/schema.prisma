@@ -39,6 +39,7 @@ model Author {
   Categories        Category[]
   PreparedFeatures  Episode[]  @relation("preparedFeature")
   PresentedFeatures Episode[]  @relation("presentedFeature")
+  Videos            Video[]
   createdAt         DateTime   @default(now())
   updatedAt         DateTime   @updatedAt
 }
@@ -57,17 +58,17 @@ model Category {
 }
 
 model Post {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  title     String
-  image     String
-  content   String
-  month     String?
-  type      String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  published Boolean  @default(false)
-  author    Author   @relation(fields: [authorId], references: [id])
-  authorId  String   @db.ObjectId
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  image       String
+  content     String
+  month       String?
+  type        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  published   Boolean  @default(false)
+  presenter   Author?  @relation(fields: [presenterId], references: [id])
+  presenterId String?  @db.ObjectId
 }
 
 model User {
@@ -85,18 +86,27 @@ model User {
 }
 
 model Video {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  title     String
-  image     String
-  link      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  image       String
+  link        String
+  presenter   Author?  @relation(fields: [presenterId], references: [id])
+  presenterId String?  @db.ObjectId
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model Year {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   year      String
   months    String[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Schedule {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  Days      Json[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }

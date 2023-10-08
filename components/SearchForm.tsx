@@ -7,7 +7,13 @@ import { FcSearch } from "react-icons/fc";
 function SearchForm({
   content,
 }: {
-  content: "episodes" | "articles" | "features" | "programs" | "media-scoop";
+  content:
+    | "episodes"
+    | "articles"
+    | "features"
+    | "programs"
+    | "media-scoop"
+    | "presenters";
 }) {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const router = useRouter();

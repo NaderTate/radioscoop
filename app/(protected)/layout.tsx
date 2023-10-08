@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     // @ts-ignore
     <ProtectedRoute>
-      <div dir="rtl" className=" px-5 mt-10">
+      <div dir="rtl" className=" px-5 mt-12">
         <div className="fixed z-10 top-5 right-5">
           <AdminHeader />
         </div>
