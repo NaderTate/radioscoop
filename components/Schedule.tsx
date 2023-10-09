@@ -1,15 +1,18 @@
 "use client";
-import React from "react";
 import Day from "./Day";
-function Schedule() {
+function Schedule({ Days, title }: { Days: DayType[] | any; title: string }) {
   return (
     <div>
       <div className="border border-gray-300/30 bg-slate-100/5 px-4 py-5 mx-3 rounded-lg">
         <div className="bg-slate-400/25 rounded-3xl p-2 text-base font-bold tracking-tight sm:text-2xl md:text-2xl mb-5">
-          برامج شهر أكتوبر 2023
+          {title}
         </div>
         <div className="flex flex-col gap-2">
-          <Day
+          {Days.map((day: DayType) => {
+            return <Day Day={day.name} Images={day.images} />;
+          })}
+
+          {/* <Day
             Day="السبت"
             Images={[
               "https://res.cloudinary.com/dqkyatgoy/image/upload/v1693567903/Radio/%D8%A7%D8%B3%D9%85%D8%A7%D8%A1_%D8%B7%D9%87_trsw2e.webp",
@@ -27,7 +30,6 @@ function Schedule() {
             Images={[
               "https://res.cloudinary.com/dqkyatgoy/image/upload/v1693567903/Radio/%D8%A7%D8%B3%D9%85%D8%A7%D8%A1_%D9%85%D8%AF%D9%8A%D8%AD_rruojn.webp",
               "https://res.cloudinary.com/dqkyatgoy/image/upload/v1693567926/Radio/%D9%85%D9%86%D9%89_%D9%85%D8%AD%D9%85%D9%88%D8%AF_cfhrqj.webp",
-              // "https://res.cloudinary.com/dqkyatgoy/image/upload/v1693567913/Radio/%D8%B1%D8%B4%D8%A7_%D8%B9%D9%84%D9%89_q67zet.webp",
               "https://res.cloudinary.com/dqkyatgoy/image/upload/v1693567928/Radio/%D9%86%D8%A7%D9%86%D8%A7_%D9%85%D9%83%D8%A7%D9%88%D9%89_ltthgd.webp",
               "https://res.cloudinary.com/dqkyatgoy/image/upload/v1693567929/Radio/%D9%87%D8%A8%D8%A9_%D8%A7%D9%84%D8%AE%D9%8A%D8%A7%D8%B7_ivfu6i.webp",
               "https://res.cloudinary.com/dqkyatgoy/image/upload/v1693567910/Radio/%D8%A7%D9%8A%D9%85%D8%A7%D9%86_%D9%85%D9%86%D8%B5%D9%88%D8%B1_c5tnza.webp",
@@ -115,7 +117,7 @@ function Schedule() {
               "https://res.cloudinary.com/dqkyatgoy/image/upload/v1693567916/Radio/%D8%B3%D8%A7%D8%B1%D8%A9_%D8%B7%D8%A7%D8%B1%D9%82_hgovwf.webp",
               "https://res.cloudinary.com/dqkyatgoy/image/upload/v1693567920/Radio/%D9%85%D8%AD%D9%85%D8%AF_%D8%A7%D9%84%D8%AD%D8%AF%D9%8A%D8%AF%D9%89_hnbohm.webp",
             ]}
-          />
+          /> */}
           {/* <Day Day="الجمعة" Images={[]} /> */}
         </div>
       </div>

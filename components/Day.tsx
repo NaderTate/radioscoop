@@ -5,7 +5,13 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/free-mode";
 import Image from "next/image";
-function Day({ Day, Images }: { Day: string; Images: Array<string> }) {
+function Day({
+  Day,
+  Images,
+}: {
+  Day: string;
+  Images: { id: string; link: string }[];
+}) {
   return (
     <div className="">
       <div className="flex justify-center">
@@ -38,15 +44,16 @@ function Day({ Day, Images }: { Day: string; Images: Array<string> }) {
           }}
         >
           {Images.length > 0 &&
-            Images.map((Img) => {
+            Images.map((Img, i) => {
               return (
-                <SwiperSlide className="w-full" key={Img}>
+                <SwiperSlide className="w-full" key={i}>
                   <Image
                     width={200}
                     height={200}
                     className="w-full rounded-md hover:scale-[1.01]"
-                    src={Img}
+                    src={Img.link}
                     alt=""
+                    sizes=" (min-width: 768px) 60vw, 25vw"
                   />
                 </SwiperSlide>
               );

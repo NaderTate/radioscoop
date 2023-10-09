@@ -1,15 +1,15 @@
 import Schedule from "./Schedule";
 import prisma from "@/lib/prisma";
 async function page() {
-  const days = await prisma.schedule.findFirst({
+  const schedule = await prisma.schedule.findFirst({
     select: {
       Days: true,
+      title: true,
     },
   });
-  console.log(days);
   return (
     <div>
-      <Schedule Days={days?.Days} />
+      <Schedule Days={schedule?.Days} title={schedule?.title || ""} />
     </div>
   );
 }

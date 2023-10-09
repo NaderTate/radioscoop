@@ -14,7 +14,12 @@ async function page() {
     },
     include: { author: { select: { label: true } }, category: true },
   });
-
+  const schedule = await prisma.schedule.findFirst({
+    select: {
+      Days: true,
+      title: true,
+    },
+  });
   return (
     <div>
       <Contact />
@@ -25,7 +30,7 @@ async function page() {
 
         <div className="lg:col-span-4 lg:border-r border-gray-800 dark:border-gray-300 ">
           <EpisodesSection title="أحدث الحلقات" data={Episodes} seeAll="/ep" />
-          <Schedule />
+          <Schedule Days={schedule?.Days} title={schedule?.title || ""} />
         </div>
         <div className="p-2 lg:hidden">
           <SidePanel />

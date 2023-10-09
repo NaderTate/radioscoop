@@ -81,7 +81,7 @@ const menuItems: Array<{
   },
   {
     title: "الاعلانات",
-    link: "/dashboard/ads",
+    link: "/dashboard/sidebar",
     icon: <HiSpeakerphone />,
   },
   {

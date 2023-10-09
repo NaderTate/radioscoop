@@ -144,6 +144,7 @@ async function page({ params: { id } }: { params: { id: string } }) {
         <div className="p-2 lg:hidden">
           <SidePanel />
           <div className="hidden">
+            {/* @ts-ignore */}
             <Schedule />
           </div>
         </div>

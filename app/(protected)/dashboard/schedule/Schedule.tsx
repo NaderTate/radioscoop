@@ -4,31 +4,48 @@ import Day from "./Day";
 import { useState } from "react";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { updateSchedule } from "@/lib/_actions";
+import { Input } from "@/components/ui/input";
+import { PulseLoader } from "react-spinners";
+import { useToast } from "@/components/ui/use-toast";
 
-function Schedule({
-  Days,
-}: {
-  Days:
-    | { id: number; name: string; images: { id: string; link: string }[] }[]
-    | any;
-}) {
-  const [days, setDays] =
-    useState<
-      { id: number; name: string; images: { id: string; link: string }[] }[]
-    >(Days);
+function Schedule({ Days, title }: { Days: DayType[] | any; title: string }) {
+  const { toast } = useToast();
+
+  const [days, setDays] = useState<DayType[]>(Days);
+  const [Title, setTitle] = useState(title);
+  const [loading, setLoading] = useState(false);
+
   const removeDay = (id: number) => {
     setDays(days.filter((day) => day.id !== id));
   };
   return (
     <div>
-      <Button
-        onClick={async () => {
-          await updateSchedule(days);
-        }}
-      >
-        save
-      </Button>
+      <div className="flex justify-end">
+        <Button
+          onClick={async () => {
+            setLoading(true);
+            await updateSchedule(days, Title);
+            setLoading(false);
+            toast({
+              title: "تم الحفظ",
+              className: "dark:bg-white dark:text-black bg-gray-800 text-white",
+            });
+          }}
+        >
+          {loading ? <PulseLoader size={6} /> : <p>حفظ</p>}
+        </Button>
+      </div>
       <div className="space-y-5">
+        <div className="flex justify-center">
+          <Input
+            placeholder="title"
+            className="text-center w-52  border border-muted-foreground"
+            defaultValue={Title}
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
+          />
+        </div>
         {days.map((day) => {
           return (
             <Day
@@ -59,6 +76,7 @@ function Schedule({
 
         <div className="flex justify-center">
           <Button
+            className="mb-5"
             onClick={() => {
               setDays([
                 ...days,

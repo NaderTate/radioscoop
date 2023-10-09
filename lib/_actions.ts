@@ -24,12 +24,14 @@ export const updateSchedule = async (
     id: number;
     name: string;
     images: { id: string; link: string }[];
-  }[]
+  }[],
+  title: string
 ) => {
   await prisma.schedule.deleteMany();
   await prisma.schedule.create({
     data: {
       Days: data,
+      title,
     },
   });
 };

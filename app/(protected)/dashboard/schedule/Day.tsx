@@ -1,9 +1,8 @@
 "use client";
 import Dropzone from "@/components/DropZone";
-import { Button } from "@/components/ui/button";
 import { RxCross2 } from "react-icons/rx";
 import Image from "next/image";
-import { ChangeEvent, MouseEvent, use, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { ReactSortable } from "react-sortablejs";
 import { Input } from "@/components/ui/input";
 function Card({ src, deleteImage }: { src: string; deleteImage: () => void }) {
@@ -38,7 +37,6 @@ function Day({
   images: { id: string; link: string }[];
 }) {
   const [Images, setImages] = useState<{ id: string; link: string }[]>(images);
-  const [files, setFiles] = useState<File[]>([]);
   const [uploading, setUploading] = useState(false);
 
   const deleteImg = (id: any) => {
@@ -70,30 +68,36 @@ function Day({
           </div>
         )}
         <div dir="ltr">
-          <ReactSortable
-            animation={150}
-            list={Images}
-            setList={setImages}
-            className="flex flex-wrap gap-5 justify-start items-center mx-2"
+          <div
+            className={`flex flex-wrap items-center ${
+              images.length > 0 ? "justify-start" : "justify-center"
+            } gap-5`}
           >
-            {Images.map((image: { id: string; link: string }) => (
-              <Card
-                key={image.id}
-                src={image.link}
-                deleteImage={() => {
-                  deleteImg(image.id);
-                }}
-              />
-            ))}
+            <ReactSortable
+              animation={150}
+              list={Images}
+              setList={setImages}
+              className="flex flex-wrap gap-5 justify-start items-center mx-2"
+            >
+              {Images.map((image: { id: string; link: string }) => (
+                <Card
+                  key={image.id}
+                  src={image.link}
+                  deleteImage={() => {
+                    deleteImg(image.id);
+                  }}
+                />
+              ))}
+            </ReactSortable>
             <Dropzone
               handleImages={async (file: File[]) => {
                 setUploading(true);
                 for (let i = 0; i < file.length; i++) {
                   const formData = new FormData();
                   formData.append("file", file[i]);
-                  formData.append("upload_preset", "classified");
+                  formData.append("upload_preset", "schedule");
                   const res = await fetch(
-                    "https://api.cloudinary.com/v1_1//dqkyatgoy/image/upload",
+                    "https://api.cloudinary.com/v1_1//ddcjbeysn/image/upload",
                     {
                       method: "POST",
                       body: formData,
@@ -108,7 +112,7 @@ function Day({
                 setUploading(false);
               }}
             />
-          </ReactSortable>
+          </div>
         </div>
       </div>
     </div>
