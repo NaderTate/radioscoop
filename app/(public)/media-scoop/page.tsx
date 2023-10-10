@@ -36,7 +36,7 @@ async function page({
       </div>
       <div className="grid  grid-cols-2  gap-4 sm:mx-auto sm:w-fit justify-center md:grid-cols-3 md:gap-7 mt-10 lg:grid-cols-5">
         {videos.map((video) => (
-          <a href={video.link} target="_blank">
+          <a key={video.id} href={video.link} target="_blank">
             <div className="relative w-40 h-56 mx-auto hover:scale-[1.02] transition">
               <Image
                 src={video.image}

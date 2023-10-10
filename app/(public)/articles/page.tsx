@@ -22,7 +22,7 @@ async function page({
     orderBy: {
       id: "desc",
     },
-    include: { author: { select: { name: true } } },
+    include: { presenter: { select: { label: true } } },
   });
   const count = await prisma.post.count({
     where: {

@@ -8,28 +8,6 @@ export async function generateStaticParams() {
   const products = await prisma.episode.findMany();
   return products.map((episode) => ({ id: episode.id }));
 }
-// export const getStaticProps = async ({ params: { id } }) => {
-//   const res = await fetch(`https://radio-scoop.com/api/Episodes/${id}`);
-//   const data = await res.json();
-//   return {
-//     props: {
-//       episode: data.episode,
-//       related: data.related || null,
-//     },
-//   };
-// };
-
-// export const getStaticPaths = async () => {
-//   const res = await fetch(`https://radio-scoop.com/api/Episodes`);
-//   const data = await res.json();
-//   const paths = data.data.map((episode) => ({
-//     params: { id: episode._id.toString() },
-//   }));
-//   return {
-//     paths,
-//     fallback: "blocking",
-//   };
-// };
 export async function generateMetadata({ params }: { params: { id: string } }) {
   try {
     const episode = await prisma.episode.findUnique({
@@ -41,7 +19,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
     if (!episode)
       return { title: "Not found", description: "This episode does not exist" };
     return {
-      title: ` الحلقة ${episode?.title} من ${episode?.category.name}`,
+      title: ` الحلقة ${episode?.title} من ${episode?.category?.name}`,
       description:
         " 2022-10-1 راديو سكوب : اول راديو في مصر بنقل المتميزين من متتدربيه للاذاعات الكبرى اف ام  في مصر يمكن التواصل من خلال واتساب فيسبوك تويتر او انستاجرام او من خلال رقم الهاتف الجوال FM الكبرى",
       alternates: {
@@ -50,13 +28,13 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
       twitter: {
         card: "summary_large_image",
         site: "@radioscoop",
-        title: ` الحلقة ${episode?.title} من ${episode?.category.name}`,
+        title: ` الحلقة ${episode?.title} من ${episode?.category?.name}`,
         description:
           " 2022-10-1 راديو سكوب : اول راديو في مصر بنقل المتميزين من متتدربيه للاذاعات الكبرى اف ام  في مصر يمكن التواصل من خلال واتساب فيسبوك تويتر او انستاجرام او من خلال رقم الهاتف الجوال FM الكبرى",
         images: [episode?.img || "/public/favicon.png"],
       },
       openGraph: {
-        title: ` الحلقة ${episode?.title} من ${episode?.category.name}`,
+        title: ` الحلقة ${episode?.title} من ${episode?.category?.name}`,
         images: [
           {
             url: episode?.img || "/public/favicon.png",
@@ -80,7 +58,7 @@ async function page({ params: { id } }: { params: { id: string } }) {
     },
     include: {
       category: { select: { name: true } },
-      author: { select: { name: true } },
+      presenter: { select: { label: true } },
     },
   });
 
@@ -92,7 +70,12 @@ async function page({ params: { id } }: { params: { id: string } }) {
     orderBy: { createdAt: "desc" },
     include: {
       category: { select: { name: true } },
-      author: { select: { name: true } },
+      author: { select: { label: true } },
+    },
+  });
+  const posts = await prisma.sideBar.findFirst({
+    select: {
+      Items: true,
     },
   });
   return (
@@ -133,7 +116,7 @@ async function page({ params: { id } }: { params: { id: string } }) {
                 type="button"
                 className="flex items-center h-10 pl-8 pr-4 text-xs font-medium transition-colors bg-white dark:bg-gray-800 dark:hover:text-white hover:text-gray-900"
               >
-                الحلقة {Episode?.title} من {Episode?.category.name}
+                الحلقة {Episode?.title} من {Episode?.category?.name}
               </button>
             </li>
             <li className="relative flex items-center">
@@ -161,7 +144,7 @@ async function page({ params: { id } }: { params: { id: string } }) {
               <div className="flex flex-wrap md:flex-nowrap justify-center">
                 <ShareIcons
                   mainImg={Episode?.img || "/favicon.png"}
-                  title={` الحلقة ${Episode?.title} من ${Episode?.category.name}`}
+                  title={` الحلقة ${Episode?.title} من ${Episode?.category?.name}`}
                 />
               </div>
             </div>
@@ -183,7 +166,7 @@ async function page({ params: { id } }: { params: { id: string } }) {
         </div>
 
         <div className="lg:pt-10">
-          <SidePanel />
+          <SidePanel data={posts?.Items || []} />
         </div>
       </section>
     </div>

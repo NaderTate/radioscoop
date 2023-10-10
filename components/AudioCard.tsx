@@ -5,7 +5,8 @@ import { Episode } from "@prisma/client";
 
 import "react-h5-audio-player/lib/styles.css";
 interface Episodee extends Episode {
-  category: { name: string };
+  category?: { name: string } | null;
+  presenter?: { label: string } | null;
 }
 function AudioCard({ audio }: { audio: Episodee }) {
   const [duration, setDuration] = React.useState(0);
@@ -26,8 +27,8 @@ function AudioCard({ audio }: { audio: Episodee }) {
           className="my-4 md:mr-10 text-center font-semibold flex flex-col gap-1"
         >
           <div className="">{audio.featureTitle}</div>
-          <div>{audio.category.name}</div>
-          <div>تقديم {audio.presenter}</div>
+          <div>{audio.category?.name}</div>
+          <div>تقديم {audio?.presenter?.label}</div>
         </div>
       )}
       <div
@@ -56,7 +57,9 @@ function AudioCard({ audio }: { audio: Episodee }) {
               <div className="flex justify-between">
                 <div className="flex gap-2">
                   <strong className="rounded border border-indigo-500 bg-indigo-500 px-[2px] sm:px-3 sm:py-1.5 text-[10px] sm:font-medium  text-white dark:text-indigo-50">
-                    {audio.featured ? audio.featureTitle : audio.category.name}
+                    {audio.featured
+                      ? audio.featureTitle
+                      : audio?.category?.name}
                   </strong>
                   {!audio.featured && (
                     <strong className="rounded border border-indigo-500 bg-indigo-500 px-[2px] sm:px-3 sm:py-1.5 text-[10px] sm:font-medium  text-white dark:text-indigo-50">

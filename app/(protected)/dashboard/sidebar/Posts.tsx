@@ -3,7 +3,7 @@ import { ReactSortable } from "react-sortablejs";
 import { RxCross2 } from "react-icons/rx";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -11,9 +11,9 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
-import { Post } from "@prisma/client";
 import { useToast } from "@/components/ui/use-toast";
 import { PulseLoader } from "react-spinners";
+import { updateSidebar } from "@/lib/_actions";
 
 function Card({
   src,
@@ -30,7 +30,6 @@ function Card({
         onClick={deleteImage}
         className="w-6 h-6 absolute right-0 top-0 bg-background rounded-bl-md cursor-pointer z-[2]"
       />
-
       <Image
         width={200}
         height={200}
@@ -38,20 +37,27 @@ function Card({
         alt={"img"}
         className="rounded-md object-contain m-auto"
       />
-      {title}
+      <h1 className="text-center">{title}</h1>
     </div>
   );
 }
-function Posts({ data, search }: { data: Post[]; search: Function }) {
+function Posts({
+  data,
+  search,
+}: {
+  data: Post[] | any;
+  search: (e: string) => Promise<Post[]>;
+}) {
   const { toast } = useToast();
 
   const [Data, setData] = useState(data);
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useState<Post[]>([]);
   const [loading, setLoading] = useState(false);
-
-  const deletePost = (id: any) => {
+  const searchRef = useRef<HTMLInputElement>(null);
+  const deletePost = (id: string) => {
     setData((current: Post[]) => current.filter((item: Post) => item.id != id));
   };
+  console.log(Data);
   return (
     <div>
       <div className="flex justify-end">
@@ -59,7 +65,7 @@ function Posts({ data, search }: { data: Post[]; search: Function }) {
           className="mb-5"
           onClick={async () => {
             setLoading(true);
-            // await updateSchedule(days, Title);
+            await updateSidebar(Data.map((item: Post) => item));
             setLoading(false);
             toast({
               title: "تم الحفظ",
@@ -75,16 +81,28 @@ function Posts({ data, search }: { data: Post[]; search: Function }) {
         dir="ltr"
       >
         <div>
-          <Input
-            placeholder="Add post"
-            className="border-muted-foreground border w-52"
-            onChange={async (e) => {
-              if (e.target.value.length < 2) setResults([]);
-              else {
-                setResults(await search(e.target.value));
-              }
-            }}
-          />
+          <div className="relative w-52">
+            <Input
+              ref={searchRef}
+              placeholder="ابحث عن منشور"
+              className="border-muted-foreground border w-52"
+              onChange={async (e) => {
+                if (e.target.value.length < 2) setResults([]);
+                else {
+                  setResults(await search(e.target.value));
+                }
+              }}
+            />
+            <RxCross2
+              onClick={() => {
+                searchRef.current?.value && (searchRef.current.value = "");
+
+                setResults([]);
+              }}
+              className="absolute right-2 top-0 bottom-0 m-auto cursor-pointer opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
+              size={18}
+            />
+          </div>
           {results.length > 0 && (
             <Command className="w-fit border border-muted-foreground ">
               <CommandList>

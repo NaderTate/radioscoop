@@ -53,6 +53,11 @@ async function page({ params: { id } }: { params: { id: string } }) {
       id,
     },
   });
+  const posts = await prisma.sideBar.findFirst({
+    select: {
+      Items: true,
+    },
+  });
   return (
     <div>
       <div>
@@ -112,7 +117,7 @@ async function page({ params: { id } }: { params: { id: string } }) {
       </div>
       <section className="grid grid-cols-1 lg:grid-cols-5">
         <div className="p-2 hidden lg:block">
-          <SidePanel />
+          <SidePanel data={posts?.Items || []} />
         </div>
         <div className="lg:col-span-4 mx-auto max-w-screen-2xl px-4 py-16 sm:px-6 lg:px-8">
           <div className="flex flex-col">
@@ -142,10 +147,9 @@ async function page({ params: { id } }: { params: { id: string } }) {
           </div>
         </div>
         <div className="p-2 lg:hidden">
-          <SidePanel />
+          <SidePanel data={posts?.Items || []} />
           <div className="hidden">
-            {/* @ts-ignore */}
-            <Schedule />
+            <Schedule title="" Days={[]} />
           </div>
         </div>
       </section>
