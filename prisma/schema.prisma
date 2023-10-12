@@ -11,7 +11,7 @@ datasource db {
 model Episode {
   id           String    @id @default(auto()) @map("_id") @db.ObjectId
   title        String
-  img          String
+  img          String?
   link         String
   featured     Boolean   @default(false)
   description  String?
@@ -32,8 +32,7 @@ model Episode {
 
 model Author {
   id                String     @id @default(auto()) @map("_id") @db.ObjectId
-  label             String
-  value             String
+  name              String
   episodes          Episode[]
   posts             Post[]
   Categories        Category[]
@@ -50,8 +49,6 @@ model Category {
   img       String
   authorId  String    @db.ObjectId
   author    Author    @relation(fields: [authorId], references: [id])
-  // year      Year      @relation(fields: [yearId], references: [id])
-  // yearId    String    @db.ObjectId
   month     Month?    @relation(fields: [monthId], references: [id])
   monthId   String?   @db.ObjectId
   episodes  Episode[]
@@ -102,7 +99,6 @@ model Year {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
   year      String
   months    Month[]
-  // categories Category[]
   monthsId  String[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

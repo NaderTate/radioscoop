@@ -17,6 +17,7 @@ export const deleteEpisode = async (id: string) => {
   const episode = await prisma.episode.delete({
     where: { id },
   });
+  revalidatePath("/dashboard/episodes");
   return episode;
 };
 // update the schedule
@@ -139,4 +140,24 @@ export const deleteProgram = async (programId: string) => {
   });
   revalidatePath("/dashboard/seasons");
   return program;
+};
+// create new episode
+export const createNewEpisode = async (
+  title: string,
+  link: string,
+  programId: string
+) => {
+  const episode = await prisma.episode.create({
+    data: {
+      title,
+      link,
+      category: {
+        connect: {
+          id: programId,
+        },
+      },
+    },
+  });
+  revalidatePath("/dashboard/episodes");
+  return episode;
 };
