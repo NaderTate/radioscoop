@@ -2,7 +2,7 @@ import { Episode } from "@prisma/client";
 // extend the type of Episode and add the category and author fields
 interface Episodee extends Episode {
   category?: { name: string } | null;
-  author?: { label: string } | null;
+  author?: { name: string } | null;
 }
 function EpisodeCard({ ep }: { ep: Episodee }) {
   return (
@@ -29,9 +29,9 @@ function EpisodeCard({ ep }: { ep: Episodee }) {
           <h5 className=" text-sm  sm:text-xl font-bold text-ellipsis whitespace-nowrap overflow-hidden">
             {ep?.category?.name}
           </h5>
-          {ep?.author?.label && (
+          {ep?.author?.name && (
             <h5 className="text-sm  font-bold text-ellipsis whitespace-nowrap overflow-hidden">
-              {ep?.author?.label}
+              {ep?.author?.name}
             </h5>
           )}
         </div>

@@ -1,4 +1,3 @@
-"use client";
 import {
   Table,
   TableBody,
@@ -8,21 +7,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import Image from "next/image";
 import DeleteButton from "./DeleteButton";
-import { FiEdit } from "react-icons/fi";
 import { Episode } from "@prisma/client";
 import Link from "next/link";
 import { deleteEpisode } from "@/lib/_actions";
 import EpisodeForm from "./EpisodeForm";
-import { useState } from "react";
 interface EpisodesTableProps extends Episode {
   category: { name: string; img: string; author: { name: string } } | null;
 }
@@ -37,7 +27,6 @@ function EpisodesTable({
     month: { name: string; year: { year: string } } | null;
   }[];
 }) {
-  const [open, setOpen] = useState(false);
   return (
     <div>
       <Table>
@@ -77,28 +66,15 @@ function EpisodesTable({
               </TableCell>
               <TableCell className="text-right">
                 <div className="flex gap-3">
-                  <Dialog>
-                    <DialogTrigger>
-                      <FiEdit size={20} />
-                    </DialogTrigger>
-                    <DialogContent>
-                      <DialogHeader>
-                        <DialogTitle>تعديل الحلقة</DialogTitle>
-                      </DialogHeader>
-                      <EpisodeForm
-                        programs={programs}
-                        handleOpen={(open) => {
-                          setOpen(open);
-                        }}
-                        episode={{
-                          id: ep.id,
-                          title: ep.title,
-                          link: ep.link,
-                          programId: ep.categoryId || "",
-                        }}
-                      />
-                    </DialogContent>
-                  </Dialog>
+                  <EpisodeForm
+                    programs={programs}
+                    episode={{
+                      id: ep.id,
+                      title: ep.title,
+                      link: ep.link,
+                      programId: ep?.categoryId || "",
+                    }}
+                  />{" "}
                   | <DeleteButton deleteAction={deleteEpisode} id={ep.id} />{" "}
                 </div>
               </TableCell>

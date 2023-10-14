@@ -1,5 +1,4 @@
 import EpisodeForm from "@/components/EpisodeForm";
-import EpisodeFormTrigger from "@/components/EpisodeFormTrigger";
 import EpisodesTable from "@/components/EpisodesTable";
 import Pagination from "@/components/Pagination";
 import SearchForm from "@/components/SearchForm";
@@ -72,7 +71,7 @@ async function page({
   return (
     <div>
       <div className="flex items-start sm:items-center gap-5 flex-col sm:flex-row">
-        <EpisodeFormTrigger programs={programs} />
+        <EpisodeForm programs={programs} />
         <SearchForm content="episodes" />
       </div>
       <EpisodesTable programs={programs} data={Episodes} />

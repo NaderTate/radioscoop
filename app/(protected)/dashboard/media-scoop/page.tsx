@@ -19,7 +19,7 @@ async function page({
       },
     },
     include: {
-      presenter: { select: { label: true } },
+      presenter: { select: { name: true } },
     },
     take: itemsToShow,
     skip: (sk - 1) * itemsToShow,

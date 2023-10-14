@@ -14,7 +14,7 @@ import Link from "next/link";
 import { Video } from "@prisma/client";
 import { deleteEpisode } from "@/lib/_actions";
 interface VideosTableProps extends Video {
-  presenter: { label: string } | null;
+  presenter: { name: string } | null;
 }
 function VideosTable({ data }: { data: VideosTableProps[] }) {
   return (
@@ -44,7 +44,7 @@ function VideosTable({ data }: { data: VideosTableProps[] }) {
                 </Link>
               </TableCell>
               <TableCell>{video.title}</TableCell>
-              <TableCell>{video.presenter?.label}</TableCell>
+              <TableCell>{video.presenter?.name}</TableCell>
 
               <TableCell>
                 {new Date(video.createdAt).toLocaleDateString("ar-EG", {

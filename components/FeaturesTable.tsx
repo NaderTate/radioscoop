@@ -14,8 +14,8 @@ import { Episode } from "@prisma/client";
 import Link from "next/link";
 import { deleteEpisode } from "@/lib/_actions";
 interface FeaturesTableProps extends Episode {
-  preparedBy: { label: string } | null;
-  presenter: { label: string } | null;
+  preparedBy: { name: string } | null;
+  presenter: { name: string } | null;
 }
 function FeaturesTable({ data }: { data: FeaturesTableProps[] }) {
   return (
@@ -38,7 +38,7 @@ function FeaturesTable({ data }: { data: FeaturesTableProps[] }) {
                 <Link href={{ pathname: `/ep/${ep.id}` }} target="_blank">
                   <Image
                     alt="logo"
-                    src={ep.img}
+                    src={ep.img || ""}
                     width={100}
                     height={100}
                     className="rounded-xl"
@@ -46,8 +46,8 @@ function FeaturesTable({ data }: { data: FeaturesTableProps[] }) {
                 </Link>
               </TableCell>
               <TableCell>{ep.featureTitle}</TableCell>
-              <TableCell>{ep?.preparedBy?.label}</TableCell>
-              <TableCell>{ep?.presenter?.label}</TableCell>
+              <TableCell>{ep?.preparedBy?.name}</TableCell>
+              <TableCell>{ep?.presenter?.name}</TableCell>
               <TableCell>
                 {new Date(ep.createdAt).toLocaleDateString("ar-EG", {
                   year: "numeric",

@@ -2,14 +2,46 @@
 import { revalidatePath } from "next/cache";
 import prisma from "./prisma";
 // create episode
-export const createEpisode = async (data: {
-  title: string;
-  img: string;
-  link: string;
-}) => {
+export const createEpisode = async (
+  title: string,
+  link: string,
+  programId: string
+) => {
   const episode = await prisma.episode.create({
-    data,
+    data: {
+      title,
+      link,
+      category: {
+        connect: {
+          id: programId,
+        },
+      },
+    },
   });
+  revalidatePath("/dashboard/episodes");
+  return episode;
+};
+
+// update episode
+export const updateEpisode = async (
+  id: string,
+  title: string,
+  link: string,
+  programId: string
+) => {
+  const episode = await prisma.episode.update({
+    where: { id },
+    data: {
+      title,
+      link,
+      category: {
+        connect: {
+          id: programId,
+        },
+      },
+    },
+  });
+  revalidatePath("/dashboard/episodes");
   return episode;
 };
 // delete episode
@@ -140,24 +172,4 @@ export const deleteProgram = async (programId: string) => {
   });
   revalidatePath("/dashboard/seasons");
   return program;
-};
-// create new episode
-export const createNewEpisode = async (
-  title: string,
-  link: string,
-  programId: string
-) => {
-  const episode = await prisma.episode.create({
-    data: {
-      title,
-      link,
-      category: {
-        connect: {
-          id: programId,
-        },
-      },
-    },
-  });
-  revalidatePath("/dashboard/episodes");
-  return episode;
 };

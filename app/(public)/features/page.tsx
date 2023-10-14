@@ -19,8 +19,8 @@ async function page({
       type: type ? type : undefined,
     },
     include: {
-      presenter: { select: { label: true } },
-      preparedBy: { select: { label: true } },
+      presenter: { select: { name: true } },
+      preparedBy: { select: { name: true } },
     },
     take: itemsToShow,
     skip: (sk - 1) * itemsToShow,
@@ -43,15 +43,15 @@ async function page({
             <a href={`/ep/${feature.id}`}>
               <img
                 className="shadow-md shadow-indigo-300/50 rounded-md  brightness-[.6]"
-                src={feature.img}
+                src={feature.img || ""}
                 alt=""
               />
             </a>
             <div className="absolute bottom-7 right-1 font-semibold tracking-wide">
-              تقديم {feature.presenter?.label}
+              تقديم {feature.presenter?.name}
             </div>
             <div className="absolute bottom-12 right-1 font-semibold tracking-wide">
-              {feature.preparedBy?.label}
+              {feature.preparedBy?.name}
             </div>
             <p className="text-center">{feature.featureTitle}</p>
           </div>

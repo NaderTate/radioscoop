@@ -14,7 +14,7 @@ import Link from "next/link";
 import { Post } from "@prisma/client";
 import { deleteEpisode } from "@/lib/_actions";
 interface ArticlesTableProps extends Post {
-  presenter: { label: string } | null;
+  presenter: { name: string } | null;
 }
 function ArticlesTable({ data }: { data: ArticlesTableProps[] }) {
   return (
@@ -48,7 +48,7 @@ function ArticlesTable({ data }: { data: ArticlesTableProps[] }) {
                 </Link>
               </TableCell>
               <TableCell>{article.title}</TableCell>
-              <TableCell>{article?.presenter?.label}</TableCell>
+              <TableCell>{article?.presenter?.name}</TableCell>
 
               <TableCell>{article?.type}</TableCell>
               <TableCell>

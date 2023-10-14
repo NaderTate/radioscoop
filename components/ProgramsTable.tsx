@@ -14,8 +14,9 @@ import Link from "next/link";
 import { Category } from "@prisma/client";
 import { deleteEpisode } from "@/lib/_actions";
 interface ProgramsTableProps extends Category {
-  author: { label: string } | null;
+  author: { name: string } | null;
   episodes: { id: string }[] | null;
+  month: { name: string; year: { year: string } } | null;
 }
 function ProgramsTable({ data }: { data: ProgramsTableProps[] }) {
   return (
@@ -51,9 +52,9 @@ function ProgramsTable({ data }: { data: ProgramsTableProps[] }) {
               </TableCell>
               <TableCell>{program.name}</TableCell>
               <TableCell>
-                {program?.year} - {program.month}
+                {program?.month?.year.year} - {program?.month?.name}
               </TableCell>
-              <TableCell>{program?.author?.label}</TableCell>
+              <TableCell>{program?.author?.name}</TableCell>
               <TableCell>{program?.episodes?.length}</TableCell>
               <TableCell>
                 {new Date(program.createdAt).toLocaleDateString("ar-EG", {

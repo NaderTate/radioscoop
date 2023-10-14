@@ -26,8 +26,8 @@ async function page({
       id: "desc",
     },
     include: {
-      preparedBy: { select: { label: true } },
-      presenter: { select: { label: true } },
+      preparedBy: { select: { name: true } },
+      presenter: { select: { name: true } },
     },
   });
   const count = await prisma.episode.count({

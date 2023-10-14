@@ -58,7 +58,7 @@ async function page({ params: { id } }: { params: { id: string } }) {
     },
     include: {
       category: { select: { name: true } },
-      presenter: { select: { label: true } },
+      presenter: { select: { name: true } },
     },
   });
 
@@ -70,7 +70,7 @@ async function page({ params: { id } }: { params: { id: string } }) {
     orderBy: { createdAt: "desc" },
     include: {
       category: { select: { name: true } },
-      author: { select: { label: true } },
+      author: { select: { name: true } },
     },
   });
   const posts = await prisma.sideBar.findFirst({

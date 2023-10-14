@@ -26,7 +26,8 @@ async function page({
     },
     include: {
       episodes: { select: { id: true } },
-      author: { select: { label: true } },
+      author: { select: { name: true } },
+      month: { select: { name: true, year: { select: { year: true } } } },
     },
   });
   const count = await prisma.category.count({

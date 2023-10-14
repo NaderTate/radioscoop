@@ -24,7 +24,7 @@ async function page({
       id: "desc",
     },
     include: {
-      presenter: { select: { label: true } },
+      presenter: { select: { name: true } },
     },
   });
   const count = await prisma.post.count({

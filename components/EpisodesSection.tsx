@@ -10,7 +10,7 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "swiper/css/grid";
 interface data extends Episode {
-  author?: { label: string } | null;
+  author?: { name: string } | null;
   category?: { name: string } | null;
 }
 
