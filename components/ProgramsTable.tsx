@@ -9,16 +9,22 @@ import {
 } from "@/components/ui/table";
 import Image from "next/image";
 import DeleteButton from "./DeleteButton";
-import { FiEdit } from "react-icons/fi";
 import Link from "next/link";
 import { Category } from "@prisma/client";
-import { deleteEpisode } from "@/lib/_actions";
+import { deleteProgram } from "@/lib/_actions";
+import ProgramForm from "./ProgramForm";
 interface ProgramsTableProps extends Category {
   author: { name: string } | null;
   episodes: { id: string }[] | null;
   month: { name: string; year: { year: string } } | null;
 }
-function ProgramsTable({ data }: { data: ProgramsTableProps[] }) {
+function ProgramsTable({
+  data,
+  presenters,
+}: {
+  data: ProgramsTableProps[];
+  presenters: { id: string; name: string }[];
+}) {
   return (
     <div>
       <Table>
@@ -65,18 +71,8 @@ function ProgramsTable({ data }: { data: ProgramsTableProps[] }) {
               </TableCell>
               <TableCell className="text-right">
                 <div className="flex gap-3">
-                  <Link
-                    className="cursor-pointer"
-                    href={{
-                      pathname: "/edit",
-                      query: { content: "video", id: program.id },
-                    }}
-                    target="_blank"
-                  >
-                    <FiEdit size={20} />
-                  </Link>
-                  |{" "}
-                  <DeleteButton deleteAction={deleteEpisode} id={program.id} />{" "}
+                  <ProgramForm presenters={presenters} program={program} /> |{" "}
+                  <DeleteButton deleteAction={deleteProgram} id={program.id} />{" "}
                 </div>
               </TableCell>
             </TableRow>

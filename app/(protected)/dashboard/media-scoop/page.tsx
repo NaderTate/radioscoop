@@ -4,6 +4,7 @@ import SearchForm from "@/components/SearchForm";
 import { Button } from "@/components/ui/button";
 import prisma from "@/lib/prisma";
 import { pagination } from "@/lib/utils";
+import VideoForm from "@/components/VideoForm";
 async function page({
   searchParams,
 }: {
@@ -34,13 +35,15 @@ async function page({
       },
     },
   });
+  const presenters = await prisma.author.findMany({
+    select: { id: true, name: true },
+    orderBy: { id: "desc" },
+  });
   const { Arr, pages } = pagination(count, sk, itemsToShow);
   return (
     <div>
       <div className="flex items-start sm:items-center gap-5 flex-col sm:flex-row">
-        <Button className="my-3">
-          <a href="/dashboard/features/create">إضافة فيديو</a>
-        </Button>
+        <VideoForm presenters={presenters} />
         <SearchForm content="media-scoop" />
       </div>
       <VideosTable data={videos} />

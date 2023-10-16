@@ -10,7 +10,8 @@ import {
 import { AiFillDelete } from "react-icons/ai";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { Button } from "./ui/button";
-import { deleteEpisode } from "@/lib/_actions";
+import { deleteAdmin } from "@/lib/_actions";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 function AdminCard({ admin }: { admin: User }) {
   return (
@@ -19,13 +20,10 @@ function AdminCard({ admin }: { admin: User }) {
       className="border-primary border rounded-md p-5 relative"
     >
       <div className="flex items-center gap-5">
-        <img
-          src={admin.image}
-          alt={admin.name}
-          width={50}
-          height={50}
-          className="rounded-full"
-        />
+        <Avatar>
+          <AvatarImage src={admin.image} alt={admin.name} />
+          <AvatarFallback>{admin.name[0]}</AvatarFallback>
+        </Avatar>
         <p>{admin.name}</p>
       </div>
       <p>{admin.email}</p>
@@ -45,7 +43,7 @@ function AdminCard({ admin }: { admin: User }) {
               <DialogClose>
                 <Button
                   onClick={async () => {
-                    await deleteEpisode(admin.id);
+                    await deleteAdmin(admin.id);
                   }}
                   variant="destructive"
                 >

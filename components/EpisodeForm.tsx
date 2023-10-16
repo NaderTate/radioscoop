@@ -21,7 +21,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { BeatLoader } from "react-spinners";
 import { useState } from "react";
 import { AiOutlineCheck } from "react-icons/ai";
 import { LuChevronsUpDown } from "react-icons/lu";
@@ -49,7 +48,6 @@ function EpisodeForm({
   const [programId, setProgramId] = useState(episode?.programId || "");
   const [title, setTitle] = useState(episode?.title || "");
   const [link, setLink] = useState(episode?.link || "");
-  const [loading, setLoading] = useState(false);
   return (
     <div className="space-y-5">
       <Dialog>
@@ -147,13 +145,7 @@ function EpisodeForm({
                 }
               }}
             >
-              {loading ? (
-                <BeatLoader color="black" size={10} />
-              ) : episode?.id ? (
-                "تعديل"
-              ) : (
-                "إضافة"
-              )}
+              {episode?.id ? "تعديل" : "إضافة"}
             </Button>
           </DialogClose>
         </DialogContent>

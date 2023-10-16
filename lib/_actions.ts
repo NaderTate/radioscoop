@@ -173,3 +173,182 @@ export const deleteProgram = async (programId: string) => {
   revalidatePath("/dashboard/seasons");
   return program;
 };
+
+// add new author
+export const addAuthor = async (name: string, img?: string) => {
+  // check if another author with the same name exists
+  const existingAuthor = await prisma.author.findFirst({
+    where: { name },
+  });
+  if (existingAuthor) {
+    return { error: ` يوجد مذيع آخر بنفس الاسم: ${name}` };
+  }
+  await prisma.author.create({
+    data: {
+      name,
+      img,
+    },
+  });
+  revalidatePath("/dashboard/presenters");
+  return { success: true };
+};
+// update author
+export const updateAuthor = async (
+  authorId: string,
+  name: string,
+  img?: string
+) => {
+  // check if another author with the same name exists
+  const existingAuthor = await prisma.author.findFirst({
+    where: { name },
+  });
+  if (existingAuthor) {
+    return { error: ` يوجد مذيع آخر بنفس الاسم: ${name}` };
+  }
+  await prisma.author.update({
+    where: { id: authorId },
+    data: {
+      name,
+      img,
+    },
+  });
+  revalidatePath("/dashboard/presenters");
+  return { success: true };
+};
+// delete author
+export const deleteAuthor = async (authorId: string) => {
+  const author = await prisma.author.delete({
+    where: { id: authorId },
+  });
+  revalidatePath("/dashboard/presenters");
+  return author;
+};
+// add new program
+export const createProgram = async (
+  name: string,
+  img: string,
+  presenterId: string
+) => {
+  const program = await prisma.category.create({
+    data: {
+      name,
+      img,
+      author: {
+        connect: {
+          id: presenterId,
+        },
+      },
+    },
+  });
+  revalidatePath("/dashboard/programs");
+  return program;
+};
+// update program
+export const updateProgram = async (
+  programId: string,
+  name: string,
+  img: string,
+  presenterId: string
+) => {
+  const program = await prisma.category.update({
+    where: { id: programId },
+    data: {
+      name,
+      img,
+      author: {
+        connect: {
+          id: presenterId,
+        },
+      },
+    },
+  });
+  revalidatePath("/dashboard/programs");
+  return program;
+};
+// delete program
+export const deletePrograms = async (programId: string) => {
+  const program = await prisma.category.delete({
+    where: { id: programId },
+  });
+  revalidatePath("/dashboard/programs");
+  return program;
+};
+// delete admin
+export const deleteAdmin = async (adminId: string) => {
+  await prisma.user.delete({
+    where: { id: adminId },
+  });
+  revalidatePath("/dashboard/admins");
+};
+// add admin
+export const addAdmin = async (name: string, email: string) => {
+  const admin = await prisma.user.findFirst({
+    where: { email },
+  });
+  if (admin) {
+    return { error: "هذا البريد الإلكتروني موجود بالفعل" };
+  }
+  await prisma.user.create({
+    data: {
+      email,
+      name,
+      image: "",
+    },
+  });
+  revalidatePath("/dashboard/admins");
+  return { success: true };
+};
+// add video
+export const addVideo = async (
+  title: string,
+  link: string,
+  image: string,
+  authorId: string
+) => {
+  const video = await prisma.video.create({
+    data: {
+      title,
+      link,
+      image,
+      presenter: {
+        connect: {
+          id: authorId,
+        },
+      },
+    },
+  });
+  revalidatePath("/dashboard/media-scoop");
+  return video;
+};
+// update video
+export const updateVideo = async (
+  videoId: string,
+  title: string,
+  link: string,
+  image: string,
+  authorId: string
+) => {
+  const video = await prisma.video.update({
+    where: { id: videoId },
+    data: {
+      title,
+      link,
+      image,
+      presenter: {
+        connect: {
+          id: authorId,
+        },
+      },
+    },
+  });
+  revalidatePath("/dashboard/media-scoop");
+  return video;
+};
+// delete video
+export const deleteVideo = async (videoId: string) => {
+  const video = await prisma.video.delete({
+    where: { id: videoId },
+  });
+  revalidatePath("/dashboard/media-scoop");
+  return video;
+};

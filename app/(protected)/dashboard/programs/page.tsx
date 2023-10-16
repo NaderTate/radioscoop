@@ -4,6 +4,7 @@ import SearchForm from "@/components/SearchForm";
 import { Button } from "@/components/ui/button";
 import prisma from "@/lib/prisma";
 import { pagination } from "@/lib/utils";
+import ProgramForm from "@/components/ProgramForm";
 
 async function page({
   searchParams,
@@ -37,17 +38,19 @@ async function page({
       },
     },
   });
+  const presenetrs = await prisma.author.findMany({
+    select: { id: true, name: true },
+    orderBy: { id: "desc" },
+  });
   const { Arr, pages } = pagination(count, sk, itemsToShow);
 
   return (
     <div>
       <div className="flex items-start sm:items-center gap-5 flex-col sm:flex-row">
-        <Button className="my-3">
-          <a href="/dashboard/features/create">إضافة برنامج</a>
-        </Button>
+        <ProgramForm presenters={presenetrs} />
         <SearchForm content="programs" />
       </div>
-      <ProgramsTable data={programs} />
+      <ProgramsTable presenters={presenetrs} data={programs} />
       <Pagination Arr={Arr} pages={pages} link="/dashboard/features" />
     </div>
   );

@@ -12,7 +12,7 @@ import DeleteButton from "./DeleteButton";
 import { FiEdit } from "react-icons/fi";
 import Link from "next/link";
 import { Video } from "@prisma/client";
-import { deleteEpisode } from "@/lib/_actions";
+import { deleteVideo } from "@/lib/_actions";
 interface VideosTableProps extends Video {
   presenter: { name: string } | null;
 }
@@ -65,7 +65,7 @@ function VideosTable({ data }: { data: VideosTableProps[] }) {
                   >
                     <FiEdit size={20} />
                   </Link>
-                  | <DeleteButton deleteAction={deleteEpisode} id={video.id} />
+                  | <DeleteButton deleteAction={deleteVideo} id={video.id} />
                 </div>
               </TableCell>
             </TableRow>
