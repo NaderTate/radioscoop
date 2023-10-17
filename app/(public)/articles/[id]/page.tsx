@@ -137,10 +137,9 @@ async function page({ params: { id } }: { params: { id: string } }) {
             <div className="relative flex items-center bg-gray-100/20 rounded-xl">
               <div className="p-8 sm:p-16 lg:p-24">
                 {post?.content && (
-                  <p
-                    className="mt-4 text-gray-600 text-sm dark:text-gray-200 md:text-lg font-semibold flex flex-col gap-1 md:gap-2"
-                    dangerouslySetInnerHTML={{ __html: post?.content }}
-                  ></p>
+                  <p className="mt-4 text-gray-600 text-sm dark:text-gray-200 md:text-lg font-semibold flex flex-col gap-1 md:gap-2 whitespace-pre-wrap">
+                    {post.content}
+                  </p>
                 )}
               </div>
             </div>

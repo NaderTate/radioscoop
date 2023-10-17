@@ -14,8 +14,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { ScrollArea } from "@/components/ui/scroll-area";
-
 import { TiEdit } from "react-icons/ti";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";

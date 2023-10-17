@@ -1,3 +1,4 @@
+import ArticleForm from "@/components/ArticleForm";
 import ArticlesTable from "@/components/ArticlesTable";
 import Pagination from "@/components/Pagination";
 import SearchForm from "@/components/SearchForm";
@@ -35,12 +36,31 @@ async function page({
     },
   });
   const { Arr, pages } = pagination(count, sk, itemsToShow);
+  const presenters = await prisma.author.findMany({
+    select: { id: true, name: true },
+    orderBy: { id: "desc" },
+  });
+  const types = await prisma.type.findMany({
+    select: { id: true, name: true },
+    orderBy: { id: "desc" },
+  });
+  const postMonths = await prisma.postMonth.findMany({
+    select: { id: true, name: true, year: { select: { year: true } } },
+    orderBy: { id: "desc" },
+  });
+  const years = await prisma.year.findMany({
+    select: { id: true, year: true },
+    orderBy: { id: "desc" },
+  });
   return (
     <div>
       <div className="flex items-start sm:items-center gap-5 flex-col sm:flex-row">
-        <Button className="my-3">
-          <a href="/dashboard/features/create">إضافة مقالة</a>
-        </Button>
+        <ArticleForm
+          years={years}
+          postMonths={postMonths}
+          types={types}
+          presenters={presenters}
+        />
         <SearchForm content="articles" />
       </div>
       <ArticlesTable data={articles} />

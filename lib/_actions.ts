@@ -96,6 +96,21 @@ export const addMonth = async (yearId: string, name: string) => {
   revalidatePath("/dashboard/seasons");
   return month;
 };
+// add new postmonth
+export const addPostMonth = async (name: string, yearId: string) => {
+  const month = await prisma.year.update({
+    where: { id: yearId },
+    data: {
+      postMonth: {
+        create: {
+          name,
+        },
+      },
+    },
+  });
+  revalidatePath("/dashboard/articles");
+  return month;
+};
 // update month
 export const updateMonth = async (
   monthId: string,
@@ -351,4 +366,60 @@ export const deleteVideo = async (videoId: string) => {
   });
   revalidatePath("/dashboard/media-scoop");
   return video;
+};
+// add article
+export const addArticle = async (
+  title: string,
+  image: string,
+  content: string,
+  authorId: string
+) => {
+  const article = await prisma.post.create({
+    data: {
+      title,
+      content,
+      image,
+      presenter: {
+        connect: {
+          id: authorId,
+        },
+      },
+    },
+  });
+  revalidatePath("/dashboard/articles");
+  return article;
+};
+// update article
+export const updateArticle = async (
+  articleId: string,
+  title: string,
+  image: string,
+  content: string,
+  authorId: string
+) => {
+  const article = await prisma.post.update({
+    where: { id: articleId },
+    data: {
+      title,
+      content,
+      image,
+      presenter: {
+        connect: {
+          id: authorId,
+        },
+      },
+    },
+  });
+  revalidatePath("/dashboard/articles");
+  return article;
+};
+// add new type
+export const addType = async (name: string) => {
+  const type = await prisma.type.create({
+    data: {
+      name,
+    },
+  });
+  revalidatePath("/dashboard/articles");
+  return type;
 };

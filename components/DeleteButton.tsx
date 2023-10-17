@@ -20,8 +20,8 @@ function DeleteButton({
   return (
     <div>
       <Dialog>
-        <DialogTrigger>
-          <AiFillDelete size={20} className="text-2xl cursor-pointer" />
+        <DialogTrigger className="flex items-center">
+          <AiFillDelete size={20} className=" cursor-pointer" />
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>

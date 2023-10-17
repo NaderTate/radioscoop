@@ -55,9 +55,7 @@ function EpisodeForm({
           {episode?.id ? (
             <FiEdit className="mr-2 h-4 w-4 shrink-0 opacity-50" />
           ) : (
-            <Button variant="outline" className="w-full">
-              إضافة حلقة
-            </Button>
+            <Button className="w-full">إضافة حلقة</Button>
           )}
         </DialogTrigger>
         <DialogContent>

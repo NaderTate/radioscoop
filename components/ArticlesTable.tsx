@@ -35,7 +35,7 @@ function ArticlesTable({ data }: { data: ArticlesTableProps[] }) {
             <TableRow key={article.id}>
               <TableCell>
                 <Link
-                  href={{ pathname: `/article/${article.id}` }}
+                  href={{ pathname: `/articles/${article.id}` }}
                   target="_blank"
                 >
                   <Image

@@ -29,7 +29,8 @@ import { AiOutlineCheck } from "react-icons/ai";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { BeatLoader } from "react-spinners";
-import { addVideo } from "@/lib/_actions";
+import { addVideo, updateVideo } from "@/lib/_actions";
+import { FiEdit } from "react-icons/fi";
 
 function VideoForm({
   presenters,
@@ -47,11 +48,15 @@ function VideoForm({
   return (
     <Dialog>
       <DialogTrigger>
-        <Button className="w-full">إضافة فيديو</Button>
+        {video?.id ? (
+          <FiEdit size={20} className="m-auto" />
+        ) : (
+          <Button className="w-full">إضافة فيديو</Button>
+        )}
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>اضافة فيديو جديد</DialogTitle>
+          <DialogTitle>{video?.id ? "تعديل" : "اضافة فيديو"} </DialogTitle>
         </DialogHeader>
         <div className="space-y-5">
           <div className="space-y-2">
@@ -168,10 +173,14 @@ function VideoForm({
               disabled={!title || !image}
               className="w-full"
               onClick={async () => {
-                await addVideo(title, image, link, presenterId);
+                if (video?.id) {
+                  await updateVideo(video.id, title, link, image, presenterId);
+                } else {
+                  await addVideo(title, link, image, presenterId);
+                }
               }}
             >
-              إضافة
+              {video?.id ? "تعديل" : "إضافة"}
             </Button>
           </DialogClose>
         </div>

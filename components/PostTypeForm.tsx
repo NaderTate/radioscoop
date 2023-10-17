@@ -8,21 +8,20 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Type } from "@prisma/client";
 import { useState } from "react";
-import { addAdmin } from "@/lib/_actions";
 import { DialogClose } from "@radix-ui/react-dialog";
-
-function AdminForm() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+import { addType } from "@/lib/_actions";
+function PostTypeForm({ type }: { type?: Type }) {
+  const [name, setName] = useState(type?.name || "");
   return (
     <Dialog>
       <DialogTrigger>
-        <Button className="w-full">إضافة مشرف</Button>
+        <Button className="w-full">إضافة تصنيف</Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>اضافة مشرف جديد</DialogTitle>
+          <DialogTitle>اضافة تصنيف جديد</DialogTitle>
         </DialogHeader>
         <div className="space-y-5">
           <div className="space-y-2">
@@ -31,24 +30,15 @@ function AdminForm() {
               defaultValue={name}
               onChange={(e) => setName(e.target.value)}
             />
-            <Input
-              type="email"
-              placeholder="البريد الالكتروني"
-              defaultValue={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
           </div>
           <DialogClose className="w-full">
             <Button
-              disabled={!name || !email}
+              disabled={!name}
               className="w-full"
               onClick={async () => {
-                const res = await addAdmin(name, email);
-                if (res.error) {
-                  alert(res.error);
-                }
+                const res = await addType(name);
+
                 setName("");
-                setEmail("");
               }}
             >
               إضافة
@@ -60,4 +50,4 @@ function AdminForm() {
   );
 }
 
-export default AdminForm;
+export default PostTypeForm;

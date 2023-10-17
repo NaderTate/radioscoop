@@ -1,7 +1,6 @@
 "use client";
 import { Category, Month, Year } from "@prisma/client";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@radix-ui/react-separator";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import MonthCard from "./MonthCard";
 import {

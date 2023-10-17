@@ -46,7 +46,7 @@ async function page({
         <VideoForm presenters={presenters} />
         <SearchForm content="media-scoop" />
       </div>
-      <VideosTable data={videos} />
+      <VideosTable presenters={presenters} data={videos} />
       <Pagination Arr={Arr} pages={pages} link="/dashboard/videos" />
     </div>
   );

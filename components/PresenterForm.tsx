@@ -99,6 +99,7 @@ function PresenterForm({ presenter }: { presenter?: Author_ }) {
             <DialogClose className="w-full">
               {presenter?.id ? (
                 <Button
+                  disabled={!name}
                   onClick={async () => {
                     const res = await updateAuthor(presenter.id, name, img);
                     if (res.error) {
@@ -111,6 +112,7 @@ function PresenterForm({ presenter }: { presenter?: Author_ }) {
                 </Button>
               ) : (
                 <Button
+                  disabled={!name}
                   onClick={async () => {
                     const res = await addAuthor(name, img);
                     if (res.error) {

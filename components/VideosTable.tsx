@@ -13,10 +13,17 @@ import { FiEdit } from "react-icons/fi";
 import Link from "next/link";
 import { Video } from "@prisma/client";
 import { deleteVideo } from "@/lib/_actions";
+import VideoForm from "./VideoForm";
 interface VideosTableProps extends Video {
   presenter: { name: string } | null;
 }
-function VideosTable({ data }: { data: VideosTableProps[] }) {
+function VideosTable({
+  data,
+  presenters,
+}: {
+  data: VideosTableProps[];
+  presenters: { id: string; name: string }[];
+}) {
   return (
     <div>
       <Table>
@@ -45,7 +52,6 @@ function VideosTable({ data }: { data: VideosTableProps[] }) {
               </TableCell>
               <TableCell>{video.title}</TableCell>
               <TableCell>{video.presenter?.name}</TableCell>
-
               <TableCell>
                 {new Date(video.createdAt).toLocaleDateString("ar-EG", {
                   year: "numeric",
@@ -55,16 +61,7 @@ function VideosTable({ data }: { data: VideosTableProps[] }) {
               </TableCell>
               <TableCell className="text-right">
                 <div className="flex gap-3">
-                  <Link
-                    className="cursor-pointer"
-                    href={{
-                      pathname: "/edit",
-                      query: { content: "video", id: video.id },
-                    }}
-                    target="_blank"
-                  >
-                    <FiEdit size={20} />
-                  </Link>
+                  <VideoForm video={video} presenters={presenters} />
                   | <DeleteButton deleteAction={deleteVideo} id={video.id} />
                 </div>
               </TableCell>
