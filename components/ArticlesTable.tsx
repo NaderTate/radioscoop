@@ -9,18 +9,31 @@ import {
 } from "@/components/ui/table";
 import Image from "next/image";
 import DeleteButton from "./DeleteButton";
-import { FiEdit } from "react-icons/fi";
 import Link from "next/link";
 import { Post } from "@prisma/client";
-import { deleteEpisode } from "@/lib/_actions";
+import { deleteArticle } from "@/lib/_actions";
+import ArticleForm from "./ArticleForm";
 interface ArticlesTableProps extends Post {
   presenter: { name: string } | null;
+  type: { name: string } | null;
 }
-function ArticlesTable({ data }: { data: ArticlesTableProps[] }) {
+function ArticlesTable({
+  data,
+  presenters,
+  types,
+  postMonths,
+  years,
+}: {
+  data: ArticlesTableProps[];
+  presenters: { id: string; name: string }[];
+  types: { id: string; name: string }[];
+  years: { id: string; year: string }[];
+  postMonths: { id: string; name: string; year: { year: string } }[];
+}) {
   return (
     <div>
       <Table>
-        <TableCaption>أحدث البرامج</TableCaption>
+        <TableCaption>أحدث المقالات</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead className="text-right">البوستر</TableHead>
@@ -50,7 +63,7 @@ function ArticlesTable({ data }: { data: ArticlesTableProps[] }) {
               <TableCell>{article.title}</TableCell>
               <TableCell>{article?.presenter?.name}</TableCell>
 
-              <TableCell>{article?.type}</TableCell>
+              <TableCell>{article?.type?.name}</TableCell>
               <TableCell>
                 {new Date(article.createdAt).toLocaleDateString("ar-EG", {
                   year: "numeric",
@@ -60,18 +73,15 @@ function ArticlesTable({ data }: { data: ArticlesTableProps[] }) {
               </TableCell>
               <TableCell className="text-right">
                 <div className="flex gap-3">
-                  <Link
-                    className="cursor-pointer"
-                    href={{
-                      pathname: "/edit",
-                      query: { content: "video", id: article.id },
-                    }}
-                    target="_blank"
-                  >
-                    <FiEdit size={20} />
-                  </Link>
+                  <ArticleForm
+                    years={years}
+                    postMonths={postMonths}
+                    types={types}
+                    presenters={presenters}
+                    article={article}
+                  />
                   |{" "}
-                  <DeleteButton deleteAction={deleteEpisode} id={article.id} />{" "}
+                  <DeleteButton deleteAction={deleteArticle} id={article.id} />{" "}
                 </div>
               </TableCell>
             </TableRow>

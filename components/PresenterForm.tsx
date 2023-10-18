@@ -15,6 +15,7 @@ import { DialogClose } from "@radix-ui/react-dialog";
 import Image from "next/image";
 import { BeatLoader } from "react-spinners";
 import { addAuthor, updateAuthor } from "@/lib/_actions";
+import { AiOutlinePlusCircle } from "react-icons/ai";
 interface Author_ extends Author {
   Categories: { id: string }[];
 }
@@ -28,7 +29,9 @@ function PresenterForm({ presenter }: { presenter?: Author_ }) {
         {presenter?.id ? (
           <FiEdit className="mr-2 h-4 w-4 shrink-0 opacity-50" />
         ) : (
-          <Button className="w-full">إضافة مذيع</Button>
+          <Button className="w-full">
+            إضافة مذيع <AiOutlinePlusCircle className="mr-2 h-4 w-4" />
+          </Button>
         )}
       </DialogTrigger>
       <DialogContent>
@@ -96,7 +99,7 @@ function PresenterForm({ presenter }: { presenter?: Author_ }) {
                 alt="img"
               />
             )}
-            <DialogClose className="w-full">
+            <DialogClose disabled={!name} className="w-full">
               {presenter?.id ? (
                 <Button
                   disabled={!name}

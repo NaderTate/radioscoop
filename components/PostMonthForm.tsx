@@ -29,12 +29,12 @@ import { cn } from "@/lib/utils";
 function PostMonthForm({ years }: { years: { id: string; year: string }[] }) {
   const [open, setOpen] = useState(false);
   const [monthName, setMonthName] = useState("");
-  const [yearId, setYearId] = useState(years[years.length - 1].id);
+  const [yearId, setYearId] = useState(years[0].id);
   return (
     <Dialog>
       <DialogTrigger>
         <Button className="">
-          <AiOutlinePlusCircle size={25} />
+          اضافة شهر <AiOutlinePlusCircle className="mr-2 h-4 w-4" />
         </Button>
       </DialogTrigger>
       <DialogContent>
@@ -90,8 +90,9 @@ function PostMonthForm({ years }: { years: { id: string; year: string }[] }) {
             </Command>
           </PopoverContent>
         </Popover>
-        <DialogClose asChild>
+        <DialogClose disabled={!monthName || !yearId} asChild>
           <Button
+            disabled={!monthName || !yearId}
             onClick={() => {
               addPostMonth(monthName, yearId);
             }}

@@ -31,7 +31,7 @@ import PresenterForm from "./PresenterForm";
 import { AiOutlineCheck } from "react-icons/ai";
 import { cn } from "@/lib/utils";
 import { Textarea } from "./ui/textarea";
-import { addArticle } from "@/lib/_actions";
+import { addArticle, updateArticle } from "@/lib/_actions";
 import PostTypeForm from "./PostTypeForm";
 import PostMonthForm from "./PostMonthForm";
 function ArticleForm({
@@ -151,7 +151,7 @@ function ArticleForm({
               </PopoverTrigger>
               <PopoverContent className=" h-52 p-0">
                 <Command>
-                  <CommandInput placeholder="ابحث عن برنامج..." />
+                  <CommandInput placeholder="ابحث عن مذيع..." />
                   <CommandEmpty>لم يتم العثور على أي مذيع.</CommandEmpty>
                   <CommandGroup className="overflow-auto">
                     <div className="my-2">
@@ -233,7 +233,7 @@ function ArticleForm({
                   className="w-[200px] justify-between"
                 >
                   {monthId
-                    ? types.find((type) => type.id === monthId)?.name
+                    ? postMonths.find((month) => month.id === monthId)?.name
                     : "الشهر..."}
                   <LuChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
@@ -269,14 +269,36 @@ function ArticleForm({
               </PopoverContent>
             </Popover>
           </div>
-          <DialogClose className="w-full">
+          <DialogClose disabled={!image || !content} className="w-full">
             <Button
               disabled={!title || !image}
               className="w-full"
               onClick={async () => {
                 if (article?.id) {
+                  await updateArticle(
+                    article.id,
+                    title,
+                    image,
+                    content,
+                    presenterId,
+                    typeId,
+                    monthId
+                  );
                 } else {
-                  await addArticle(title, image, content, presenterId);
+                  await addArticle(
+                    title,
+                    image,
+                    content,
+                    presenterId,
+                    typeId,
+                    monthId
+                  );
+                  setTitle("");
+                  setImage("");
+                  setContent("");
+                  setPresenterId("");
+                  setTypeId("");
+                  setMonthId("");
                 }
               }}
             >

@@ -22,7 +22,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useState } from "react";
-import { AiOutlineCheck } from "react-icons/ai";
+import { AiOutlineCheck, AiOutlinePlusCircle } from "react-icons/ai";
 import { LuChevronsUpDown } from "react-icons/lu";
 import { createEpisode, updateEpisode } from "@/lib/_actions";
 import { FiEdit } from "react-icons/fi";
@@ -55,12 +55,16 @@ function EpisodeForm({
           {episode?.id ? (
             <FiEdit className="mr-2 h-4 w-4 shrink-0 opacity-50" />
           ) : (
-            <Button className="w-full">إضافة حلقة</Button>
+            <Button className="w-full">
+              إضافة حلقة <AiOutlinePlusCircle className="mr-2 h-4 w-4" />
+            </Button>
           )}
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>اضافة حلقة جديدة</DialogTitle>
+            <DialogTitle>
+              {episode?.id ? "تعديل الحلقة" : "اضافة حلقة جديدة"}
+            </DialogTitle>
           </DialogHeader>
           <Input
             defaultValue={title}
@@ -123,7 +127,7 @@ function EpisodeForm({
               </Command>
             </PopoverContent>
           </Popover>
-          <DialogClose>
+          <DialogClose disabled={!title || !link || !programId}>
             <Button
               disabled={!title || !link || !programId}
               className="block w-full"

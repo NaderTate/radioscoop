@@ -26,6 +26,7 @@ async function page({
     },
     include: {
       presenter: { select: { name: true } },
+      type: { select: { name: true } },
     },
   });
   const count = await prisma.post.count({
@@ -63,7 +64,13 @@ async function page({
         />
         <SearchForm content="articles" />
       </div>
-      <ArticlesTable data={articles} />
+      <ArticlesTable
+        years={years}
+        postMonths={postMonths}
+        types={types}
+        presenters={presenters}
+        data={articles}
+      />
       <Pagination Arr={Arr} pages={pages} link="/dashboard/articles" />
     </div>
   );

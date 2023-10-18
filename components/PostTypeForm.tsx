@@ -12,12 +12,15 @@ import { Type } from "@prisma/client";
 import { useState } from "react";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { addType } from "@/lib/_actions";
+import { AiOutlinePlusCircle } from "react-icons/ai";
 function PostTypeForm({ type }: { type?: Type }) {
   const [name, setName] = useState(type?.name || "");
   return (
     <Dialog>
       <DialogTrigger>
-        <Button className="w-full">إضافة تصنيف</Button>
+        <Button className="w-full">
+          إضافة تصنيف <AiOutlinePlusCircle className="mr-2 h-4 w-4" />
+        </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -31,12 +34,12 @@ function PostTypeForm({ type }: { type?: Type }) {
               onChange={(e) => setName(e.target.value)}
             />
           </div>
-          <DialogClose className="w-full">
+          <DialogClose disabled={!name} className="w-full">
             <Button
               disabled={!name}
               className="w-full"
               onClick={async () => {
-                const res = await addType(name);
+                await addType(name);
 
                 setName("");
               }}

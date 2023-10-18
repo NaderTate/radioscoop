@@ -372,7 +372,9 @@ export const addArticle = async (
   title: string,
   image: string,
   content: string,
-  authorId: string
+  authorId: string,
+  typeId: string,
+  monthId: string
 ) => {
   const article = await prisma.post.create({
     data: {
@@ -382,6 +384,16 @@ export const addArticle = async (
       presenter: {
         connect: {
           id: authorId,
+        },
+      },
+      type: {
+        connect: {
+          id: typeId,
+        },
+      },
+      PostMonth: {
+        connect: {
+          id: monthId,
         },
       },
     },
@@ -395,7 +407,9 @@ export const updateArticle = async (
   title: string,
   image: string,
   content: string,
-  authorId: string
+  authorId: string,
+  typeId: string,
+  monthId: string
 ) => {
   const article = await prisma.post.update({
     where: { id: articleId },
@@ -408,7 +422,26 @@ export const updateArticle = async (
           id: authorId,
         },
       },
+      type: {
+        connect: {
+          id: typeId,
+        },
+      },
+      PostMonth: {
+        connect: {
+          id: monthId,
+        },
+      },
     },
+  });
+  revalidatePath("/dashboard/articles");
+  return article;
+};
+
+// delete article
+export const deleteArticle = async (articleId: string) => {
+  const article = await prisma.post.delete({
+    where: { id: articleId },
   });
   revalidatePath("/dashboard/articles");
   return article;
