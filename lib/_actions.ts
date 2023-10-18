@@ -456,3 +456,72 @@ export const addType = async (name: string) => {
   revalidatePath("/dashboard/articles");
   return type;
 };
+// add a feature
+export const addFeature = async (
+  title: string,
+  image: string,
+  link: string,
+  preparerId: string,
+  presenterId: string,
+  typeId?: string
+) => {
+  const feature = await prisma.episode.create({
+    data: {
+      featured: true,
+      title: "",
+      featureTitle: title,
+      img: image,
+      link,
+      preparedBy: preparerId ? { connect: { id: preparerId } } : undefined,
+      presenter: presenterId ? { connect: { id: presenterId } } : undefined,
+      type: typeId ? { connect: { id: typeId } } : undefined,
+    },
+  });
+  revalidatePath("/dashboard/features");
+  return feature;
+};
+
+// update feature
+export const updateFeature = async (
+  featureId: string,
+  title: string,
+  image: string,
+  link: string,
+  preparerId: string,
+  presenterId: string,
+  typeId?: string
+) => {
+  const feature = await prisma.episode.update({
+    where: { id: featureId },
+    data: {
+      title: "",
+      featured: true,
+      featureTitle: title,
+      img: image,
+      link,
+      preparedBy: preparerId ? { connect: { id: preparerId } } : undefined,
+      presenter: presenterId ? { connect: { id: presenterId } } : undefined,
+      type: typeId ? { connect: { id: typeId } } : undefined,
+    },
+  });
+  revalidatePath("/dashboard/features");
+  return feature;
+};
+// delete feature
+export const deleteFeature = async (featureId: string) => {
+  const feature = await prisma.episode.delete({
+    where: { id: featureId },
+  });
+  revalidatePath("/dashboard/features");
+  return feature;
+};
+// add feature type
+export const addFeatureType = async (name: string) => {
+  const type = await prisma.featureType.create({
+    data: {
+      name,
+    },
+  });
+  revalidatePath("/dashboard/features");
+  return type;
+};

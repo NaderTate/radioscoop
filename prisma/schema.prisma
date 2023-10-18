@@ -9,25 +9,26 @@ datasource db {
 }
 
 model Episode {
-  id           String    @id @default(auto()) @map("_id") @db.ObjectId
+  id           String       @id @default(auto()) @map("_id") @db.ObjectId
   title        String
   img          String?
   link         String
-  featured     Boolean   @default(false)
+  featured     Boolean      @default(false)
   description  String?
-  preparedBy   Author?   @relation("preparedFeature", fields: [preparedById], references: [id])
-  preparedById String?   @db.ObjectId
-  presenter    Author?   @relation("presentedFeature", fields: [presenterId], references: [id])
-  presenterId  String?   @db.ObjectId
+  preparedBy   Author?      @relation("preparedFeature", fields: [preparedById], references: [id])
+  preparedById String?      @db.ObjectId
+  presenter    Author?      @relation("presentedFeature", fields: [presenterId], references: [id])
+  presenterId  String?      @db.ObjectId
   featureTitle String?
-  type         String?
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
-  published    Boolean   @default(false)
-  author       Author?   @relation(fields: [authorId], references: [id])
-  categoryId   String?   @db.ObjectId
-  category     Category? @relation(fields: [categoryId], references: [id])
-  authorId     String?   @db.ObjectId
+  type         FeatureType? @relation(fields: [typeId], references: [id])
+  typeId       String?      @db.ObjectId
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  published    Boolean      @default(false)
+  author       Author?      @relation(fields: [authorId], references: [id])
+  categoryId   String?      @db.ObjectId
+  category     Category?    @relation(fields: [categoryId], references: [id])
+  authorId     String?      @db.ObjectId
 }
 
 model Author {
@@ -62,7 +63,6 @@ model Post {
   title       String
   image       String
   content     String
-  month       String?
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
   published   Boolean    @default(false)
@@ -80,6 +80,14 @@ model Type {
   posts     Post[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model FeatureType {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  features  Episode[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
 
 model User {

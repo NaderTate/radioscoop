@@ -146,8 +146,8 @@ function AdminHeader() {
               <span className="font-light text-sm my-2">
                 {session?.user?.email}
               </span>
-              <Button>
-                <FiLogOut onClick={() => signOut()} />
+              <Button onClick={() => signOut()}>
+                <FiLogOut />
                 تسجيل الخروج
               </Button>
             </div>

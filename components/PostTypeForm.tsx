@@ -11,9 +11,9 @@ import {
 import { Type } from "@prisma/client";
 import { useState } from "react";
 import { DialogClose } from "@radix-ui/react-dialog";
-import { addType } from "@/lib/_actions";
+import { addFeatureType, addType } from "@/lib/_actions";
 import { AiOutlinePlusCircle } from "react-icons/ai";
-function PostTypeForm({ type }: { type?: Type }) {
+function PostTypeForm({ type, For }: { type?: Type; For: string }) {
   const [name, setName] = useState(type?.name || "");
   return (
     <Dialog>
@@ -39,8 +39,11 @@ function PostTypeForm({ type }: { type?: Type }) {
               disabled={!name}
               className="w-full"
               onClick={async () => {
-                await addType(name);
-
+                if (For == "post") {
+                  await addType(name);
+                } else {
+                  await addFeatureType(name);
+                }
                 setName("");
               }}
             >

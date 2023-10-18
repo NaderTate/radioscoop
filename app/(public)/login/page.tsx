@@ -50,16 +50,17 @@ const Page = () => {
           >
             <div className="max-w-xl lg:max-w-3xl">
               <div className="flex items-center ">
-                <AiFillLock className="w-10 h-10" />
-                <h1 className="text-4xl font-bold tracking-wide">Classified</h1>
+                <h1 className="text-4xl font-bold tracking-wide">
+                  Radio Scoop
+                </h1>
               </div>
 
               <h1 className="mt-6 text-2xl font-bold sm:text-3xl md:text-4xl">
-                Welcome to Classified 🔐
+                Welcome to Radio scoop 🎙️
               </h1>
 
               <p className="mt-4 leading-relaxed ">
-                Please use your google account to access the site
+                Please use your google account to access the dashboard
               </p>
               <SignInButton />
             </div>

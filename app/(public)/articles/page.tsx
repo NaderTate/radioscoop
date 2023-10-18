@@ -15,19 +15,22 @@ async function page({
   const itemsToShow = 30;
   const articles = await prisma.post.findMany({
     where: {
-      type: type ? type : undefined,
-      month: month ? month : undefined,
+      type: { name: type ? type : undefined },
+      PostMonth: { name: month ? month : undefined },
     },
     take: 20,
     orderBy: {
       id: "desc",
     },
-    include: { presenter: { select: { name: true } } },
+    include: {
+      presenter: { select: { name: true } },
+      type: { select: { name: true } },
+    },
   });
   const count = await prisma.post.count({
     where: {
-      type: type ? type : undefined,
-      month: month ? month : undefined,
+      type: { name: type ? type : undefined },
+      PostMonth: { name: month ? month : undefined },
     },
   });
   const { Arr, pages } = pagination(count, sk, itemsToShow);

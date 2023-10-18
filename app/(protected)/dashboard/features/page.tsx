@@ -1,3 +1,4 @@
+import FeatureForm from "@/components/FeatureForm";
 import FeaturesTable from "@/components/FeaturesTable";
 import Pagination from "@/components/Pagination";
 import SearchForm from "@/components/SearchForm";
@@ -39,15 +40,21 @@ async function page({
     },
   });
   const { Arr, pages } = pagination(count, sk, itemsToShow);
+  const presenters = await prisma.author.findMany({
+    select: { id: true, name: true },
+    orderBy: { id: "desc" },
+  });
+  const types = await prisma.featureType.findMany({
+    select: { id: true, name: true },
+    orderBy: { id: "desc" },
+  });
   return (
     <div>
       <div className="flex items-start sm:items-center gap-5 flex-col sm:flex-row">
-        <Button className="my-3">
-          <a href="/dashboard/features/create">إضافة فيتشر</a>
-        </Button>
+        <FeatureForm types={types} presenters={presenters} />
         <SearchForm content="features" />
       </div>
-      <FeaturesTable data={features} />
+      <FeaturesTable types={types} presenters={presenters} data={features} />
       <Pagination Arr={Arr} pages={pages} link="/dashboard/features" />
     </div>
   );

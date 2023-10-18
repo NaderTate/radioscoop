@@ -200,7 +200,7 @@ function ArticleForm({
                   <CommandEmpty>لم يتم العثور على أي تصنيف.</CommandEmpty>
                   <CommandGroup className="overflow-auto">
                     <div className="my-2">
-                      <PostTypeForm />
+                      <PostTypeForm For="post" />
                     </div>
 
                     {types.map((type) => (

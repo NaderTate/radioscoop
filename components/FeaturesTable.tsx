@@ -12,12 +12,21 @@ import DeleteButton from "./DeleteButton";
 import { FiEdit } from "react-icons/fi";
 import { Episode } from "@prisma/client";
 import Link from "next/link";
-import { deleteEpisode } from "@/lib/_actions";
+import { deleteFeature } from "@/lib/_actions";
+import FeatureForm from "./FeatureForm";
 interface FeaturesTableProps extends Episode {
   preparedBy: { name: string } | null;
   presenter: { name: string } | null;
 }
-function FeaturesTable({ data }: { data: FeaturesTableProps[] }) {
+function FeaturesTable({
+  data,
+  presenters,
+  types,
+}: {
+  data: FeaturesTableProps[];
+  presenters: { id: string; name: string }[];
+  types: { id: string; name: string }[];
+}) {
   return (
     <div>
       <Table>
@@ -32,24 +41,27 @@ function FeaturesTable({ data }: { data: FeaturesTableProps[] }) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data.map((ep) => (
-            <TableRow key={ep.id}>
+          {data.map((feature) => (
+            <TableRow key={feature.id}>
               <TableCell>
-                <Link href={{ pathname: `/ep/${ep.id}` }} target="_blank">
+                <Link
+                  href={{ pathname: `/feature/${feature.id}` }}
+                  target="_blank"
+                >
                   <Image
                     alt="logo"
-                    src={ep.img || ""}
+                    src={feature.img || ""}
                     width={100}
                     height={100}
                     className="rounded-xl"
                   />
                 </Link>
               </TableCell>
-              <TableCell>{ep.featureTitle}</TableCell>
-              <TableCell>{ep?.preparedBy?.name}</TableCell>
-              <TableCell>{ep?.presenter?.name}</TableCell>
+              <TableCell>{feature.featureTitle}</TableCell>
+              <TableCell>{feature?.preparedBy?.name}</TableCell>
+              <TableCell>{feature?.presenter?.name}</TableCell>
               <TableCell>
-                {new Date(ep.createdAt).toLocaleDateString("ar-EG", {
+                {new Date(feature.createdAt).toLocaleDateString("ar-EG", {
                   year: "numeric",
                   month: "long",
                   day: "numeric",
@@ -57,17 +69,13 @@ function FeaturesTable({ data }: { data: FeaturesTableProps[] }) {
               </TableCell>
               <TableCell className="text-right">
                 <div className="flex gap-3">
-                  <Link
-                    className="cursor-pointer"
-                    href={{
-                      pathname: "/edit",
-                      query: { content: "video", id: ep.id },
-                    }}
-                    target="_blank"
-                  >
-                    <FiEdit size={20} />
-                  </Link>
-                  | <DeleteButton deleteAction={deleteEpisode} id={ep.id} />{" "}
+                  <FeatureForm
+                    types={types}
+                    presenters={presenters}
+                    feature={feature}
+                  />
+                  |{" "}
+                  <DeleteButton deleteAction={deleteFeature} id={feature.id} />{" "}
                 </div>
               </TableCell>
             </TableRow>

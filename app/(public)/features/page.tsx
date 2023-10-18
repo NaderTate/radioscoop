@@ -16,7 +16,7 @@ async function page({
   const features = await prisma.episode.findMany({
     where: {
       featured: true,
-      type: type ? type : undefined,
+      type: { name: type ? type : undefined },
     },
     include: {
       presenter: { select: { name: true } },
@@ -31,7 +31,7 @@ async function page({
   const count = await prisma.episode.count({
     where: {
       featured: true,
-      type: type ? type : undefined,
+      type: { name: type ? type : undefined },
     },
   });
   const { Arr, pages } = pagination(count, sk, itemsToShow);
