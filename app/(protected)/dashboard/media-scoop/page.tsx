@@ -47,7 +47,12 @@ async function page({
         <SearchForm content="media-scoop" />
       </div>
       <VideosTable presenters={presenters} data={videos} />
-      <Pagination Arr={Arr} pages={pages} link="/dashboard/videos" />
+      <Pagination
+        Arr={Arr}
+        pages={pages}
+        link="/dashboard/videos"
+        currentPage={sk}
+      />
     </div>
   );
 }

@@ -13,6 +13,7 @@ model Episode {
   title        String
   img          String?
   link         String
+  categoryy    String?
   featured     Boolean      @default(false)
   description  String?
   preparedBy   Author?      @relation("preparedFeature", fields: [preparedById], references: [id])
@@ -49,8 +50,9 @@ model Category {
   id        String    @id @default(auto()) @map("_id") @db.ObjectId
   name      String
   img       String
-  authorId  String    @db.ObjectId
-  author    Author    @relation(fields: [authorId], references: [id])
+  authorr   String?
+  authorId  String?   @db.ObjectId
+  author    Author?   @relation(fields: [authorId], references: [id])
   month     Month?    @relation(fields: [monthId], references: [id])
   monthId   String?   @db.ObjectId
   episodes  Episode[]

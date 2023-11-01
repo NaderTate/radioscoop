@@ -71,7 +71,12 @@ async function page({
         presenters={presenters}
         data={articles}
       />
-      <Pagination Arr={Arr} pages={pages} link="/dashboard/articles" />
+      <Pagination
+        Arr={Arr}
+        pages={pages}
+        link="/dashboard/articles"
+        currentPage={sk}
+      />
     </div>
   );
 }

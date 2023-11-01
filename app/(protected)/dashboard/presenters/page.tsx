@@ -43,7 +43,12 @@ async function page({
         <SearchForm content="presenters" />
       </div>
       <PresenetersTable data={presenters} />
-      <Pagination Arr={Arr} pages={pages} link="/dashboard/presenters" />
+      <Pagination
+        Arr={Arr}
+        pages={pages}
+        link="/dashboard/presenters"
+        currentPage={sk}
+      />
     </div>
   );
 }

@@ -2,7 +2,6 @@
 const nextConfig = {
   experimental: {
     typedRoutes: true,
-    serverActions: true,
   },
   i18n: {
     locales: ["ar"],

@@ -5,38 +5,42 @@ function Pagination({
   query,
   Arr,
   link,
+  currentPage,
 }: {
   pages: number[];
   query?: object;
   Arr: number[];
   link: string;
+  currentPage?: number;
 }) {
-  const style =
-    "inline-flex items-center justify-center w-8 h-8 border border-gray-100 rounded-full hover:bg-slate-400/50 transition bg-white dark:bg-inherit";
   return (
     <div dir="ltr">
       {pages && Arr && (
-        <ol className="flex justify-center gap-1 my-16 text-sm font-medium">
+        <ol className="flex justify-center gap-1 my-16 text-sm font-medium items-center">
           <li>
             <Link
               href={{
                 pathname: link,
                 query: { page: pages.at(0), ...query },
               }}
-              className={style}
+              className={""}
             >
               <BsChevronDoubleLeft />
             </Link>
           </li>
           {Arr &&
-            Arr.map((page: any) => (
+            Arr.map((page: number) => (
               <li key={page}>
                 <Link
                   href={{
                     pathname: link,
                     query: { page: page, ...query },
                   }}
-                  className={style}
+                  className={` inline-flex items-center justify-center w-8 h-8 border border-gray-100 rounded-full hover:bg-slate-400/50 transition bg-white dark:bg-inherit dark:hover:bg-slate-600/50 dark:border-gray-700 dark:text-gray-100 ${
+                    currentPage === page
+                      ? "bg-slate-400/50 dark:bg-slate-600/50"
+                      : ""
+                  }`}
                 >
                   {page}
                 </Link>
@@ -48,7 +52,7 @@ function Pagination({
                 pathname: link,
                 query: { page: pages.at(-1), ...query },
               }}
-              className={style}
+              className={""}
             >
               <BsChevronDoubleRight />
             </Link>

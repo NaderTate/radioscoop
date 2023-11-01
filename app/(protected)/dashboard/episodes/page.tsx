@@ -2,10 +2,8 @@ import EpisodeForm from "@/components/EpisodeForm";
 import EpisodesTable from "@/components/EpisodesTable";
 import Pagination from "@/components/Pagination";
 import SearchForm from "@/components/SearchForm";
-import { Button } from "@/components/ui/button";
 import prisma from "@/lib/prisma";
 import { pagination } from "@/lib/utils";
-import Link from "next/link";
 async function page({
   searchParams,
 }: {
@@ -13,7 +11,7 @@ async function page({
 }) {
   const { search, page } = searchParams;
   const sk = Number(page) || 1;
-  const itemsToShow = 30;
+  const itemsToShow = 1500;
   const Episodes = await prisma.episode.findMany({
     where: {
       featured: false,
@@ -75,7 +73,12 @@ async function page({
         <SearchForm content="episodes" />
       </div>
       <EpisodesTable programs={programs} data={Episodes} />
-      <Pagination Arr={Arr} pages={pages} link="/dashboard/episodes" />
+      <Pagination
+        Arr={Arr}
+        pages={pages}
+        link="/dashboard/episodes"
+        currentPage={sk}
+      />
     </div>
   );
 }

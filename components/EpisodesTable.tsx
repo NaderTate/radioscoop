@@ -14,7 +14,11 @@ import Link from "next/link";
 import { deleteEpisode } from "@/lib/_actions";
 import EpisodeForm from "./EpisodeForm";
 interface EpisodesTableProps extends Episode {
-  category: { name: string; img: string; author: { name: string } } | null;
+  category: {
+    name: string;
+    img: string;
+    author: { name: string } | null;
+  } | null;
 }
 function EpisodesTable({
   data,
@@ -36,6 +40,7 @@ function EpisodesTable({
             <TableHead className="text-right">البوستر</TableHead>
             <TableHead className="text-right">الحلقة</TableHead>
             <TableHead className="text-right">البرنامج</TableHead>
+            <TableHead className="text-right">catoetoryy</TableHead>
             <TableHead className="text-right">تقديم</TableHead>
             <TableHead className="text-right">التاريخ</TableHead>
           </TableRow>
@@ -56,7 +61,8 @@ function EpisodesTable({
               </TableCell>
               <TableCell>{ep.title}</TableCell>
               <TableCell>{ep?.category?.name}</TableCell>
-              <TableCell>{ep?.category?.author.name}</TableCell>
+              <TableCell>{ep?.categoryy}</TableCell>
+              <TableCell>{ep?.category?.author?.name}</TableCell>
               <TableCell>
                 {new Date(ep.createdAt).toLocaleDateString("ar-EG", {
                   year: "numeric",

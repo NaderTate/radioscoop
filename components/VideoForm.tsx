@@ -116,7 +116,7 @@ function VideoForm({
               />
             )}
             <Input
-              placeholder="الرايط"
+              placeholder="الرابط"
               defaultValue={link}
               onChange={async (e) => setLink(e.target.value)}
             />
@@ -168,7 +168,7 @@ function VideoForm({
               </PopoverContent>
             </Popover>
           </div>
-          <DialogClose className="w-full">
+          <DialogClose className="w-full" disabled={!title || !image}>
             <Button
               disabled={!title || !image}
               className="w-full"

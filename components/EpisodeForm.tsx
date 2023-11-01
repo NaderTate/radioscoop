@@ -27,6 +27,7 @@ import { LuChevronsUpDown } from "react-icons/lu";
 import { createEpisode, updateEpisode } from "@/lib/_actions";
 import { FiEdit } from "react-icons/fi";
 import { DialogClose } from "@radix-ui/react-dialog";
+import ProgramForm from "./ProgramForm";
 
 function EpisodeForm({
   programs,
@@ -103,6 +104,9 @@ function EpisodeForm({
                 <CommandInput placeholder="ابحث عن برنامج..." />
                 <CommandEmpty>لم يتم العثور على أي برنامج.</CommandEmpty>
                 <CommandGroup className="overflow-auto">
+                  <div className="my-2">
+                    <ProgramForm presenters={programs} />
+                  </div>
                   {programs.map((program) => (
                     <CommandItem
                       key={program.id}

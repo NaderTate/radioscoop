@@ -248,11 +248,8 @@ export const createProgram = async (
     data: {
       name,
       img,
-      author: {
-        connect: {
-          id: presenterId,
-        },
-      },
+
+      author: presenterId ? { connect: { id: presenterId } } : undefined,
     },
   });
   revalidatePath("/dashboard/programs");

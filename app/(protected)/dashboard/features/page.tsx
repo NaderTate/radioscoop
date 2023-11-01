@@ -55,7 +55,12 @@ async function page({
         <SearchForm content="features" />
       </div>
       <FeaturesTable types={types} presenters={presenters} data={features} />
-      <Pagination Arr={Arr} pages={pages} link="/dashboard/features" />
+      <Pagination
+        Arr={Arr}
+        pages={pages}
+        link="/dashboard/features"
+        currentPage={sk}
+      />
     </div>
   );
 }
