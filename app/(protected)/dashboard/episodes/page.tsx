@@ -11,7 +11,7 @@ async function page({
 }) {
   const { search, page } = searchParams;
   const sk = Number(page) || 1;
-  const itemsToShow = 1500;
+  const itemsToShow = 30;
   const Episodes = await prisma.episode.findMany({
     where: {
       featured: false,

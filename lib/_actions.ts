@@ -7,10 +7,22 @@ export const createEpisode = async (
   link: string,
   programId: string
 ) => {
+  const AudioDriveLink = (url: string) => {
+    let arr = url.split("/");
+    let updatedLink = [
+      arr[0],
+      "//",
+      arr[2],
+      "/",
+      "uc?export=open&id=",
+      arr[5],
+    ].join("");
+    return updatedLink;
+  };
   const episode = await prisma.episode.create({
     data: {
       title,
-      link,
+      link: AudioDriveLink(link),
       category: {
         connect: {
           id: programId,

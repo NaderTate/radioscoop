@@ -45,10 +45,18 @@ function EpisodeForm({
     programId: string;
   };
 }) {
+  const ReverseAudioDriveLink = (updatedLink: string) => {
+    const id = updatedLink.split("id=")[1];
+    const originalUrl = `https://drive.google.com/file/d/${id}/view`;
+
+    return originalUrl;
+  };
   const [open, setOpen] = useState(false);
   const [programId, setProgramId] = useState(episode?.programId || "");
   const [title, setTitle] = useState(episode?.title || "");
-  const [link, setLink] = useState(episode?.link || "");
+  const [link, setLink] = useState(
+    episode?.link ? ReverseAudioDriveLink(episode?.link) : ""
+  );
   return (
     <div className="space-y-5">
       <Dialog>
