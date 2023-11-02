@@ -2,6 +2,7 @@ import prisma from "@/lib/prisma";
 import SidePanel from "@/components/SidePanel";
 import Link from "next/link";
 import Schedule from "@/components/Schedule";
+export const revalidate = 60;
 export async function generateStaticParams() {
   const products = await prisma.post.findMany();
   return products.map((post) => ({ id: post.id }));
