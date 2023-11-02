@@ -404,9 +404,9 @@ export const updateArticle = async (
   title: string,
   image: string,
   content: string,
-  authorId: string,
-  typeId: string,
-  monthId: string
+  authorId?: string,
+  typeId?: string,
+  monthId?: string
 ) => {
   const article = await prisma.post.update({
     where: { id: articleId },
@@ -414,21 +414,9 @@ export const updateArticle = async (
       title,
       content,
       image,
-      presenter: {
-        connect: {
-          id: authorId,
-        },
-      },
-      type: {
-        connect: {
-          id: typeId,
-        },
-      },
-      PostMonth: {
-        connect: {
-          id: monthId,
-        },
-      },
+      presenter: authorId ? { connect: { id: authorId } } : undefined,
+      type: typeId ? { connect: { id: typeId } } : undefined,
+      PostMonth: monthId ? { connect: { id: monthId } } : undefined,
     },
   });
   revalidatePath("/dashboard/articles");
