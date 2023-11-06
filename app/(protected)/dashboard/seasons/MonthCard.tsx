@@ -96,7 +96,7 @@ function MonthCard({
                   <Input
                     placeholder="ابحث عن برنامج"
                     onChange={async (e) => {
-                      if (e.target.value.length > 3) {
+                      if (e.target.value.length > 1) {
                         setResults(await getPrograms(e.target.value));
                       } else {
                         setResults([]);

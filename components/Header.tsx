@@ -5,183 +5,184 @@ import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import Search from "./Search";
 import ThemeToggle from "./ThemeToggle";
 import Link from "next/link";
+import { BsChevronDown } from "react-icons/bs";
+import { BiChevronDown, BiSolidChevronDown } from "react-icons/bi";
 const data = [
-  { title: "الصفحة الرئيسية", link: "/", content: [] },
-  {
-    title: "اكاديمية الراديو",
-    link: "/articles",
-    content: [
-      {
-        title: "ورشة التعليق الصوتي الاقوي والافضل",
-        link: "/articles/6339d8b3eb8c933b9fd29f0f",
-        content: [],
-      },
-      {
-        title: "الكورس المكثف مع احمد اسماعيل",
-        link: "/articles/6339d8e5eb8c933b9fd29f12",
-        content: [],
-      },
-      {
-        title: "ورشة التمثيل الاذاعي",
-        link: "/articles/6339d91beb8c933b9fd29f15",
-        content: [],
-      },
-      {
-        title: "الكورس الشامل",
-        link: "/articles/6339d957eb8c933b9fd29f18",
-        content: [],
-      },
-      {
-        title: "ليه اختار التدريب في راديو سكووب",
-        link: "/articles/6339d9aaeb8c933b9fd29f1e",
-        content: [],
-      },
-    ],
-  },
-  {
-    title: "البرامج",
-    link: "/program",
-    content: [
-      // { title: "الفيتشرات الاذاعيه", link: "/features", content: [] },
-      {
-        title: "فيتشرات رمضان 2023",
-        link: "/features?type=ramadan-2023",
-        content: [],
-      },
-      {
-        title: "فيتشرات العيد",
-        link: "/features?type=eid-fetr-2023",
-        content: [],
-      },
-      {
-        title: "فيتشرات صيف 2023",
-        link: "/features?type=summer-2023",
-        content: [],
-      },
-      {
-        title: "مسلسلات FM",
-        link: "ep?search=ادم%20و%20حياة",
-        content: [],
-      },
-      {
-        title: "ميديا سكووب",
-        link: "/media-scoop",
-        content: [],
-      },
-      {
-        title: "البرنامج العام",
-        link: "/ep/general",
-        content: [
-          {
-            title: "2023",
-            link: "",
-            content: [
-              {
-                title: "شهر يناير",
-                link: "/ep/general?general=jan-2023",
-                content: [],
-              },
-              {
-                title: "شهر فبراير",
-                link: "/ep/general?general=feb-2023",
-                content: [],
-              },
-            ],
-          },
-        ],
-      },
-      {
-        title: "برامج 2023",
-        link: "/features/?search=2023",
-        content: [
-          {
-            title: "شهر 2",
-            link: "/features?search=2023&month=2",
-            content: [],
-          },
-          {
-            title: "رمضان",
-            link: "/features?search=2023&month=رمضان",
-            content: [],
-          },
-          {
-            title: "شهر 5",
-            link: "/features?search=2023&month=5",
-            content: [],
-          },
-          {
-            title: "شهر 7",
-            link: "/features?search=2023&month=7",
-            content: [],
-          },
-          {
-            title: "شهر 9",
-            link: "/features?search=2023&month=9",
-            content: [],
-          },
-        ],
-      },
-      {
-        title: "برامج 2022",
-        link: "/features/?search=2022",
-        content: [
-          {
-            title: "شهر 2",
-            link: "/features?search=2022&month=2",
-            content: [],
-          },
-          {
-            title: "رمضان",
-            link: "/features?search=2022&month=رمضان",
-            content: [],
-          },
-          {
-            title: "شهر 6",
-            link: "/features?search=2022&month=6",
-            content: [],
-          },
+  // {
+  //   title: "اكاديمية الراديو",
+  //   link: "/articles",
+  //   content: [
+  //     {
+  //       title: "ورشة التعليق الصوتي الاقوي والافضل",
+  //       link: "/articles/6339d8b3eb8c933b9fd29f0f",
+  //       content: [],
+  //     },
+  //     {
+  //       title: "الكورس المكثف مع احمد اسماعيل",
+  //       link: "/articles/6339d8e5eb8c933b9fd29f12",
+  //       content: [],
+  //     },
+  //     {
+  //       title: "ورشة التمثيل الاذاعي",
+  //       link: "/articles/6339d91beb8c933b9fd29f15",
+  //       content: [],
+  //     },
+  //     {
+  //       title: "الكورس الشامل",
+  //       link: "/articles/6339d957eb8c933b9fd29f18",
+  //       content: [],
+  //     },
+  //     {
+  //       title: "ليه اختار التدريب في راديو سكووب",
+  //       link: "/articles/6339d9aaeb8c933b9fd29f1e",
+  //       content: [],
+  //     },
+  //   ],
+  // },
+  // {
+  //   title: "البرامج",
+  //   link: "/program",
+  //   content: [
+  //     // { title: "الفيتشرات الاذاعيه", link: "/features", content: [] },
+  //     {
+  //       title: "فيتشرات رمضان 2023",
+  //       link: "/features?type=ramadan-2023",
+  //       content: [],
+  //     },
+  //     {
+  //       title: "فيتشرات العيد",
+  //       link: "/features?type=eid-fetr-2023",
+  //       content: [],
+  //     },
+  //     {
+  //       title: "فيتشرات صيف 2023",
+  //       link: "/features?type=summer-2023",
+  //       content: [],
+  //     },
+  //     {
+  //       title: "مسلسلات FM",
+  //       link: "ep?search=ادم%20و%20حياة",
+  //       content: [],
+  //     },
+  //     {
+  //       title: "ميديا سكووب",
+  //       link: "/media-scoop",
+  //       content: [],
+  //     },
+  //     {
+  //       title: "البرنامج العام",
+  //       link: "/ep/general",
+  //       content: [
+  //         {
+  //           title: "2023",
+  //           link: "",
+  //           content: [
+  //             {
+  //               title: "شهر يناير",
+  //               link: "/ep/general?general=jan-2023",
+  //               content: [],
+  //             },
+  //             {
+  //               title: "شهر فبراير",
+  //               link: "/ep/general?general=feb-2023",
+  //               content: [],
+  //             },
+  //           ],
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       title: "برامج 2023",
+  //       link: "/features/?search=2023",
+  //       content: [
+  //         {
+  //           title: "شهر 2",
+  //           link: "/features?search=2023&month=2",
+  //           content: [],
+  //         },
+  //         {
+  //           title: "رمضان",
+  //           link: "/features?search=2023&month=رمضان",
+  //           content: [],
+  //         },
+  //         {
+  //           title: "شهر 5",
+  //           link: "/features?search=2023&month=5",
+  //           content: [],
+  //         },
+  //         {
+  //           title: "شهر 7",
+  //           link: "/features?search=2023&month=7",
+  //           content: [],
+  //         },
+  //         {
+  //           title: "شهر 9",
+  //           link: "/features?search=2023&month=9",
+  //           content: [],
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       title: "برامج 2022",
+  //       link: "/features/?search=2022",
+  //       content: [
+  //         {
+  //           title: "شهر 2",
+  //           link: "/features?search=2022&month=2",
+  //           content: [],
+  //         },
+  //         {
+  //           title: "رمضان",
+  //           link: "/features?search=2022&month=رمضان",
+  //           content: [],
+  //         },
+  //         {
+  //           title: "شهر 6",
+  //           link: "/features?search=2022&month=6",
+  //           content: [],
+  //         },
 
-          {
-            title: "شهر 8",
-            link: "/features?search=2022&month=8",
-            content: [],
-          },
+  //         {
+  //           title: "شهر 8",
+  //           link: "/features?search=2022&month=8",
+  //           content: [],
+  //         },
 
-          {
-            title: "شهر 10",
-            link: "/features?search=2022&month=10",
-            content: [],
-          },
-          {
-            title: "شهر 12",
-            link: "/features?search=2022&month=12",
-            content: [],
-          },
-        ],
-      },
-      {
-        title: "برامج 2021",
-        link: "/features/?search=2021",
-        content: [
-          {
-            title: "شهر 10",
-            link: "/features?search=2021&month=10",
-            content: [],
-          },
-          {
-            title: "شهر 11",
-            link: "/features?search=2021&month=11",
-            content: [],
-          },
-          {
-            title: "شهر 12",
-            link: "/features?search=2021&month=12",
-            content: [],
-          },
-        ],
-      },
-    ],
-  },
+  //         {
+  //           title: "شهر 10",
+  //           link: "/features?search=2022&month=10",
+  //           content: [],
+  //         },
+  //         {
+  //           title: "شهر 12",
+  //           link: "/features?search=2022&month=12",
+  //           content: [],
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       title: "برامج 2021",
+  //       link: "/features/?search=2021",
+  //       content: [
+  //         {
+  //           title: "شهر 10",
+  //           link: "/features?search=2021&month=10",
+  //           content: [],
+  //         },
+  //         {
+  //           title: "شهر 11",
+  //           link: "/features?search=2021&month=11",
+  //           content: [],
+  //         },
+  //         {
+  //           title: "شهر 12",
+  //           link: "/features?search=2021&month=12",
+  //           content: [],
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // },
   {
     title: "مجلة سكوب",
     link: "/articles",
@@ -266,8 +267,35 @@ const data = [
   { title: "للاستماع والتعليق", link: "/comment", content: [] },
   { title: "تواصل معنا", link: "/contact", content: [] },
 ];
-
-const Header = () => {
+const radioAcademy = [
+  {
+    title: "ورشة التعليق الصوتي الاقوي والافضل",
+    link: "/articles/6339d8b3eb8c933b9fd29f0f",
+  },
+  {
+    title: "الكورس المكثف مع احمد اسماعيل",
+    link: "/articles/6339d8e5eb8c933b9fd29f12",
+  },
+  {
+    title: "ورشة التمثيل الاذاعي",
+    link: "/articles/6339d91beb8c933b9fd29f15",
+  },
+  {
+    title: "الكورس الشامل",
+    link: "/articles/6339d957eb8c933b9fd29f18",
+  },
+  {
+    title: "ليه اختار التدريب في راديو سكووب",
+    link: "/articles/6339d9aaeb8c933b9fd29f1e",
+  },
+];
+const Header = ({
+  featureTypes,
+  seasons,
+}: {
+  featureTypes: { id: string; name: string }[];
+  seasons: { year: string; months: { id: string; name: string }[] }[];
+}) => {
   useEffect(() => {
     const fetchWeather = async () => {
       const res = await fetch("/api/weather");
@@ -279,7 +307,54 @@ const Header = () => {
 
   const [open, setOpen] = useState(false);
   const [weather, setWeather] = useState<any>(null);
-
+  const navItemStyle =
+    "block whitespace-nowrap overflow-ellipsis px-4 group py-2 text-sm font-semibold rounded-lg text-slate-100 flex-grow hover:text-white hover:bg-[#848da065] border-b border-b-slate-700 md:border-0 lg:text-md xl:text-lg";
+  const navStyle =
+    "flex flex-col mt-2 ml-8 group-open:bg-[#848da091]  rounded-md lg:absolute z-40 backdrop-blur-md";
+  const NavChevron = () => {
+    return (
+      <span className="ml-auto  transition translate-y-[3px] duration-300 group-open:-rotate-180">
+        <BiSolidChevronDown size={18} />
+      </span>
+    );
+  };
+  const NavMainItem = ({ title }: { title: string }) => {
+    return (
+      <span className="text-sm lg:text-md font-semibold flex whitespace-nowrap overflow-ellipsis xl:text-lg">
+        {title}
+      </span>
+    );
+  };
+  const Season = ({
+    season,
+  }: {
+    season: { year: string; months: { name: string; id: string }[] };
+  }) => {
+    const closeDetails = () => {
+      const details = document.querySelectorAll("details");
+      details.forEach((detail) => {
+        detail.removeAttribute("open");
+      });
+    };
+    return (
+      <details className="group border-b border-b-slate-700 md:border-0 lg:relative ">
+        <summary className="flex items-center justify-between hover:bg-[#848da065] group-open:bg-[#848da091] px-4 py-2 rounded-lg cursor-pointer text-slate-100">
+          <NavMainItem title={`برامج ${season.year}`} />
+          <NavChevron />
+        </summary>
+        <nav className={navStyle}>
+          {season.months.map((month) => (
+            <Link
+              href={{ pathname: "/ep", query: { month: month.id } }}
+              className={navItemStyle}
+            >
+              شهر {month.name}
+            </Link>
+          ))}
+        </nav>
+      </details>
+    );
+  };
   return (
     <header className="bg-[#194F88]">
       <div className="max-w-screen-xl px-4 py-8 mx-auto sm:px-10 lg:px-[1.5%]">
@@ -294,7 +369,7 @@ const Header = () => {
             </p>
           </div>
           <div className="w-20 md:w-auto rounded-xl bg-slate-50">
-            <Link href="/">
+            <Link href={{ pathname: "/" }}>
               <Image alt="logo" src="/favicon.png" width={100} height={100} />
             </Link>
           </div>
@@ -312,6 +387,63 @@ const Header = () => {
             ))}
           </nav>
           <nav className="hidden lg:flex h-14 flex-row justify-between  gap- bg-[#00000060] p-2 rounded-xl self-start">
+            <Link href={{ pathname: "/" }} className={navItemStyle}>
+              الصفحة الرئيسية
+            </Link>
+            <details className="group lg:relative ">
+              <summary className="flex items-center justify-between hover:bg-[#848da065] group-open:bg-[#848da091] px-4 py-2 rounded-lg cursor-pointer text-slate-100">
+                <NavMainItem title="أكاديمية الراديو" />
+                <NavChevron />
+              </summary>
+              <nav className={navStyle}>
+                {radioAcademy.map((subItem) => (
+                  <Link
+                    href={{ pathname: subItem.link }}
+                    className="text-sm lg:text-md font-semibold flex whitespace-nowrap overflow-ellipsis xl:text-lg p-2 hover:bg-[#848da065]"
+                  >
+                    {subItem.title}
+                  </Link>
+                ))}
+              </nav>
+            </details>
+            <details className="group lg:relative ">
+              <summary className="flex items-center justify-between hover:bg-[#848da065] group-open:bg-[#848da091] px-4 py-2 rounded-lg cursor-pointer text-slate-100">
+                <NavMainItem title="البرامج" />
+                <NavChevron />
+              </summary>
+              <nav className={navStyle}>
+                {featureTypes.map((type) => (
+                  <Link
+                    href={{ pathname: "/features", query: { type: type.id } }}
+                    className={navItemStyle}
+                  >
+                    {type.name}
+                  </Link>
+                ))}
+                <Link
+                  href={{ pathname: "/media-scoop" }}
+                  className={navItemStyle}
+                >
+                  مسلسلات FM
+                </Link>
+                <Link
+                  href={{ pathname: "/media-scoop" }}
+                  className={navItemStyle}
+                >
+                  ميديا سكووب
+                </Link>
+                <Link
+                  href={{ pathname: "/ep/general" }}
+                  className={navItemStyle}
+                >
+                  البرنامج العام
+                </Link>
+                {seasons?.map((season, i) => (
+                  <Season key={"season" + i} season={season} />
+                ))}
+              </nav>
+            </details>
+
             {data.map((item, index) => (
               <NavItem key={"mainNav" + index} item={item} />
             ))}
