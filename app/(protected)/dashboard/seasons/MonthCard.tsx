@@ -112,7 +112,7 @@ function MonthCard({
                           <div
                             className="flex items-center gap-2 cursor-pointer"
                             onClick={() => {
-                              setCategories((current) => [...current, result]);
+                              setCategories((current) => [result, ...current]);
                               setResults([]);
                             }}
                           >
