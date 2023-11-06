@@ -44,7 +44,7 @@ function MonthCard({
             <DialogTrigger>
               <TiEdit className="cursor-pointer" size={20} />
             </DialogTrigger>
-            <DialogContent>
+            <DialogContent className="overflow-auto max-h-[85vh]">
               <Dialog>
                 <div className="flex justify-end">
                   <DialogTrigger>
