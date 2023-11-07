@@ -1,16 +1,14 @@
 import { Episode } from "@prisma/client";
-// extend the type of Episode and add the category and author fields
 interface Episodee extends Episode {
-  category?: { name: string } | null;
-  author?: { name: string } | null;
+  category?: { name: string; author: { name: string } | null } | null;
 }
 function EpisodeCard({ ep }: { ep: Episodee }) {
   return (
-    <div className="hover:scale-[1.01] transition w-full aspect-square ">
+    <div className="hover:scale-[1.01] transition w-full aspect-square relative">
       <a
         href={`/ep/${ep.id}`}
         style={{ backgroundImage: `url(${ep.img})` }}
-        className="relative block overflow-hidden h-full bg-center bg-no-repeat bg-cover rounded-xl"
+        className=" block overflow-hidden h-full bg-center bg-no-repeat bg-cover rounded-xl"
       >
         {!ep.featured && (
           <span className="absolute z-10 inline-flex items-center px-3 py-1 text-xs font-semibold text-white bg-black/50 rounded-full right-4 top-4">
@@ -25,15 +23,14 @@ function EpisodeCard({ ep }: { ep: Episodee }) {
             </svg>
           </span>
         )}
-        <div className="relative p-2 h-full pt-28 sm:p-2 sm:pt-40 text-white bg-black bg-opacity-40  ">
-          <h5 className=" text-sm  sm:text-xl font-bold text-ellipsis whitespace-nowrap overflow-hidden">
+        <div className=" h-full text-white bg-black bg-opacity-40  ">
+          <h5 className="absolute bottom-8 right-4 text-sm  sm:text-xl font-bold text-ellipsis whitespace-nowrap overflow-hidden">
             {ep?.category?.name}
           </h5>
-          {ep?.author?.name && (
-            <h5 className="text-sm  font-bold text-ellipsis whitespace-nowrap overflow-hidden">
-              {ep?.author?.name}
-            </h5>
-          )}
+
+          <h5 className="absolute bottom-4 right-4 text-sm font-bold text-ellipsis whitespace-nowrap overflow-hidden">
+            {ep?.category?.author?.name}
+          </h5>
         </div>
       </a>
     </div>

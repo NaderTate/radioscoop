@@ -8,8 +8,20 @@ const nextConfig = {
     defaultLocale: "ar",
   },
   images: {
-    domains: ["telegra.ph", "res.cloudinary.com", "images.unsplash.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "telegra.ph",
+      },
+    ],
   },
 };
-
 module.exports = nextConfig;

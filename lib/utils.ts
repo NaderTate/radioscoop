@@ -11,7 +11,7 @@ export function pagination(count: number, sk: number, itemsToShow: number) {
   const pagenateArr = (arr: Array<number>, p: number) => {
     let newArr: Array<number> = [];
     arr.forEach((element: any) => {
-      if (Math.abs(element - p) <= 2) {
+      if (Math.abs(element - p) <= 3) {
         newArr = [...newArr, element];
       }
     });

@@ -44,10 +44,7 @@ function FeaturesTable({
           {data.map((feature) => (
             <TableRow key={feature.id}>
               <TableCell>
-                <Link
-                  href={{ pathname: `/feature/${feature.id}` }}
-                  target="_blank"
-                >
+                <Link href={{ pathname: `/ep/${feature.id}` }} target="_blank">
                   <Image
                     alt="logo"
                     src={feature.img || ""}

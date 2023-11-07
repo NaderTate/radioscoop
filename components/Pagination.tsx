@@ -36,9 +36,9 @@ function Pagination({
                     pathname: link,
                     query: { page: page, ...query },
                   }}
-                  className={` inline-flex items-center justify-center w-8 h-8 border border-gray-100 rounded-full hover:bg-slate-400/50 transition bg-white dark:bg-inherit dark:hover:bg-slate-600/50 dark:border-gray-700 dark:text-gray-100 ${
+                  className={` inline-flex items-center justify-center w-8 h-8 border border-gray-400 dark:border-gray-400 rounded-full hover:bg-slate-400/50 transition dark:hover:bg-slate-600/50  dark:text-gray-100 ${
                     currentPage === page
-                      ? "bg-slate-400/50 dark:bg-slate-600/50"
+                      ? " bg-slate-400/50 dark:bg-slate-600/50"
                       : ""
                   }`}
                 >

@@ -2,7 +2,6 @@ import ArticleForm from "@/components/ArticleForm";
 import ArticlesTable from "@/components/ArticlesTable";
 import Pagination from "@/components/Pagination";
 import SearchForm from "@/components/SearchForm";
-import { Button } from "@/components/ui/button";
 import prisma from "@/lib/prisma";
 import { pagination } from "@/lib/utils";
 async function page({

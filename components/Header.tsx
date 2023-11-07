@@ -5,8 +5,7 @@ import { HiOutlineMenuAlt3 } from "react-icons/hi";
 import Search from "./Search";
 import ThemeToggle from "./ThemeToggle";
 import Link from "next/link";
-import { BsChevronDown } from "react-icons/bs";
-import { BiChevronDown, BiSolidChevronDown } from "react-icons/bi";
+import { BiSolidChevronDown } from "react-icons/bi";
 const data = [
   // {
   //   title: "اكاديمية الراديو",
@@ -183,87 +182,87 @@ const data = [
   //     },
   //   ],
   // },
-  {
-    title: "مجلة سكوب",
-    link: "/articles",
-    content: [
-      {
-        title: "مقالات",
-        link: "/articles",
-        content: [
-          {
-            title: "شهر مارس ",
-            link: "/articles?month=march&type=article",
-            content: [],
-          },
-          {
-            title: "شهر ابريل",
-            link: "/articles?month=april&type=article",
-            content: [],
-          },
-          {
-            title: "شهر مايو",
-            link: "/articles?month=may&type=article",
-            content: [],
-          },
-          {
-            title: "شهر يونيو",
-            link: "/articles?month=june&type=article",
-            content: [],
-          },
-          {
-            title: "شهر يوليو",
-            link: "/articles?month=july&type=article",
-            content: [],
-          },
-          {
-            title: "شهر أغسطس",
-            link: "/articles?month=august&type=article",
-            content: [],
-          },
-          {
-            title: "شهر سبتمبر",
-            link: "/articles?month=septemper&type=article",
-            content: [],
-          },
-        ],
-      },
-      {
-        title: "اخبار محلية",
-        link: "/news",
-        content: [
-          {
-            title: "شهر مارس ",
-            link: "/news?month=march",
-            content: [],
-          },
+  // {
+  //   title: "مجلة سكوب",
+  //   link: "/articles",
+  //   content: [
+  //     {
+  //       title: "مقالات",
+  //       link: "/articles",
+  //       content: [
+  //         {
+  //           title: "شهر مارس ",
+  //           link: "/articles?month=march&type=article",
+  //           content: [],
+  //         },
+  //         {
+  //           title: "شهر ابريل",
+  //           link: "/articles?month=april&type=article",
+  //           content: [],
+  //         },
+  //         {
+  //           title: "شهر مايو",
+  //           link: "/articles?month=may&type=article",
+  //           content: [],
+  //         },
+  //         {
+  //           title: "شهر يونيو",
+  //           link: "/articles?month=june&type=article",
+  //           content: [],
+  //         },
+  //         {
+  //           title: "شهر يوليو",
+  //           link: "/articles?month=july&type=article",
+  //           content: [],
+  //         },
+  //         {
+  //           title: "شهر أغسطس",
+  //           link: "/articles?month=august&type=article",
+  //           content: [],
+  //         },
+  //         {
+  //           title: "شهر سبتمبر",
+  //           link: "/articles?month=septemper&type=article",
+  //           content: [],
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       title: "اخبار محلية",
+  //       link: "/news",
+  //       content: [
+  //         {
+  //           title: "شهر مارس ",
+  //           link: "/news?month=march",
+  //           content: [],
+  //         },
 
-          {
-            title: "شهر ابريل",
-            link: "/news?month=april",
-            content: [],
-          },
-        ],
-      },
-      { title: " خواطر ", link: "/articles?type=khwater", content: [] },
+  //         {
+  //           title: "شهر ابريل",
+  //           link: "/news?month=april",
+  //           content: [],
+  //         },
+  //       ],
+  //     },
+  //     { title: " خواطر ", link: "/articles?type=khwater", content: [] },
 
-      {
-        title: "شعر عامي",
-        link: "/poem?formal=false",
-        content: [],
-      },
-      {
-        title: "شعر فصحي",
-        link: "/poem?formal=true",
-        content: [],
-      },
-      {
-        title: "فيتشرات صحفية",
-        link: "/mediafeatures",
-        content: [],
-      },
-    ],
-  },
+  //     {
+  //       title: "شعر عامي",
+  //       link: "/poem?formal=false",
+  //       content: [],
+  //     },
+  //     {
+  //       title: "شعر فصحي",
+  //       link: "/poem?formal=true",
+  //       content: [],
+  //     },
+  //     {
+  //       title: "فيتشرات صحفية",
+  //       link: "/mediafeatures",
+  //       content: [],
+  //     },
+  //   ],
+  // },
   { title: "للاستماع والتعليق", link: "/comment", content: [] },
   { title: "تواصل معنا", link: "/contact", content: [] },
 ];
@@ -291,9 +290,18 @@ const radioAcademy = [
 ];
 const Header = ({
   featureTypes,
+  articleTypes,
   seasons,
 }: {
   featureTypes: { id: string; name: string }[];
+  articleTypes: {
+    name: string;
+    id: string;
+    seasons: {
+      year: number;
+      months: { id: string; name: string }[];
+    }[];
+  }[];
   seasons: { year: string; months: { id: string; name: string }[] }[];
 }) => {
   useEffect(() => {
@@ -325,17 +333,17 @@ const Header = ({
       </span>
     );
   };
+  const closeDetails = () => {
+    const details = document.querySelectorAll("details");
+    details.forEach((detail) => {
+      detail.removeAttribute("open");
+    });
+  };
   const Season = ({
     season,
   }: {
     season: { year: string; months: { name: string; id: string }[] };
   }) => {
-    const closeDetails = () => {
-      const details = document.querySelectorAll("details");
-      details.forEach((detail) => {
-        detail.removeAttribute("open");
-      });
-    };
     return (
       <details className="group border-b border-b-slate-700 md:border-0 lg:relative ">
         <summary className="flex items-center justify-between hover:bg-[#848da065] group-open:bg-[#848da091] px-4 py-2 rounded-lg cursor-pointer text-slate-100">
@@ -345,7 +353,9 @@ const Header = ({
         <nav className={navStyle}>
           {season.months.map((month) => (
             <Link
-              href={{ pathname: "/ep", query: { month: month.id } }}
+              onClick={closeDetails}
+              key={month.id}
+              href={{ pathname: "/programs", query: { month: month.id } }}
               className={navItemStyle}
             >
               شهر {month.name}
@@ -382,11 +392,6 @@ const Header = ({
                 : "opacity-0 -translate-x-full h-0 hidden"
             } `}
           >
-            {data.map((item, index) => (
-              <NavItem key={"mainNav" + index} item={item} />
-            ))}
-          </nav>
-          <nav className="hidden lg:flex h-14 flex-row justify-between  gap- bg-[#00000060] p-2 rounded-xl self-start">
             <Link href={{ pathname: "/" }} className={navItemStyle}>
               الصفحة الرئيسية
             </Link>
@@ -398,6 +403,8 @@ const Header = ({
               <nav className={navStyle}>
                 {radioAcademy.map((subItem) => (
                   <Link
+                    onClick={closeDetails}
+                    key={subItem.title}
                     href={{ pathname: subItem.link }}
                     className="text-sm lg:text-md font-semibold flex whitespace-nowrap overflow-ellipsis xl:text-lg p-2 hover:bg-[#848da065]"
                   >
@@ -414,6 +421,153 @@ const Header = ({
               <nav className={navStyle}>
                 {featureTypes.map((type) => (
                   <Link
+                    onClick={closeDetails}
+                    key={type.id}
+                    href={{ pathname: "/features", query: { type: type.id } }}
+                    className={navItemStyle}
+                  >
+                    {type.name}
+                  </Link>
+                ))}
+                <Link
+                  href={{ pathname: "/media-scoop" }}
+                  className={navItemStyle}
+                >
+                  مسلسلات FM
+                </Link>
+                <Link
+                  href={{ pathname: "/media-scoop" }}
+                  className={navItemStyle}
+                >
+                  ميديا سكووب
+                </Link>
+                <Link
+                  href={{ pathname: "/programs/general" }}
+                  className={navItemStyle}
+                >
+                  البرنامج العام
+                </Link>
+                {seasons?.map((season, i) => (
+                  <Season key={"season" + i} season={season} />
+                ))}
+              </nav>
+            </details>
+            <details className="group lg:relative ">
+              <summary className="flex items-center justify-between hover:bg-[#848da065] group-open:bg-[#848da091] px-4 py-2 rounded-lg cursor-pointer text-slate-100">
+                <NavMainItem title="مجلة سكوب" />
+                <NavChevron />
+              </summary>
+              <nav className={navStyle}>
+                {articleTypes.map((type) => {
+                  if (type.seasons.length === 0) {
+                    return (
+                      <Link
+                        onClick={closeDetails}
+                        key={type.id}
+                        href={{
+                          pathname: "/articles",
+                          query: { type: type.id },
+                        }}
+                        className={navItemStyle}
+                      >
+                        {type.name}
+                      </Link>
+                    );
+                  } else {
+                    return (
+                      <details className="group border-b border-b-slate-700 md:border-0 lg:relative ">
+                        <summary className="flex items-center justify-between hover:bg-[#848da065] group-open:bg-[#848da091] px-4 py-2 rounded-lg cursor-pointer text-slate-100">
+                          <NavMainItem title={type.name} />
+                          <NavChevron />
+                        </summary>
+                        <nav className={navStyle}>
+                          {type.seasons.map((season) => {
+                            if (season.months.length === 0) {
+                              return (
+                                <Link
+                                  onClick={closeDetails}
+                                  key={season.year}
+                                  href={{
+                                    pathname: "/articles",
+                                    query: { type: type.id },
+                                  }}
+                                  className={navItemStyle}
+                                >
+                                  {season.year}
+                                </Link>
+                              );
+                            } else {
+                              return (
+                                <details className="group border-b border-b-slate-700 md:border-0 lg:relative ">
+                                  <summary className="flex items-center justify-between hover:bg-[#848da065] group-open:bg-[#848da091] px-4 py-2 rounded-lg cursor-pointer text-slate-100">
+                                    <NavMainItem title={String(season.year)} />
+                                    <NavChevron />
+                                  </summary>
+                                  <nav className={navStyle}>
+                                    {season.months.map((month) => (
+                                      <Link
+                                        onClick={closeDetails}
+                                        key={month.id}
+                                        href={{
+                                          pathname: "/articles",
+                                          query: {
+                                            type: type.id,
+                                            month: month.id,
+                                          },
+                                        }}
+                                        className={navItemStyle}
+                                      >
+                                        شهر {month.name}
+                                      </Link>
+                                    ))}
+                                  </nav>
+                                </details>
+                              );
+                            }
+                          })}
+                        </nav>
+                      </details>
+                    );
+                  }
+                })}
+              </nav>
+            </details>
+            {data.map((item, index) => (
+              <NavItem key={"mainNav" + index} item={item} />
+            ))}
+          </nav>
+          <nav className="hidden lg:flex h-14 flex-row justify-between  gap- bg-[#00000060] p-2 rounded-xl self-start">
+            <Link href={{ pathname: "/" }} className={navItemStyle}>
+              الصفحة الرئيسية
+            </Link>
+            <details className="group lg:relative ">
+              <summary className="flex items-center justify-between hover:bg-[#848da065] group-open:bg-[#848da091] px-4 py-2 rounded-lg cursor-pointer text-slate-100">
+                <NavMainItem title="أكاديمية الراديو" />
+                <NavChevron />
+              </summary>
+              <nav className={navStyle}>
+                {radioAcademy.map((subItem) => (
+                  <Link
+                    onClick={closeDetails}
+                    key={subItem.title}
+                    href={{ pathname: subItem.link }}
+                    className="text-sm lg:text-md font-semibold flex whitespace-nowrap overflow-ellipsis xl:text-lg p-2 hover:bg-[#848da065]"
+                  >
+                    {subItem.title}
+                  </Link>
+                ))}
+              </nav>
+            </details>
+            <details className="group lg:relative ">
+              <summary className="flex items-center justify-between hover:bg-[#848da065] group-open:bg-[#848da091] px-4 py-2 rounded-lg cursor-pointer text-slate-100">
+                <NavMainItem title="البرامج" />
+                <NavChevron />
+              </summary>
+              <nav className={navStyle}>
+                {featureTypes.map((type) => (
+                  <Link
+                    onClick={closeDetails}
+                    key={type.id}
                     href={{ pathname: "/features", query: { type: type.id } }}
                     className={navItemStyle}
                   >
@@ -441,6 +595,86 @@ const Header = ({
                 {seasons?.map((season, i) => (
                   <Season key={"season" + i} season={season} />
                 ))}
+              </nav>
+            </details>
+            <details className="group lg:relative ">
+              <summary className="flex items-center justify-between hover:bg-[#848da065] group-open:bg-[#848da091] px-4 py-2 rounded-lg cursor-pointer text-slate-100">
+                <NavMainItem title="مجلة سكوب" />
+                <NavChevron />
+              </summary>
+              <nav className={navStyle}>
+                {articleTypes.map((type) => {
+                  if (type.seasons.length === 0) {
+                    return (
+                      <Link
+                        onClick={closeDetails}
+                        key={type.id}
+                        href={{
+                          pathname: "/articles",
+                          query: { type: type.id },
+                        }}
+                        className={navItemStyle}
+                      >
+                        {type.name}
+                      </Link>
+                    );
+                  } else {
+                    return (
+                      <details className="group border-b border-b-slate-700 md:border-0 lg:relative ">
+                        <summary className="flex items-center justify-between hover:bg-[#848da065] group-open:bg-[#848da091] px-4 py-2 rounded-lg cursor-pointer text-slate-100">
+                          <NavMainItem title={type.name} />
+                          <NavChevron />
+                        </summary>
+                        <nav className={navStyle}>
+                          {type.seasons.map((season) => {
+                            if (season.months.length === 0) {
+                              return (
+                                <Link
+                                  onClick={closeDetails}
+                                  key={season.year}
+                                  href={{
+                                    pathname: "/articles",
+                                    query: { type: type.id },
+                                  }}
+                                  className={navItemStyle}
+                                >
+                                  {season.year}
+                                </Link>
+                              );
+                            } else {
+                              return (
+                                <details className="group border-b border-b-slate-700 md:border-0 lg:relative ">
+                                  <summary className="flex items-center justify-between hover:bg-[#848da065] group-open:bg-[#848da091] px-4 py-2 rounded-lg cursor-pointer text-slate-100">
+                                    <NavMainItem title={String(season.year)} />
+                                    <NavChevron />
+                                  </summary>
+                                  <nav className={navStyle}>
+                                    {season.months.map((month) => (
+                                      <Link
+                                        onClick={closeDetails}
+                                        key={month.id}
+                                        href={{
+                                          pathname: "/articles",
+                                          query: {
+                                            type: type.id,
+                                            month: month.id,
+                                          },
+                                        }}
+                                        className={navItemStyle}
+                                      >
+                                        شهر {month.name}
+                                      </Link>
+                                    ))}
+                                  </nav>
+                                </details>
+                              );
+                            }
+                          })}
+                        </nav>
+                      </details>
+                    );
+                  }
+                })}
               </nav>
             </details>
 

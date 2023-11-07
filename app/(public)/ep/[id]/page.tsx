@@ -57,20 +57,40 @@ async function page({ params: { id } }: { params: { id: string } }) {
       id,
     },
     include: {
-      category: { select: { name: true } },
+      category: {
+        select: {
+          name: true,
+        },
+      },
       presenter: { select: { name: true } },
     },
   });
 
   const related = await prisma.episode.findMany({
     where: {
-      categoryId: "645a5ff3c4477baa1bd545e0",
+      AND: [
+        { categoryId: Episode?.categoryId },
+        {
+          id: {
+            not: Episode?.id,
+          },
+        },
+      ],
     },
     take: 12,
     orderBy: { createdAt: "desc" },
     include: {
-      category: { select: { name: true } },
-      author: { select: { name: true } },
+      category: {
+        select: {
+          name: true,
+          author: {
+            select: {
+              name: true,
+            },
+          },
+        },
+      },
+      presenter: { select: { name: true } },
     },
   });
   const posts = await prisma.sideBar.findFirst({

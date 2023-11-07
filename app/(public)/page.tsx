@@ -12,7 +12,18 @@ async function page() {
     orderBy: {
       id: "desc",
     },
-    include: { author: { select: { name: true } }, category: true },
+    include: {
+      category: {
+        select: {
+          name: true,
+          author: {
+            select: {
+              name: true,
+            },
+          },
+        },
+      },
+    },
   });
   const schedule = await prisma.schedule.findFirst({
     select: {

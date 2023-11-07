@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Changa } from "next/font/google";
 import SessionProv from "@/components/SessionProvider";
 import { ThemeProvider } from "@/components/theme-porvider";
+import Footer from "@/components/Footer";
 
 const changa = Changa({ subsets: ["arabic"] });
 export const metadata: Metadata = {
@@ -25,6 +26,7 @@ export default function RootLayout({
             {children}
           </ThemeProvider>
         </body>
+        <Footer />
       </SessionProv>
     </html>
   );

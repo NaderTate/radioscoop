@@ -16,7 +16,7 @@ async function page({
   const features = await prisma.episode.findMany({
     where: {
       featured: true,
-      type: { name: type ? type : undefined },
+      typeId: type ? type : undefined,
     },
     include: {
       presenter: { select: { name: true } },
@@ -31,7 +31,7 @@ async function page({
   const count = await prisma.episode.count({
     where: {
       featured: true,
-      type: { name: type ? type : undefined },
+      typeId: type ? type : undefined,
     },
   });
   const { Arr, pages } = pagination(count, sk, itemsToShow);
@@ -47,11 +47,11 @@ async function page({
                 alt=""
               />
             </a>
+            <div className="absolute bottom-12 right-1 font-semibold tracking-wide">
+              اعداد {feature.preparedBy?.name}
+            </div>
             <div className="absolute bottom-7 right-1 font-semibold tracking-wide">
               تقديم {feature.presenter?.name}
-            </div>
-            <div className="absolute bottom-12 right-1 font-semibold tracking-wide">
-              {feature.preparedBy?.name}
             </div>
             <p className="text-center">{feature.featureTitle}</p>
           </div>
@@ -62,6 +62,7 @@ async function page({
         pages={pages}
         link="/features"
         query={type ? { type: type } : undefined}
+        currentPage={sk}
       />
     </div>
   );

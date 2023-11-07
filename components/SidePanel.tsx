@@ -1,11 +1,14 @@
 "use client";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
+import Schedule from "./Schedule";
+import { Navigation } from "swiper/modules";
+import "swiper/css/navigation";
+import "swiper/css";
 
 const SidePanel = ({ data }: { data: Post[] | any }) => {
   return (
-    <div className=" mb-4">
+    <div className="xl:max-w-xs mb-4 m-auto ">
       <div className="hidden lg:flex flex-col gap-3 ">
         {data.map((item: Post, index: number) => (
           <div
@@ -31,6 +34,8 @@ const SidePanel = ({ data }: { data: Post[] | any }) => {
       <div className="lg:hidden ">
         <Swiper
           dir="ltr"
+          modules={[Navigation]}
+          navigation
           spaceBetween={5}
           slidesPerView={1}
           breakpoints={{
@@ -62,6 +67,9 @@ const SidePanel = ({ data }: { data: Post[] | any }) => {
             </SwiperSlide>
           ))}
         </Swiper>
+      </div>
+      <div className="hidden">
+        <Schedule title="" Days={[]} />
       </div>
     </div>
   );
