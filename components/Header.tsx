@@ -292,6 +292,7 @@ const Header = ({
   featureTypes,
   articleTypes,
   seasons,
+  search,
 }: {
   featureTypes: { id: string; name: string }[];
   articleTypes: {
@@ -303,6 +304,7 @@ const Header = ({
     }[];
   }[];
   seasons: { year: string; months: { id: string; name: string }[] }[];
+  search: Function;
 }) => {
   useEffect(() => {
     const fetchWeather = async () => {
@@ -404,7 +406,7 @@ const Header = ({
                 {radioAcademy.map((subItem) => (
                   <Link
                     onClick={closeDetails}
-                    key={subItem.title}
+                    key={subItem.title + " mobile"}
                     href={{ pathname: subItem.link }}
                     className="text-sm lg:text-md font-semibold flex whitespace-nowrap overflow-ellipsis xl:text-lg p-2 hover:bg-[#848da065]"
                   >
@@ -422,7 +424,7 @@ const Header = ({
                 {featureTypes.map((type) => (
                   <Link
                     onClick={closeDetails}
-                    key={type.id}
+                    key={type.id + " mobile"}
                     href={{ pathname: "/features", query: { type: type.id } }}
                     className={navItemStyle}
                   >
@@ -430,25 +432,28 @@ const Header = ({
                   </Link>
                 ))}
                 <Link
+                  onClick={closeDetails}
                   href={{ pathname: "/media-scoop" }}
                   className={navItemStyle}
                 >
                   مسلسلات FM
                 </Link>
                 <Link
+                  onClick={closeDetails}
                   href={{ pathname: "/media-scoop" }}
                   className={navItemStyle}
                 >
                   ميديا سكووب
                 </Link>
                 <Link
+                  onClick={closeDetails}
                   href={{ pathname: "/programs/general" }}
                   className={navItemStyle}
                 >
                   البرنامج العام
                 </Link>
                 {seasons?.map((season, i) => (
-                  <Season key={"season" + i} season={season} />
+                  <Season key={"season" + i + " mobile"} season={season} />
                 ))}
               </nav>
             </details>
@@ -458,12 +463,12 @@ const Header = ({
                 <NavChevron />
               </summary>
               <nav className={navStyle}>
-                {articleTypes.map((type) => {
+                {articleTypes.map((type, i) => {
                   if (type.seasons.length === 0) {
                     return (
                       <Link
                         onClick={closeDetails}
-                        key={type.id}
+                        key={type.id + " mobile"}
                         href={{
                           pathname: "/articles",
                           query: { type: type.id },
@@ -475,18 +480,21 @@ const Header = ({
                     );
                   } else {
                     return (
-                      <details className="group border-b border-b-slate-700 md:border-0 lg:relative ">
+                      <details
+                        key={type.id + i}
+                        className="group border-b border-b-slate-700 md:border-0 lg:relative "
+                      >
                         <summary className="flex items-center justify-between hover:bg-[#848da065] group-open:bg-[#848da091] px-4 py-2 rounded-lg cursor-pointer text-slate-100">
                           <NavMainItem title={type.name} />
                           <NavChevron />
                         </summary>
                         <nav className={navStyle}>
-                          {type.seasons.map((season) => {
+                          {type.seasons.map((season, i) => {
                             if (season.months.length === 0) {
                               return (
                                 <Link
                                   onClick={closeDetails}
-                                  key={season.year}
+                                  key={season.year + " mobile"}
                                   href={{
                                     pathname: "/articles",
                                     query: { type: type.id },
@@ -498,7 +506,10 @@ const Header = ({
                               );
                             } else {
                               return (
-                                <details className="group border-b border-b-slate-700 md:border-0 lg:relative ">
+                                <details
+                                  key={season.year + i}
+                                  className="group border-b border-b-slate-700 md:border-0 lg:relative "
+                                >
                                   <summary className="flex items-center justify-between hover:bg-[#848da065] group-open:bg-[#848da091] px-4 py-2 rounded-lg cursor-pointer text-slate-100">
                                     <NavMainItem title={String(season.year)} />
                                     <NavChevron />
@@ -507,7 +518,7 @@ const Header = ({
                                     {season.months.map((month) => (
                                       <Link
                                         onClick={closeDetails}
-                                        key={month.id}
+                                        key={month.id + " mobile"}
                                         href={{
                                           pathname: "/articles",
                                           query: {
@@ -533,7 +544,7 @@ const Header = ({
               </nav>
             </details>
             {data.map((item, index) => (
-              <NavItem key={"mainNav" + index} item={item} />
+              <NavItem key={"mainNav" + index + " mobile"} item={item} />
             ))}
           </nav>
           <nav className="hidden lg:flex h-14 flex-row justify-between  gap- bg-[#00000060] p-2 rounded-xl self-start">
@@ -575,25 +586,28 @@ const Header = ({
                   </Link>
                 ))}
                 <Link
+                  onClick={closeDetails}
                   href={{ pathname: "/media-scoop" }}
                   className={navItemStyle}
                 >
                   مسلسلات FM
                 </Link>
                 <Link
+                  onClick={closeDetails}
                   href={{ pathname: "/media-scoop" }}
                   className={navItemStyle}
                 >
                   ميديا سكووب
                 </Link>
                 <Link
+                  onClick={closeDetails}
                   href={{ pathname: "/ep/general" }}
                   className={navItemStyle}
                 >
                   البرنامج العام
                 </Link>
                 {seasons?.map((season, i) => (
-                  <Season key={"season" + i} season={season} />
+                  <Season key={"season " + i} season={season} />
                 ))}
               </nav>
             </details>
@@ -603,7 +617,7 @@ const Header = ({
                 <NavChevron />
               </summary>
               <nav className={navStyle}>
-                {articleTypes.map((type) => {
+                {articleTypes.map((type, i) => {
                   if (type.seasons.length === 0) {
                     return (
                       <Link
@@ -620,13 +634,16 @@ const Header = ({
                     );
                   } else {
                     return (
-                      <details className="group border-b border-b-slate-700 md:border-0 lg:relative ">
+                      <details
+                        key={type.id + i}
+                        className="group border-b border-b-slate-700 md:border-0 lg:relative "
+                      >
                         <summary className="flex items-center justify-between hover:bg-[#848da065] group-open:bg-[#848da091] px-4 py-2 rounded-lg cursor-pointer text-slate-100">
                           <NavMainItem title={type.name} />
                           <NavChevron />
                         </summary>
                         <nav className={navStyle}>
-                          {type.seasons.map((season) => {
+                          {type.seasons.map((season, i) => {
                             if (season.months.length === 0) {
                               return (
                                 <Link
@@ -643,7 +660,10 @@ const Header = ({
                               );
                             } else {
                               return (
-                                <details className="group border-b border-b-slate-700 md:border-0 lg:relative ">
+                                <details
+                                  key={season.year + i}
+                                  className="group border-b border-b-slate-700 md:border-0 lg:relative "
+                                >
                                   <summary className="flex items-center justify-between hover:bg-[#848da065] group-open:bg-[#848da091] px-4 py-2 rounded-lg cursor-pointer text-slate-100">
                                     <NavMainItem title={String(season.year)} />
                                     <NavChevron />
@@ -701,7 +721,11 @@ const Header = ({
                   </strong>
                 </div>
               )}
-              <Search />
+              <Search
+                search={async (e: string) => {
+                  return await search(e);
+                }}
+              />
             </div>
             {weather && (
               <div className="sm:hidden mt-5">

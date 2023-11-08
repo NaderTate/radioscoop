@@ -3,8 +3,7 @@ import type { Metadata } from "next";
 import { Changa } from "next/font/google";
 import SessionProv from "@/components/SessionProvider";
 import { ThemeProvider } from "@/components/theme-porvider";
-import Footer from "@/components/Footer";
-
+import NextUIProvider from "@/components/NextUIProvider";
 const changa = Changa({ subsets: ["arabic"] });
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -22,11 +21,12 @@ export default function RootLayout({
     <html lang="en">
       <SessionProv session={session}>
         <body dir="rtl" className={changa.className}>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            {children}
-          </ThemeProvider>
+          <NextUIProvider>
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              {children}
+            </ThemeProvider>
+          </NextUIProvider>
         </body>
-        <Footer />
       </SessionProv>
     </html>
   );
