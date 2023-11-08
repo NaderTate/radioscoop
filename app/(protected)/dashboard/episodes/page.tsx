@@ -1,6 +1,7 @@
 import EpisodeForm from "@/components/EpisodeForm";
 import EpisodesTable from "@/components/EpisodesTable";
-import Pagination from "@/components/Pagination";
+import NextUIPagination from "@/components/NextUIPagination";
+
 import SearchForm from "@/components/SearchForm";
 import prisma from "@/lib/prisma";
 import { pagination } from "@/lib/utils";
@@ -73,11 +74,9 @@ async function page({
         <SearchForm content="episodes" />
       </div>
       <EpisodesTable programs={programs} data={Episodes} />
-      <Pagination
-        Arr={Arr}
-        pages={pages}
-        link="/dashboard/episodes"
-        currentPage={sk}
+      <NextUIPagination
+        total={Math.floor(count / itemsToShow)}
+        queries={["search"]}
       />
     </div>
   );

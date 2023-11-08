@@ -1,9 +1,9 @@
-import Pagination from "@/components/Pagination";
+import NextUIPagination from "@/components/NextUIPagination";
+
 import PresenetersTable from "@/components/PresenetersTable";
 import PresenterForm from "@/components/PresenterForm";
 import SearchForm from "@/components/SearchForm";
 import prisma from "@/lib/prisma";
-import { pagination } from "@/lib/utils";
 
 async function page({
   searchParams,
@@ -35,7 +35,6 @@ async function page({
       },
     },
   });
-  const { Arr, pages } = pagination(count, sk, itemsToShow);
   return (
     <div>
       <div className="flex items-start sm:items-center gap-5 flex-col sm:flex-row">
@@ -43,11 +42,9 @@ async function page({
         <SearchForm content="presenters" />
       </div>
       <PresenetersTable data={presenters} />
-      <Pagination
-        Arr={Arr}
-        pages={pages}
-        link="/dashboard/presenters"
-        currentPage={sk}
+      <NextUIPagination
+        total={Math.floor(count / itemsToShow)}
+        queries={["search"]}
       />
     </div>
   );

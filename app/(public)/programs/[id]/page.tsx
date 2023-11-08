@@ -1,7 +1,5 @@
 import EpisodeCard from "@/components/EpisodeCard";
-import Pagination from "@/components/Pagination";
-import { pagination } from "@/lib/utils";
-
+import NextUIPagination from "@/components/NextUIPagination";
 async function Program({
   params: { id },
   searchParams,
@@ -42,7 +40,6 @@ async function Program({
       categoryId: id,
     },
   });
-  const { Arr, pages } = pagination(count, sk, itemsToShow);
 
   return (
     <div>
@@ -64,7 +61,7 @@ async function Program({
             <EpisodeCard key={episode.id} ep={episode} />
           ))}
         </div>
-        <Pagination pages={pages} Arr={Arr} link="/programs" currentPage={sk} />
+        <NextUIPagination total={Math.floor(count / itemsToShow)} />
       </div>
     </div>
   );

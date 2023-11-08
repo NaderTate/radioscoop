@@ -1,8 +1,6 @@
 import prisma from "@/lib/prisma";
 import EpisodeCard from "@/components/EpisodeCard";
-import { pagination } from "@/lib/utils";
-import Pagination from "@/components/Pagination";
-
+import NextUIPagination from "@/components/NextUIPagination";
 async function page({ searchParams }: { searchParams: { page: string } }) {
   const { page } = searchParams;
   const sk = Number(page) || 1;
@@ -34,7 +32,6 @@ async function page({ searchParams }: { searchParams: { page: string } }) {
       featured: false,
     },
   });
-  const { Arr, pages } = pagination(count, sk, itemsToShow);
 
   return (
     <div>
@@ -53,7 +50,7 @@ async function page({ searchParams }: { searchParams: { page: string } }) {
             <EpisodeCard key={episode.id} ep={episode} />
           ))}
         </div>
-        <Pagination pages={pages} Arr={Arr} link="/ep" currentPage={sk} />
+        <NextUIPagination total={Math.floor(count / itemsToShow)} />
       </div>
     </div>
   );

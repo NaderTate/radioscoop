@@ -1,6 +1,6 @@
-import Pagination from "@/components/Pagination";
+import NextUIPagination from "@/components/NextUIPagination";
 import prisma from "@/lib/prisma";
-import { pagination } from "@/lib/utils";
+
 import Image from "next/image";
 
 async function page({
@@ -21,7 +21,6 @@ async function page({
     },
   });
   const count = await prisma.video.count();
-  const { Arr, pages } = pagination(count, sk, itemsToShow);
 
   return (
     <div>
@@ -51,7 +50,7 @@ async function page({
           </a>
         ))}
       </div>
-      <Pagination Arr={Arr} pages={pages} link="/media-scoop" />
+      <NextUIPagination total={Math.floor(count / itemsToShow)} />
     </div>
   );
 }

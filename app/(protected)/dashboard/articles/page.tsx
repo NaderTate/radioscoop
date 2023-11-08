@@ -1,5 +1,6 @@
 import ArticleForm from "@/components/ArticleForm";
 import ArticlesTable from "@/components/ArticlesTable";
+import NextUIPagination from "@/components/NextUIPagination";
 import Pagination from "@/components/Pagination";
 import SearchForm from "@/components/SearchForm";
 import prisma from "@/lib/prisma";
@@ -70,11 +71,9 @@ async function page({
         presenters={presenters}
         data={articles}
       />
-      <Pagination
-        Arr={Arr}
-        pages={pages}
-        link="/dashboard/articles"
-        currentPage={sk}
+      <NextUIPagination
+        total={Math.floor(count / itemsToShow)}
+        queries={["search"]}
       />
     </div>
   );

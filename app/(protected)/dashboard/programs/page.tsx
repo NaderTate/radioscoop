@@ -1,10 +1,11 @@
 import ProgramsTable from "@/components/ProgramsTable";
-import Pagination from "@/components/Pagination";
+
 import SearchForm from "@/components/SearchForm";
-import { Button } from "@/components/ui/button";
+
 import prisma from "@/lib/prisma";
-import { pagination } from "@/lib/utils";
+
 import ProgramForm from "@/components/ProgramForm";
+import NextUIPagination from "@/components/NextUIPagination";
 
 async function page({
   searchParams,
@@ -42,7 +43,6 @@ async function page({
     select: { id: true, name: true },
     orderBy: { id: "desc" },
   });
-  const { Arr, pages } = pagination(count, sk, itemsToShow);
 
   return (
     <div>
@@ -51,11 +51,9 @@ async function page({
         <SearchForm content="programs" />
       </div>
       <ProgramsTable presenters={presenetrs} data={programs} />
-      <Pagination
-        Arr={Arr}
-        pages={pages}
-        link="/dashboard/programs"
-        currentPage={sk}
+      <NextUIPagination
+        total={Math.floor(count / itemsToShow)}
+        queries={["search"]}
       />
     </div>
   );

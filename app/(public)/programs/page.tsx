@@ -1,6 +1,6 @@
-import Pagination from "@/components/Pagination";
+import NextUIPagination from "@/components/NextUIPagination";
 import ProgramCard from "@/components/ProgramCard";
-import { pagination } from "@/lib/utils";
+
 async function Programs({
   searchParams,
 }: {
@@ -32,7 +32,6 @@ async function Programs({
       monthId: month ? month : undefined,
     },
   });
-  const { Arr, pages } = pagination(count, sk, itemsToShow);
   return (
     <div>
       <div className="px-4 py-16 mx-auto sm:px-6 lg:px-8 sm:py-24">
@@ -46,12 +45,9 @@ async function Programs({
             <ProgramCard key={program.id} program={program} />
           ))}
         </div>
-        <Pagination
-          pages={pages}
-          Arr={Arr}
-          link="/ep"
-          currentPage={sk}
-          query={{ month }}
+        <NextUIPagination
+          total={Math.floor(count / itemsToShow)}
+          queries={["month"]}
         />
       </div>
     </div>

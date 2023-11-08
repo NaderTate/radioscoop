@@ -1,6 +1,5 @@
-import Pagination from "../../../components/Pagination";
+import NextUIPagination from "@/components/NextUIPagination";
 import prisma from "@/lib/prisma";
-import { pagination } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 async function page({
@@ -20,7 +19,8 @@ async function page({
       typeId: type ? type : undefined,
       postMonthId: month ? month : undefined,
     },
-    take: 20,
+    take: itemsToShow,
+    skip: (sk - 1) * itemsToShow,
     orderBy: {
       id: "desc",
     },
@@ -35,7 +35,6 @@ async function page({
       postMonthId: month ? month : undefined,
     },
   });
-  const { Arr, pages } = pagination(count, sk, itemsToShow);
 
   return (
     <div>
@@ -53,12 +52,10 @@ async function page({
           </div>
         ))}
       </div>
-      <Pagination
-        Arr={Arr}
-        pages={pages}
-        link="/articles"
-        query={{ type, month }}
-        currentPage={sk}
+
+      <NextUIPagination
+        total={Math.floor(count / itemsToShow)}
+        queries={["type", "month"]}
       />
     </div>
   );

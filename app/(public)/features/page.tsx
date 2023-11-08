@@ -1,6 +1,6 @@
-import Pagination from "../../../components/Pagination";
+import NextUIPagination from "@/components/NextUIPagination";
 import prisma from "@/lib/prisma";
-import { pagination } from "@/lib/utils";
+
 async function page({
   searchParams,
 }: {
@@ -34,7 +34,7 @@ async function page({
       typeId: type ? type : undefined,
     },
   });
-  const { Arr, pages } = pagination(count, sk, itemsToShow);
+
   return (
     <div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-10 px-4">
@@ -57,12 +57,9 @@ async function page({
           </div>
         ))}
       </div>
-      <Pagination
-        Arr={Arr}
-        pages={pages}
-        link="/features"
-        query={type ? { type: type } : undefined}
-        currentPage={sk}
+      <NextUIPagination
+        total={Math.floor(count / itemsToShow)}
+        queries={["type"]}
       />
     </div>
   );

@@ -1,10 +1,10 @@
 import FeatureForm from "@/components/FeatureForm";
 import FeaturesTable from "@/components/FeaturesTable";
-import Pagination from "@/components/Pagination";
+import NextUIPagination from "@/components/NextUIPagination";
+
 import SearchForm from "@/components/SearchForm";
-import { Button } from "@/components/ui/button";
+
 import prisma from "@/lib/prisma";
-import { pagination } from "@/lib/utils";
 
 async function page({
   searchParams,
@@ -39,7 +39,7 @@ async function page({
       },
     },
   });
-  const { Arr, pages } = pagination(count, sk, itemsToShow);
+
   const presenters = await prisma.author.findMany({
     select: { id: true, name: true },
     orderBy: { id: "desc" },
@@ -55,11 +55,9 @@ async function page({
         <SearchForm content="features" />
       </div>
       <FeaturesTable types={types} presenters={presenters} data={features} />
-      <Pagination
-        Arr={Arr}
-        pages={pages}
-        link="/dashboard/features"
-        currentPage={sk}
+      <NextUIPagination
+        total={Math.floor(count / itemsToShow)}
+        queries={["search"]}
       />
     </div>
   );

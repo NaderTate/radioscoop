@@ -5,6 +5,8 @@ module.exports = {
   darkMode: ["class"],
   content: [
     "./node_modules/@nextui-org/theme/dist/components/spinner.js",
+    "./node_modules/@nextui-org/theme/dist/components/pagination.js",
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
@@ -75,5 +77,19 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), nextui()],
+  plugins: [
+    require("tailwindcss-animate"),
+    nextui({
+      themes: {
+        light: {
+          layout: {},
+          colors: {},
+        },
+        dark: {
+          layout: {},
+          colors: { background: "#1F2937" },
+        },
+      },
+    }),
+  ],
 };
