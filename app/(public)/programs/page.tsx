@@ -46,7 +46,7 @@ async function Programs({
           ))}
         </div>
         <NextUIPagination
-          total={Math.floor(count / itemsToShow)}
+          total={Math.ceil(count / itemsToShow)}
           queries={["month"]}
         />
       </div>

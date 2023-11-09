@@ -5,11 +5,12 @@ import { BiSearch } from "react-icons/bi";
 import { debounce } from "lodash";
 import { ChangeEvent, useState } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
+import { Image } from "@nextui-org/image";
 import Link from "next/link";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { Spinner } from "@nextui-org/spinner";
-function Search({ search }: { search: Function }) {
+import { search } from "@/lib/_actions";
+function Search() {
   const [loading, setLoading] = useState(false);
   const [searchTerms, setSearchTerms] = useState<string>("");
   const [searchResults, setSearchResults] = useState<{
@@ -18,7 +19,7 @@ function Search({ search }: { search: Function }) {
       id: string;
       img: string;
     }[];
-    authors: { name: string; img: string; id: string }[];
+    authors: { name: string; img: string | null; id: string }[];
   }>({ programs: [], authors: [] });
   const router = useRouter();
   const resetSearchResults = () => {
@@ -71,13 +72,13 @@ function Search({ search }: { search: Function }) {
             <div className="flex flex-wrap justify-center gap-5 ">
               {searchResults.programs.map((program) => {
                 return (
-                  <DialogClose asChild>
+                  <DialogClose key={program.id} asChild>
                     <Link href={{ pathname: `/programs/${program.id}` }}>
                       <Image
                         width={135}
                         height={135}
                         className="object-contain rounded-md"
-                        src={program.img}
+                        src={program?.img}
                         alt=""
                       />
                       <h1 className="text-center">{program.name}</h1>
@@ -94,14 +95,14 @@ function Search({ search }: { search: Function }) {
             <div className="flex flex-wrap justify-center gap-5">
               {searchResults.authors.map((author) => {
                 return (
-                  <DialogClose asChild>
-                    <Link href={{ pathname: `/authors/${author.id}` }}>
+                  <DialogClose key={author.id} asChild>
+                    <Link href={{ pathname: `/announcers/${author.id}` }}>
                       <Image
                         width={135}
                         height={135}
                         className="object-contain rounded-md"
                         src={
-                          author?.img?.length > 3
+                          author?.img
                             ? author.img
                             : "https://res.cloudinary.com/ddcjbeysn/image/upload/v1699437344/person-gray-photo-placeholder-woman-t-shirt-white-background-131683043_rmfhru.jpg"
                         }

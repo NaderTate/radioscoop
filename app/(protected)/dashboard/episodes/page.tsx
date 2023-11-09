@@ -16,9 +16,24 @@ async function page({
   const Episodes = await prisma.episode.findMany({
     where: {
       featured: false,
-      title: {
-        contains: search,
-      },
+      OR: [
+        {
+          category: {
+            name: {
+              contains: search,
+            },
+          },
+        },
+        {
+          category: {
+            author: {
+              name: {
+                contains: search,
+              },
+            },
+          },
+        },
+      ],
     },
     take: itemsToShow,
     skip: (sk - 1) * itemsToShow,
@@ -75,7 +90,7 @@ async function page({
       </div>
       <EpisodesTable programs={programs} data={Episodes} />
       <NextUIPagination
-        total={Math.floor(count / itemsToShow)}
+        total={Math.ceil(count / itemsToShow)}
         queries={["search"]}
       />
     </div>

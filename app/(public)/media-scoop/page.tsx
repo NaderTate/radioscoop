@@ -50,7 +50,7 @@ async function page({
           </a>
         ))}
       </div>
-      <NextUIPagination total={Math.floor(count / itemsToShow)} />
+      <NextUIPagination total={Math.ceil(count / itemsToShow)} />
     </div>
   );
 }

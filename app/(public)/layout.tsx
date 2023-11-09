@@ -91,32 +91,6 @@ export default async function RootLayout({
         featureTypes={featureTypes}
         seasons={seasons}
         articleTypes={FormattedArticleTypes}
-        search={async (e: string) => {
-          "use server";
-          const programs = await prisma.category.findMany({
-            where: { name: { contains: e, mode: "insensitive" } },
-            select: {
-              name: true,
-              id: true,
-              img: true,
-            },
-            take: 6,
-            orderBy: {
-              id: "desc",
-            },
-          });
-          const authors = await prisma.author.findMany({
-            where: { name: { contains: e, mode: "insensitive" } },
-            take: 6,
-            orderBy: {
-              id: "desc",
-            },
-          });
-          return {
-            programs,
-            authors,
-          };
-        }}
       />
       {children}
       <Footer />

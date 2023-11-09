@@ -292,7 +292,6 @@ const Header = ({
   featureTypes,
   articleTypes,
   seasons,
-  search,
 }: {
   featureTypes: { id: string; name: string }[];
   articleTypes: {
@@ -304,7 +303,6 @@ const Header = ({
     }[];
   }[];
   seasons: { year: string; months: { id: string; name: string }[] }[];
-  search: Function;
 }) => {
   useEffect(() => {
     const fetchWeather = async () => {
@@ -721,11 +719,7 @@ const Header = ({
                   </strong>
                 </div>
               )}
-              <Search
-                search={async (e: string) => {
-                  return await search(e);
-                }}
-              />
+              <Search />
             </div>
             {weather && (
               <div className="sm:hidden mt-5">

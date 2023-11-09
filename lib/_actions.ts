@@ -225,13 +225,6 @@ export const updateAuthor = async (
   name: string,
   img?: string
 ) => {
-  // check if another author with the same name exists
-  const existingAuthor = await prisma.author.findFirst({
-    where: { name },
-  });
-  if (existingAuthor) {
-    return { error: ` يوجد مذيع آخر بنفس الاسم: ${name}` };
-  }
   await prisma.author.update({
     where: { id: authorId },
     data: {
@@ -509,4 +502,30 @@ export const addFeatureType = async (name: string) => {
   });
   revalidatePath("/dashboard/features");
   return type;
+};
+// search
+export const search = async (searchQuery: string) => {
+  const programs = await prisma.category.findMany({
+    where: { name: { contains: searchQuery, mode: "insensitive" } },
+    select: {
+      name: true,
+      id: true,
+      img: true,
+    },
+    take: 6,
+    orderBy: {
+      id: "desc",
+    },
+  });
+  const authors = await prisma.author.findMany({
+    where: { name: { contains: searchQuery, mode: "insensitive" } },
+    take: 6,
+    orderBy: {
+      id: "desc",
+    },
+  });
+  return {
+    programs,
+    authors,
+  };
 };

@@ -43,7 +43,7 @@ async function page({
       </div>
       <PresenetersTable data={presenters} />
       <NextUIPagination
-        total={Math.floor(count / itemsToShow)}
+        total={Math.ceil(count / itemsToShow)}
         queries={["search"]}
       />
     </div>

@@ -1,5 +1,6 @@
 import EpisodeCard from "@/components/EpisodeCard";
 import NextUIPagination from "@/components/NextUIPagination";
+import Link from "next/link";
 async function Program({
   params: { id },
   searchParams,
@@ -10,10 +11,21 @@ async function Program({
   const { page } = searchParams;
   const sk = Number(page) || 1;
   const itemsToShow = 30;
+  const program = await prisma.category.findUnique({
+    where: {
+      id,
+    },
+    select: {
+      name: true,
+      author: { select: { name: true, id: true } },
+      month: {
+        select: { name: true, year: { select: { year: true } } },
+      },
+    },
+  });
   const episodes = await prisma.episode.findMany({
     where: {
       featured: false,
-
       categoryId: id,
     },
     include: {
@@ -45,15 +57,18 @@ async function Program({
     <div>
       <div className="px-4 py-16 mx-auto sm:px-6 lg:px-8 sm:py-20">
         <div className="max-w-xl mx-auto text-center ">
-          <h2 className="text-4xl font-bold tracking-tight sm:text-5xl ">
-            برنامج {episodes[0]?.category?.name}
+          <h2 className="text-4xl font-bold tracking-tight sm:text-5xl mb-4">
+            برنامج {program?.name}
           </h2>
-          <p className="text-center my-4">
-            تقديم {episodes[0]?.category?.author?.name || "راديو سكوب"}
-          </p>
+          تقديم :{" "}
+          <Link
+            href={{ pathname: `/announcers/${program?.author?.id}` }}
+            className="text-center my-4 underline"
+          >
+            {program?.author?.name}
+          </Link>
           <p className="text-sm my-4">
-            {episodes[0]?.category?.month?.year.year} /{" "}
-            {episodes[0]?.category?.month?.name}
+            {program?.month?.year.year} / {program?.month?.name}
           </p>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
@@ -61,7 +76,7 @@ async function Program({
             <EpisodeCard key={episode.id} ep={episode} />
           ))}
         </div>
-        <NextUIPagination total={Math.floor(count / itemsToShow)} />
+        <NextUIPagination total={Math.ceil(count / itemsToShow)} />
       </div>
     </div>
   );

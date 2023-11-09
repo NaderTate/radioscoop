@@ -54,7 +54,7 @@ async function page({
       </div>
 
       <NextUIPagination
-        total={Math.floor(count / itemsToShow)}
+        total={Math.ceil(count / itemsToShow)}
         queries={["type", "month"]}
       />
     </div>

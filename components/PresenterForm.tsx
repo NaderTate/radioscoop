@@ -105,9 +105,6 @@ function PresenterForm({ presenter }: { presenter?: Author_ }) {
                   disabled={!name}
                   onClick={async () => {
                     const res = await updateAuthor(presenter.id, name, img);
-                    if (res.error) {
-                      alert(res.error);
-                    }
                   }}
                   className="w-full"
                 >

@@ -24,7 +24,6 @@ function NextUIPagination({
       );
     })
     .join("");
-  console.log(queryStr);
   return (
     <div className="flex justify-center my-5">
       <Pagination

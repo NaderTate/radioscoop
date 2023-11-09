@@ -50,7 +50,7 @@ async function page({ searchParams }: { searchParams: { page: string } }) {
             <EpisodeCard key={episode.id} ep={episode} />
           ))}
         </div>
-        <NextUIPagination total={Math.floor(count / itemsToShow)} />
+        <NextUIPagination total={Math.ceil(count / itemsToShow)} />
       </div>
     </div>
   );
