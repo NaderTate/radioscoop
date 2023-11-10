@@ -1,5 +1,8 @@
 import Contact from "@/components/Contact";
-
+export const metadata = {
+  title: "للاستماع و التعليق",
+  description: "للاستماع و التعليق",
+};
 function Comment() {
   return (
     <div>

@@ -76,12 +76,12 @@ function Tabs({
                     <Link
                       key={post.id}
                       href={{ pathname: `/articles/${post.id}` }}
-                      className="relative"
+                      className="relative  w-52"
                     >
                       <Image
-                        width={135}
-                        height={135}
-                        className="object-contain rounded-md rounded-b-none"
+                        width={210}
+                        height={210}
+                        className="object-cover   aspect-[9/16] rounded-md rounded-b-none"
                         src={post?.image!}
                         alt=""
                       />

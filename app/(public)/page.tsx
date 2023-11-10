@@ -16,6 +16,7 @@ async function page() {
       category: {
         select: {
           name: true,
+          img: true,
           author: {
             select: {
               name: true,

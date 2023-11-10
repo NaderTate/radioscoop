@@ -3,7 +3,6 @@ import { signIn } from "next-auth/react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
-import { AiFillLock } from "react-icons/ai";
 const SignInButton = () => {
   return (
     <button

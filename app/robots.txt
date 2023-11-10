@@ -1,0 +1,5 @@
+User-Agent:*
+Allow:/
+Dissallow:/dashboard/   
+SiteMap: http://www.radio-scoop.com/sitemap.xml
+```

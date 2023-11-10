@@ -2,49 +2,65 @@ import prisma from "@/lib/prisma";
 import SidePanel from "@/components/SidePanel";
 import Link from "next/link";
 import Schedule from "@/components/Schedule";
+import { Image } from "@nextui-org/image";
 export const revalidate = 60;
 export async function generateStaticParams() {
   const products = await prisma.post.findMany();
   return products.map((post) => ({ id: post.id }));
 }
 
-export async function generateMetadata({ params }: { params: { id: string } }) {
+export async function generateMetadata({
+  params: { id },
+}: {
+  params: { id: string };
+}) {
   try {
-    const post = await prisma.post.findUnique({
-      where: { id: params.id },
-    });
-    if (!post)
-      return { title: "Not found", description: "This post does not exist" };
-    return {
-      title: post?.title,
-      description:
-        " 2022-10-1 راديو سكوب : اول راديو في مصر بنقل المتميزين من متتدربيه للاذاعات الكبرى اف ام  في مصر يمكن التواصل من خلال واتساب فيسبوك تويتر او انستاجرام او من خلال رقم الهاتف الجوال FM الكبرى",
-      alternates: {
-        canonical: `ep/${post?.id}`,
+    const article = await prisma.post.findUnique({
+      where: { id },
+      select: {
+        title: true,
+        image: true,
+        presenter: { select: { name: true } },
       },
+    });
+
+    return {
+      title: article?.presenter
+        ? `${article.title + " بقلم " + article.presenter.name}`
+        : article?.title || "راديو سكووب",
+      description: "راديو سكووب",
       twitter: {
         card: "summary_large_image",
-        site: "@radioscoop",
-        title: post?.title,
-        description:
-          " 2022-10-1 راديو سكوب : اول راديو في مصر بنقل المتميزين من متتدربيه للاذاعات الكبرى اف ام  في مصر يمكن التواصل من خلال واتساب فيسبوك تويتر او انستاجرام او من خلال رقم الهاتف الجوال FM الكبرى",
-        images: [post?.image || "/public/favicon.png"],
-      },
-      openGraph: {
-        title: post?.title,
+        site: "@radio-scoop",
+        title: article?.presenter
+          ? `${article.title + " بقلم " + article.presenter.name}`
+          : article?.title || "راديو سكووب",
+        description: "راديو سكووب",
         images: [
           {
-            url: post?.image || "/public/favicon.png",
+            url: article?.image,
             width: 800,
-            height: 800,
+            height: 600,
+          },
+        ],
+      },
+      openGraph: {
+        title: article?.presenter
+          ? `${article.title + " بقلم " + article.presenter.name}`
+          : article?.title || "راديو سكووب",
+        images: [
+          {
+            url: article?.image,
+            width: 800,
+            height: 600,
           },
         ],
       },
     };
   } catch (error) {
     return {
-      title: "Not found",
-      description: "This post does not exist",
+      title: "لا توجد",
+      description: "هذه الصفحة غير موجودة",
     };
   }
 }
@@ -127,12 +143,16 @@ async function page({ params: { id } }: { params: { id: string } }) {
             </h2>
 
             <div className=" lg:py-6">
-              <div className="relative w-full rounded-lg overflow-hidden ">
-                <img
-                  alt="House"
-                  src={post?.image}
-                  className=" h-full w-full object-contain"
-                />
+              <div className="flex justify-center">
+                <div className="relative max-w-[600px] rounded-lg overflow-hidden ">
+                  <Image
+                    width={600}
+                    height={400}
+                    alt="House"
+                    src={post?.image}
+                    className=" h-full object-contain"
+                  />
+                </div>
               </div>
             </div>
             <div className="relative flex items-center bg-gray-100/20 rounded-xl">

@@ -24,9 +24,11 @@ function NextUIPagination({
       );
     })
     .join("");
+  const currentPage = Number(searchParams.get("page")) || 1;
   return (
     <div className="flex justify-center my-5">
       <Pagination
+        initialPage={currentPage}
         dir="ltr"
         total={total}
         onChange={(e) => {

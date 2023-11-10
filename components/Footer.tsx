@@ -113,16 +113,6 @@ function Footer() {
         <div className="pt-8 mt-16 border-t border-gray-100">
           <p className="text-xs leading-relaxed text-center text-gray-500">
             © Radio Scoop 2022. All rights reserved.
-            <br />
-            Created with
-            <a
-              className="text-gray-700 underline transition hover:text-gray-700/75"
-              target="_blank"
-              href="https://github.com/Mov305"
-              rel="noopener noreferrer"
-            >
-              MOV
-            </a>
           </p>
         </div>
       </div>

@@ -1,6 +1,9 @@
 import NextUIPagination from "@/components/NextUIPagination";
 import ProgramCard from "@/components/ProgramCard";
-
+export const metadata = {
+  title: "برامج راديو سكووب",
+  description: "برامج راديو سكووب",
+};
 async function Programs({
   searchParams,
 }: {

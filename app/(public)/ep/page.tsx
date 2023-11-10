@@ -1,6 +1,11 @@
 import prisma from "@/lib/prisma";
 import EpisodeCard from "@/components/EpisodeCard";
 import NextUIPagination from "@/components/NextUIPagination";
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "حلفات راديو سكووب",
+  description: "راديو سكووب",
+};
 async function page({ searchParams }: { searchParams: { page: string } }) {
   const { page } = searchParams;
   const sk = Number(page) || 1;
@@ -18,6 +23,7 @@ async function page({ searchParams }: { searchParams: { page: string } }) {
       category: {
         select: {
           name: true,
+          img: true,
           author: {
             select: {
               name: true,

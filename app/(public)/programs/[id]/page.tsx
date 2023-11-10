@@ -2,6 +2,48 @@ import EpisodeCard from "@/components/EpisodeCard";
 import NextUIPagination from "@/components/NextUIPagination";
 import Link from "next/link";
 import prisma from "@/lib/prisma";
+export async function generateMetadata({ params }: { params: { id: string } }) {
+  try {
+    const program = await prisma.category.findUnique({
+      where: { id: params.id },
+      select: {
+        id: true,
+        name: true,
+        img: true,
+      },
+    });
+    if (!program)
+      return { title: "لا يوجد", description: "هذا البرنامج غير موجود" };
+    return {
+      title: `برنامج ${program?.name}`,
+      description:
+        " 2022-10-1 راديو سكوب : اول راديو في مصر بنقل المتميزين من متتدربيه للاذاعات الكبرى اف ام  في مصر يمكن التواصل من خلال واتساب فيسبوك تويتر او انستاجرام او من خلال رقم الهاتف الجوال FM الكبرى",
+      alternates: {
+        canonical: `ep/${program?.id}`,
+      },
+      twitter: {
+        card: "summary_large_image",
+        site: "@radioscoop",
+        title: `برنامج ${program?.name}`,
+        description:
+          " 2022-10-1 راديو سكوب : اول راديو في مصر بنقل المتميزين من متتدربيه للاذاعات الكبرى اف ام  في مصر يمكن التواصل من خلال واتساب فيسبوك تويتر او انستاجرام او من خلال رقم الهاتف الجوال FM الكبرى",
+        images: [program.img || "/favicon.png"],
+      },
+      openGraph: {
+        title: `برنامج ${program?.name}`,
+        images: [
+          {
+            url: program.img || "/favicon.png",
+            width: 800,
+            height: 800,
+          },
+        ],
+      },
+    };
+  } catch (error) {
+    return { title: "لا يوجد", description: "هذا البرنامج غير موجود" };
+  }
+}
 async function Program({
   params: { id },
   searchParams,
@@ -33,6 +75,7 @@ async function Program({
       category: {
         select: {
           name: true,
+          img: true,
           author: { select: { name: true } },
           month: {
             select: { name: true, year: { select: { year: true } } },

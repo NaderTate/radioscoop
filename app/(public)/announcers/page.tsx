@@ -2,6 +2,10 @@ import NextUIPagination from "@/components/NextUIPagination";
 import prisma from "@/lib/prisma";
 import { Image } from "@nextui-org/image";
 import Link from "next/link";
+export const metadata = {
+  title: "المذيعون",
+  description: "مذيعون راديو سكووب",
+};
 async function Announcers({
   searchParams,
 }: {

@@ -6,13 +6,13 @@ import { ThemeProvider } from "@/components/theme-porvider";
 import NextUIProvider from "@/components/NextUIProvider";
 import { Session } from "next-auth";
 const changa = Changa({ subsets: ["arabic"] });
-export const metadata = {
+export const metadata: Metadata = {
   metadataBase: new URL("https://www.radio-scoop.com/"),
   title: { default: "راديو سكووب", template: "%s | راديو سكووب" },
   description: "اذاعة بطعم السعادة",
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: "ar_EG",
     url: "https://www.radio-scoop.com/",
     siteName: "راديو سكووب",
     images: [

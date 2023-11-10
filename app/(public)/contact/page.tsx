@@ -8,6 +8,7 @@ import {
   BsFacebook,
 } from "react-icons/bs";
 import { send } from "emailjs-com";
+import { Metadata } from "next";
 
 const data = [
   {
@@ -43,7 +44,7 @@ function Contact() {
     message: "",
   });
 
-  const handleChange = (e: { target: { name: any; value: any } }) => {
+  const handleChange = (e: { target: { name: string; value: string } }) => {
     setToSend({ ...toSend, [e.target.name]: e.target.value });
   };
 

@@ -1,13 +1,17 @@
 import { Episode } from "@prisma/client";
 interface Episodee extends Episode {
-  category?: { name: string; author: { name: string } | null } | null;
+  category?: {
+    name: string;
+    img: string;
+    author: { name: string } | null;
+  } | null;
 }
 function EpisodeCard({ ep }: { ep: Episodee }) {
   return (
     <div className="hover:scale-[1.01] transition w-full aspect-square relative">
       <a
         href={`/ep/${ep.id}`}
-        style={{ backgroundImage: `url(${ep.img})` }}
+        style={{ backgroundImage: `url(${ep.category?.img})` }}
         className=" block overflow-hidden h-full bg-center bg-no-repeat bg-cover rounded-xl"
       >
         {!ep.featured && (

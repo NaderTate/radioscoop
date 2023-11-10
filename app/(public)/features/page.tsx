@@ -1,7 +1,11 @@
 import NextUIPagination from "@/components/NextUIPagination";
 import prisma from "@/lib/prisma";
+import { Metadata } from "next";
 import Link from "next/link";
-
+export const metadata: Metadata = {
+  title: "الفيتشرات",
+  description: "فيتشرات راديو سكووب",
+};
 async function page({
   searchParams,
 }: {

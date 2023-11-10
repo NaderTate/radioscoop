@@ -1,7 +1,11 @@
 import NextUIPagination from "@/components/NextUIPagination";
 import prisma from "@/lib/prisma";
-import Image from "next/image";
+import { Image } from "@nextui-org/image";
 import Link from "next/link";
+export const metadata = {
+  title: "المقالات",
+  description: "مقالات راديو سكووب",
+};
 async function page({
   searchParams,
 }: {
@@ -37,18 +41,29 @@ async function page({
   });
 
   return (
-    <div>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6 gap-4 mt-10">
+    <div className="p-5">
+      <div className="flex flex-wrap gap-4 justify-center mt-10">
         {articles.map((article) => (
-          <div className="flex flex-col" key={article.id}>
+          <div key={article.id} className="w-52">
             <Link href={{ pathname: `/articles/${article.id}` }}>
-              <img
+              <Image
+                width={210}
+                height={210}
                 src={article.image}
                 alt=""
-                className="object-cover h-64 w-48 m-auto rounded-md"
+                className="object-cover aspect-[9/16]  m-auto rounded-md rounded-b-none"
               />
             </Link>
-            <p className="text-center">{article.title}</p>
+            <div className="bg-gray-900 p-4 rounded-b-md">
+              <p className="text-center text-gray-300 line-clamp-2">
+                {article.title}
+              </p>
+              {article.presenter?.name && (
+                <h5 className="text-sm text-gray-500 text-center">
+                  بقلم: {article.presenter?.name}
+                </h5>
+              )}
+            </div>
           </div>
         ))}
       </div>

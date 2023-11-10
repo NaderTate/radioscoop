@@ -1,6 +1,55 @@
 import prisma from "@/lib/prisma";
 import ImagesSection from "../ImagesSection";
 import Tabs from "../Tabs";
+export async function generateMetadata({
+  params: { id },
+}: {
+  params: { id: string };
+}) {
+  try {
+    const announcer = await prisma.author.findUnique({
+      where: { id },
+      select: {
+        name: true,
+        img: true,
+      },
+    });
+    return {
+      title: announcer?.name,
+      description: "راديو سكووب",
+      twitter: {
+        card: "summary_large_image",
+        site: "@radio-scoop",
+        title: announcer?.name,
+
+        description: "راديو سكووب",
+        images: [
+          {
+            url: announcer?.img,
+            width: 800,
+            height: 600,
+          },
+        ],
+      },
+      openGraph: {
+        title: announcer?.name,
+
+        images: [
+          {
+            url: announcer?.img,
+            width: 800,
+            height: 600,
+          },
+        ],
+      },
+    };
+  } catch (error) {
+    return {
+      title: "لا توجد",
+      description: "هذه الصفحة غير موجودة",
+    };
+  }
+}
 async function Announcer({ params: { id } }: { params: { id: string } }) {
   const announcer = await prisma.author.findUnique({
     where: {

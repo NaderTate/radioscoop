@@ -1,8 +1,10 @@
 import NextUIPagination from "@/components/NextUIPagination";
 import prisma from "@/lib/prisma";
 
-import Image from "next/image";
-
+import { Image } from "@nextui-org/image";
+export const metadata = {
+  title: "ميديا سكووب",
+};
 async function page({
   searchParams,
 }: {
@@ -36,14 +38,15 @@ async function page({
       <div className="grid  grid-cols-2  gap-4 sm:mx-auto sm:w-fit justify-center md:grid-cols-3 md:gap-7 mt-10 lg:grid-cols-5">
         {videos.map((video) => (
           <a key={video.id} href={video.link} target="_blank">
-            <div className="relative w-40 h-56 mx-auto hover:scale-[1.02] transition">
+            <div className="relative mx-auto hover:scale-[1.02] transition">
               <Image
+                width={200}
+                height={200}
                 src={video.image}
                 alt=""
-                fill
-                className="rounded-md object-cover brightness-75"
+                className="rounded-md aspect-[9/16] object-cover brightness-75"
               />
-              <div className="absolute bottom-0 right-0 font-bold text-white">
+              <div className="absolute bottom-2 z-10 right-2 font-bold text-white">
                 {video.title}
               </div>
             </div>

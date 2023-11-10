@@ -12,14 +12,26 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
   try {
     const episode = await prisma.episode.findUnique({
       where: { id: params.id },
-      include: {
-        category: { select: { name: true } },
+      select: {
+        id: true,
+        img: true,
+        featured: true,
+        featureTitle: true,
+        title: true,
+        category: {
+          select: {
+            name: true,
+            img: true,
+          },
+        },
       },
     });
     if (!episode)
-      return { title: "Not found", description: "This episode does not exist" };
+      return { title: "لا توجد", description: "هذه الحلقة غير موجودة" };
     return {
-      title: ` الحلقة ${episode?.title} من ${episode?.category?.name}`,
+      title: episode.featured
+        ? episode.featureTitle
+        : `الحلقة ${episode.title} من برنامج ${episode?.category?.name}`,
       description:
         " 2022-10-1 راديو سكوب : اول راديو في مصر بنقل المتميزين من متتدربيه للاذاعات الكبرى اف ام  في مصر يمكن التواصل من خلال واتساب فيسبوك تويتر او انستاجرام او من خلال رقم الهاتف الجوال FM الكبرى",
       alternates: {
@@ -28,16 +40,24 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
       twitter: {
         card: "summary_large_image",
         site: "@radioscoop",
-        title: ` الحلقة ${episode?.title} من ${episode?.category?.name}`,
+        title: episode?.title,
         description:
           " 2022-10-1 راديو سكوب : اول راديو في مصر بنقل المتميزين من متتدربيه للاذاعات الكبرى اف ام  في مصر يمكن التواصل من خلال واتساب فيسبوك تويتر او انستاجرام او من خلال رقم الهاتف الجوال FM الكبرى",
-        images: [episode?.img || "/public/favicon.png"],
+        images: [
+          episode.featured
+            ? episode.img
+            : episode.category?.img || "/favicon.png",
+        ],
       },
       openGraph: {
-        title: ` الحلقة ${episode?.title} من ${episode?.category?.name}`,
+        title: episode.featured
+          ? episode.featureTitle
+          : `الحلقة ${episode.title} من برنامج ${episode?.category?.name}`,
         images: [
           {
-            url: episode?.img || "/public/favicon.png",
+            url: episode.featured
+              ? episode.img
+              : episode.category?.img || "/favicon.png",
             width: 800,
             height: 800,
           },
@@ -46,8 +66,8 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
     };
   } catch (error) {
     return {
-      title: "Not found",
-      description: "This episode does not exist",
+      title: "لا توجد",
+      description: "هذه الحلقة غير موجودة",
     };
   }
 }
@@ -60,6 +80,7 @@ async function page({ params: { id } }: { params: { id: string } }) {
       category: {
         select: {
           name: true,
+          img: true,
         },
       },
       presenter: { select: { name: true } },
@@ -83,6 +104,7 @@ async function page({ params: { id } }: { params: { id: string } }) {
       category: {
         select: {
           name: true,
+          img: true,
           author: {
             select: {
               name: true,
