@@ -1,6 +1,7 @@
 import EpisodeCard from "@/components/EpisodeCard";
 import NextUIPagination from "@/components/NextUIPagination";
 import Link from "next/link";
+import prisma from "@/lib/prisma";
 async function Program({
   params: { id },
   searchParams,
@@ -81,5 +82,4 @@ async function Program({
     </div>
   );
 }
-
 export default Program;
