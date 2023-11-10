@@ -56,8 +56,8 @@ async function Announcers({
     },
   });
   return (
-    <div>
-      <div className="flex flex-wrap gap-5">
+    <div className="p-5">
+      <div className="flex flex-wrap gap-5 justify-center ">
         {announcers.map((announcer) => {
           return (
             <Link

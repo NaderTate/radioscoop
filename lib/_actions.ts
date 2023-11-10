@@ -154,6 +154,14 @@ export const addYear = async (name: string) => {
 };
 // add a program to a certain month
 export const addProgram = async (monthId: string, prgramId: string[]) => {
+  await prisma.month.update({
+    where: { id: monthId },
+    data: {
+      categories: {
+        set: [],
+      },
+    },
+  });
   const program = await prisma.month.update({
     where: { id: monthId },
     data: {
