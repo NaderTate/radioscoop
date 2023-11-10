@@ -129,12 +129,19 @@ export const updateMonth = async (
   name: string,
   prgramId: string[]
 ) => {
+  await prisma.month.update({
+    where: { id: monthId },
+    data: {
+      categories: {
+        set: [],
+      },
+    },
+  });
   const month = await prisma.month.update({
     where: { id: monthId },
     data: {
       name,
       categories: {
-        set: [],
         connect: prgramId.map((id) => ({ id })),
       },
     },
