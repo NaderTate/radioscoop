@@ -1,3 +1,4 @@
+import AnnouncerCard from "@/components/AnnouncerCard";
 import NextUIPagination from "@/components/NextUIPagination";
 import prisma from "@/lib/prisma";
 import { Image } from "@nextui-org/image";
@@ -64,23 +65,12 @@ async function Announcers({
       <div className="flex flex-wrap gap-5 justify-center ">
         {announcers.map((announcer) => {
           return (
-            <Link
+            <AnnouncerCard
               key={announcer.id}
-              href={{ pathname: `/announcers/${announcer.id}` }}
-            >
-              <Image
-                width={135}
-                height={135}
-                className="object-contain rounded-md"
-                src={
-                  announcer?.img
-                    ? announcer.img
-                    : "https://res.cloudinary.com/ddcjbeysn/image/upload/v1699437344/person-gray-photo-placeholder-woman-t-shirt-white-background-131683043_rmfhru.jpg"
-                }
-                alt=""
-              />
-              <h1 className="text-center">{announcer.name}</h1>
-            </Link>
+              id={announcer.id}
+              name={announcer.name}
+              img={announcer.img}
+            />
           );
         })}
       </div>

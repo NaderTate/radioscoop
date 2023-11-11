@@ -1,39 +1,33 @@
-import NextUIPagination from "@/components/NextUIPagination";
 import ProgramCard from "@/components/ProgramCard";
 import prisma from "@/lib/prisma";
+import NextUIPagination from "@/components/NextUIPagination";
 export const metadata = {
-  title: "برامج راديو سكووب",
-  description: "برامج راديو سكووب",
+  title: "البرنامج العام",
 };
-async function Programs({
+async function GeneralProgram({
   searchParams,
 }: {
-  searchParams: { page: string; month: string };
+  searchParams: { page: string };
 }) {
-  const { page, month } = searchParams;
-  const sk = Number(page) || 1;
-  const itemsToShow = 30;
-  const monthInfo = await prisma.month.findUnique({
-    where: { id: month },
-    select: { name: true, year: { select: { year: true } } },
-  });
+  const sk = Number(searchParams.page) || 1;
+  const itemsPerPage = 30;
   const programs = await prisma.category.findMany({
     where: {
-      monthId: month ? month : undefined,
+      generalProgram: true,
     },
-    take: itemsToShow,
-    skip: (sk - 1) * itemsToShow,
-    orderBy: {
-      id: "desc",
-    },
+    take: itemsPerPage,
+    skip: (sk - 1) * itemsPerPage,
     include: {
       author: { select: { name: true } },
       month: { select: { name: true, year: { select: { year: true } } } },
     },
+    orderBy: {
+      createdAt: "desc",
+    },
   });
   const count = await prisma.category.count({
     where: {
-      monthId: month ? month : undefined,
+      generalProgram: true,
     },
   });
   return (
@@ -41,7 +35,7 @@ async function Programs({
       <div className="px-4 py-16 mx-auto sm:px-6 lg:px-8 sm:py-24">
         <div className="max-w-xl mx-auto text-center ">
           <h2 className="text-4xl font-bold tracking-tight mb-4">
-            برامج موسم {monthInfo?.year.year} / {monthInfo?.name}
+            البرنامج العام
           </h2>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
@@ -49,13 +43,10 @@ async function Programs({
             <ProgramCard key={program.id} program={program} />
           ))}
         </div>
-        <NextUIPagination
-          total={Math.ceil(count / itemsToShow)}
-          queries={["month"]}
-        />
+        <NextUIPagination total={Math.ceil(count / itemsPerPage)} />
       </div>
     </div>
   );
 }
 
-export default Programs;
+export default GeneralProgram;

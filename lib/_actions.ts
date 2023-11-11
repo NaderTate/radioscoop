@@ -41,11 +41,23 @@ export const updateEpisode = async (
   link: string,
   programId: string
 ) => {
+  const AudioDriveLink = (url: string) => {
+    let arr = url.split("/");
+    let updatedLink = [
+      arr[0],
+      "//",
+      arr[2],
+      "/",
+      "uc?export=open&id=",
+      arr[5],
+    ].join("");
+    return updatedLink;
+  };
   const episode = await prisma.episode.update({
     where: { id },
     data: {
       title,
-      link,
+      link: AudioDriveLink(link),
       category: {
         connect: {
           id: programId,
@@ -458,13 +470,25 @@ export const addFeature = async (
   presenterId: string,
   typeId?: string
 ) => {
+  const AudioDriveLink = (url: string) => {
+    let arr = url.split("/");
+    let updatedLink = [
+      arr[0],
+      "//",
+      arr[2],
+      "/",
+      "uc?export=open&id=",
+      arr[5],
+    ].join("");
+    return updatedLink;
+  };
   const feature = await prisma.episode.create({
     data: {
       featured: true,
       title: "",
       featureTitle: title,
       img: image,
-      link,
+      link: AudioDriveLink(link),
       preparedBy: preparerId ? { connect: { id: preparerId } } : undefined,
       presenter: presenterId ? { connect: { id: presenterId } } : undefined,
       type: typeId ? { connect: { id: typeId } } : undefined,
@@ -484,6 +508,18 @@ export const updateFeature = async (
   presenterId: string,
   typeId?: string
 ) => {
+  const AudioDriveLink = (url: string) => {
+    let arr = url.split("/");
+    let updatedLink = [
+      arr[0],
+      "//",
+      arr[2],
+      "/",
+      "uc?export=open&id=",
+      arr[5],
+    ].join("");
+    return updatedLink;
+  };
   const feature = await prisma.episode.update({
     where: { id: featureId },
     data: {
@@ -491,7 +527,7 @@ export const updateFeature = async (
       featured: true,
       featureTitle: title,
       img: image,
-      link,
+      link: AudioDriveLink(link),
       preparedBy: preparerId ? { connect: { id: preparerId } } : undefined,
       presenter: presenterId ? { connect: { id: presenterId } } : undefined,
       type: typeId ? { connect: { id: typeId } } : undefined,
@@ -518,7 +554,7 @@ export const addFeatureType = async (name: string) => {
   revalidatePath("/dashboard/features");
   return type;
 };
-// search
+// search programs and authors
 export const search = async (searchQuery: string) => {
   const programs = await prisma.category.findMany({
     where: { name: { contains: searchQuery, mode: "insensitive" } },
@@ -543,4 +579,47 @@ export const search = async (searchQuery: string) => {
     programs,
     authors,
   };
+};
+
+// find programs
+export const getPrograms = async (searchQuery: string) => {
+  const programs = await prisma.category.findMany({
+    where: {
+      name: {
+        contains: searchQuery,
+        mode: "insensitive",
+      },
+    },
+    select: {
+      name: true,
+      id: true,
+      img: true,
+    },
+    orderBy: {
+      id: "desc",
+    },
+  });
+  return programs;
+};
+// add program to general program
+export const addGeneralProgram = async (programId: string) => {
+  const program = await prisma.category.update({
+    where: { id: programId },
+    data: {
+      generalProgram: true,
+    },
+  });
+  revalidatePath("/dashboard/generalProgram");
+  return program;
+};
+// Add program to series
+export const addSeriesProgram = async (programId: string) => {
+  const program = await prisma.category.update({
+    where: { id: programId },
+    data: {
+      series: true,
+    },
+  });
+  revalidatePath("/dashboard/series");
+  return program;
 };

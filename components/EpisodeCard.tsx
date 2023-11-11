@@ -1,4 +1,6 @@
+import { Image } from "@nextui-org/image";
 import { Episode } from "@prisma/client";
+import Link from "next/link";
 interface Episodee extends Episode {
   category?: {
     name: string;
@@ -8,12 +10,12 @@ interface Episodee extends Episode {
 }
 function EpisodeCard({ ep }: { ep: Episodee }) {
   return (
-    <div className="hover:scale-[1.01] transition w-full aspect-square relative">
-      <a
-        href={`/ep/${ep.id}`}
-        style={{ backgroundImage: `url(${ep.category?.img})` }}
-        className=" block overflow-hidden h-full bg-center bg-no-repeat bg-cover rounded-xl"
-      >
+    <div className="relative aspect-square ">
+      <Link href={{ pathname: `/ep/${ep.id}` }}>
+        <Image
+          src={ep.category?.img}
+          className="aspect-square object-cover brightness-[.6]"
+        />
         {!ep.featured && (
           <span className="absolute z-10 inline-flex items-center px-3 py-1 text-xs font-semibold text-white bg-black/50 rounded-full right-4 top-4">
             الحلقة {ep.title}
@@ -27,16 +29,16 @@ function EpisodeCard({ ep }: { ep: Episodee }) {
             </svg>
           </span>
         )}
-        <div className=" h-full text-white bg-black bg-opacity-40  ">
-          <h5 className="absolute bottom-8 right-4 text-sm  sm:text-xl font-bold text-ellipsis whitespace-nowrap overflow-hidden">
+        <div className="  text-white bg-black bg-opacity-40  ">
+          <h5 className="absolute bottom-8 right-4 text-sm  sm:text-xl font-bold text-ellipsis whitespace-nowrap overflow-hidden z-10">
             {ep?.category?.name}
           </h5>
 
-          <h5 className="absolute bottom-4 right-4 text-sm font-bold text-ellipsis whitespace-nowrap overflow-hidden">
+          <h5 className="absolute bottom-4 right-4 text-sm font-bold text-ellipsis whitespace-nowrap overflow-hidden z-10">
             {ep?.category?.author?.name}
           </h5>
         </div>
-      </a>
+      </Link>
     </div>
   );
 }

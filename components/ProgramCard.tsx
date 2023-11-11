@@ -1,7 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Category } from "@prisma/client";
-import Image from "next/image";
+import { Image } from "@nextui-org/image";
 interface Program extends Category {
   author: { name: string } | null;
   month: { name: string; year: { year: string } } | null;
@@ -9,13 +9,11 @@ interface Program extends Category {
 function ProgramCard({ program }: { program: Program }) {
   return (
     <Link href={{ pathname: `/programs/${program.id}` }}>
-      <div className="block overflow-hidden rounded-2xl flex-1">
+      <div className="block overflow-hidden rounded-2xl flex-1 ">
         <Image
-          width={220}
-          height={220}
           alt={program.name}
           src={program.img}
-          className="object-cover w-full"
+          className="object-cover aspect-square w-full rounded-b-none"
         />
 
         <div className="bg-gray-900 p-4">

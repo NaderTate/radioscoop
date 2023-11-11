@@ -42,13 +42,21 @@ function FeatureForm({
   presenters: { id: string; name: string }[];
   types: { id: string; name: string }[];
 }) {
+  const ReverseAudioDriveLink = (updatedLink: string) => {
+    const id = updatedLink.split("id=")[1];
+    const originalUrl = `https://drive.google.com/file/d/${id}/view`;
+
+    return originalUrl;
+  };
   const [openPresenter, setOpenPresenter] = useState(false);
   const [openPreparer, setOpenPreparer] = useState(false);
   const [openType, setOpenType] = useState(false);
   const [featureTitle, setFeatureTitle] = useState(feature?.featureTitle || "");
   const [preparerId, setPreparerId] = useState(feature?.preparedById || "");
   const [presenterId, setPresenterId] = useState(feature?.presenterId || "");
-  const [link, setLink] = useState(feature?.link || "");
+  const [link, setLink] = useState(
+    feature?.link ? ReverseAudioDriveLink(feature?.link) : ""
+  );
   const [image, setImage] = useState(feature?.img || "");
   const [typeId, setTypeId] = useState(feature?.typeId || "");
   const [uploading, setUploading] = useState(false);

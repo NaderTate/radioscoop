@@ -52,7 +52,7 @@ function EpisodesTable({
                 <Link href={{ pathname: `/ep/${ep.id}` }} target="_blank">
                   <Image
                     alt="logo"
-                    src={ep.category?.img || "/logo.png"}
+                    src={ep?.img || "/logo.png"}
                     width={100}
                     height={100}
                     className="rounded-xl"

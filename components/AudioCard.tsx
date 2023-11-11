@@ -5,7 +5,7 @@ import { Episode } from "@prisma/client";
 
 import "react-h5-audio-player/lib/styles.css";
 interface Episodee extends Episode {
-  category?: { name: string } | null;
+  category?: { name: string; img: string } | null;
   presenter?: { name: string } | null;
 }
 function AudioCard({ audio }: { audio: Episodee }) {
@@ -33,7 +33,9 @@ function AudioCard({ audio }: { audio: Episodee }) {
       )}
       <div
         style={{
-          backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.067), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7), black), url(${audio.img}) `,
+          backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.067), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7), black), url(${
+            audio.featured ? audio.img : audio?.category?.img
+          }) `,
         }}
         className="  ring ring-indigo-50 dark:bg-indigo-300/10 flex mx-auto lg:max-w-screen-md flex-col relative overflow-hidden rounded-2xl bg-cover bg-center bg-no-repeat justify-end sm:h-[600px] sm:w-[600px] md:h-[800px] md:w-[800px] w-[90vw] h-[90vw] "
       >

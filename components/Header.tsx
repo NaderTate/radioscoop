@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
-import Search from "./Search";
+import SearchPopup from "./SearchPopup";
 import ThemeToggle from "./ThemeToggle";
 import Link from "next/link";
 import { BiSolidChevronDown } from "react-icons/bi";
@@ -431,7 +431,7 @@ const Header = ({
                 ))}
                 <Link
                   onClick={closeDetails}
-                  href={{ pathname: "/media-scoop" }}
+                  href={{ pathname: "/series" }}
                   className={navItemStyle}
                 >
                   مسلسلات FM
@@ -445,7 +445,7 @@ const Header = ({
                 </Link>
                 <Link
                   onClick={closeDetails}
-                  href={{ pathname: "/programs/general" }}
+                  href={{ pathname: "/generalProgram" }}
                   className={navItemStyle}
                 >
                   البرنامج العام
@@ -585,7 +585,7 @@ const Header = ({
                 ))}
                 <Link
                   onClick={closeDetails}
-                  href={{ pathname: "/media-scoop" }}
+                  href={{ pathname: "/series" }}
                   className={navItemStyle}
                 >
                   مسلسلات FM
@@ -599,7 +599,7 @@ const Header = ({
                 </Link>
                 <Link
                   onClick={closeDetails}
-                  href={{ pathname: "/ep/general" }}
+                  href={{ pathname: "/generalProgram" }}
                   className={navItemStyle}
                 >
                   البرنامج العام
@@ -719,7 +719,7 @@ const Header = ({
                   </strong>
                 </div>
               )}
-              <Search />
+              <SearchPopup />
             </div>
             {weather && (
               <div className="sm:hidden mt-5">

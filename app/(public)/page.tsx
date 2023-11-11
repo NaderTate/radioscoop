@@ -3,6 +3,10 @@ import EpisodesSection from "@/components/EpisodesSection";
 import Schedule from "@/components/Schedule";
 import SidePanel from "@/components/SidePanel";
 import prisma from "@/lib/prisma";
+export const metadata = {
+  title: "راديو سكووب | اذاعة بطعم السعادة",
+  description: "راديو سكووب | اذاعة بطعم السعادة",
+};
 async function page() {
   const Episodes = await prisma.episode.findMany({
     where: {

@@ -80,6 +80,16 @@ const menuItems: Array<{
     icon: <LuPersonStanding />,
   },
   {
+    title: "البرنامج العام",
+    link: "/dashboard/generalProgram",
+    icon: <TbCategoryFilled />,
+  },
+  {
+    title: "مسلسلات FM",
+    link: "/dashboard/series",
+    icon: <MdOndemandVideo />,
+  },
+  {
     title: "الاعلانات",
     link: "/dashboard/sidebar",
     icon: <HiSpeakerphone />,

@@ -47,17 +47,19 @@ model Author {
 }
 
 model Category {
-  id        String    @id @default(auto()) @map("_id") @db.ObjectId
-  name      String
-  img       String
-  authorr   String?
-  authorId  String?   @db.ObjectId
-  author    Author?   @relation(fields: [authorId], references: [id])
-  month     Month?    @relation(fields: [monthId], references: [id])
-  monthId   String?   @db.ObjectId
-  episodes  Episode[]
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  id             String    @id @default(auto()) @map("_id") @db.ObjectId
+  name           String
+  img            String
+  authorr        String?
+  authorId       String?   @db.ObjectId
+  author         Author?   @relation(fields: [authorId], references: [id])
+  month          Month?    @relation(fields: [monthId], references: [id])
+  monthId        String?   @db.ObjectId
+  episodes       Episode[]
+  generalProgram Boolean?  @default(false)
+  series         Boolean?  @default(false)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
 }
 
 model Post {
