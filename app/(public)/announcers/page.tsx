@@ -1,8 +1,8 @@
 import AnnouncerCard from "@/components/AnnouncerCard";
 import NextUIPagination from "@/components/NextUIPagination";
 import prisma from "@/lib/prisma";
-import { Image } from "@nextui-org/image";
-import Link from "next/link";
+export const revalidate = 60;
+
 export const metadata = {
   title: "المذيعون",
   description: "مذيعون راديو سكووب",

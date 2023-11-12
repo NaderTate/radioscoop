@@ -11,6 +11,8 @@ function ProgramCard({ program }: { program: Program }) {
     <Link href={{ pathname: `/programs/${program.id}` }}>
       <div className="block overflow-hidden rounded-2xl flex-1 ">
         <Image
+          width={200}
+          height={200}
           alt={program.name}
           src={program.img}
           className="object-cover aspect-square w-full rounded-b-none"

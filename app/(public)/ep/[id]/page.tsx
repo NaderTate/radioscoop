@@ -81,16 +81,29 @@ async function page({ params: { id } }: { params: { id: string } }) {
         select: {
           name: true,
           img: true,
+          authorId: true,
         },
       },
       presenter: { select: { name: true } },
+      preparedBy: { select: { name: true } },
     },
   });
 
   const related = await prisma.episode.findMany({
     where: {
       AND: [
-        { categoryId: Episode?.categoryId },
+        {
+          OR: [
+            {
+              categoryId: Episode?.categoryId,
+            },
+            {
+              category: {
+                authorId: Episode?.category?.authorId,
+              },
+            },
+          ],
+        },
         {
           id: {
             not: Episode?.id,

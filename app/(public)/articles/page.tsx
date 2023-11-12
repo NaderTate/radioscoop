@@ -2,6 +2,8 @@ import NextUIPagination from "@/components/NextUIPagination";
 import prisma from "@/lib/prisma";
 import { Image } from "@nextui-org/image";
 import Link from "next/link";
+export const revalidate = 60;
+
 export const metadata = {
   title: "المقالات",
   description: "مقالات راديو سكووب",

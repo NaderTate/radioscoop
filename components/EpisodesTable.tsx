@@ -40,7 +40,6 @@ function EpisodesTable({
             <TableHead className="text-right">البوستر</TableHead>
             <TableHead className="text-right">الحلقة</TableHead>
             <TableHead className="text-right">البرنامج</TableHead>
-            <TableHead className="text-right">catoetoryy</TableHead>
             <TableHead className="text-right">تقديم</TableHead>
             <TableHead className="text-right">التاريخ</TableHead>
           </TableRow>
@@ -52,7 +51,7 @@ function EpisodesTable({
                 <Link href={{ pathname: `/ep/${ep.id}` }} target="_blank">
                   <Image
                     alt="logo"
-                    src={ep?.img || "/logo.png"}
+                    src={ep?.category?.img || "/logo.png"}
                     width={100}
                     height={100}
                     className="rounded-xl"
@@ -61,7 +60,6 @@ function EpisodesTable({
               </TableCell>
               <TableCell>{ep.title}</TableCell>
               <TableCell>{ep?.category?.name}</TableCell>
-              <TableCell>{ep?.categoryy}</TableCell>
               <TableCell>{ep?.category?.author?.name}</TableCell>
               <TableCell>
                 {new Date(ep.createdAt).toLocaleDateString("ar-EG", {

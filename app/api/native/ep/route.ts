@@ -7,12 +7,9 @@ export async function GET(request: NextRequest) {
   const itemsToShow = 20;
   const episodes = await prisma.episode.findMany({
     where: {
-      category: {
-        name: {
-          contains: search,
-          mode: "insensitive",
-        },
-      },
+      category: search
+        ? { name: { contains: search, mode: "insensitive" } }
+        : undefined,
     },
     select: {
       id: true,
@@ -25,6 +22,7 @@ export async function GET(request: NextRequest) {
       category: {
         select: {
           name: true,
+          img: true,
           author: {
             select: {
               name: true,
@@ -63,6 +61,7 @@ export async function GET(request: NextRequest) {
     return {
       ...episode,
       _id: episode?.id,
+      img: episode.featured ? episode.img : episode?.category?.img,
       category: episode.featured
         ? episode.featureTitle
         : episode?.category?.name,

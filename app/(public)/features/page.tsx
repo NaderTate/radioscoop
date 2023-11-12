@@ -2,6 +2,8 @@ import NextUIPagination from "@/components/NextUIPagination";
 import prisma from "@/lib/prisma";
 import { Metadata } from "next";
 import Link from "next/link";
+export const revalidate = 60;
+
 export const metadata: Metadata = {
   title: "الفيتشرات",
   description: "فيتشرات راديو سكووب",
@@ -52,10 +54,10 @@ async function page({
                 alt=""
               />
             </Link>
-            <div className="absolute bottom-12 right-1 font-semibold tracking-wide">
+            <div className="absolute bottom-12 right-1 font-semibold tracking-wide text-white">
               اعداد {feature.preparedBy?.name}
             </div>
-            <div className="absolute bottom-7 right-1 font-semibold tracking-wide">
+            <div className="absolute bottom-7 right-1 font-semibold tracking-wide text-white">
               تقديم {feature.presenter?.name}
             </div>
             <p className="text-center">{feature.featureTitle}</p>

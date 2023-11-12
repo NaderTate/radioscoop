@@ -13,7 +13,7 @@ import { BiSearch } from "react-icons/bi";
 import { debounce } from "lodash";
 import { ChangeEvent, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Input } from "@/components/ui/input";
+import { Input } from "@nextui-org/input";
 
 function SearchPopup() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -63,22 +63,32 @@ function SearchPopup() {
       >
         <BiSearch size={20} />
       </div>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange} className="w-fuldsfl">
-        <ModalContent className="p-2 max-h-[95vh] ">
+      <Modal
+        placement="center"
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        scrollBehavior={"inside"}
+      >
+        <ModalContent className="p-2 max-h-[95vh] overflow-auto">
           <ModalBody>
             <div className="relative mt-5" onKeyDown={handleKeyDown}>
-              <Input onChange={handleInputChange} placeholder="ابحث..." />
-              <div
-                className="absolute left-2 top-0 bottom-0 flex items-center"
-                onClick={() => {
-                  if (searchTerms.length < 2) return;
-                  onOpenChange();
-                  router.push(`/search?search=${searchTerms}`);
-                  resetSearchResults();
-                }}
-              >
-                <BiSearch className="cursor-pointer" size={22} />
-              </div>
+              <Input
+                onChange={handleInputChange}
+                label="ابحث..."
+                autoFocus
+                endContent={
+                  <BiSearch
+                    className="cursor-pointer"
+                    size={22}
+                    onClick={() => {
+                      if (searchTerms.length < 2) return;
+                      onOpenChange();
+                      router.push(`/search?search=${searchTerms}`);
+                      resetSearchResults();
+                    }}
+                  />
+                }
+              />
             </div>
             {loading && <Spinner />}
             {searchResults.programs.length > 0 && (

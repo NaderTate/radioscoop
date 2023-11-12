@@ -1,6 +1,8 @@
 import ProgramCard from "@/components/ProgramCard";
 import prisma from "@/lib/prisma";
 import NextUIPagination from "@/components/NextUIPagination";
+export const revalidate = 60;
+
 export const metadata = {
   title: "مسلسلات FM ",
 };

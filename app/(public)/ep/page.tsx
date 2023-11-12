@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: "حلفات راديو سكووب",
   description: "راديو سكووب",
 };
+export const revalidate = 60;
 async function page({ searchParams }: { searchParams: { page: string } }) {
   const { page } = searchParams;
   const sk = Number(page) || 1;

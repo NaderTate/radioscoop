@@ -7,6 +7,7 @@ import "react-h5-audio-player/lib/styles.css";
 interface Episodee extends Episode {
   category?: { name: string; img: string } | null;
   presenter?: { name: string } | null;
+  preparedBy?: { name: string } | null;
 }
 function AudioCard({ audio }: { audio: Episodee }) {
   const [duration, setDuration] = React.useState(0);
@@ -28,6 +29,7 @@ function AudioCard({ audio }: { audio: Episodee }) {
         >
           <div className="">{audio.featureTitle}</div>
           <div>{audio.category?.name}</div>
+          <div>اعداد {audio?.preparedBy?.name}</div>
           <div>تقديم {audio?.presenter?.name}</div>
         </div>
       )}
