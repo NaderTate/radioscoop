@@ -4,6 +4,8 @@ import Link from "next/link";
 import SidePanel from "@/components/SidePanel";
 import prisma from "@/lib/prisma";
 import ShareIcons from "@/components/ShareIcons";
+export const revalidate = 60;
+
 export async function generateStaticParams() {
   const products = await prisma.episode.findMany();
   return products.map((episode) => ({ id: episode.id }));

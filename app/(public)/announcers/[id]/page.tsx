@@ -1,6 +1,8 @@
 import prisma from "@/lib/prisma";
 import ImagesSection from "../ImagesSection";
 import Tabs from "../Tabs";
+export const revalidate = 60;
+
 export async function generateStaticParams() {
   const announcers = await prisma.author.findMany();
   return announcers.map((announcer) => ({ id: announcer.id }));
