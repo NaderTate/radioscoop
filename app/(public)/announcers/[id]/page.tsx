@@ -1,6 +1,10 @@
 import prisma from "@/lib/prisma";
 import ImagesSection from "../ImagesSection";
 import Tabs from "../Tabs";
+export async function generateStaticParams() {
+  const announcers = await prisma.author.findMany();
+  return announcers.map((announcer) => ({ id: announcer.id }));
+}
 export async function generateMetadata({
   params: { id },
 }: {
@@ -25,7 +29,9 @@ export async function generateMetadata({
         description: "راديو سكووب",
         images: [
           {
-            url: announcer?.img,
+            url:
+              announcer?.img ||
+              "https://res.cloudinary.com/ddcjbeysn/image/upload/v1699813302/person-placeholder-image_hrwla9.png",
             width: 800,
             height: 600,
           },
@@ -33,10 +39,11 @@ export async function generateMetadata({
       },
       openGraph: {
         title: announcer?.name,
-
         images: [
           {
-            url: announcer?.img,
+            url:
+              announcer?.img ||
+              "https://res.cloudinary.com/ddcjbeysn/image/upload/v1699813302/person-placeholder-image_hrwla9.png",
             width: 800,
             height: 600,
           },
@@ -126,7 +133,7 @@ async function Announcer({ params: { id } }: { params: { id: string } }) {
       <ImagesSection
         image={
           announcer?.img ||
-          "https://res.cloudinary.com/ddcjbeysn/image/upload/v1699437344/person-gray-photo-placeholder-woman-t-shirt-white-background-131683043_rmfhru.jpg"
+          "https://res.cloudinary.com/ddcjbeysn/image/upload/v1699813302/person-placeholder-image_hrwla9.png"
         }
       />
       <h1 className="text-center text-xl mt-5 font-semibold">

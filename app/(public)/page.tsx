@@ -43,6 +43,28 @@ async function page() {
       },
     },
   });
+  const series = await prisma.episode.findMany({
+    where: {
+      categoryId: "655080f6b67e7e9d49578ab8",
+    },
+    take: 20,
+    orderBy: {
+      id: "desc",
+    },
+    include: {
+      category: {
+        select: {
+          name: true,
+          img: true,
+          author: {
+            select: {
+              name: true,
+            },
+          },
+        },
+      },
+    },
+  });
   const schedule = await prisma.schedule.findFirst({
     select: {
       Days: true,
@@ -75,7 +97,16 @@ async function page() {
         </div>
 
         <div className="lg:col-span-4 lg:border-r border-gray-800 dark:border-gray-300 ">
-          <EpisodesSection title="أحدث الحلقات" data={Episodes} seeAll="/ep" />
+          <EpisodesSection
+            title=" مسلسل أغرب القضايا"
+            data={series}
+            seeAll="/ep"
+          />
+          <EpisodesSection
+            title="أحدث الحلقات"
+            data={Episodes}
+            seeAll="/programs/655080f6b67e7e9d49578ab8"
+          />
           <Schedule Days={schedule?.Days} title={schedule?.title || ""} />
         </div>
         <div className="p-2 lg:hidden">

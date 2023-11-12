@@ -61,6 +61,7 @@ export async function GET(request: NextRequest) {
     return {
       ...episode,
       _id: episode?.id,
+      title: episode.featured ? 1 : episode?.title,
       img: episode.featured ? episode.img : episode?.category?.img,
       category: episode.featured
         ? episode.featureTitle

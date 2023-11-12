@@ -5,8 +5,8 @@ import Schedule from "@/components/Schedule";
 import { Image } from "@nextui-org/image";
 export const revalidate = 60;
 export async function generateStaticParams() {
-  const products = await prisma.post.findMany();
-  return products.map((post) => ({ id: post.id }));
+  const posts = await prisma.post.findMany();
+  return posts.map((post) => ({ id: post.id }));
 }
 
 export async function generateMetadata({
