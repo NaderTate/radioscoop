@@ -100,13 +100,9 @@ async function page() {
           <EpisodesSection
             title=" مسلسل أغرب القضايا"
             data={series}
-            seeAll="/ep"
-          />
-          <EpisodesSection
-            title="أحدث الحلقات"
-            data={Episodes}
             seeAll="/programs/655080f6b67e7e9d49578ab8"
           />
+          <EpisodesSection title="أحدث الحلقات" data={Episodes} seeAll="/ep" />
           <Schedule Days={schedule?.Days} title={schedule?.title || ""} />
         </div>
         <div className="p-2 lg:hidden">

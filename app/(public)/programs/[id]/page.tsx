@@ -104,16 +104,22 @@ async function Program({
           <h2 className="text-4xl font-bold tracking-tight sm:text-5xl mb-4">
             برنامج {program?.name}
           </h2>
-          تقديم :{" "}
-          <Link
-            href={{ pathname: `/announcers/${program?.author?.id}` }}
-            className="text-center my-4 underline"
-          >
-            {program?.author?.name}
-          </Link>
-          <p className="text-sm my-4">
-            {program?.month?.year.year} / {program?.month?.name}
-          </p>
+          {program?.author?.name && (
+            <div>
+              تقديم :{" "}
+              <Link
+                href={{ pathname: `/announcers/${program?.author?.id}` }}
+                className="text-center my-4 underline"
+              >
+                {program?.author?.name}
+              </Link>
+            </div>
+          )}
+          {program?.month?.name && program.month.year.year && (
+            <p className="text-sm my-4">
+              {program?.month?.year.year} / {program?.month?.name}
+            </p>
+          )}
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
           {episodes?.map((episode) => (

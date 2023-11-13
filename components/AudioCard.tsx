@@ -39,7 +39,7 @@ function AudioCard({ audio }: { audio: Episodee }) {
             audio.featured ? audio.img : audio?.category?.img
           }) `,
         }}
-        className="  ring ring-indigo-50 dark:bg-indigo-300/10 flex mx-auto lg:max-w-screen-md flex-col relative overflow-hidden rounded-2xl bg-cover bg-center bg-no-repeat justify-end sm:h-[600px] sm:w-[600px] md:h-[800px] md:w-[800px] w-[90vw] h-[90vw] "
+        className="ring ring-indigo-50 dark:bg-indigo-300/10 flex  lg:max-w-screen-md flex-col relative overflow-hidden rounded-2xl bg-cover bg-center bg-no-repeat justify-end aspect-square mx-5 sm:mx-10 xl:mx-auto"
       >
         <article className="p-2 bg-white/50 sm:p-8 rounded-xl backdrop-blur ring ring-indigo-50 dark:bg-indigo-300/20 h-32 sm:h-48">
           <div className="flex items-start">

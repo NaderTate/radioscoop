@@ -173,7 +173,9 @@ async function page({ params: { id } }: { params: { id: string } }) {
                 type="button"
                 className="flex items-center h-10 pl-8 pr-4 text-xs font-medium transition-colors bg-white dark:bg-gray-800 dark:hover:text-white hover:text-gray-900"
               >
-                الحلقة {Episode?.title} من {Episode?.category?.name}
+                {Episode?.featured
+                  ? Episode.featureTitle
+                  : `الحلقة ${Episode?.title} من ${Episode?.category?.name}`}
               </button>
             </li>
             <li className="relative flex items-center">
@@ -190,10 +192,8 @@ async function page({ params: { id } }: { params: { id: string } }) {
       </div>
       <section className="flex flex-col lg:flex-row-reverse justify-between">
         <div className="flex-1 flex justify-center">
-          <div className="mx-auto md:mx-7 flex-1 max-w-screen-2xl px-4 py-6 sm:px-6 lg:px-8">
-            <div className="px-5" dir="ltr">
-              {Episode && <AudioCard audio={Episode} />}
-            </div>
+          <div className="mx-auto md:mx-7 flex-1 max-w-screen-2xl ">
+            <div dir="ltr">{Episode && <AudioCard audio={Episode} />}</div>
             <div className="flex justify-center flex-col">
               <h5 className="text-2xl font-bold text-center text-gray-700 dark:text-gray-200">
                 مشاركة الحلقة
