@@ -143,7 +143,7 @@ function Tabs({
                           alt=""
                         />
                         <div className="absolute bottom-24 right-1 font-semibold tracking-wide">
-                          اعداد {announcerData.name}
+                          اعداد {feature?.preparedBy?.name}
                         </div>
                         <div className="absolute bottom-16 right-1 font-semibold tracking-wide">
                           تقديم {announcerData.name}
