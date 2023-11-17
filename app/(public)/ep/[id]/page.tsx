@@ -4,6 +4,7 @@ import Link from "next/link";
 import SidePanel from "@/components/SidePanel";
 import prisma from "@/lib/prisma";
 import ShareIcons from "@/components/ShareIcons";
+import { AiOutlineHome } from "react-icons/ai";
 export const revalidate = 60;
 
 export async function generateStaticParams() {
@@ -46,7 +47,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
         description:
           " 2022-10-1 راديو سكوب : اول راديو في مصر بنقل المتميزين من متتدربيه للاذاعات الكبرى اف ام  في مصر يمكن التواصل من خلال واتساب فيسبوك تويتر او انستاجرام او من خلال رقم الهاتف الجوال FM الكبرى",
         images: [
-          episode.featured
+          episode.featured || episode?.img
             ? episode.img
             : episode.category?.img || "/favicon.png",
         ],
@@ -57,9 +58,10 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
           : `الحلقة ${episode.title} من برنامج ${episode?.category?.name}`,
         images: [
           {
-            url: episode.featured
-              ? episode.img
-              : episode.category?.img || "/favicon.png",
+            url:
+              episode.featured || episode?.img
+                ? episode.img
+                : episode.category?.img || "/favicon.png",
             width: 800,
             height: 800,
           },
@@ -148,20 +150,7 @@ async function page({ params: { id } }: { params: { id: string } }) {
                 href="/"
                 className="flex items-center h-10 px-4 transition-colors bg-gray-100 dark:bg-gray-900 dark:hover:text-white hover:text-gray-900"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-4 h-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                  />
-                </svg>
+                <AiOutlineHome />
                 <span className="ml-1.5 font-medium text-xs hidden sm:inline">
                   الصفحة الرئيسية
                 </span>

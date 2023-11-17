@@ -36,7 +36,7 @@ function AudioCard({ audio }: { audio: Episodee }) {
       <div
         style={{
           backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.067), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7), black), url(${
-            audio.featured ? audio.img : audio?.category?.img
+            audio.featured || audio.img ? audio.img : audio?.category?.img
           }) `,
         }}
         className="ring ring-indigo-50 dark:bg-indigo-300/10 flex  lg:max-w-screen-md flex-col relative overflow-hidden rounded-2xl bg-cover bg-center bg-no-repeat justify-end aspect-square mx-5 sm:mx-10 xl:mx-auto"

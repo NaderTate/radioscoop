@@ -50,7 +50,7 @@ function Day({
                   <Image
                     width={200}
                     height={200}
-                    className="w-full rounded-md hover:scale-[1.01]"
+                    className="w-full rounded-md hover:scale-[1.01] transition-transform"
                     src={Img.link}
                     alt=""
                     sizes=" (min-width: 768px) 60vw, 25vw"

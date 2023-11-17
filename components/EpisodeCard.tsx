@@ -13,7 +13,7 @@ function EpisodeCard({ ep }: { ep: Episodee }) {
     <div className="relative aspect-square ">
       <Link href={{ pathname: `/ep/${ep.id}` }}>
         <Image
-          src={ep.category?.img}
+          src={ep.img ? ep.img : ep?.category?.img}
           className="aspect-square object-cover brightness-[.6]"
         />
         {!ep.featured && (
