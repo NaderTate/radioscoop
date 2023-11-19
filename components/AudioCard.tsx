@@ -71,7 +71,7 @@ function AudioCard({ audio }: { audio: Episodee }) {
                     </strong>
                   )}
                 </div>
-                <div className="flex items-center text-gray-500 dark:text-indigo-50">
+                <div className="flex items-center 0">
                   <svg
                     className="w-4 h-4"
                     fill="none"
@@ -86,7 +86,7 @@ function AudioCard({ audio }: { audio: Episodee }) {
                       d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                     />
                   </svg>
-                  <p className="ml-1 text-xs font-medium dark:text-indigo-50">
+                  <p className="ml-1 text-xs font-medium ">
                     {timestamps(duration)} minutes
                   </p>
                 </div>

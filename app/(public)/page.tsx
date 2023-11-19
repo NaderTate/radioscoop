@@ -82,7 +82,7 @@ async function page() {
       <Link href="/articles/655083ccb67e7e9d49578abb">
         <>
           <img
-            src="https://telegra.ph/file/0c1a8d236e05ade092b4c.jpg"
+            src="https://res.cloudinary.com/ddcjbeysn/image/upload/v1700413414/programs/402228471_313029954876007_2413582928079890119_n_h0whdt.jpg"
             alt=""
             className="lg:hidden w-3/4 m-auto rounded-md my-10"
           />

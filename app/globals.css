@@ -97,16 +97,16 @@
 .rhap_main-controls-button,
 .rhap_repeat-button,
 .rhap_volume-button {
-  @apply dark:text-indigo-400 !important;
+  @apply text-indigo-400 !important;
 }
 
 .rhap_progress-indicator,
 .rhap_volume-indicator {
-  @apply dark:bg-indigo-400 !important;
+  @apply bg-indigo-400 !important;
 }
 
 .rhap_time {
-  @apply dark:text-indigo-50 !important;
+  @apply text-indigo-50 !important;
 }
 .navItem {
   display: inline-block;
