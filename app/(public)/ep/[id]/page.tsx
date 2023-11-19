@@ -25,6 +25,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
           select: {
             name: true,
             img: true,
+            series: true,
           },
         },
       },
@@ -34,7 +35,9 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
     return {
       title: episode.featured
         ? episode.featureTitle
-        : `الحلقة ${episode.title} من برنامج ${episode?.category?.name}`,
+        : `الحلقة ${episode.title} من ${
+            episode.category?.series ? "مسلسل" : "برنامج"
+          } ${episode?.category?.name}`,
       description:
         " 2022-10-1 راديو سكوب : اول راديو في مصر بنقل المتميزين من متتدربيه للاذاعات الكبرى اف ام  في مصر يمكن التواصل من خلال واتساب فيسبوك تويتر او انستاجرام او من خلال رقم الهاتف الجوال FM الكبرى",
       alternates: {
@@ -55,7 +58,9 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
       openGraph: {
         title: episode.featured
           ? episode.featureTitle
-          : `الحلقة ${episode.title} من برنامج ${episode?.category?.name}`,
+          : `الحلقة ${episode.title} من ${
+              episode.category?.series ? "مسلسل" : "برنامج"
+            } ${episode?.category?.name}`,
         images: [
           {
             url:
