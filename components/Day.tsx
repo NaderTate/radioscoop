@@ -4,7 +4,7 @@ import { Navigation, FreeMode } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/free-mode";
-import Image from "next/image";
+import { Image } from "@nextui-org/image";
 function Day({
   Day,
   Images,
