@@ -1,10 +1,10 @@
 "use client";
 import Dropzone from "@/components/DropZone";
 import { RxCross2 } from "react-icons/rx";
-import Image from "next/image";
 import { ChangeEvent, useEffect, useState } from "react";
 import { ReactSortable } from "react-sortablejs";
 import { Input } from "@/components/ui/input";
+import { Image } from "@nextui-org/image";
 function Card({ src, deleteImage }: { src: string; deleteImage: () => void }) {
   return (
     <div className="relative ">

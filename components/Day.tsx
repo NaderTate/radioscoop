@@ -53,7 +53,6 @@ function Day({
                     className="w-full rounded-md hover:scale-[1.01] transition-transform"
                     src={Img.link}
                     alt=""
-                    sizes=" (min-width: 768px) 60vw, 25vw"
                   />
                 </SwiperSlide>
               );
