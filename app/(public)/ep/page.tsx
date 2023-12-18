@@ -1,22 +1,32 @@
 import prisma from "@/lib/prisma";
+
+import { Metadata } from "next";
+
 import EpisodeCard from "@/components/EpisodeCard";
 import NextUIPagination from "@/components/NextUIPagination";
-import { Metadata } from "next";
+
 export const metadata: Metadata = {
   title: "حلفات راديو سكووب",
   description: "راديو سكووب",
 };
+
 export const revalidate = 60;
-async function page({ searchParams }: { searchParams: { page: string } }) {
+
+type Props = {
+  searchParams: { page: string };
+};
+
+async function page({ searchParams }: Props) {
   const { page } = searchParams;
-  const sk = Number(page) || 1;
+  const pageNumber = Number(page) || 1;
   const itemsToShow = 30;
+
   const episodes = await prisma.episode.findMany({
     where: {
       featured: false,
     },
     take: itemsToShow,
-    skip: (sk - 1) * itemsToShow,
+    skip: (pageNumber - 1) * itemsToShow,
     orderBy: {
       id: "desc",
     },
@@ -34,6 +44,7 @@ async function page({ searchParams }: { searchParams: { page: string } }) {
       },
     },
   });
+
   const count = await prisma.episode.count({
     where: {
       featured: false,
@@ -41,7 +52,7 @@ async function page({ searchParams }: { searchParams: { page: string } }) {
   });
 
   return (
-    <div>
+    <>
       <div className="px-4 py-16 mx-auto sm:px-6 lg:px-8 sm:py-24">
         <div className="max-w-xl mx-auto text-center ">
           <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
@@ -59,7 +70,7 @@ async function page({ searchParams }: { searchParams: { page: string } }) {
         </div>
         <NextUIPagination total={Math.ceil(count / itemsToShow)} />
       </div>
-    </div>
+    </>
   );
 }
 

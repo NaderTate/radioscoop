@@ -1,19 +1,26 @@
 "use client";
-import Link from "next/link";
-import { Swiper, SwiperSlide } from "swiper/react";
-import Schedule from "./Schedule";
-import { Navigation } from "swiper/modules";
-import "swiper/css/navigation";
-import "swiper/css";
 
-const SidePanel = ({ data }: { data: Post[] | any }) => {
+import Link from "next/link";
+import { Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import Schedule from "./Schedule";
+
+import "swiper/css";
+import "swiper/css/navigation";
+
+type Props = {
+  data: Post[] | any;
+};
+
+const SidePanel = ({ data }: Props) => {
   return (
     <div className="xl:max-w-xs mb-4 m-auto ">
       <div className="hidden lg:flex flex-col gap-3 ">
         {data.map((item: Post, index: number) => (
           <div
             key={index + item.title}
-            className="rounded-lg   sm:h-auto  flex flex-col justify-between  shadow-xl bg-slate-700 hover:scale-[1.01] cursor-pointer w-full"
+            className="rounded-lg sm:h-auto flex flex-col justify-between shadow-xl bg-slate-700 hover:scale-[1.01] cursor-pointer w-full"
           >
             <Link href={{ pathname: `/articles/${item.id}` }}>
               <div className="w-full rounded-lg p-3 shadow-sm ">
@@ -24,14 +31,13 @@ const SidePanel = ({ data }: { data: Post[] | any }) => {
                 />
               </div>
             </Link>
-
-            <h1 className="flex flex-col justify-between  p-1 text-center rounded-lg ">
-              <p className="mt-4 text-sm text-gray-100">{item.title}</p>
-            </h1>
+            <h4 className="flex flex-col justify-between p-1 text-center rounded-lg mt-4 text-sm text-gray-100">
+              {item.title}
+            </h4>
           </div>
         ))}
       </div>
-      <div className="lg:hidden ">
+      <div className="lg:hidden">
         <Swiper
           dir="ltr"
           modules={[Navigation]}
@@ -55,7 +61,7 @@ const SidePanel = ({ data }: { data: Post[] | any }) => {
                     backgroundPosition: "center",
                     margin: "auto",
                   }}
-                  className="rounded-lg h-80  sm:m-2 w-72 justify-end flex flex-col p-2 shadow-xl  hover:scale-[1.01] cursor-pointer"
+                  className="rounded-lg h-80 sm:m-2 w-72 justify-end flex flex-col p-2 shadow-xl hover:scale-[1.01] cursor-pointer"
                 >
                   {item.title.length > 1 && (
                     <blockquote className="p-1 text-center rounded-lg bg-slate-700/50 backdrop-blur-sm ">

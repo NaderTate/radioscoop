@@ -4,49 +4,30 @@ import {
   ModalContent,
   ModalBody,
   useDisclosure,
-} from "@nextui-org/modal";
-import { Image } from "@nextui-org/image";
-import { search } from "@/lib/_actions";
-import { Spinner } from "@nextui-org/spinner";
+  Image as NUIImage,
+  Spinner,
+  Input,
+} from "@nextui-org/react";
 import Link from "next/link";
-import { BiSearch } from "react-icons/bi";
-import { debounce } from "lodash";
-import { ChangeEvent, useState } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Input } from "@nextui-org/input";
 
-function SearchPopup() {
+import { useFetchSearchResults } from "./_hooks/useFetchSearchResults";
+
+import { BiSearch } from "react-icons/bi";
+
+function SearchModal() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [loading, setLoading] = useState(false);
-  const [searchTerms, setSearchTerms] = useState<string>("");
-  const [searchResults, setSearchResults] = useState<{
-    programs: {
-      name: string;
-      id: string;
-      img: string;
-    }[];
-    authors: { name: string; img: string | null; id: string }[];
-  }>({ programs: [], authors: [] });
   const router = useRouter();
-  const resetSearchResults = () => {
-    setSearchResults({ programs: [], authors: [] });
-  };
-  const debouncedSearch = debounce(async (searchQuery) => {
-    // Make your Prisma query here and update the UI
-    if (searchQuery.length < 2) return;
-    setLoading(true);
-    const data = await search(searchQuery);
-    // Update the UI with the search results
-    setSearchResults(data);
-    setLoading(false);
-  }, 500);
-  function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
-    const searchQuery = event.target.value;
-    if (searchQuery.length < 2) resetSearchResults();
-    setSearchTerms(searchQuery);
-    resetSearchResults();
-    debouncedSearch(searchQuery);
-  }
+
+  const {
+    searchResults,
+    searchTerms,
+    handleInputChange,
+    loading,
+    resetSearchResults,
+  } = useFetchSearchResults();
+
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       if (searchTerms.length < 2) return;
@@ -56,7 +37,7 @@ function SearchPopup() {
     }
   };
   return (
-    <div>
+    <>
       <div
         className=" text-white bg-[#62657d94] hover:bg-[#757373b7] rounded-full hover:text-slate-100  shadow-sm block px-2 py-1.5 cursor-pointer"
         onClick={onOpen}
@@ -71,29 +52,28 @@ function SearchPopup() {
       >
         <ModalContent className="p-2 max-h-[95vh] overflow-auto">
           <ModalBody>
-            <div className="relative mt-5" onKeyDown={handleKeyDown}>
-              <Input
-                onChange={handleInputChange}
-                label="ابحث..."
-                autoFocus
-                endContent={
-                  <BiSearch
-                    className="cursor-pointer"
-                    size={22}
-                    onClick={() => {
-                      if (searchTerms.length < 2) return;
-                      onOpenChange();
-                      router.push(`/search?search=${searchTerms}`);
-                      resetSearchResults();
-                    }}
-                  />
-                }
-              />
-            </div>
+            <Input
+              onChange={handleInputChange}
+              onKeyDown={handleKeyDown}
+              label="ابحث..."
+              autoFocus
+              endContent={
+                <BiSearch
+                  className="cursor-pointer m-auto"
+                  size={22}
+                  onClick={() => {
+                    if (searchTerms.length < 2) return;
+                    onOpenChange();
+                    router.push(`/search?search=${searchTerms}`);
+                    resetSearchResults();
+                  }}
+                />
+              }
+            />
             {loading && <Spinner />}
             {searchResults.programs.length > 0 && (
-              <div>
-                <h1 className="text-center mb-3">البرامج</h1>
+              <>
+                <h5 className="text-center mb-3">البرامج</h5>
                 <div className="flex flex-wrap justify-center gap-5 ">
                   {searchResults.programs.map((program) => {
                     return (
@@ -105,23 +85,24 @@ function SearchPopup() {
                           resetSearchResults();
                         }}
                       >
-                        <Image
+                        <NUIImage
+                          as={Image}
                           width={135}
                           height={135}
                           className="object-cover rounded-md aspect-square "
                           src={program?.img}
-                          alt=""
+                          alt={program.name}
                         />
-                        <h1 className="text-center">{program.name}</h1>
+                        <h6 className="text-center">{program.name}</h6>
                       </Link>
                     );
                   })}
                 </div>
-              </div>
+              </>
             )}
             {searchResults.authors.length > 0 && (
-              <div>
-                <h1 className="text-center mb-3">المذيعين</h1>
+              <>
+                <h5 className="text-center mb-3">المذيعين</h5>
                 <div className="flex flex-wrap justify-center gap-5">
                   {searchResults.authors.map((author) => {
                     return (
@@ -133,7 +114,8 @@ function SearchPopup() {
                           resetSearchResults();
                         }}
                       >
-                        <Image
+                        <NUIImage
+                          as={Image}
                           width={135}
                           height={135}
                           className="object-contain rounded-md"
@@ -144,18 +126,18 @@ function SearchPopup() {
                           }
                           alt=""
                         />
-                        <h1 className="text-center">{author.name}</h1>
+                        <h6 className="text-center">{author.name}</h6>
                       </Link>
                     );
                   })}
                 </div>
-              </div>
+              </>
             )}
           </ModalBody>
         </ModalContent>
       </Modal>
-    </div>
+    </>
   );
 }
 
-export default SearchPopup;
+export default SearchModal;

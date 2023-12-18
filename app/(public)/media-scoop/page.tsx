@@ -1,31 +1,34 @@
-import NextUIPagination from "@/components/NextUIPagination";
 import prisma from "@/lib/prisma";
 
 import { Image } from "@nextui-org/image";
+
+import NextUIPagination from "@/components/NextUIPagination";
+
 export const metadata = {
   title: "ميديا سكووب",
 };
-async function page({
-  searchParams,
-}: {
-  searchParams: {
-    page: string;
-  };
-}) {
+
+type Props = {
+  searchParams: { page: string };
+};
+
+async function page({ searchParams }: Props) {
   const { page } = searchParams;
-  const sk = Number(page) || 1;
+  const pageNumber = Number(page) || 1;
   const itemsToShow = 30;
+
   const videos = await prisma.video.findMany({
     take: itemsToShow,
-    skip: (sk - 1) * itemsToShow,
+    skip: (pageNumber - 1) * itemsToShow,
     orderBy: {
       id: "desc",
     },
   });
+
   const count = await prisma.video.count();
 
   return (
-    <div>
+    <>
       <div className="max-w-xl mx-auto text-center mt-10">
         <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
           راديو سكووب
@@ -54,7 +57,7 @@ async function page({
         ))}
       </div>
       <NextUIPagination total={Math.ceil(count / itemsToShow)} />
-    </div>
+    </>
   );
 }
 

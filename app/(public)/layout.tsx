@@ -1,5 +1,6 @@
-import Header from "@/components/Header";
 import prisma from "@/lib/prisma";
+
+import Header from "@/components/public/Header";
 import Footer from "@/components/Footer";
 
 export default async function RootLayout({
@@ -81,7 +82,7 @@ export default async function RootLayout({
   });
 
   return (
-    <div>
+    <>
       <Header
         featureTypes={featureTypes}
         seasons={seasons}
@@ -89,6 +90,6 @@ export default async function RootLayout({
       />
       {children}
       <Footer />
-    </div>
+    </>
   );
 }

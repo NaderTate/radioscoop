@@ -1,20 +1,24 @@
+import prisma from "@/lib/prisma";
+
 import AnnouncerCard from "@/components/AnnouncerCard";
 import NextUIPagination from "@/components/NextUIPagination";
-import prisma from "@/lib/prisma";
+
 export const revalidate = 60;
 
 export const metadata = {
   title: "المذيعون",
   description: "مذيعون راديو سكووب",
 };
-async function Announcers({
-  searchParams,
-}: {
+
+type Props = {
   searchParams: { page: string; search: string };
-}) {
+};
+
+async function Announcers({ searchParams }: Props) {
   const { page, search } = searchParams;
   const itemsToShow = 30;
-  const sk = Number(page) || 1;
+  const pageNumber = Number(page) || 1;
+
   const announcers = await prisma.author.findMany({
     where: {
       OR: [
@@ -35,11 +39,12 @@ async function Announcers({
       ],
     },
     take: itemsToShow,
-    skip: (sk - 1) * itemsToShow,
+    skip: (pageNumber - 1) * itemsToShow,
     orderBy: {
       id: "desc",
     },
   });
+
   const count = await prisma.author.count({
     where: {
       OR: [
@@ -60,6 +65,7 @@ async function Announcers({
       ],
     },
   });
+
   return (
     <div className="p-5">
       <div className="flex flex-wrap gap-5 justify-center ">

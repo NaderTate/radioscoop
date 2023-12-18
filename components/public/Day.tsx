@@ -1,19 +1,21 @@
-import React from "react";
+import Image from "next/image";
+import { Image as NUIImage } from "@nextui-org/image";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, FreeMode } from "swiper/modules";
+
 import "swiper/css";
-import "swiper/css/navigation";
 import "swiper/css/free-mode";
-import { Image } from "@nextui-org/image";
-function Day({
-  Day,
-  Images,
-}: {
+import "swiper/css/navigation";
+
+type Props = {
   Day: string;
   Images: { id: string; link: string }[];
-}) {
+};
+
+function Day({ Day, Images }: Props) {
   return (
-    <div className="">
+    <div>
       <div className="flex justify-center">
         <button className="text-white text-center border border-gray-300/30 rounded-md cursor-default border-b-0 px-5 rounded-b-none ">
           {Day}
@@ -47,7 +49,8 @@ function Day({
             Images.map((Img, i) => {
               return (
                 <SwiperSlide className="w-full" key={i}>
-                  <Image
+                  <NUIImage
+                    as={Image}
                     width={200}
                     height={200}
                     className="w-full rounded-md hover:scale-[1.01] transition-transform"

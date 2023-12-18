@@ -1,32 +1,33 @@
-import NextUIPagination from "@/components/NextUIPagination";
 import prisma from "@/lib/prisma";
-import { Image } from "@nextui-org/image";
+
 import Link from "next/link";
+import { Image } from "@nextui-org/image";
+
+import NextUIPagination from "@/components/NextUIPagination";
+
 export const revalidate = 60;
 
 export const metadata = {
   title: "المقالات",
   description: "مقالات راديو سكووب",
 };
-async function page({
-  searchParams,
-}: {
-  searchParams: {
-    page: string;
-    type?: string;
-    month?: string;
-  };
-}) {
+
+type Props = {
+  searchParams: { page: string; type?: string; month?: string };
+};
+
+async function page({ searchParams }: Props) {
   const { page, type, month } = searchParams;
-  const sk = Number(page) || 1;
+  const pageNumber = Number(page) || 1;
   const itemsToShow = 30;
+
   const articles = await prisma.post.findMany({
     where: {
       typeId: type ? type : undefined,
       postMonthId: month ? month : undefined,
     },
     take: itemsToShow,
-    skip: (sk - 1) * itemsToShow,
+    skip: (pageNumber - 1) * itemsToShow,
     orderBy: {
       id: "desc",
     },
@@ -35,6 +36,7 @@ async function page({
       type: { select: { name: true } },
     },
   });
+
   const count = await prisma.post.count({
     where: {
       typeId: type ? type : undefined,

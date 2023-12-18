@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import {
   BsYoutube,
@@ -7,8 +8,8 @@ import {
   BsTwitter,
   BsFacebook,
 } from "react-icons/bs";
+
 import { send } from "emailjs-com";
-import { Metadata } from "next";
 
 const data = [
   {
@@ -64,7 +65,7 @@ function Contact() {
   };
 
   return (
-    <div>
+    <>
       <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-lg text-center">
           <h1 className="text-2xl font-bold sm:text-3xl">
@@ -140,7 +141,7 @@ function Contact() {
           </div>
         </form>
       </div>
-    </div>
+    </>
   );
 }
 

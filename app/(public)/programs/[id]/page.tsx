@@ -1,8 +1,16 @@
+import prisma from "@/lib/prisma";
+
+import Link from "next/link";
+
 import EpisodeCard from "@/components/EpisodeCard";
 import NextUIPagination from "@/components/NextUIPagination";
-import Link from "next/link";
-import prisma from "@/lib/prisma";
-export async function generateMetadata({ params }: { params: { id: string } }) {
+
+type Props = {
+  params: { id: string };
+  searchParams: { page: string };
+};
+
+export async function generateMetadata({ params }: Props) {
   try {
     const program = await prisma.category.findUnique({
       where: { id: params.id },
@@ -44,16 +52,12 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
     return { title: "لا يوجد", description: "هذا البرنامج غير موجود" };
   }
 }
-async function Program({
-  params: { id },
-  searchParams,
-}: {
-  params: { id: string };
-  searchParams: { page: string };
-}) {
+
+async function Program({ params: { id }, searchParams }: Props) {
   const { page } = searchParams;
-  const sk = Number(page) || 1;
+  const pageNumber = Number(page) || 1;
   const itemsToShow = 30;
+
   const program = await prisma.category.findUnique({
     where: {
       id,
@@ -66,6 +70,7 @@ async function Program({
       },
     },
   });
+
   const episodes = await prisma.episode.findMany({
     where: {
       featured: false,
@@ -84,11 +89,12 @@ async function Program({
       },
     },
     take: itemsToShow,
-    skip: (sk - 1) * itemsToShow,
+    skip: (pageNumber - 1) * itemsToShow,
     orderBy: {
       id: "desc",
     },
   });
+
   const count = await prisma.episode.count({
     where: {
       featured: false,
@@ -98,7 +104,7 @@ async function Program({
   });
 
   return (
-    <div>
+    <>
       <div className="px-4 py-16 mx-auto sm:px-6 lg:px-8 sm:py-20">
         <div className="max-w-xl mx-auto text-center ">
           <h2 className="text-4xl font-bold tracking-tight sm:text-5xl mb-4">
@@ -128,7 +134,7 @@ async function Program({
         </div>
         <NextUIPagination total={Math.ceil(count / itemsToShow)} />
       </div>
-    </div>
+    </>
   );
 }
 export default Program;

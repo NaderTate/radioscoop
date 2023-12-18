@@ -1,19 +1,23 @@
 import prisma from "@/lib/prisma";
-import SidePanel from "@/components/SidePanel";
+
 import Link from "next/link";
-import Schedule from "@/components/Schedule";
 import { Image } from "@nextui-org/image";
+
+import SidePanel from "@/components/SidePanel";
+import Schedule from "@/components/Schedule";
+
 export const revalidate = 60;
+
 export async function generateStaticParams() {
   const posts = await prisma.post.findMany();
   return posts.map((post) => ({ id: post.id }));
 }
 
-export async function generateMetadata({
-  params: { id },
-}: {
+type Props = {
   params: { id: string };
-}) {
+};
+
+export async function generateMetadata({ params: { id } }: Props) {
   try {
     const article = await prisma.post.findUnique({
       where: { id },
@@ -70,13 +74,15 @@ async function page({ params: { id } }: { params: { id: string } }) {
       id,
     },
   });
+
   const posts = await prisma.sideBar.findFirst({
     select: {
       Items: true,
     },
   });
+
   return (
-    <div>
+    <>
       <div>
         <nav aria-label="Breadcrumb" className="flex m-2 md:m-9">
           <ol
@@ -173,7 +179,7 @@ async function page({ params: { id } }: { params: { id: string } }) {
           </div>
         </div>
       </section>
-    </div>
+    </>
   );
 }
 

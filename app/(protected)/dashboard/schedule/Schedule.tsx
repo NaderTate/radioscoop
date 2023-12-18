@@ -8,10 +8,10 @@ import { Input } from "@/components/ui/input";
 import { PulseLoader } from "react-spinners";
 import { useToast } from "@/components/ui/use-toast";
 
-function Schedule({ Days, title }: { Days: DayType[] | any; title: string }) {
+function Schedule({ Days, title }: { Days: Day[] | any; title: string }) {
   const { toast } = useToast();
 
-  const [days, setDays] = useState<DayType[]>(Days);
+  const [days, setDays] = useState<Day[]>(Days);
   const [Title, setTitle] = useState(title);
   const [loading, setLoading] = useState(false);
 

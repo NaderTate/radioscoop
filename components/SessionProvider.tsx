@@ -8,7 +8,7 @@ export default function SessionProv({
   session,
 }: {
   children: React.ReactNode;
-  session: Session;
+  session: Session | null;
 }) {
   return (
     <SessionProvider

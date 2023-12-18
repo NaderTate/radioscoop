@@ -10,7 +10,7 @@ function ImagesSection({ image }: { image: string }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   return (
-    <div>
+    <>
       <Image
         src="https://res.cloudinary.com/ddcjbeysn/image/upload/v1699518962/assets/294423928_376764924602881_6195196421443861263_n_z7lh3y.png"
         alt="cover"
@@ -43,7 +43,7 @@ function ImagesSection({ image }: { image: string }) {
           </ModalBody>
         </ModalContent>
       </Modal>
-    </div>
+    </>
   );
 }
 

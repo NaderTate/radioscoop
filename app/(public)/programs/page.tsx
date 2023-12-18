@@ -1,28 +1,33 @@
-import NextUIPagination from "@/components/NextUIPagination";
-import ProgramCard from "@/components/ProgramCard";
 import prisma from "@/lib/prisma";
+
+import ProgramCard from "@/components/ProgramCard";
+import NextUIPagination from "@/components/NextUIPagination";
+
 export const metadata = {
   title: "برامج راديو سكووب",
   description: "برامج راديو سكووب",
 };
-async function Programs({
-  searchParams,
-}: {
+
+type Props = {
   searchParams: { page: string; month: string };
-}) {
+};
+
+async function Programs({ searchParams }: Props) {
   const { page, month } = searchParams;
-  const sk = Number(page) || 1;
+  const pageNumber = Number(page) || 1;
   const itemsToShow = 30;
+
   const monthInfo = await prisma.month.findUnique({
     where: { id: month },
     select: { name: true, year: { select: { year: true } } },
   });
+
   const programs = await prisma.category.findMany({
     where: {
       monthId: month ? month : undefined,
     },
     take: itemsToShow,
-    skip: (sk - 1) * itemsToShow,
+    skip: (pageNumber - 1) * itemsToShow,
     orderBy: {
       id: "desc",
     },
@@ -31,13 +36,15 @@ async function Programs({
       month: { select: { name: true, year: { select: { year: true } } } },
     },
   });
+
   const count = await prisma.category.count({
     where: {
       monthId: month ? month : undefined,
     },
   });
+
   return (
-    <div>
+    <>
       <div className="px-4 py-16 mx-auto sm:px-6 lg:px-8 sm:py-24">
         <div className="max-w-xl mx-auto text-center ">
           <h2 className="text-4xl font-bold tracking-tight mb-4">
@@ -54,7 +61,7 @@ async function Programs({
           queries={["month"]}
         />
       </div>
-    </div>
+    </>
   );
 }
 

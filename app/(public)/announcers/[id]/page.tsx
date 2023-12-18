@@ -1,17 +1,20 @@
 import prisma from "@/lib/prisma";
-import ImagesSection from "../ImagesSection";
+
 import Tabs from "../Tabs";
+import ImagesSection from "../ImagesSection";
+
 export const revalidate = 60;
 
 export async function generateStaticParams() {
   const announcers = await prisma.author.findMany();
   return announcers.map((announcer) => ({ id: announcer.id }));
 }
-export async function generateMetadata({
-  params: { id },
-}: {
+
+type Props = {
   params: { id: string };
-}) {
+};
+
+export async function generateMetadata({ params: { id } }: Props) {
   try {
     const announcer = await prisma.author.findUnique({
       where: { id },
@@ -59,7 +62,7 @@ export async function generateMetadata({
     };
   }
 }
-async function Announcer({ params: { id } }: { params: { id: string } }) {
+async function Announcer({ params: { id } }: Props) {
   const announcer = await prisma.author.findUnique({
     where: {
       id,
@@ -130,6 +133,7 @@ async function Announcer({ params: { id } }: { params: { id: string } }) {
       },
     },
   });
+
   return (
     <div className="pb-10">
       <ImagesSection

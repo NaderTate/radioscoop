@@ -4,7 +4,8 @@ import { Changa } from "next/font/google";
 import SessionProv from "@/components/SessionProvider";
 import { ThemeProvider } from "@/components/theme-porvider";
 import NextUIProvider from "@/components/NextUIProvider";
-import { Session } from "next-auth";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/authOptions";
 const changa = Changa({ subsets: ["arabic"] });
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.radio-scoop.com/"),
@@ -32,13 +33,12 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
-  session,
 }: {
   children: React.ReactNode;
-  session: Session;
 }) {
+  const session = await getServerSession(authOptions);
   return (
     <html lang="ar">
       <SessionProv session={session}>

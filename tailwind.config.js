@@ -4,13 +4,6 @@ const { nextui } = require("@nextui-org/theme");
 module.exports = {
   darkMode: ["class"],
   content: [
-    "./node_modules/@nextui-org/theme/dist/components/spinner.js",
-    "./node_modules/@nextui-org/theme/dist/components/pagination.js",
-    "./node_modules/@nextui-org/theme/dist/components/modal.js",
-    "./node_modules/@nextui-org/theme/dist/components/image.js",
-    "./node_modules/@nextui-org/theme/dist/components/tabs.js",
-    "./node_modules/@nextui-org/theme/dist/components/input.js",
-    "./node_modules/@nextui-org/theme/dist/components/autocomplete.js",
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
