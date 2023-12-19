@@ -1,4 +1,4 @@
-import NextUIPagination from "@/components/NextUIPagination";
+import Pagination from "@/components/Pagination";
 import ProgramCard from "@/components/ProgramCard";
 import prisma from "@/lib/prisma";
 import AddProgramForm from "./AddProgramForm";
@@ -45,7 +45,7 @@ async function Seriess({ searchParams }: { searchParams: { page: string } }) {
           </h2>
         </div>
       )}
-      <NextUIPagination total={Math.ceil(count / itemsPerPage)} />
+      <Pagination total={Math.ceil(count / itemsPerPage)} />
     </div>
   );
 }

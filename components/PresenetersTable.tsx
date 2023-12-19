@@ -7,7 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import DeleteButton from "./DeleteButton";
+import DeleteButton from "./ConfirmDelete";
 import { deleteAuthor } from "@/lib/_actions";
 import { Author } from "@prisma/client";
 import PresenterForm from "./PresenterForm";

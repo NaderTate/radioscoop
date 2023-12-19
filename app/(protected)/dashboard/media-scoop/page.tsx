@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import prisma from "@/lib/prisma";
 
 import VideoForm from "@/components/VideoForm";
-import NextUIPagination from "@/components/NextUIPagination";
+import Pagination from "@/components/Pagination";
 async function page({
   searchParams,
 }: {
@@ -48,10 +48,7 @@ async function page({
         <SearchForm content="media-scoop" />
       </div>
       <VideosTable presenters={presenters} data={videos} />
-      <NextUIPagination
-        total={Math.ceil(count / itemsToShow)}
-        queries={["search"]}
-      />
+      <Pagination total={Math.ceil(count / itemsToShow)} queries={["search"]} />
     </div>
   );
 }

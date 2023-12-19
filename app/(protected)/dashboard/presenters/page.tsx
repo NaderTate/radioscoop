@@ -1,4 +1,4 @@
-import NextUIPagination from "@/components/NextUIPagination";
+import Pagination from "@/components/Pagination";
 
 import PresenetersTable from "@/components/PresenetersTable";
 import PresenterForm from "@/components/PresenterForm";
@@ -42,10 +42,7 @@ async function page({
         <SearchForm content="presenters" />
       </div>
       <PresenetersTable data={presenters} />
-      <NextUIPagination
-        total={Math.ceil(count / itemsToShow)}
-        queries={["search"]}
-      />
+      <Pagination total={Math.ceil(count / itemsToShow)} queries={["search"]} />
     </div>
   );
 }

@@ -4,12 +4,20 @@ import AudioPlayer from "react-h5-audio-player";
 import { Episode } from "@prisma/client";
 
 import "react-h5-audio-player/lib/styles.css";
-interface Episodee extends Episode {
-  category?: { name: string; img: string } | null;
-  presenter?: { name: string } | null;
-  preparedBy?: { name: string } | null;
-}
-function AudioCard({ audio }: { audio: Episodee }) {
+type Props = {
+  audio: {
+    category?: { name: string; img: string } | null;
+    presenter?: { name: string } | null;
+    preparedBy?: { name: string } | null;
+    featured?: boolean;
+    featureTitle?: string | null;
+    title?: string;
+    link: string;
+    img?: string | null;
+    id: string;
+  };
+};
+function AudioCard({ audio }: Props) {
   const [duration, setDuration] = React.useState(0);
   const [play, setPlay] = React.useState(false);
   const timestamps = (sec: number) => {

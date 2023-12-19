@@ -17,7 +17,7 @@ function ImagesSection({ image }: { image: string }) {
           alt="cover"
           width={1500}
           height={400}
-          className="object-cover h-48 sm:h-96 w-full brightness-90 shadow-lg shadow-blue-400/50 "
+          className="object-cover h-48 sm:h-96 w-screen brightness-90 shadow-lg shadow-blue-400/50 "
         />
       </div>
       <div className="flex justify-center">

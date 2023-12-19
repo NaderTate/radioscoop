@@ -1,7 +1,7 @@
 import prisma from "@/lib/prisma";
 
 import AnnouncerCard from "@/components/AnnouncerCard";
-import NextUIPagination from "@/components/NextUIPagination";
+import Pagination from "@/components/Pagination";
 
 export const revalidate = 60;
 
@@ -80,10 +80,7 @@ async function Announcers({ searchParams }: Props) {
           );
         })}
       </div>
-      <NextUIPagination
-        total={Math.ceil(count / itemsToShow)}
-        queries={["search"]}
-      />
+      <Pagination total={Math.ceil(count / itemsToShow)} queries={["search"]} />
     </div>
   );
 }

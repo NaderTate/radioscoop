@@ -42,7 +42,7 @@ const Contact = () => {
                 <Image
                   alt="logo"
                   className="bg-white"
-                  src="/favicon.png"
+                  src="/logo.png"
                   width={54}
                   height={54}
                 />

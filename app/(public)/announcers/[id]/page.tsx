@@ -1,7 +1,7 @@
 import prisma from "@/lib/prisma";
 
-import AnnouncerTabs from "../AnnouncerTabs";
-import ImagesSection from "../ImagesSection";
+import AnnouncerTabs from "./_components/AnnouncerTabs";
+import ImagesSection from "./_components/ImagesSection";
 
 import { getAnnouncerData } from "../utils";
 

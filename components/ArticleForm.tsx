@@ -63,7 +63,7 @@ function ArticleForm({
         {article?.id ? (
           <FiEdit size={20} className="m-auto" />
         ) : (
-          <Button className="w-full">إضافة مقالة</Button>
+          <p className="">إضافة مقالة</p>
         )}
       </DialogTrigger>
       <DialogContent className="overflow-auto h-full max-h-[80vh]">

@@ -1,7 +1,7 @@
 import ProgramCard from "@/components/ProgramCard";
 import prisma from "@/lib/prisma";
 import AddProgramForm from "./AddProgramForm";
-import NextUIPagination from "@/components/NextUIPagination";
+import Pagination from "@/components/Pagination";
 async function GeneralProgram({
   searchParams,
 }: {
@@ -46,7 +46,7 @@ async function GeneralProgram({
           </h2>
         </div>
       )}
-      <NextUIPagination total={Math.ceil(count / itemsPerPage)} />
+      <Pagination total={Math.ceil(count / itemsPerPage)} />
     </div>
   );
 }

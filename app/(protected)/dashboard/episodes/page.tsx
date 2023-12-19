@@ -1,6 +1,6 @@
 import EpisodeForm from "@/components/EpisodeForm";
 import EpisodesTable from "@/components/EpisodesTable";
-import NextUIPagination from "@/components/NextUIPagination";
+import Pagination from "@/components/Pagination";
 
 import SearchForm from "@/components/SearchForm";
 import prisma from "@/lib/prisma";
@@ -89,10 +89,7 @@ async function page({
         <SearchForm content="episodes" />
       </div>
       <EpisodesTable programs={programs} data={Episodes} />
-      <NextUIPagination
-        total={Math.ceil(count / itemsToShow)}
-        queries={["search"]}
-      />
+      <Pagination total={Math.ceil(count / itemsToShow)} queries={["search"]} />
     </div>
   );
 }

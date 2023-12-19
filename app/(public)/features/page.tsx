@@ -3,7 +3,7 @@ import prisma from "@/lib/prisma";
 import Link from "next/link";
 import { Metadata } from "next";
 
-import NextUIPagination from "@/components/NextUIPagination";
+import Pagination from "@/components/Pagination";
 
 export const revalidate = 60;
 
@@ -66,10 +66,7 @@ async function page({ searchParams }: Props) {
           </div>
         ))}
       </div>
-      <NextUIPagination
-        total={Math.ceil(count / itemsToShow)}
-        queries={["type"]}
-      />
+      <Pagination total={Math.ceil(count / itemsToShow)} queries={["type"]} />
     </>
   );
 }

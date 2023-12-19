@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     siteName: "راديو سكووب",
     images: [
       {
-        url: "/favicon.png",
+        url: "/logo.png",
         width: 800,
         height: 600,
         alt: "راديو سكووب",

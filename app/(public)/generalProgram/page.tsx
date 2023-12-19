@@ -1,7 +1,7 @@
 import prisma from "@/lib/prisma";
 
 import ProgramCard from "@/components/ProgramCard";
-import NextUIPagination from "@/components/NextUIPagination";
+import Pagination from "@/components/Pagination";
 
 export const revalidate = 60;
 
@@ -51,7 +51,7 @@ async function GeneralProgram({ searchParams }: Props) {
             <ProgramCard key={program.id} program={program} />
           ))}
         </div>
-        <NextUIPagination total={Math.ceil(count / itemsPerPage)} />
+        <Pagination total={Math.ceil(count / itemsPerPage)} />
       </div>
     </>
   );

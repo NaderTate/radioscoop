@@ -5,7 +5,7 @@ import SearchForm from "@/components/SearchForm";
 import prisma from "@/lib/prisma";
 
 import ProgramForm from "@/components/ProgramForm";
-import NextUIPagination from "@/components/NextUIPagination";
+import Pagination from "@/components/Pagination";
 
 async function page({
   searchParams,
@@ -51,10 +51,7 @@ async function page({
         <SearchForm content="programs" />
       </div>
       <ProgramsTable presenters={presenetrs} data={programs} />
-      <NextUIPagination
-        total={Math.ceil(count / itemsToShow)}
-        queries={["search"]}
-      />
+      <Pagination total={Math.ceil(count / itemsToShow)} queries={["search"]} />
     </div>
   );
 }

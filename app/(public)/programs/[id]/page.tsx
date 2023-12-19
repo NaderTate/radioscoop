@@ -3,7 +3,7 @@ import prisma from "@/lib/prisma";
 import Link from "next/link";
 
 import EpisodeCard from "@/components/EpisodeCard";
-import NextUIPagination from "@/components/NextUIPagination";
+import Pagination from "@/components/Pagination";
 
 type Props = {
   params: { id: string };
@@ -35,13 +35,13 @@ export async function generateMetadata({ params }: Props) {
         title: `برنامج ${program?.name}`,
         description:
           "راديو سكوب : اول راديو في مصر بنقل المتميزين من متتدربيه للاذاعات الكبرى اف ام  في مصر يمكن التواصل من خلال واتساب فيسبوك تويتر او انستاجرام او من خلال رقم الهاتف الجوال FM الكبرى",
-        images: [program.img || "/favicon.png"],
+        images: [program.img || "/logo.png"],
       },
       openGraph: {
         title: `برنامج ${program?.name}`,
         images: [
           {
-            url: program.img || "/favicon.png",
+            url: program.img || "/logo.png",
             width: 800,
             height: 800,
           },
@@ -132,7 +132,7 @@ async function Program({ params: { id }, searchParams }: Props) {
             <EpisodeCard key={episode.id} ep={episode} />
           ))}
         </div>
-        <NextUIPagination total={Math.ceil(count / itemsToShow)} />
+        <Pagination total={Math.ceil(count / itemsToShow)} />
       </div>
     </>
   );

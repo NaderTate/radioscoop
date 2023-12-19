@@ -3,7 +3,7 @@ import prisma from "@/lib/prisma";
 import { Metadata } from "next";
 
 import EpisodeCard from "@/components/EpisodeCard";
-import NextUIPagination from "@/components/NextUIPagination";
+import Pagination from "@/components/Pagination";
 
 export const metadata: Metadata = {
   title: "حلفات راديو سكووب",
@@ -68,7 +68,7 @@ async function page({ searchParams }: Props) {
             <EpisodeCard key={episode.id} ep={episode} />
           ))}
         </div>
-        <NextUIPagination total={Math.ceil(count / itemsToShow)} />
+        <Pagination total={Math.ceil(count / itemsToShow)} />
       </div>
     </>
   );

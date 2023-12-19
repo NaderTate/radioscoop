@@ -2,7 +2,7 @@ import prisma from "@/lib/prisma";
 
 import { Image } from "@nextui-org/image";
 
-import NextUIPagination from "@/components/NextUIPagination";
+import Pagination from "@/components/Pagination";
 
 export const metadata = {
   title: "ميديا سكووب",
@@ -56,7 +56,7 @@ async function page({ searchParams }: Props) {
           </a>
         ))}
       </div>
-      <NextUIPagination total={Math.ceil(count / itemsToShow)} />
+      <Pagination total={Math.ceil(count / itemsToShow)} />
     </>
   );
 }

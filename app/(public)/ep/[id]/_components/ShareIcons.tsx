@@ -22,7 +22,7 @@ function ShareIcons({ title, mainImg }: { title: string; mainImg: string }) {
   const pathname = "https://radio-scoop.com" + usePathname();
 
   return (
-    <div>
+    <>
       <div className="mt-5">
         <div className="flex flex-wrap gap-2" dir="ltr">
           <FacebookShareButton url={pathname}>
@@ -52,7 +52,7 @@ function ShareIcons({ title, mainImg }: { title: string; mainImg: string }) {
           </EmailShareButton>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

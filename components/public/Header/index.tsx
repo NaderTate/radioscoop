@@ -17,6 +17,7 @@ import { HiOutlineMenuAlt3 } from "react-icons/hi";
 const Header = () => {
   const [open, setOpen] = useState(false);
   const { articleTypes, featureTypes, seasons } = useFetchNavbarData();
+
   return (
     <header className="bg-[#194F88]">
       <div className="max-w-screen-xl px-4 py-8 mx-auto sm:px-10 lg:px-[1.5%]">

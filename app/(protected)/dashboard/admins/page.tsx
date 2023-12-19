@@ -1,34 +1,57 @@
-import AdminCard from "@/components/AdminCard";
-import AdminForm from "@/components/AdminForm";
 import prisma from "@/lib/prisma";
-async function page({
-  searchParams,
-}: {
-  searchParams: { search: string; page: string };
-}) {
+
+import AdminCard from "./_components/AdminCard";
+import AdminForm from "./_components/AdminForm";
+import Pagination from "@/components/Pagination";
+import SearchInput from "@/components/dashboard/SearchInput";
+
+type Props = {
+  searchParams: { search: string; page: number };
+};
+
+async function page({ searchParams }: Props) {
   const { search, page } = searchParams;
-  const sk = Number(page) || 1;
   const itemsToShow = 30;
-  const admins = await prisma.user.findMany({
+
+  const admins = await prisma.admin.findMany({
     where: {
       name: {
         contains: search,
       },
     },
     take: itemsToShow,
-    skip: (sk - 1) * itemsToShow,
+    skip: ((page ?? 1) - 1) * itemsToShow,
     orderBy: {
       id: "desc",
     },
   });
+
+  const count = await prisma.admin.count({
+    where: {
+      name: {
+        contains: search,
+      },
+    },
+  });
+
   return (
-    <div>
-      <AdminForm />
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 mt-5 gap-5">
-        {admins.map((admin) => {
-          return <AdminCard key={admin.id} admin={admin} />;
-        })}
+    <div className="flex flex-col min-h-[90vh]">
+      <div className="flex flex-col-reverse sm:flex-row items-start sm:items-center gap-5">
+        <AdminForm />
+        <SearchInput />
       </div>
+      <div className="grow">
+        <div className="flex flex-wrap mt-5 gap-5">
+          {admins.map((admin) => {
+            return <AdminCard key={admin.id} admin={admin} />;
+          })}
+        </div>
+      </div>
+      <Pagination
+        currentPage={page}
+        total={Math.ceil(count / itemsToShow)}
+        queries={{ search }}
+      />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import FeatureForm from "@/components/FeatureForm";
 import FeaturesTable from "@/components/FeaturesTable";
-import NextUIPagination from "@/components/NextUIPagination";
+import Pagination from "@/components/Pagination";
 
 import SearchForm from "@/components/SearchForm";
 
@@ -55,10 +55,7 @@ async function page({
         <SearchForm content="features" />
       </div>
       <FeaturesTable types={types} presenters={presenters} data={features} />
-      <NextUIPagination
-        total={Math.ceil(count / itemsToShow)}
-        queries={["search"]}
-      />
+      <Pagination total={Math.ceil(count / itemsToShow)} queries={["search"]} />
     </div>
   );
 }

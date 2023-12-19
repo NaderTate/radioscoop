@@ -1,7 +1,7 @@
 import prisma from "@/lib/prisma";
 
 import ProgramCard from "@/components/ProgramCard";
-import NextUIPagination from "@/components/NextUIPagination";
+import Pagination from "@/components/Pagination";
 
 export const metadata = {
   title: "برامج راديو سكووب",
@@ -56,7 +56,7 @@ async function Programs({ searchParams }: Props) {
             <ProgramCard key={program.id} program={program} />
           ))}
         </div>
-        <NextUIPagination
+        <Pagination
           total={Math.ceil(count / itemsToShow)}
           queries={["month"]}
         />

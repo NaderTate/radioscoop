@@ -2,7 +2,7 @@ import prisma from "@/lib/prisma";
 
 import ProgramCard from "@/components/ProgramCard";
 import AnnouncerCard from "@/components/AnnouncerCard";
-import NextUIPagination from "@/components/NextUIPagination";
+import Pagination from "@/components/Pagination";
 
 type Props = {
   searchParams: { page: string; search: string };
@@ -80,7 +80,7 @@ async function Search({ searchParams }: Props) {
         </>
       )}
 
-      <NextUIPagination total={Math.ceil(total / itemsToShow)} />
+      <Pagination total={Math.ceil(total / itemsToShow)} />
     </div>
   );
 }

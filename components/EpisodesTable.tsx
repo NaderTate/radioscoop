@@ -8,7 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import Image from "next/image";
-import DeleteButton from "./DeleteButton";
+import DeleteButton from "./ConfirmDelete";
 import { Episode } from "@prisma/client";
 import Link from "next/link";
 import { deleteEpisode } from "@/lib/_actions";
