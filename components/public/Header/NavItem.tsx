@@ -32,7 +32,15 @@ const NavContent = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-const NavLink = ({ label, link }: { label: string | number; link: string }) => {
+const NavLink = ({
+  label,
+  link,
+  queries,
+}: {
+  label: string | number;
+  link: string;
+  queries?: {};
+}) => {
   return (
     <Link
       onClick={() => {
@@ -41,7 +49,7 @@ const NavLink = ({ label, link }: { label: string | number; link: string }) => {
           detail.removeAttribute("open");
         });
       }}
-      href={{ pathname: link }}
+      href={{ pathname: link, query: queries }}
       className={
         "block whitespace-nowrap overflow-ellipsis px-4 group py-2 text-sm font-semibold rounded-lg text-slate-100 flex-grow hover:text-white hover:bg-[#848da065] border-b border-b-slate-700 md:border-0 lg:text-md xl:text-lg"
       }

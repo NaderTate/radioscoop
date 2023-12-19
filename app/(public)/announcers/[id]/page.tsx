@@ -1,7 +1,9 @@
 import prisma from "@/lib/prisma";
 
-import Tabs from "../Tabs";
+import AnnouncerTabs from "../AnnouncerTabs";
 import ImagesSection from "../ImagesSection";
+
+import { getAnnouncerData } from "../utils";
 
 export const revalidate = 60;
 
@@ -63,76 +65,7 @@ export async function generateMetadata({ params: { id } }: Props) {
   }
 }
 async function Announcer({ params: { id } }: Props) {
-  const announcer = await prisma.author.findUnique({
-    where: {
-      id,
-    },
-    include: {
-      Categories: {
-        select: {
-          id: true,
-          name: true,
-          img: true,
-          month: {
-            select: {
-              name: true,
-              year: {
-                select: {
-                  year: true,
-                },
-              },
-            },
-          },
-        },
-      },
-      posts: {
-        select: {
-          id: true,
-          image: true,
-          title: true,
-          type: {
-            select: {
-              name: true,
-            },
-          },
-          PostMonth: {
-            select: {
-              name: true,
-              year: {
-                select: {
-                  year: true,
-                },
-              },
-            },
-          },
-        },
-      },
-      PreparedFeatures: {
-        select: {
-          id: true,
-          img: true,
-          featureTitle: true,
-          presenter: {
-            select: {
-              name: true,
-            },
-          },
-        },
-      },
-      PresentedFeatures: {
-        select: {
-          id: true,
-          img: true,
-          featureTitle: true,
-          preparedBy: {
-            select: {
-              name: true,
-            },
-          },
-        },
-      },
-    },
-  });
+  const announcer = await getAnnouncerData(id);
 
   return (
     <div className="pb-10">
@@ -145,7 +78,7 @@ async function Announcer({ params: { id } }: Props) {
       <h1 className="text-center text-xl mt-5 font-semibold">
         {announcer?.name}
       </h1>
-      {announcer && <Tabs announcerData={announcer} />}
+      {announcer && <AnnouncerTabs announcerData={announcer} />}
     </div>
   );
 }

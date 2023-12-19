@@ -137,11 +137,7 @@ async function page({ params: { id } }: { params: { id: string } }) {
       presenter: { select: { name: true } },
     },
   });
-  const posts = await prisma.sideBar.findFirst({
-    select: {
-      Items: true,
-    },
-  });
+
   return (
     <div>
       <div>
@@ -217,7 +213,7 @@ async function page({ params: { id } }: { params: { id: string } }) {
         </div>
 
         <div className="lg:pt-10">
-          <SidePanel data={posts?.Items || []} />
+          <SidePanel />
         </div>
       </section>
     </div>

@@ -11,13 +11,15 @@ function ImagesSection({ image }: { image: string }) {
 
   return (
     <>
-      <Image
-        src="https://res.cloudinary.com/ddcjbeysn/image/upload/v1699518962/assets/294423928_376764924602881_6195196421443861263_n_z7lh3y.png"
-        alt="cover"
-        width={1500}
-        height={400}
-        className="object-cover h-48 sm:h-96 w-full brightness-90 shadow-lg shadow-blue-400/50 "
-      />
+      <div className="flex justify-center">
+        <Image
+          src="https://res.cloudinary.com/ddcjbeysn/image/upload/v1699518962/assets/294423928_376764924602881_6195196421443861263_n_z7lh3y.png"
+          alt="cover"
+          width={1500}
+          height={400}
+          className="object-cover h-48 sm:h-96 w-full brightness-90 shadow-lg shadow-blue-400/50 "
+        />
+      </div>
       <div className="flex justify-center">
         <Image
           onClick={onOpen}

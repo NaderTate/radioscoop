@@ -77,11 +77,7 @@ async function Home() {
       title: true,
     },
   });
-  const posts = await prisma.sideBar.findFirst({
-    select: {
-      Items: true,
-    },
-  });
+
   return (
     <main>
       <div className="p-5 m-2 dark:border-white border rounded-xl border-gray-500">
@@ -100,7 +96,7 @@ async function Home() {
       </Link>
       <div className="grid grid-cols-1 lg:grid-cols-5">
         <div className="p-2 hidden lg:block">
-          <SidePanel data={posts?.Items || []} />
+          <SidePanel />
         </div>
 
         <div className="lg:col-span-4 lg:border-r border-gray-800 dark:border-gray-300 ">
@@ -113,7 +109,7 @@ async function Home() {
           <Schedule Days={schedule?.Days} title={schedule?.title as string} />
         </div>
         <div className="p-2 lg:hidden">
-          <SidePanel data={posts?.Items || []} />
+          <SidePanel />
         </div>
       </div>
     </main>

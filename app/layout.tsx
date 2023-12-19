@@ -1,12 +1,14 @@
 import "./globals.css";
+
 import type { Metadata } from "next";
 import { Changa } from "next/font/google";
-import SessionProv from "@/components/SessionProvider";
-import { ThemeProvider } from "@/components/theme-porvider";
-import NextUIProvider from "@/components/NextUIProvider";
 import { getServerSession } from "next-auth";
+
 import { authOptions } from "@/lib/authOptions";
+import ClientProviders from "@/components/ClientProviders";
+
 const changa = Changa({ subsets: ["arabic"] });
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.radio-scoop.com/"),
   title: { default: "راديو سكووب", template: "%s | راديو سكووب" },
@@ -39,17 +41,12 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const session = await getServerSession(authOptions);
+
   return (
     <html lang="ar">
-      <SessionProv session={session}>
-        <body dir="rtl" className={changa.className}>
-          <NextUIProvider>
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-              {children}
-            </ThemeProvider>
-          </NextUIProvider>
-        </body>
-      </SessionProv>
+      <body dir="rtl" className={changa.className}>
+        <ClientProviders session={session}>{children}</ClientProviders>
+      </body>
     </html>
   );
 }

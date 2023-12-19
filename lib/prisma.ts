@@ -1,12 +1,10 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client/edge";
+import { withAccelerate } from "@prisma/extension-accelerate";
 
-// Prevent multiple instances of Prisma Client in development
-declare global {
-  var prisma: PrismaClient;
-}
+const prisma = new PrismaClient({
+  log: process.env.NODE_ENV === "development" ? ["error", "warn"] : ["error"],
+}).$extends(withAccelerate());
 
-const prisma = global.prisma || new PrismaClient();
-
-if (process.env.NODE_ENV === "development") global.prisma = prisma;
+// if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
 
 export default prisma;

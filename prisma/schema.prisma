@@ -108,6 +108,12 @@ model User {
   @@map("users")
 }
 
+model Admin {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  name  String
+  email String @unique
+}
+
 model Video {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   title       String

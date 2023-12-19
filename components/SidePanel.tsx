@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useState, useEffect } from "react";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -9,15 +10,20 @@ import Schedule from "./Schedule";
 import "swiper/css";
 import "swiper/css/navigation";
 
-type Props = {
-  data: Post[] | any;
-};
+import { getSidePanelPosts } from "@/actions/posts";
 
-const SidePanel = ({ data }: Props) => {
+const SidePanel = () => {
+  const [data, setData] = useState<Post[] | any>([]);
+  useEffect(() => {
+    getSidePanelPosts().then((res) => {
+      res && setData(res.Items);
+    });
+  }, []);
+
   return (
     <div className="xl:max-w-xs mb-4 m-auto ">
       <div className="hidden lg:flex flex-col gap-3 ">
-        {data.map((item: Post, index: number) => (
+        {data?.map((item: Post, index: number) => (
           <div
             key={index + item.title}
             className="rounded-lg sm:h-auto flex flex-col justify-between shadow-xl bg-slate-700 hover:scale-[1.01] cursor-pointer w-full"

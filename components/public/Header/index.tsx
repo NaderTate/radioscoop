@@ -10,12 +10,13 @@ import ThemeToggle from "@/components/ThemeToggle";
 import { NavItem, NavContent, NavLink } from "./NavItem";
 
 import { data, radioAcademy } from "./data";
+import { useFetchNavbarData } from "./_hooks/useFetchNavbarData";
 
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 
-const Header = ({ featureTypes, articleTypes, seasons }: HeaderProps) => {
+const Header = () => {
   const [open, setOpen] = useState(false);
-
+  const { articleTypes, featureTypes, seasons } = useFetchNavbarData();
   return (
     <header className="bg-[#194F88]">
       <div className="max-w-screen-xl px-4 py-8 mx-auto sm:px-10 lg:px-[1.5%]">
@@ -61,7 +62,8 @@ const Header = ({ featureTypes, articleTypes, seasons }: HeaderProps) => {
                 {featureTypes.map((type) => (
                   <NavLink
                     label={type.name}
-                    link={`/features?type=${type.id}`}
+                    link={`/features`}
+                    queries={{ type: type.id }}
                     key={type.id}
                   />
                 ))}
@@ -75,7 +77,8 @@ const Header = ({ featureTypes, articleTypes, seasons }: HeaderProps) => {
                         <NavLink
                           key={month.id}
                           label={`شهر ${month.name}`}
-                          link={`/programs?month=${month.id}`}
+                          link={`/programs`}
+                          queries={{ month: month.id }}
                         />
                       ))}
                     </NavContent>
@@ -89,9 +92,10 @@ const Header = ({ featureTypes, articleTypes, seasons }: HeaderProps) => {
                   if (type.seasons.length === 0) {
                     return (
                       <NavLink
-                        label={type.name}
-                        link={`/articles?type=${type.id}`}
                         key={type.id}
+                        label={type.name}
+                        link={`/articles`}
+                        queries={{ type: type.id }}
                       />
                     );
                   } else {
@@ -102,9 +106,10 @@ const Header = ({ featureTypes, articleTypes, seasons }: HeaderProps) => {
                             if (season.months.length === 0) {
                               return (
                                 <NavLink
-                                  label={season.year}
-                                  link={`/articles?type=${type.id}`}
                                   key={season.year}
+                                  label={season.year}
+                                  link={`/articles`}
+                                  queries={{ type: type.id }}
                                 />
                               );
                             } else {
@@ -113,9 +118,13 @@ const Header = ({ featureTypes, articleTypes, seasons }: HeaderProps) => {
                                   <NavContent>
                                     {season.months.map((month) => (
                                       <NavLink
-                                        label={`شهر ${month.name}`}
-                                        link={`/articles?type=${type.id}&month=${month.id}`}
                                         key={month.id}
+                                        label={`شهر ${month.name}`}
+                                        link={`/articles`}
+                                        queries={{
+                                          type: type.id,
+                                          month: month.id,
+                                        }}
                                       />
                                     ))}
                                   </NavContent>

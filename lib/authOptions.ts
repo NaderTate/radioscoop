@@ -1,15 +1,9 @@
-import prisma from "@/lib/prisma";
-import GoogleProvider from "next-auth/providers/google";
-import { PrismaAdapter } from "@auth/prisma-adapter";
 import { NextAuthOptions } from "next-auth";
+import { PrismaClient } from "@prisma/client";
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import GoogleProvider from "next-auth/providers/google";
 
-const emails: Array<string> = [];
-// get the emails of all admins
-prisma.user.findMany().then((users) => {
-  users.forEach((user) => {
-    emails.push(user.email);
-  });
-});
+const prisma = new PrismaClient();
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -22,10 +16,17 @@ export const authOptions: NextAuthOptions = {
 
   callbacks: {
     async session({ session, user }: any) {
+      const adminsEmails = await prisma.admin.findMany({
+        select: {
+          email: true,
+        },
+      });
       // only return a session if the user is in the database
-      if (emails.includes(user.email)) {
-        session.user.id = user.id;
+      if (adminsEmails.some((admin) => admin.email === user.email)) {
+        session.id = user.id;
         return session;
+      } else {
+        return null;
       }
     },
   },
