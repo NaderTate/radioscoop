@@ -2,6 +2,7 @@ import prisma from "@/lib/prisma";
 
 import AnnouncerCard from "@/components/AnnouncerCard";
 import Pagination from "@/components/Pagination";
+import { itemsToFetch } from "@/lib/globals";
 
 export const revalidate = 60;
 
@@ -11,13 +12,11 @@ export const metadata = {
 };
 
 type Props = {
-  searchParams: { page: string; search: string };
+  searchParams: { page: number; search: string };
 };
 
 async function Announcers({ searchParams }: Props) {
   const { page, search } = searchParams;
-  const itemsToShow = 30;
-  const pageNumber = Number(page) || 1;
 
   const announcers = await prisma.author.findMany({
     where: {
@@ -38,8 +37,8 @@ async function Announcers({ searchParams }: Props) {
         },
       ],
     },
-    take: itemsToShow,
-    skip: (pageNumber - 1) * itemsToShow,
+    take: itemsToFetch,
+    skip: ((page ?? 1) - 1) * itemsToFetch,
     orderBy: {
       id: "desc",
     },
@@ -80,7 +79,7 @@ async function Announcers({ searchParams }: Props) {
           );
         })}
       </div>
-      <Pagination total={Math.ceil(count / itemsToShow)} queries={["search"]} />
+      <Pagination currentPage={page} total={count} queries={{ search }} />
     </div>
   );
 }

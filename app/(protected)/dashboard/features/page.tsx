@@ -1,28 +1,28 @@
-import FeatureForm from "@/components/FeatureForm";
-import FeaturesTable from "@/components/FeaturesTable";
-import Pagination from "@/components/Pagination";
-
-import SearchForm from "@/components/SearchForm";
-
 import prisma from "@/lib/prisma";
 
-async function page({
-  searchParams,
-}: {
-  searchParams: { search: string; page: string };
-}) {
+import Pagination from "@/components/Pagination";
+import FeatureForm from "./_components/FeatureForm";
+import FeaturesTable from "./_components/FeaturesTable";
+import SearchInput from "@/components/dashboard/SearchInput";
+
+import { itemsToFetch } from "@/lib/globals";
+
+type Props = {
+  searchParams: { search: string; page: number };
+};
+
+async function page({ searchParams }: Props) {
   const { search, page } = searchParams;
-  const sk = Number(page) || 1;
-  const itemsToShow = 30;
+
   const features = await prisma.episode.findMany({
     where: {
       featured: true,
-      title: {
+      featureTitle: {
         contains: search,
       },
     },
-    take: itemsToShow,
-    skip: (sk - 1) * itemsToShow,
+    take: itemsToFetch,
+    skip: ((page ?? 1) - 1) * itemsToFetch,
     orderBy: {
       id: "desc",
     },
@@ -31,10 +31,11 @@ async function page({
       presenter: { select: { name: true } },
     },
   });
+
   const count = await prisma.episode.count({
     where: {
       featured: true,
-      title: {
+      featureTitle: {
         contains: search,
       },
     },
@@ -44,18 +45,22 @@ async function page({
     select: { id: true, name: true },
     orderBy: { id: "desc" },
   });
+
   const types = await prisma.featureType.findMany({
     select: { id: true, name: true },
     orderBy: { id: "desc" },
   });
+
   return (
-    <div>
-      <div className="flex items-start sm:items-center gap-5 flex-col sm:flex-row">
-        <FeatureForm types={types} presenters={presenters} />
-        <SearchForm content="features" />
+    <div className="flex flex-col min-h-[90vh]">
+      <div className="grow">
+        <div className="flex items-start sm:items-center gap-5 flex-col sm:flex-row">
+          <FeatureForm types={types} presenters={presenters} />
+          <SearchInput />
+        </div>
+        <FeaturesTable types={types} presenters={presenters} data={features} />
       </div>
-      <FeaturesTable types={types} presenters={presenters} data={features} />
-      <Pagination total={Math.ceil(count / itemsToShow)} queries={["search"]} />
+      <Pagination currentPage={page} total={count} queries={{ search }} />
     </div>
   );
 }

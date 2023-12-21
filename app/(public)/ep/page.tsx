@@ -4,6 +4,7 @@ import { Metadata } from "next";
 
 import EpisodeCard from "@/components/EpisodeCard";
 import Pagination from "@/components/Pagination";
+import { itemsToFetch } from "@/lib/globals";
 
 export const metadata: Metadata = {
   title: "حلفات راديو سكووب",
@@ -13,20 +14,18 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 type Props = {
-  searchParams: { page: string };
+  searchParams: { page: number };
 };
 
 async function page({ searchParams }: Props) {
   const { page } = searchParams;
-  const pageNumber = Number(page) || 1;
-  const itemsToShow = 30;
 
   const episodes = await prisma.episode.findMany({
     where: {
       featured: false,
     },
-    take: itemsToShow,
-    skip: (pageNumber - 1) * itemsToShow,
+    take: itemsToFetch,
+    skip: ((page ?? 1) - 1) * itemsToFetch,
     orderBy: {
       id: "desc",
     },
@@ -68,7 +67,7 @@ async function page({ searchParams }: Props) {
             <EpisodeCard key={episode.id} ep={episode} />
           ))}
         </div>
-        <Pagination total={Math.ceil(count / itemsToShow)} />
+        <Pagination currentPage={page} total={count} />
       </div>
     </>
   );

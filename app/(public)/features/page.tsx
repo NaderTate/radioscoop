@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Metadata } from "next";
 
 import Pagination from "@/components/Pagination";
+import { itemsToFetch } from "@/lib/globals";
 
 export const revalidate = 60;
 
@@ -13,13 +14,11 @@ export const metadata: Metadata = {
 };
 
 type Props = {
-  searchParams: { page: string; type?: string };
+  searchParams: { page: number; type?: string };
 };
 
 async function page({ searchParams }: Props) {
   const { page, type } = searchParams;
-  const pageNumber = Number(page) || 1;
-  const itemsToShow = 30;
 
   const features = await prisma.episode.findMany({
     where: {
@@ -30,8 +29,8 @@ async function page({ searchParams }: Props) {
       presenter: { select: { name: true } },
       preparedBy: { select: { name: true } },
     },
-    take: itemsToShow,
-    skip: (pageNumber - 1) * itemsToShow,
+    take: itemsToFetch,
+    skip: ((page ?? 1) - 1) * itemsToFetch,
     orderBy: {
       id: "desc",
     },
@@ -66,7 +65,7 @@ async function page({ searchParams }: Props) {
           </div>
         ))}
       </div>
-      <Pagination total={Math.ceil(count / itemsToShow)} queries={["type"]} />
+      <Pagination currentPage={page} total={count} queries={{ type }} />
     </>
   );
 }

@@ -4,10 +4,11 @@ import Link from "next/link";
 
 import EpisodeCard from "@/components/EpisodeCard";
 import Pagination from "@/components/Pagination";
+import { itemsToFetch } from "@/lib/globals";
 
 type Props = {
   params: { id: string };
-  searchParams: { page: string };
+  searchParams: { page: number };
 };
 
 export async function generateMetadata({ params }: Props) {
@@ -55,8 +56,6 @@ export async function generateMetadata({ params }: Props) {
 
 async function Program({ params: { id }, searchParams }: Props) {
   const { page } = searchParams;
-  const pageNumber = Number(page) || 1;
-  const itemsToShow = 30;
 
   const program = await prisma.category.findUnique({
     where: {
@@ -88,8 +87,8 @@ async function Program({ params: { id }, searchParams }: Props) {
         },
       },
     },
-    take: itemsToShow,
-    skip: (pageNumber - 1) * itemsToShow,
+    take: itemsToFetch,
+    skip: ((page ?? 1) - 1) * itemsToFetch,
     orderBy: {
       id: "desc",
     },
@@ -98,7 +97,6 @@ async function Program({ params: { id }, searchParams }: Props) {
   const count = await prisma.episode.count({
     where: {
       featured: false,
-
       categoryId: id,
     },
   });
@@ -132,7 +130,7 @@ async function Program({ params: { id }, searchParams }: Props) {
             <EpisodeCard key={episode.id} ep={episode} />
           ))}
         </div>
-        <Pagination total={Math.ceil(count / itemsToShow)} />
+        <Pagination currentPage={page} total={count} />
       </div>
     </>
   );

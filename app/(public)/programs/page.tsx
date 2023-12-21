@@ -1,7 +1,8 @@
 import prisma from "@/lib/prisma";
 
-import ProgramCard from "@/components/ProgramCard";
+import ProgramCard from "@/app/(protected)/dashboard/programs/_components/ProgramCard";
 import Pagination from "@/components/Pagination";
+import { itemsToFetch } from "@/lib/globals";
 
 export const metadata = {
   title: "برامج راديو سكووب",
@@ -9,13 +10,11 @@ export const metadata = {
 };
 
 type Props = {
-  searchParams: { page: string; month: string };
+  searchParams: { page: number; month: string };
 };
 
 async function Programs({ searchParams }: Props) {
   const { page, month } = searchParams;
-  const pageNumber = Number(page) || 1;
-  const itemsToShow = 30;
 
   const monthInfo = await prisma.month.findUnique({
     where: { id: month },
@@ -26,8 +25,8 @@ async function Programs({ searchParams }: Props) {
     where: {
       monthId: month ? month : undefined,
     },
-    take: itemsToShow,
-    skip: (pageNumber - 1) * itemsToShow,
+    take: itemsToFetch,
+    skip: ((page ?? 1) - 1) * itemsToFetch,
     orderBy: {
       id: "desc",
     },
@@ -56,10 +55,7 @@ async function Programs({ searchParams }: Props) {
             <ProgramCard key={program.id} program={program} />
           ))}
         </div>
-        <Pagination
-          total={Math.ceil(count / itemsToShow)}
-          queries={["month"]}
-        />
+        <Pagination currentPage={page} total={count} queries={{ month }} />
       </div>
     </>
   );

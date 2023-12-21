@@ -1,16 +1,25 @@
-import Pagination from "@/components/Pagination";
-import ProgramCard from "@/components/ProgramCard";
 import prisma from "@/lib/prisma";
+
+import Pagination from "@/components/Pagination";
+import ProgramCard from "@/app/(protected)/dashboard/programs/_components/ProgramCard";
+
 import AddProgramForm from "./AddProgramForm";
-async function Seriess({ searchParams }: { searchParams: { page: string } }) {
-  const sk = Number(searchParams.page) || 1;
-  const itemsPerPage = 30;
+
+import { itemsToFetch } from "@/lib/globals";
+
+type Props = {
+  searchParams: { page: number };
+};
+
+async function Seriess({ searchParams }: Props) {
+  const page = searchParams.page || 1;
+
   const programs = await prisma.category.findMany({
     where: {
       series: true,
     },
-    take: itemsPerPage,
-    skip: (sk - 1) * itemsPerPage,
+    take: itemsToFetch,
+    skip: ((page ?? 1) - 1) * itemsToFetch,
     include: {
       author: { select: { name: true } },
       month: { select: { name: true, year: { select: { year: true } } } },
@@ -19,6 +28,7 @@ async function Seriess({ searchParams }: { searchParams: { page: string } }) {
       updatedAt: "desc",
     },
   });
+
   const count = await prisma.category.count({
     where: {
       series: true,
@@ -45,7 +55,7 @@ async function Seriess({ searchParams }: { searchParams: { page: string } }) {
           </h2>
         </div>
       )}
-      <Pagination total={Math.ceil(count / itemsPerPage)} />
+      <Pagination currentPage={page} total={count} />
     </div>
   );
 }

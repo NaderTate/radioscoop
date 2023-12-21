@@ -1,8 +1,8 @@
 import prisma from "@/lib/prisma";
 
 import Pagination from "@/components/Pagination";
-import ArticleForm from "@/components/ArticleForm";
-import ArticlesTable from "@/components/ArticlesTable";
+import ArticleForm from "@/app/(protected)/dashboard/articles/_components/ArticleForm";
+import ArticlesTable from "@/app/(protected)/dashboard/articles/_components/ArticlesTable";
 import SearchInput from "@/components/dashboard/SearchInput";
 
 type Props = {
@@ -78,11 +78,7 @@ async function page({ searchParams }: Props) {
           data={articles}
         />
       </div>
-      <Pagination
-        currentPage={page}
-        total={Math.ceil(count / itemsToShow)}
-        queries={{ search }}
-      />
+      <Pagination currentPage={page} total={count} queries={{ search }} />
     </div>
   );
 }

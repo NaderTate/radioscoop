@@ -1,19 +1,19 @@
-import VideosTable from "@/components/VideosTable";
-
-import SearchForm from "@/components/SearchForm";
-import { Button } from "@/components/ui/button";
 import prisma from "@/lib/prisma";
 
-import VideoForm from "@/components/VideoForm";
+import VideoForm from "./_components/VideoForm";
 import Pagination from "@/components/Pagination";
-async function page({
-  searchParams,
-}: {
-  searchParams: { search: string; page: string };
-}) {
+import VideosTable from "./_components/VideosTable";
+import SearchInput from "@/components/dashboard/SearchInput";
+
+import { itemsToFetch } from "@/lib/globals";
+
+type Props = {
+  searchParams: { search: string; page: number };
+};
+
+async function page({ searchParams }: Props) {
   const { search, page } = searchParams;
-  const sk = Number(page) || 1;
-  const itemsToShow = 30;
+
   const videos = await prisma.video.findMany({
     where: {
       title: {
@@ -23,12 +23,13 @@ async function page({
     include: {
       presenter: { select: { name: true } },
     },
-    take: itemsToShow,
-    skip: (sk - 1) * itemsToShow,
+    take: itemsToFetch,
+    skip: ((page ?? 1) - 1) * itemsToFetch,
     orderBy: {
       id: "desc",
     },
   });
+
   const count = await prisma.video.count({
     where: {
       title: {
@@ -36,19 +37,22 @@ async function page({
       },
     },
   });
-  const presenters = await prisma.author.findMany({
+
+  const announcers = await prisma.author.findMany({
     select: { id: true, name: true },
     orderBy: { id: "desc" },
   });
 
   return (
-    <div>
-      <div className="flex items-start sm:items-center gap-5 flex-col sm:flex-row">
-        <VideoForm presenters={presenters} />
-        <SearchForm content="media-scoop" />
+    <div className="flex flex-col min-h-[90vh]">
+      <div className="grow">
+        <div className="flex items-start sm:items-center gap-5 flex-col sm:flex-row">
+          <VideoForm announcers={announcers} />
+          <SearchInput />
+        </div>
+        <VideosTable presenters={announcers} data={videos} />
       </div>
-      <VideosTable presenters={presenters} data={videos} />
-      <Pagination total={Math.ceil(count / itemsToShow)} queries={["search"]} />
+      <Pagination currentPage={page} total={count} queries={{ search }} />
     </div>
   );
 }

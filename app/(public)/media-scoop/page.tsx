@@ -3,23 +3,22 @@ import prisma from "@/lib/prisma";
 import { Image } from "@nextui-org/image";
 
 import Pagination from "@/components/Pagination";
+import { itemsToFetch } from "@/lib/globals";
 
 export const metadata = {
   title: "ميديا سكووب",
 };
 
 type Props = {
-  searchParams: { page: string };
+  searchParams: { page: number };
 };
 
 async function page({ searchParams }: Props) {
   const { page } = searchParams;
-  const pageNumber = Number(page) || 1;
-  const itemsToShow = 30;
 
   const videos = await prisma.video.findMany({
-    take: itemsToShow,
-    skip: (pageNumber - 1) * itemsToShow,
+    take: itemsToFetch,
+    skip: ((page ?? 1) - 1) * itemsToFetch,
     orderBy: {
       id: "desc",
     },
@@ -56,7 +55,7 @@ async function page({ searchParams }: Props) {
           </a>
         ))}
       </div>
-      <Pagination total={Math.ceil(count / itemsToShow)} />
+      <Pagination currentPage={page} total={count} />
     </>
   );
 }

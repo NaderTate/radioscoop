@@ -1,7 +1,13 @@
 "use client";
 import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
-const Dropzone = ({ handleImages }: { handleImages: Function }) => {
+const Dropzone = ({
+  handleImages,
+  maxFiles,
+}: {
+  handleImages: Function;
+  maxFiles?: number;
+}) => {
   const onDrop = useCallback((acceptedFiles: File[]) => {
     if (acceptedFiles?.length) {
       handleImages(acceptedFiles);
@@ -11,6 +17,7 @@ const Dropzone = ({ handleImages }: { handleImages: Function }) => {
     accept: {
       "image/*": [],
     },
+    maxFiles,
     onDrop,
   });
   return (

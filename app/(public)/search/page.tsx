@@ -1,25 +1,25 @@
 import prisma from "@/lib/prisma";
 
-import ProgramCard from "@/components/ProgramCard";
+import ProgramCard from "@/app/(protected)/dashboard/programs/_components/ProgramCard";
 import AnnouncerCard from "@/components/AnnouncerCard";
 import Pagination from "@/components/Pagination";
+import { itemsToFetch } from "@/lib/globals";
 
 type Props = {
-  searchParams: { page: string; search: string };
+  searchParams: { page: number; search: string };
 };
 
 async function Search({ searchParams }: Props) {
   const { search, page } = searchParams;
-  const pageNumber = Number(page) || 1;
-  const itemsToShow = 30;
+
   const announcers = await prisma.author.findMany({
     where: {
       name: {
         contains: search,
       },
     },
-    take: itemsToShow,
-    skip: (pageNumber - 1) * itemsToShow,
+    take: itemsToFetch,
+    skip: ((page ?? 1) - 1) * itemsToFetch,
     orderBy: {
       id: "desc",
     },
@@ -35,13 +35,13 @@ async function Search({ searchParams }: Props) {
       author: { select: { name: true } },
       month: { select: { name: true, year: { select: { year: true } } } },
     },
-    take: itemsToShow,
+    take: itemsToFetch,
     orderBy: {
       id: "desc",
     },
   });
 
-  const total = await prisma.category.count({
+  const count = await prisma.category.count({
     where: {
       name: {
         contains: search,
@@ -80,7 +80,7 @@ async function Search({ searchParams }: Props) {
         </>
       )}
 
-      <Pagination total={Math.ceil(total / itemsToShow)} />
+      <Pagination currentPage={page} total={count} />
     </div>
   );
 }

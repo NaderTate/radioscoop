@@ -1,6 +1,9 @@
-import Schedule from "./Schedule";
 import prisma from "@/lib/prisma";
+
+import Schedule from "./Schedule";
+
 export const revalidate = 100;
+
 async function page() {
   const schedule = await prisma.schedule.findFirst({
     select: {
@@ -8,11 +11,8 @@ async function page() {
       title: true,
     },
   });
-  return (
-    <div>
-      <Schedule Days={schedule?.Days} title={schedule?.title || ""} />
-    </div>
-  );
+
+  return <Schedule Days={schedule?.Days} title={schedule?.title || ""} />;
 }
 
 export default page;

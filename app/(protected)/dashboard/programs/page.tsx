@@ -1,37 +1,42 @@
-import ProgramsTable from "@/components/ProgramsTable";
-
-import SearchForm from "@/components/SearchForm";
-
 import prisma from "@/lib/prisma";
 
-import ProgramForm from "@/components/ProgramForm";
 import Pagination from "@/components/Pagination";
+import ProgramsTable from "./_components/ProgramsTable";
+import ProgramForm from "@/components/dashboard/ProgramForm";
+import SearchInput from "@/components/dashboard/SearchInput";
 
-async function page({
-  searchParams,
-}: {
-  searchParams: { search: string; page: string };
-}) {
+import { itemsToFetch } from "@/lib/globals";
+
+type Props = {
+  searchParams: { search: string; page: number };
+};
+
+async function page({ searchParams }: Props) {
   const { search, page } = searchParams;
-  const sk = Number(page) || 1;
-  const itemsToShow = 30;
+
   const programs = await prisma.category.findMany({
     where: {
       name: {
         contains: search,
       },
     },
-    take: itemsToShow,
-    skip: (sk - 1) * itemsToShow,
+    take: itemsToFetch,
+    skip: ((page ?? 1) - 1) * itemsToFetch,
     orderBy: {
       id: "desc",
     },
-    include: {
+    select: {
+      id: true,
+      name: true,
+      img: true,
+      authorId: true,
+      createdAt: true,
       episodes: { select: { id: true } },
       author: { select: { name: true } },
       month: { select: { name: true, year: { select: { year: true } } } },
     },
   });
+
   const count = await prisma.category.count({
     where: {
       name: {
@@ -39,19 +44,22 @@ async function page({
       },
     },
   });
+
   const presenetrs = await prisma.author.findMany({
     select: { id: true, name: true },
     orderBy: { id: "desc" },
   });
 
   return (
-    <div>
-      <div className="flex items-start sm:items-center gap-5 flex-col sm:flex-row">
-        <ProgramForm presenters={presenetrs} />
-        <SearchForm content="programs" />
+    <div className="flex flex-col min-h-[90vh]">
+      <div className="grow">
+        <div className="flex items-start sm:items-center gap-5 flex-col sm:flex-row">
+          <ProgramForm presenters={presenetrs} />
+          <SearchInput />
+        </div>
+        <ProgramsTable presenters={presenetrs} data={programs} />
       </div>
-      <ProgramsTable presenters={presenetrs} data={programs} />
-      <Pagination total={Math.ceil(count / itemsToShow)} queries={["search"]} />
+      <Pagination currentPage={page} total={count} queries={{ search }} />
     </div>
   );
 }

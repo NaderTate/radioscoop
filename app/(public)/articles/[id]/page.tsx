@@ -2,7 +2,7 @@ import prisma from "@/lib/prisma";
 
 import { Image } from "@nextui-org/react";
 
-import SidePanel from "@/components/SidePanel";
+import SidePanel from "@/components/public/SidePanel";
 import Schedule from "@/components/Schedule";
 import Breadcrumbs from "@/components/public/Breadcrumbs";
 

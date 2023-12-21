@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Image } from "@nextui-org/image";
 
 import Pagination from "@/components/Pagination";
+import { itemsToFetch } from "@/lib/globals";
 
 export const revalidate = 60;
 
@@ -13,21 +14,20 @@ export const metadata = {
 };
 
 type Props = {
-  searchParams: { page: string; type?: string; month?: string };
+  searchParams: { page: number; type?: string; month?: string };
 };
 
 async function page({ searchParams }: Props) {
   const { page, type, month } = searchParams;
-  const pageNumber = Number(page) || 1;
-  const itemsToShow = 30;
+  0;
 
   const articles = await prisma.post.findMany({
     where: {
       typeId: type ? type : undefined,
       postMonthId: month ? month : undefined,
     },
-    take: itemsToShow,
-    skip: (pageNumber - 1) * itemsToShow,
+    take: itemsToFetch,
+    skip: ((page ?? 1) - 1) * itemsToFetch,
     orderBy: {
       id: "desc",
     },
@@ -72,10 +72,7 @@ async function page({ searchParams }: Props) {
         ))}
       </div>
 
-      <Pagination
-        total={Math.ceil(count / itemsToShow)}
-        queries={["type", "month"]}
-      />
+      <Pagination currentPage={page} total={count} queries={{ type, month }} />
     </div>
   );
 }
