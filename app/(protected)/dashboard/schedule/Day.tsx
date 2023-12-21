@@ -1,5 +1,5 @@
 "use client";
-import Dropzone from "@/components/DropZone";
+import Dropzone from "@/components/dashboard/DropZone";
 import { RxCross2 } from "react-icons/rx";
 import { ChangeEvent, useEffect, useState } from "react";
 import { ReactSortable } from "react-sortablejs";

@@ -13,7 +13,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import ArticleForm from "./ArticleForm";
-import DeleteButton from "@/components/ConfirmDelete";
+import DeleteButton from "@/components/dashboard/ConfirmDelete";
 
 import { deleteArticle } from "@/lib/_actions";
 

@@ -20,7 +20,7 @@ import { useHanldeFeaturesData } from "../_hooks/useHandleFeaturesData";
 
 import { FiEdit } from "react-icons/fi";
 import { AiOutlinePlusCircle } from "react-icons/ai";
-import Dropzone from "@/components/DropZone";
+import Dropzone from "@/components/dashboard/DropZone";
 
 type Props = {
   feature?: {

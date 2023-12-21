@@ -21,3 +21,11 @@ type HeaderProps = {
   }[];
   seasons: { year: string; months: { id: string; name: string }[] }[];
 };
+import { Category, Month, Year } from "@prisma/client";
+
+interface Month_ extends Month {
+  categories: Category[];
+}
+interface Year_ extends Year {
+  months: Month_[];
+}

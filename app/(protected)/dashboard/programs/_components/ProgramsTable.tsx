@@ -10,7 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import DeleteButton from "@/components/ConfirmDelete";
+import DeleteButton from "@/components/dashboard/ConfirmDelete";
 import ProgramForm from "@/components/dashboard/ProgramForm";
 
 import { deleteProgram } from "@/lib/_actions";

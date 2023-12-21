@@ -1,6 +1,6 @@
 import prisma from "@/lib/prisma";
 
-import AnnouncerCard from "@/components/AnnouncerCard";
+import AnnouncerCard from "@/components/public/AnnouncerCard";
 import Pagination from "@/components/Pagination";
 import { itemsToFetch } from "@/lib/globals";
 

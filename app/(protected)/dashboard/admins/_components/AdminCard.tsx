@@ -3,7 +3,7 @@
 import { Admin } from "@prisma/client";
 
 import AdminForm from "./AdminForm";
-import ConfirmDelete from "@/components/ConfirmDelete";
+import ConfirmDelete from "@/components/dashboard/ConfirmDelete";
 
 import { deleteAdmin } from "@/actions/admins";
 

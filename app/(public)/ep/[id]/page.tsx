@@ -1,9 +1,9 @@
 import prisma from "@/lib/prisma";
 
-import AudioCard from "@/components/AudioCard";
+import AudioCard from "@/components/public/AudioCard";
 import SidePanel from "@/components/public/SidePanel";
 import ShareIcons from "@/app/(public)/ep/[id]/_components/ShareIcons";
-import EpisodeCard from "@/components/EpisodeCard";
+import EpisodeCard from "@/components/public/EpisodeCard";
 import Breadcrumbs from "@/components/public/Breadcrumbs";
 
 import { getEpisodeData, getRelatedEpisodes } from "./utils";

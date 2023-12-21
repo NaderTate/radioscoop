@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Scrollbar, A11y, Grid } from "swiper/modules";
 
-import EpisodeCard from "../EpisodeCard";
+import EpisodeCard from "./EpisodeCard";
 
 import "swiper/css";
 import "swiper/css/grid";

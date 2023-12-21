@@ -3,7 +3,7 @@ import prisma from "@/lib/prisma";
 import Link from "next/link";
 
 import Contact from "@/components/public/Contact";
-import Schedule from "@/components/Schedule";
+import Schedule from "@/components/public/Schedule";
 import SidePanel from "@/components/public/SidePanel";
 import LiveRadioPlayer from "@/components/public/LiveRadioPlayer";
 import EpisodesSection from "@/components/public/EpisodesSection";

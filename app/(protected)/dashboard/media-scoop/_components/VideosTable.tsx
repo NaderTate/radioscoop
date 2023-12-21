@@ -8,7 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import Image from "next/image";
-import DeleteButton from "../../../../../components/ConfirmDelete";
+import DeleteButton from "../../../../../components/dashboard/ConfirmDelete";
 import { FiEdit } from "react-icons/fi";
 import Link from "next/link";
 import { Video } from "@prisma/client";

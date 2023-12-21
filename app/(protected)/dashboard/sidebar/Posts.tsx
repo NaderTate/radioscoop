@@ -14,6 +14,7 @@ import {
 import { useToast } from "@/components/ui/use-toast";
 import { PulseLoader } from "react-spinners";
 import { updateSidebar } from "@/lib/_actions";
+import { Post } from "@prisma/client";
 
 function Card({
   src,

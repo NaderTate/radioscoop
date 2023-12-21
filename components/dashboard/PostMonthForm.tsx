@@ -18,9 +18,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { AiOutlineCheck, AiOutlinePlusCircle } from "react-icons/ai";
-import { Input } from "./ui/input";
+import { Input } from "../ui/input";
 import { DialogClose } from "@radix-ui/react-dialog";
 import { useState } from "react";
 import { addPostMonth } from "@/lib/_actions";

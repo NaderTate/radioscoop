@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import Schedule from "../Schedule";
+import Schedule from "./Schedule";
 
 import "swiper/css";
 import "swiper/css/navigation";

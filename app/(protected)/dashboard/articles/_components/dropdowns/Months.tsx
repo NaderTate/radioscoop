@@ -1,4 +1,4 @@
-import PostMonthForm from "@/components/PostMonthForm";
+import PostMonthForm from "@/components/dashboard/PostMonthForm";
 import { Button } from "@/components/ui/button";
 import {
   Command,

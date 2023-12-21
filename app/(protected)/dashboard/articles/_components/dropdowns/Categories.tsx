@@ -13,7 +13,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import PostTypeForm from "@/components/PostTypeForm";
+import PostTypeForm from "@/components/dashboard/PostTypeForm";
 
 import { cn } from "@/lib/utils";
 

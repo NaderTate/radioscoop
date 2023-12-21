@@ -1,5 +1,7 @@
 import prisma from "@/lib/prisma";
-import Seasons from "./Seasons";
+
+import Seasons from "./_components/Seasons";
+
 async function page() {
   const years = await prisma.year.findMany({
     include: {
@@ -9,25 +11,10 @@ async function page() {
         },
       },
     },
+    orderBy: { year: "asc" },
   });
-  return (
-    <div>
-      <Seasons
-        years={years}
-        getPrograms={async (e: string) => {
-          "use server";
-          return await prisma.category.findMany({
-            where: {
-              name: {
-                contains: e,
-                mode: "insensitive",
-              },
-            },
-          });
-        }}
-      />
-    </div>
-  );
+
+  return <Seasons years={years} />;
 }
 
 export default page;

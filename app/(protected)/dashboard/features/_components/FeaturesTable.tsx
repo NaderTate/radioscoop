@@ -11,7 +11,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import FeatureForm from "./FeatureForm";
-import DeleteButton from "@/components/ConfirmDelete";
+import DeleteButton from "@/components/dashboard/ConfirmDelete";
 
 import { deleteFeature } from "@/lib/_actions";
 

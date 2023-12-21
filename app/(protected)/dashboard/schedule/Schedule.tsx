@@ -7,11 +7,12 @@ import { updateSchedule } from "@/lib/_actions";
 import { Input } from "@/components/ui/input";
 import { PulseLoader } from "react-spinners";
 import { useToast } from "@/components/ui/use-toast";
+import { Day as dayType } from "@/app/types";
 
-function Schedule({ Days, title }: { Days: Day[] | any; title: string }) {
+function Schedule({ Days, title }: { Days: dayType[] | any; title: string }) {
   const { toast } = useToast();
 
-  const [days, setDays] = useState<Day[]>(Days);
+  const [days, setDays] = useState<dayType[]>(Days);
   const [Title, setTitle] = useState(title);
   const [loading, setLoading] = useState(false);
 

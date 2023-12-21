@@ -18,7 +18,7 @@ import AnnouncerDropodown from "@/components/dashboard/AnnouncerDropodown";
 import { useHandleVideoData } from "../_hooks/useHandleVideoData";
 import { Input, Spinner } from "@nextui-org/react";
 import { AiOutlinePlusCircle } from "react-icons/ai";
-import Dropzone from "@/components/DropZone";
+import Dropzone from "@/components/dashboard/DropZone";
 
 function VideoForm({
   announcers,

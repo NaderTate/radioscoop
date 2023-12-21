@@ -21,7 +21,7 @@ import AnnouncerDropodown from "@/components/dashboard/AnnouncerDropodown";
 import { useHandleArticleData } from "../_hooks/useHandleArticleData";
 
 import { FiEdit } from "react-icons/fi";
-import Dropzone from "@/components/DropZone";
+import Dropzone from "@/components/dashboard/DropZone";
 
 type Props = {
   presenters: { id: string; name: string }[];

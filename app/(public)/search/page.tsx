@@ -1,7 +1,7 @@
 import prisma from "@/lib/prisma";
 
 import ProgramCard from "@/app/(protected)/dashboard/programs/_components/ProgramCard";
-import AnnouncerCard from "@/components/AnnouncerCard";
+import AnnouncerCard from "@/components/public/AnnouncerCard";
 import Pagination from "@/components/Pagination";
 import { itemsToFetch } from "@/lib/globals";
 

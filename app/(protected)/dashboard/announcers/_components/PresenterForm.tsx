@@ -14,7 +14,7 @@ import Image from "next/image";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useHandleAnnouncerData } from "../_hooks/useHandleAnnouncerData";
 import { Input, Spinner } from "@nextui-org/react";
-import Dropzone from "@/components/DropZone";
+import Dropzone from "@/components/dashboard/DropZone";
 
 type Props = {
   announcer?: {

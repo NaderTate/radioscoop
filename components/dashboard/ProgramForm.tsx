@@ -16,7 +16,7 @@ import AnnouncerDropodown from "./AnnouncerDropodown";
 import { useHandleProgramData } from "@/app/(protected)/dashboard/programs/_hooks/useHandleProgramData";
 
 import { FiEdit } from "react-icons/fi";
-import Dropzone from "../DropZone";
+import Dropzone from "./DropZone";
 
 type Prop = {
   presenters: { id: string; name: string }[];

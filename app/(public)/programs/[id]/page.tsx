@@ -2,7 +2,7 @@ import prisma from "@/lib/prisma";
 
 import Link from "next/link";
 
-import EpisodeCard from "@/components/EpisodeCard";
+import EpisodeCard from "@/components/public/EpisodeCard";
 import Pagination from "@/components/Pagination";
 import { itemsToFetch } from "@/lib/globals";
 
