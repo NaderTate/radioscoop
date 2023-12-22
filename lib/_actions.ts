@@ -93,17 +93,6 @@ export const updateSchedule = async (
     },
   });
 };
-// update the sidebar items by receiving a list of IDs and making a relation between the posts and the sidebar
-export const updateSidebar = async (
-  data: { id: string; image: string; title: string }[]
-) => {
-  await prisma.sideBar.deleteMany();
-  await prisma.sideBar.create({
-    data: {
-      Items: data,
-    },
-  });
-};
 
 // Add new month to year
 export const addMonth = async (yearId: string, name: string) => {

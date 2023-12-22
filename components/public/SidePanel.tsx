@@ -12,6 +12,8 @@ import "swiper/css/navigation";
 
 import { getSidePanelArticles } from "@/actions/articles";
 
+import { Post } from "@/app/types";
+
 const SidePanel = () => {
   const [data, setData] = useState<Post[] | any>([]);
   useEffect(() => {

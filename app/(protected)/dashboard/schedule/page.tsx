@@ -1,6 +1,6 @@
 import prisma from "@/lib/prisma";
 
-import Schedule from "./Schedule";
+import Schedule from "./_components/Schedule";
 
 export const revalidate = 100;
 

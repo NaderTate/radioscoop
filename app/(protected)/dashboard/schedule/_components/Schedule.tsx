@@ -1,18 +1,22 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import Day from "./Day";
-import { useState } from "react";
-import { AiOutlinePlusCircle } from "react-icons/ai";
-import { updateSchedule } from "@/lib/_actions";
-import { Input } from "@/components/ui/input";
-import { PulseLoader } from "react-spinners";
-import { useToast } from "@/components/ui/use-toast";
-import { Day as dayType } from "@/app/types";
 
-function Schedule({ Days, title }: { Days: dayType[] | any; title: string }) {
+import { useState } from "react";
+import { Input } from "@nextui-org/react";
+import { Spinner } from "@nextui-org/react";
+
+import Day from "./Day";
+import { updateSchedule } from "@/lib/_actions";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
+
+import { AiOutlinePlusCircle } from "react-icons/ai";
+
+import { Day as DayType } from "@/app/types";
+
+function Schedule({ Days, title }: { Days: DayType[] | any; title: string }) {
   const { toast } = useToast();
 
-  const [days, setDays] = useState<dayType[]>(Days);
+  const [days, setDays] = useState<DayType[]>(Days);
   const [Title, setTitle] = useState(title);
   const [loading, setLoading] = useState(false);
 
@@ -20,7 +24,7 @@ function Schedule({ Days, title }: { Days: dayType[] | any; title: string }) {
     setDays(days.filter((day) => day.id !== id));
   };
   return (
-    <div>
+    <>
       <div className="flex justify-end">
         <Button
           onClick={async () => {
@@ -33,18 +37,17 @@ function Schedule({ Days, title }: { Days: dayType[] | any; title: string }) {
             });
           }}
         >
-          {loading ? <PulseLoader size={6} /> : <p>حفظ</p>}
+          {loading ? <Spinner color="secondary" /> : "حفظ"}
         </Button>
       </div>
       <div className="space-y-5">
         <div className="flex justify-center">
           <Input
-            placeholder="title"
-            className="text-center w-52  border border-muted-foreground"
+            label="title"
             defaultValue={Title}
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
+            onValueChange={setTitle}
+            className="w-80"
+            variant="bordered"
           />
         </div>
         {days.map((day) => {
@@ -93,7 +96,7 @@ function Schedule({ Days, title }: { Days: dayType[] | any; title: string }) {
           </Button>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
