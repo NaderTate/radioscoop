@@ -65,3 +65,12 @@ export const updateVideo = async (
     return { success: false, error };
   }
 };
+
+// delete video
+export const deleteVideo = async (videoId: string) => {
+  const video = await prisma.video.delete({
+    where: { id: videoId },
+  });
+  revalidatePath("/dashboard/media-scoop");
+  return video;
+};

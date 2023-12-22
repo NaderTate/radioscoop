@@ -1,14 +1,21 @@
-import { Image } from "@nextui-org/image";
 import { Episode } from "@prisma/client";
+
 import Link from "next/link";
-interface Episodee extends Episode {
+import { Image } from "@nextui-org/image";
+
+interface Episode_ extends Episode {
   category?: {
     name: string;
     img: string;
     author: { name: string } | null;
   } | null;
 }
-function EpisodeCard({ ep }: { ep: Episodee }) {
+
+type Props = {
+  ep: Episode_;
+};
+
+function EpisodeCard({ ep }: Props) {
   return (
     <div className="relative aspect-square ">
       <Link href={{ pathname: `/ep/${ep.id}` }}>

@@ -1,9 +1,10 @@
 "use client";
-import React from "react";
+
+import { useState } from "react";
 import AudioPlayer from "react-h5-audio-player";
-import { Episode } from "@prisma/client";
 
 import "react-h5-audio-player/lib/styles.css";
+
 type Props = {
   audio: {
     category?: { name: string; img: string } | null;
@@ -18,8 +19,8 @@ type Props = {
   };
 };
 function AudioCard({ audio }: Props) {
-  const [duration, setDuration] = React.useState(0);
-  const [play, setPlay] = React.useState(false);
+  const [duration, setDuration] = useState(0);
+  const [play, setPlay] = useState(false);
   const timestamps = (sec: number) => {
     const hours = Math.floor(sec / 3600);
     const minutes = Math.floor((sec - hours * 3600) / 60);

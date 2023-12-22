@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { Input, Spinner } from "@nextui-org/react";
+import { DialogClose } from "@radix-ui/react-dialog";
 
 import {
   Dialog,
@@ -10,13 +11,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import Dropzone from "./DropZone";
 import { Button } from "@/components/ui/button";
-import { DialogClose } from "@radix-ui/react-dialog";
 import AnnouncerDropodown from "./AnnouncerDropodown";
 import { useHandleProgramData } from "@/app/(protected)/dashboard/programs/_hooks/useHandleProgramData";
 
 import { FiEdit } from "react-icons/fi";
-import Dropzone from "./DropZone";
 
 type Prop = {
   presenters: { id: string; name: string }[];

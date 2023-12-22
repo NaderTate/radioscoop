@@ -1,7 +1,7 @@
-import { Post } from "@prisma/client";
-
 import Link from "next/link";
 import Image from "next/image";
+
+import { Post } from "@prisma/client";
 
 import {
   Table,
@@ -15,7 +15,7 @@ import {
 import ArticleForm from "./ArticleForm";
 import DeleteButton from "@/components/dashboard/ConfirmDelete";
 
-import { deleteArticle } from "@/lib/_actions";
+import { deleteArticle } from "@/actions/articles";
 
 interface ArticlesTableProps extends Post {
   presenter: { name: string } | null;
@@ -81,7 +81,7 @@ function ArticlesTable({ data, presenters, types, postMonths, years }: Props) {
                   presenters={presenters}
                   article={article}
                 />
-                | <DeleteButton deleteAction={deleteArticle} id={article.id} />{" "}
+                | <DeleteButton deleteAction={deleteArticle} id={article.id} />
               </div>
             </TableCell>
           </TableRow>

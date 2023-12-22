@@ -65,7 +65,7 @@ function ArticleForm({ presenters, article, types, postMonths, years }: Props) {
                 setArticleData({ ...articleData, title: e.target.value });
               }}
             />
-            <h1>الصورة</h1>
+            <h4>الصورة</h4>
             <Dropzone handleImages={handleUploadImage} />
 
             {uploadingImage && <Spinner color="primary" />}

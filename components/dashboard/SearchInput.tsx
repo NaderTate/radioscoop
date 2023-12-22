@@ -3,8 +3,8 @@
 import { Route } from "next";
 import { Input } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
-import { KeyboardEvent, useState } from "react";
 import { usePathname } from "next/navigation";
+import { KeyboardEvent, useState } from "react";
 
 import { IoSearch } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";

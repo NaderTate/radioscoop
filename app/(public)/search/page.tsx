@@ -1,8 +1,9 @@
 import prisma from "@/lib/prisma";
 
-import ProgramCard from "@/app/(protected)/dashboard/programs/_components/ProgramCard";
-import AnnouncerCard from "@/components/public/AnnouncerCard";
 import Pagination from "@/components/Pagination";
+import AnnouncerCard from "@/components/public/AnnouncerCard";
+import ProgramCard from "@/app/(protected)/dashboard/programs/_components/ProgramCard";
+
 import { itemsToFetch } from "@/lib/globals";
 
 type Props = {

@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-import { Button } from "@/components/ui/button";
 import {
   Command,
   CommandEmpty,
@@ -13,6 +12,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { Button } from "@/components/ui/button";
 import PostTypeForm from "@/components/dashboard/PostTypeForm";
 
 import { cn } from "@/lib/utils";
@@ -49,9 +49,7 @@ const Categories = ({ typeId, types, onSelect }: Props) => {
           <CommandInput placeholder="ابحث عن تصنيف..." />
           <CommandEmpty>لم يتم العثور على أي تصنيف.</CommandEmpty>
           <CommandGroup className="overflow-auto">
-            <div className="my-2">
-              <PostTypeForm For="post" />
-            </div>
+            <PostTypeForm For="post" />
 
             {types.map((type) => (
               <CommandItem

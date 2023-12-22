@@ -65,15 +65,15 @@ function Footer() {
         <div className="grid grid-cols-1 gap-8 mt-16 xl:grid-cols-4 xl:gap-24">
           <div>
             <div className="flex gap-5 justify-center mt-10">
-              {data.map((ele, index) => (
+              {data.map((element, index) => (
                 <a
-                  key={ele.link + index}
-                  className={`inline-flex h-fit items-center p-3 text-sm font-medium text-white transition-colors border-2 rounded-full hover:bg-transparent focus:outline-none focus:ring active:opacity-75 ${ele.style}`}
-                  href={ele.link}
+                  key={element.link + index}
+                  className={`inline-flex h-fit items-center p-3 text-sm font-medium text-white transition-colors border-2 rounded-full hover:bg-transparent focus:outline-none focus:ring active:opacity-75 ${element.style}`}
+                  href={element.link}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <ele.Icon className="" />
+                  <element.Icon className="" />
                 </a>
               ))}
             </div>

@@ -1,9 +1,11 @@
 import prisma from "@/lib/prisma";
 
 import Pagination from "@/components/Pagination";
-import ArticleForm from "@/app/(protected)/dashboard/articles/_components/ArticleForm";
-import ArticlesTable from "@/app/(protected)/dashboard/articles/_components/ArticlesTable";
+import ArticleForm from "./_components/ArticleForm";
+import ArticlesTable from "./_components/ArticlesTable";
 import SearchInput from "@/components/dashboard/SearchInput";
+
+import { itemsToFetch } from "@/lib/globals";
 
 type Props = {
   searchParams: { search: string; page: number };
@@ -11,7 +13,6 @@ type Props = {
 
 async function page({ searchParams }: Props) {
   const { search, page } = searchParams;
-  const itemsToShow = 30;
 
   const articles = await prisma.post.findMany({
     where: {
@@ -19,8 +20,8 @@ async function page({ searchParams }: Props) {
         contains: search,
       },
     },
-    take: itemsToShow,
-    skip: ((page ?? 1) - 1) * itemsToShow,
+    take: itemsToFetch,
+    skip: ((page ?? 1) - 1) * itemsToFetch,
     orderBy: {
       id: "desc",
     },

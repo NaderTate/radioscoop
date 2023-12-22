@@ -17,7 +17,7 @@ import { useFetchSearchResults } from "../../generalProgram/_hooks/useFetchSearc
 
 import { GoPlusCircle } from "react-icons/go";
 
-import { addSeriesProgram } from "@/lib/_actions";
+import { addProgramToSeries } from "@/actions/program";
 
 const AddProgramModal = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -58,7 +58,7 @@ const AddProgramModal = () => {
                     <Button
                       size="sm"
                       onClick={async () => {
-                        await addSeriesProgram(result.id);
+                        await addProgramToSeries(result.id);
                         onClose();
                       }}
                     >

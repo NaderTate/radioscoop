@@ -2,6 +2,7 @@ import prisma from "@/lib/prisma";
 
 import AnnouncerCard from "@/components/public/AnnouncerCard";
 import Pagination from "@/components/Pagination";
+
 import { itemsToFetch } from "@/lib/globals";
 
 export const revalidate = 60;
@@ -66,18 +67,20 @@ async function Announcers({ searchParams }: Props) {
   });
 
   return (
-    <div className="p-5">
-      <div className="flex flex-wrap gap-5 justify-center ">
-        {announcers.map((announcer) => {
-          return (
-            <AnnouncerCard
-              key={announcer.id}
-              id={announcer.id}
-              name={announcer.name}
-              img={announcer.img}
-            />
-          );
-        })}
+    <div className="p-5 flex flex-col min-h-[90vh]">
+      <div className="grow">
+        <div className="flex flex-wrap gap-5 justify-center ">
+          {announcers.map((announcer) => {
+            return (
+              <AnnouncerCard
+                key={announcer.id}
+                id={announcer.id}
+                name={announcer.name}
+                img={announcer.img}
+              />
+            );
+          })}
+        </div>
       </div>
       <Pagination currentPage={page} total={count} queries={{ search }} />
     </div>

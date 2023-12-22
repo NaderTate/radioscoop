@@ -1,4 +1,5 @@
 "use server";
+
 import prisma from "@/lib/prisma";
 
 export const getEpisodeData = async (id: string) => {
@@ -25,6 +26,7 @@ export const getEpisodeData = async (id: string) => {
       createdAt: true,
       img: true,
       link: true,
+      embedLink: true,
     },
   });
 

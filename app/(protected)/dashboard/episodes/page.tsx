@@ -12,7 +12,6 @@ type Props = {
 
 async function page({ searchParams }: Props) {
   const { search, page } = searchParams;
-  const itemsToShow = 30;
 
   const Episodes = await getEpisodes(search, page);
 
@@ -29,11 +28,7 @@ async function page({ searchParams }: Props) {
         </div>
         <EpisodesTable programs={programs} data={Episodes} />
       </div>
-      <Pagination
-        currentPage={page}
-        total={Math.ceil(count / itemsToShow)}
-        queries={{ search }}
-      />
+      <Pagination currentPage={page} total={count} queries={{ search }} />
     </div>
   );
 }

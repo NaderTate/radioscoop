@@ -1,5 +1,11 @@
 "use client";
-import { Button } from "@/components/ui/button";
+
+import { Video } from "@prisma/client";
+
+import Image from "next/image";
+import { Input, Spinner } from "@nextui-org/react";
+import { DialogClose } from "@radix-ui/react-dialog";
+
 import {
   Dialog,
   DialogContent,
@@ -7,26 +13,21 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { ChangeEvent, useState } from "react";
-import { DialogClose } from "@radix-ui/react-dialog";
-import { Video } from "@prisma/client";
-import Image from "next/image";
-import { BeatLoader } from "react-spinners";
-import { addVideo, updateVideo } from "@/lib/_actions";
-import { FiEdit } from "react-icons/fi";
-import AnnouncerDropodown from "@/components/dashboard/AnnouncerDropodown";
-import { useHandleVideoData } from "../_hooks/useHandleVideoData";
-import { Input, Spinner } from "@nextui-org/react";
-import { AiOutlinePlusCircle } from "react-icons/ai";
+import { Button } from "@/components/ui/button";
 import Dropzone from "@/components/dashboard/DropZone";
+import AnnouncerDropodown from "@/components/dashboard/AnnouncerDropodown";
 
-function VideoForm({
-  announcers,
-  video,
-}: {
+import { FiEdit } from "react-icons/fi";
+import { AiOutlinePlusCircle } from "react-icons/ai";
+
+import { useHandleVideoData } from "../_hooks/useHandleVideoData";
+
+type Props = {
   announcers: { id: string; name: string }[];
   video?: Video;
-}) {
+};
+
+function VideoForm({ announcers, video }: Props) {
   const {
     videoData,
     setVideoData,

@@ -24,9 +24,7 @@ async function Home() {
         },
         {
           category: {
-            NOT: {
-              series: true,
-            },
+            series: false,
           },
         },
       ],

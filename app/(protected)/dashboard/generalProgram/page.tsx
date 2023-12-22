@@ -1,10 +1,10 @@
 import prisma from "@/lib/prisma";
 
 import Pagination from "@/components/Pagination";
+import AddProgramModal from "./_components/AddProgramModal";
 import ProgramCard from "@/app/(protected)/dashboard/programs/_components/ProgramCard";
 
 import { itemsToFetch } from "@/lib/globals";
-import AddProgramModal from "./_components/AddProgramModal";
 
 type Props = {
   searchParams: { page: number };

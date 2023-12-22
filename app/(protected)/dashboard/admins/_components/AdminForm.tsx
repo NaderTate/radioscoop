@@ -11,10 +11,11 @@ import {
   Input,
 } from "@nextui-org/react";
 
+import { Admin } from "@prisma/client";
+
 import { FaRegEdit } from "react-icons/fa";
 
 import { useHandleAdminData } from "../_hooks/useHandleAdminData";
-import { Admin } from "@prisma/client";
 
 type Props = {
   admin?: Admin;

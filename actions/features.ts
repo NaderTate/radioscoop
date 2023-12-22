@@ -1,8 +1,10 @@
 "use server";
+
 import prisma from "@/lib/prisma";
 
-import { convertDriveLink } from "@/lib/utils";
 import { revalidatePath } from "next/cache";
+
+import { convertDriveLink } from "@/lib/utils";
 
 export const createFeature = async (featureData: {
   featureTitle: string | null;
@@ -75,4 +77,24 @@ export const updateFeature = async (
   } catch (error) {
     return { success: false, error };
   }
+};
+
+// delete feature
+export const deleteFeature = async (featureId: string) => {
+  const feature = await prisma.episode.delete({
+    where: { id: featureId },
+  });
+  revalidatePath("/dashboard/features");
+  return feature;
+};
+
+// add feature type
+export const addFeatureType = async (name: string) => {
+  const type = await prisma.featureType.create({
+    data: {
+      name,
+    },
+  });
+  revalidatePath("/dashboard/features");
+  return type;
 };

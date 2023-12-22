@@ -1,8 +1,8 @@
 "use server";
 
 import prisma from "@/lib/prisma";
-import { convertDriveLink } from "@/lib/utils";
 import { revalidatePath } from "next/cache";
+import { convertDriveLink } from "@/lib/utils";
 
 // create episode
 export const createEpisode = async (episodeData: {
@@ -49,6 +49,16 @@ export const updateEpisode = async (
           id: episodeData.programId,
         },
       },
+    },
+  });
+  revalidatePath("/dashboard/episodes");
+  return episode;
+};
+
+export const deleteEpisode = async (id: string) => {
+  const episode = await prisma.episode.delete({
+    where: {
+      id,
     },
   });
   revalidatePath("/dashboard/episodes");

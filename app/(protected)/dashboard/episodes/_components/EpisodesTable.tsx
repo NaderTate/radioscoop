@@ -15,7 +15,7 @@ import {
 import EpisodeForm from "./EpisodeForm";
 import DeleteButton from "@/components/dashboard/ConfirmDelete";
 
-import { deleteEpisode } from "@/lib/_actions";
+import { deleteEpisode } from "@/actions/episodes";
 
 interface EpisodesTableProps extends Episode {
   category: {
@@ -85,7 +85,7 @@ function EpisodesTable({ data, programs }: Props) {
                       embedLink: ep.embedLink,
                     }}
                   />
-                  | <DeleteButton deleteAction={deleteEpisode} id={ep.id} />{" "}
+                  | <DeleteButton deleteAction={deleteEpisode} id={ep.id} />
                 </div>
               </TableCell>
             </TableRow>

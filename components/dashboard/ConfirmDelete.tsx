@@ -1,5 +1,7 @@
 "use client";
+
 import { useTransition } from "react";
+
 import {
   Modal,
   ModalContent,
@@ -8,6 +10,7 @@ import {
   Button,
   useDisclosure,
 } from "@nextui-org/react";
+
 import { MdDeleteOutline } from "react-icons/md";
 
 type Props = {

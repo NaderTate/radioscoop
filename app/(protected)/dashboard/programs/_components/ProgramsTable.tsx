@@ -10,10 +10,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import DeleteButton from "@/components/dashboard/ConfirmDelete";
 import ProgramForm from "@/components/dashboard/ProgramForm";
+import DeleteButton from "@/components/dashboard/ConfirmDelete";
 
-import { deleteProgram } from "@/lib/_actions";
+import { deleteProgram } from "@/actions/program";
 
 type Props = {
   data: {

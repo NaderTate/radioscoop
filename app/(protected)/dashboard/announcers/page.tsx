@@ -3,15 +3,15 @@ import prisma from "@/lib/prisma";
 import Pagination from "@/components/Pagination";
 import PresenterForm from "./_components/PresenterForm";
 import SearchInput from "@/components/dashboard/SearchInput";
-import PresenetersTable from "./_components/PresenetersTable";
+import AnnouncersTable from "./_components/AnnouncersTable";
 
 import { itemsToFetch } from "@/lib/globals";
 
-async function page({
-  searchParams,
-}: {
+type Props = {
   searchParams: { search: string; page: number };
-}) {
+};
+
+async function page({ searchParams }: Props) {
   const { search, page } = searchParams;
   const presenters = await prisma.author.findMany({
     where: {
@@ -47,7 +47,7 @@ async function page({
           <PresenterForm />
           <SearchInput />
         </div>
-        <PresenetersTable data={presenters} />
+        <AnnouncersTable data={presenters} />
       </div>
       <Pagination currentPage={page} total={count} queries={{ search }} />
     </div>

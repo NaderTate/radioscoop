@@ -84,3 +84,30 @@ export const getArticleTypes = async () => {
   });
   return FormattedArticleTypes;
 };
+
+// search programs and authors
+export const search = async (searchQuery: string) => {
+  const programs = await prisma.category.findMany({
+    where: { name: { contains: searchQuery, mode: "insensitive" } },
+    select: {
+      name: true,
+      id: true,
+      img: true,
+    },
+    take: 6,
+    orderBy: {
+      id: "desc",
+    },
+  });
+  const authors = await prisma.author.findMany({
+    where: { name: { contains: searchQuery, mode: "insensitive" } },
+    take: 6,
+    orderBy: {
+      id: "desc",
+    },
+  });
+  return {
+    programs,
+    authors,
+  };
+};

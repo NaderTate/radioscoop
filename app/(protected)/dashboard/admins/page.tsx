@@ -5,13 +5,14 @@ import AdminForm from "./_components/AdminForm";
 import Pagination from "@/components/Pagination";
 import SearchInput from "@/components/dashboard/SearchInput";
 
+import { itemsToFetch } from "@/lib/globals";
+
 type Props = {
   searchParams: { search: string; page: number };
 };
 
 async function page({ searchParams }: Props) {
   const { search, page } = searchParams;
-  const itemsToShow = 30;
 
   const admins = await prisma.admin.findMany({
     where: {
@@ -19,8 +20,8 @@ async function page({ searchParams }: Props) {
         contains: search,
       },
     },
-    take: itemsToShow,
-    skip: ((page ?? 1) - 1) * itemsToShow,
+    take: itemsToFetch,
+    skip: ((page ?? 1) - 1) * itemsToFetch,
     orderBy: {
       id: "desc",
     },
@@ -47,11 +48,7 @@ async function page({ searchParams }: Props) {
           })}
         </div>
       </div>
-      <Pagination
-        currentPage={page}
-        total={Math.ceil(count / itemsToShow)}
-        queries={{ search }}
-      />
+      <Pagination currentPage={page} total={count} queries={{ search }} />
     </div>
   );
 }

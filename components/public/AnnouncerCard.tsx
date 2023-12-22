@@ -1,16 +1,13 @@
-import { Image } from "@nextui-org/image";
 import Link from "next/link";
-import React from "react";
+import { Image } from "@nextui-org/image";
 
-function AnnouncerCard({
-  id,
-  name,
-  img,
-}: {
+type Props = {
   id: string;
   name: string;
   img: string | null;
-}) {
+};
+
+function AnnouncerCard({ id, name, img }: Props) {
   return (
     <Link href={{ pathname: `/announcers/${id}` }}>
       <Image
@@ -22,7 +19,7 @@ function AnnouncerCard({
             ? img
             : "https://res.cloudinary.com/ddcjbeysn/image/upload/v1699437344/person-gray-photo-placeholder-woman-t-shirt-white-background-131683043_rmfhru.jpg"
         }
-        alt=""
+        alt={name}
       />
       <h1 className="text-center">{name}</h1>
     </Link>

@@ -15,12 +15,12 @@ import Category from "./dropdowns/Category";
 import Preparer from "./dropdowns/Preparer";
 import Presenter from "./dropdowns/Presenter";
 import { Button } from "@/components/ui/button";
-
-import { useHanldeFeaturesData } from "../_hooks/useHandleFeaturesData";
+import Dropzone from "@/components/dashboard/DropZone";
 
 import { FiEdit } from "react-icons/fi";
 import { AiOutlinePlusCircle } from "react-icons/ai";
-import Dropzone from "@/components/dashboard/DropZone";
+
+import { useHanldeFeaturesData } from "../_hooks/useHandleFeaturesData";
 
 type Props = {
   feature?: {

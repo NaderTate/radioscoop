@@ -25,6 +25,7 @@ export const updateYear = async (yearId: string, name: string) => {
   revalidatePath("/dashboard/seasons");
   return year;
 };
+
 // delete year
 export const deleteYear = async (yearId: string) => {
   const year = await prisma.year.delete({

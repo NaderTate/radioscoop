@@ -1,4 +1,9 @@
 "use client";
+
+import Image from "next/image";
+import { Input, Spinner } from "@nextui-org/react";
+import { DialogClose } from "@radix-ui/react-dialog";
+
 import {
   Dialog,
   DialogContent,
@@ -7,14 +12,12 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { FiEdit } from "react-icons/fi";
-import { DialogClose } from "@radix-ui/react-dialog";
-import Image from "next/image";
-
-import { AiOutlinePlusCircle } from "react-icons/ai";
-import { useHandleAnnouncerData } from "../_hooks/useHandleAnnouncerData";
-import { Input, Spinner } from "@nextui-org/react";
 import Dropzone from "@/components/dashboard/DropZone";
+
+import { FiEdit } from "react-icons/fi";
+import { AiOutlinePlusCircle } from "react-icons/ai";
+
+import { useHandleAnnouncerData } from "../_hooks/useHandleAnnouncerData";
 
 type Props = {
   announcer?: {
@@ -23,6 +26,7 @@ type Props = {
     img: string | null;
   };
 };
+
 function PresenterForm({ announcer }: Props) {
   const {
     announcerData,
@@ -31,6 +35,7 @@ function PresenterForm({ announcer }: Props) {
     onSubmit,
     handleUploadImage,
   } = useHandleAnnouncerData(announcer);
+
   return (
     <Dialog>
       <DialogTrigger>

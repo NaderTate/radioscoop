@@ -1,6 +1,10 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { Input } from "../ui/input";
+
+import { Type } from "@prisma/client";
+
+import { useState } from "react";
+import { DialogClose } from "@radix-ui/react-dialog";
+
 import {
   Dialog,
   DialogContent,
@@ -8,12 +12,20 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Type } from "@prisma/client";
-import { useState } from "react";
-import { DialogClose } from "@radix-ui/react-dialog";
-import { addFeatureType, addType } from "@/lib/_actions";
+import { Input } from "../ui/input";
+import { Button } from "@/components/ui/button";
+
+import { addArticleType } from "@/actions/articles";
+import { addFeatureType } from "@/actions/features";
+
 import { AiOutlinePlusCircle } from "react-icons/ai";
-function PostTypeForm({ type, For }: { type?: Type; For: string }) {
+
+type Props = {
+  type?: Type;
+  For: string;
+};
+
+function PostTypeForm({ type, For }: Props) {
   const [name, setName] = useState(type?.name || "");
   return (
     <Dialog>
@@ -40,7 +52,7 @@ function PostTypeForm({ type, For }: { type?: Type; For: string }) {
               className="w-full"
               onClick={async () => {
                 if (For == "post") {
-                  await addType(name);
+                  await addArticleType(name);
                 } else {
                   await addFeatureType(name);
                 }

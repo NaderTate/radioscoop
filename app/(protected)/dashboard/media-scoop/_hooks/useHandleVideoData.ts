@@ -1,8 +1,10 @@
 "use client";
 
-import { ChangeEvent, useState } from "react";
-import { addVideo, updateVideo } from "@/actions/videos";
 import { Video } from "@prisma/client";
+
+import { useState } from "react";
+
+import { addVideo, updateVideo } from "@/actions/videos";
 
 export const useHandleVideoData = (video?: Video) => {
   const [videoData, setVideoData] = useState<Video>(video || ({} as Video));

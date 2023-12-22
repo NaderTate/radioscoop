@@ -2,8 +2,8 @@ import prisma from "@/lib/prisma";
 
 import { Image } from "@nextui-org/react";
 
-import SidePanel from "@/components/public/SidePanel";
 import Schedule from "@/components/public/Schedule";
+import SidePanel from "@/components/public/SidePanel";
 import Breadcrumbs from "@/components/public/Breadcrumbs";
 
 export const revalidate = 60;

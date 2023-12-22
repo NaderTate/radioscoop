@@ -1,8 +1,8 @@
 import prisma from "@/lib/prisma";
 
+import ShareIcons from "./_components/ShareIcons";
 import AudioCard from "@/components/public/AudioCard";
 import SidePanel from "@/components/public/SidePanel";
-import ShareIcons from "@/app/(public)/ep/[id]/_components/ShareIcons";
 import EpisodeCard from "@/components/public/EpisodeCard";
 import Breadcrumbs from "@/components/public/Breadcrumbs";
 

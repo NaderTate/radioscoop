@@ -1,4 +1,5 @@
 "use client";
+
 import {
   Modal,
   ModalContent,
@@ -6,6 +7,7 @@ import {
   useDisclosure,
 } from "@nextui-org/modal";
 import { Image } from "@nextui-org/image";
+
 function ImagesSection({ image }: { image: string }) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 

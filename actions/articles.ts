@@ -1,5 +1,7 @@
 "use server";
+
 import prisma from "@/lib/prisma";
+
 import { revalidatePath } from "next/cache";
 
 export const getSidePanelArticles = async () => {
@@ -79,4 +81,43 @@ export const updateArticle = async (
   } catch (error) {
     return { success: false, error };
   }
+};
+
+// delete article
+export const deleteArticle = async (articleId: string) => {
+  const article = await prisma.post.delete({
+    where: { id: articleId },
+  });
+  revalidatePath("/dashboard/articles");
+  return article;
+};
+
+// add new type
+export const addArticleType = async (name: string) => {
+  const type = await prisma.type.create({
+    data: {
+      name,
+    },
+  });
+  revalidatePath("/dashboard/articles");
+  return type;
+};
+
+// add new postmonth
+export const addArticleMonth = async (monthData: {
+  monthName: string;
+  yearId: string;
+}) => {
+  const month = await prisma.year.update({
+    where: { id: monthData.yearId },
+    data: {
+      postMonth: {
+        create: {
+          name: monthData.monthName,
+        },
+      },
+    },
+  });
+  revalidatePath("/dashboard/articles");
+  return month;
 };

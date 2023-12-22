@@ -3,7 +3,7 @@
 import { debounce } from "lodash";
 import { ChangeEvent, useState } from "react";
 
-import { search } from "@/lib/_actions";
+import { search } from "../utils";
 
 export const useFetchSearchResults = () => {
   const [loading, setLoading] = useState(false);

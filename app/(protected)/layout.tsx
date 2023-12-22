@@ -21,7 +21,7 @@ export default async function RootLayout({
   if (!session) redirect("/login");
 
   return (
-    <div dir="rtl" className=" px-5 pt-12">
+    <div dir="rtl" className="px-5 pt-12">
       <div className="fixed z-20 top-5 right-5">
         <Sidebar />
       </div>

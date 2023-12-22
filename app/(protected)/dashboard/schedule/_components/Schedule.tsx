@@ -5,7 +5,7 @@ import { Input } from "@nextui-org/react";
 import { Spinner } from "@nextui-org/react";
 
 import Day from "./Day";
-import { updateSchedule } from "@/lib/_actions";
+import { updateSchedule } from "../utils";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 

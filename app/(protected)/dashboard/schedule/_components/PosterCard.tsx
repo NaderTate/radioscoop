@@ -1,7 +1,7 @@
-import { Image as NUIImage } from "@nextui-org/react";
-import React from "react";
-import { RxCross2 } from "react-icons/rx";
 import Image from "next/image";
+import { Image as NUIImage } from "@nextui-org/react";
+
+import { RxCross2 } from "react-icons/rx";
 
 type Props = { img: string; deleteImage: () => void };
 

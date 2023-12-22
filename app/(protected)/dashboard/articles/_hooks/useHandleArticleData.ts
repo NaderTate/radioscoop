@@ -1,8 +1,11 @@
 "use client";
 
 import { Post } from "@prisma/client";
+
 import { useState } from "react";
+
 import { createNewArticle, updateArticle } from "@/actions/articles";
+
 export const useHandleArticleData = (article?: Post) => {
   const [articleData, setArticleData] = useState(article || ({} as Post));
 

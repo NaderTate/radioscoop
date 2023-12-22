@@ -1,5 +1,10 @@
-import PostMonthForm from "@/components/dashboard/PostMonthForm";
-import { Button } from "@/components/ui/button";
+import { useState } from "react";
+
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import {
   Command,
   CommandEmpty,
@@ -7,15 +12,14 @@ import {
   CommandInput,
   CommandItem,
 } from "@/components/ui/command";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
+import ArticleMonthForm from "../ArticleMonthForm";
+import { Button } from "@/components/ui/button";
+
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+
 import { AiOutlineCheck } from "react-icons/ai";
 import { LuChevronsUpDown } from "react-icons/lu";
+
 type Props = {
   postMonths: { id: string; name: string; year: { year: string } }[];
   postMonthId: string | null;
@@ -47,7 +51,7 @@ const Months = ({ postMonths, postMonthId, years, onSelect }: Props) => {
           <CommandEmpty>لم يتم العثور على أي شهر.</CommandEmpty>
           <CommandGroup className="overflow-auto">
             <div className="my-2">
-              <PostMonthForm years={years} />
+              <ArticleMonthForm years={years} />
             </div>
 
             {postMonths.map((month) => (

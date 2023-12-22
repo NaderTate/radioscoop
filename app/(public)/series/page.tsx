@@ -1,7 +1,8 @@
 import prisma from "@/lib/prisma";
 
-import ProgramCard from "@/app/(protected)/dashboard/programs/_components/ProgramCard";
 import Pagination from "@/components/Pagination";
+import ProgramCard from "@/app/(protected)/dashboard/programs/_components/ProgramCard";
+
 import { itemsToFetch } from "@/lib/globals";
 
 export const revalidate = 60;

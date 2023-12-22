@@ -39,21 +39,19 @@ async function GeneralProgram({ searchParams }: Props) {
   });
 
   return (
-    <>
-      <div className="px-4 py-16 mx-auto sm:px-6 lg:px-8 sm:py-24">
-        <div className="max-w-xl mx-auto text-center ">
-          <h2 className="text-4xl font-bold tracking-tight mb-4">
-            البرنامج العام
-          </h2>
-        </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
-          {programs?.map((program) => (
-            <ProgramCard key={program.id} program={program} />
-          ))}
-        </div>
-        <Pagination currentPage={page} total={count} />
+    <div className="px-4 py-16 mx-auto sm:px-6 lg:px-8 sm:py-24">
+      <div className="max-w-xl mx-auto text-center ">
+        <h2 className="text-4xl font-bold tracking-tight mb-4">
+          البرنامج العام
+        </h2>
       </div>
-    </>
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
+        {programs?.map((program) => (
+          <ProgramCard key={program.id} program={program} />
+        ))}
+      </div>
+      <Pagination currentPage={page} total={count} />
+    </div>
   );
 }
 

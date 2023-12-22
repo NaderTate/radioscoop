@@ -1,7 +1,8 @@
-import React from "react";
-import Link from "next/link";
 import { Category } from "@prisma/client";
+
+import Link from "next/link";
 import { Image } from "@nextui-org/image";
+
 interface Program extends Category {
   author: { name: string } | null;
   month: { name: string; year: { year: string } } | null;

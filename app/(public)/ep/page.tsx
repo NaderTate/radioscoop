@@ -1,6 +1,6 @@
-import prisma from "@/lib/prisma";
-
 import { Metadata } from "next";
+
+import prisma from "@/lib/prisma";
 
 import EpisodeCard from "@/components/public/EpisodeCard";
 import Pagination from "@/components/Pagination";
@@ -51,25 +51,23 @@ async function page({ searchParams }: Props) {
   });
 
   return (
-    <>
-      <div className="px-4 py-16 mx-auto sm:px-6 lg:px-8 sm:py-24">
-        <div className="max-w-xl mx-auto text-center ">
-          <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
-            راديو سكووب
-          </h2>
-          <p className="max-w-lg mx-auto mt-4 ">
-            اول راديو اون لاين في مصر بينقل المميزين من متدربيه الي الاذاعات ال
-            FM الكبرى
-          </p>
-        </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5 justify-center">
-          {episodes?.map((episode) => (
-            <EpisodeCard key={episode.id} ep={episode} />
-          ))}
-        </div>
-        <Pagination currentPage={page} total={count} />
+    <div className="px-4 py-16 mx-auto sm:px-6 lg:px-8 sm:py-24">
+      <div className="max-w-xl mx-auto text-center ">
+        <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
+          راديو سكووب
+        </h2>
+        <p className="max-w-lg mx-auto mt-4 ">
+          اول راديو اون لاين في مصر بينقل المميزين من متدربيه الي الاذاعات ال FM
+          الكبرى
+        </p>
       </div>
-    </>
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5 justify-center">
+        {episodes?.map((episode) => (
+          <EpisodeCard key={episode.id} ep={episode} />
+        ))}
+      </div>
+      <Pagination currentPage={page} total={count} />
+    </div>
   );
 }
 

@@ -78,3 +78,24 @@ export const updateProgram = async (
   revalidatePath("/dashboard/programs");
   return program;
 };
+
+// delete program
+export const deleteProgram = async (programId: string) => {
+  const program = await prisma.category.delete({
+    where: { id: programId },
+  });
+  revalidatePath("/dashboard/seasons");
+  return program;
+};
+
+// Add program to series
+export const addProgramToSeries = async (programId: string) => {
+  const program = await prisma.category.update({
+    where: { id: programId },
+    data: {
+      series: true,
+    },
+  });
+  revalidatePath("/dashboard/series");
+  return program;
+};

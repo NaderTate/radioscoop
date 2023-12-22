@@ -24,6 +24,7 @@ function Day({ updateData, removeDay, name, images }: Props) {
   useEffect(() => {
     updateData(name, Images);
   }, [Images]);
+
   return (
     <>
       <div className="flex justify-center ">
