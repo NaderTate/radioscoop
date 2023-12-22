@@ -26,6 +26,10 @@ export const useHandleAdminData = (admin?: {
         createNewAdmin({
           ...adminData,
         });
+        setAdminData({
+          name: "",
+          email: "",
+        });
       }
     });
   };

@@ -8,6 +8,7 @@ export const useHandleEpisodeData = (episode?: {
   id: string;
   title: string;
   link: string;
+  embedLink?: string | null;
   programId: string;
 }) => {
   const [episodeData, setEpisodeData] = useState(
@@ -16,7 +17,7 @@ export const useHandleEpisodeData = (episode?: {
           ...episode,
           link: episode?.link ? ReverseAudioDriveLink(episode.link) : "",
         }
-      : { title: "", link: "", programId: "" }
+      : { title: "", link: "", programId: "", embedLink: "" }
   );
 
   const missingData = !(
@@ -30,6 +31,7 @@ export const useHandleEpisodeData = (episode?: {
       await updateEpisode(episode.id, { ...episodeData });
     } else {
       await createEpisode({ ...episodeData });
+      setEpisodeData({ title: "", link: "", programId: "", embedLink: "" });
     }
   };
 

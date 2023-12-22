@@ -12,6 +12,7 @@ export const useHanldeYearData = (year?: { id: string; name: string }) => {
       await updateYear(year.id, yearData.name);
     } else {
       await addYear(yearData.name);
+      setYearData({ name: "" });
     }
   };
   return { yearData, setYearData, onSubmit };

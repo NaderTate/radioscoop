@@ -29,6 +29,7 @@ type Props = {
     title: string;
     link: string;
     programId: string;
+    embedLink?: string | null;
   };
 };
 
@@ -61,16 +62,24 @@ function EpisodeForm({ programs, episode }: Props) {
             className="w-fit"
             type="number"
             label="رقم الحلقة"
-            onChange={(e) => {
-              setEpisodeData({ ...episodeData, title: e.target.value });
+            onValueChange={(e) => {
+              setEpisodeData({ ...episodeData, title: e });
             }}
           />
           <Input
             variant="bordered"
             defaultValue={episodeData.link}
             label="الرابط (drive)"
-            onChange={(e) => {
-              setEpisodeData({ ...episodeData, link: e.target.value });
+            onValueChange={(e) => {
+              setEpisodeData({ ...episodeData, link: e });
+            }}
+          />
+          <Input
+            variant="bordered"
+            defaultValue={episodeData.embedLink || ""}
+            label="رابط الفيديو (embed)"
+            onValueChange={(e) => {
+              setEpisodeData({ ...episodeData, embedLink: e });
             }}
           />
 

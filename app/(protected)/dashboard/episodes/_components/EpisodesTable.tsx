@@ -82,6 +82,7 @@ function EpisodesTable({ data, programs }: Props) {
                       title: ep.title,
                       link: ep.link,
                       programId: ep?.categoryId || "",
+                      embedLink: ep.embedLink,
                     }}
                   />
                   | <DeleteButton deleteAction={deleteEpisode} id={ep.id} />{" "}

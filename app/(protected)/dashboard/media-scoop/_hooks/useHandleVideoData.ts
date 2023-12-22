@@ -50,6 +50,7 @@ export const useHandleVideoData = (video?: Video) => {
         ...videoData,
         announcerId: videoData.presenterId,
       });
+      setVideoData({} as Video);
     }
   };
 

@@ -70,6 +70,14 @@ export const useHanldeFeaturesData = (feature?: {
       await updateFeature(feature.id, { ...featureData });
     } else {
       await createFeature({ ...featureData });
+      setFeatureData({
+        featureTitle: "",
+        preparedById: "",
+        presenterId: "",
+        link: "",
+        img: "",
+        typeId: "",
+      });
     }
   };
 

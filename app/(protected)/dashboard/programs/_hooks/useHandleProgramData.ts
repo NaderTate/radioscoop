@@ -52,6 +52,11 @@ export const useHandleProgramData = (program?: {
       await updateProgram(program.id, programData);
     } else {
       await createProgram(programData);
+      setProgramData({
+        img: "",
+        name: "",
+        authorId: "",
+      });
     }
   };
 

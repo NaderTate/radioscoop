@@ -111,11 +111,15 @@ function ArticleForm({ presenters, article, types, postMonths, years }: Props) {
             />
           </div>
           <DialogClose
-            disabled={!articleData.image || !articleData.content}
+            disabled={
+              !articleData.image || !articleData.content || !articleData.title
+            }
             className="w-full"
           >
             <Button
-              disabled={!articleData.image || !articleData.content}
+              disabled={
+                !articleData.image || !articleData.content || !articleData.title
+              }
               color="primary"
               className="w-full"
               onClick={onSubmit}

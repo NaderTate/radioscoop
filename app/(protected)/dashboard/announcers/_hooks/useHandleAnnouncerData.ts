@@ -51,6 +51,10 @@ export const useHandleAnnouncerData = (announcer?: {
       await updateAnnouncer(announcer.id, announcerData);
     } else {
       await addAnnouncer(announcerData);
+      setAnnouncerData({
+        name: "",
+        img: "",
+      });
     }
   };
 

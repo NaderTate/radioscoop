@@ -1,30 +1,21 @@
 "use server";
 
 import prisma from "@/lib/prisma";
+import { convertDriveLink } from "@/lib/utils";
 import { revalidatePath } from "next/cache";
 
 // create episode
 export const createEpisode = async (episodeData: {
   title: string;
   link: string;
+  embedLink?: string | null;
   programId: string;
 }) => {
-  const AudioDriveLink = (url: string) => {
-    let arr = url.split("/");
-    let updatedLink = [
-      arr[0],
-      "//",
-      arr[2],
-      "/",
-      "uc?export=open&id=",
-      arr[5],
-    ].join("");
-    return updatedLink;
-  };
   const episode = await prisma.episode.create({
     data: {
       title: episodeData.title,
-      link: AudioDriveLink(episodeData.link),
+      link: convertDriveLink(episodeData.link),
+      embedLink: episodeData.embedLink,
       category: {
         connect: {
           id: episodeData.programId,
@@ -41,28 +32,18 @@ export const updateEpisode = async (
   episodeData: {
     title: string;
     link: string;
+    embedLink?: string | null;
     programId: string;
   }
 ) => {
-  const AudioDriveLink = (url: string) => {
-    let arr = url.split("/");
-    let updatedLink = [
-      arr[0],
-      "//",
-      arr[2],
-      "/",
-      "uc?export=open&id=",
-      arr[5],
-    ].join("");
-    return updatedLink;
-  };
   const episode = await prisma.episode.update({
     where: {
       id,
     },
     data: {
       title: episodeData.title,
-      link: AudioDriveLink(episodeData.link),
+      link: convertDriveLink(episodeData.link),
+      embedLink: episodeData.embedLink,
       category: {
         connect: {
           id: episodeData.programId,

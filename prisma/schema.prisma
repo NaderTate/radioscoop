@@ -13,8 +13,8 @@ model Episode {
   title        String
   img          String?
   link         String
+  embedLink    String?
   featured     Boolean      @default(false)
-  description  String?
   preparedBy   Author?      @relation("preparedFeature", fields: [preparedById], references: [id])
   preparedById String?      @db.ObjectId
   presenter    Author?      @relation("presentedFeature", fields: [presenterId], references: [id])
@@ -22,20 +22,16 @@ model Episode {
   featureTitle String?
   type         FeatureType? @relation(fields: [typeId], references: [id])
   typeId       String?      @db.ObjectId
-  createdAt    DateTime     @default(now())
-  updatedAt    DateTime     @updatedAt
-  published    Boolean      @default(false)
-  author       Author?      @relation(fields: [authorId], references: [id])
   categoryId   String?      @db.ObjectId
   category     Category?    @relation(fields: [categoryId], references: [id])
-  authorId     String?      @db.ObjectId
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
 }
 
 model Author {
   id                String     @id @default(auto()) @map("_id") @db.ObjectId
   name              String
   img               String?
-  episodes          Episode[]
   posts             Post[]
   Categories        Category[]
   PreparedFeatures  Episode[]  @relation("preparedFeature")

@@ -43,6 +43,7 @@ export const useHandleArticleData = (article?: Post) => {
       await updateArticle(articleData.id, { ...articleData });
     } else {
       await createNewArticle({ ...articleData });
+      setArticleData({} as Post);
     }
   };
 
