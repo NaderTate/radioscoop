@@ -5,10 +5,7 @@ export const getAnnouncerData = async (authorId: string) => {
     where: {
       id: authorId,
     },
-    cacheStrategy: {
-      ttl: 60 * 60,
-      swr: 10,
-    },
+
     include: {
       Categories: {
         select: {

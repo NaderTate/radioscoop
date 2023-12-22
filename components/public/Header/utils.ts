@@ -11,10 +11,6 @@ export const getFeatureTypes = async () => {
     orderBy: {
       id: "desc",
     },
-    cacheStrategy: {
-      ttl: 60 * 60 * 24 * 2,
-      swr: 20,
-    },
   });
 
   return featureTypes;
@@ -29,10 +25,6 @@ export const getSeasons = async () => {
           id: true,
         },
       },
-    },
-    cacheStrategy: {
-      ttl: 60 * 60 * 24 * 2,
-      swr: 20,
     },
   });
   return seasons;
@@ -57,10 +49,6 @@ export const getArticleTypes = async () => {
           },
         },
       },
-    },
-    cacheStrategy: {
-      ttl: 60 * 60 * 24 * 2,
-      swr: 20,
     },
   });
   // format the array so that I get the following:

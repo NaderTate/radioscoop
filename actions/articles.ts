@@ -7,10 +7,6 @@ export const getSidePanelArticles = async () => {
     select: {
       Items: true,
     },
-    cacheStrategy: {
-      ttl: 60 * 60 * 2,
-      swr: 20,
-    },
   });
   return posts;
 };

@@ -26,10 +26,6 @@ export const getEpisodeData = async (id: string) => {
       img: true,
       link: true,
     },
-    cacheStrategy: {
-      ttl: 60 * 5,
-      swr: 5,
-    },
   });
 
   return episode;
@@ -77,10 +73,6 @@ export const getRelatedEpisodes = async (
         },
       },
       presenter: { select: { name: true } },
-    },
-    cacheStrategy: {
-      ttl: 60 * 5,
-      swr: 5,
     },
   });
   return episodes;
