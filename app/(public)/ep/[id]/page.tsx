@@ -82,7 +82,8 @@ async function page({ params: { id } }: { params: { id: string } }) {
       Episode.category?.id,
       Episode.category?.authorId
     ));
-
+  const srcMatch = Episode?.embedLink?.match(/<iframe.*?src=["'](.*?)["']/);
+  const srcUrl = srcMatch && srcMatch[1];
   return (
     <>
       <div>
@@ -98,7 +99,20 @@ async function page({ params: { id } }: { params: { id: string } }) {
       <section className="flex flex-col lg:flex-row-reverse justify-between">
         <div className="flex-1 flex justify-center">
           <div className="mx-auto md:mx-7 flex-1 max-w-screen-2xl ">
-            <div dir="ltr">{Episode && <AudioCard audio={Episode} />}</div>
+            <div dir="ltr">
+              {Episode && Episode.embedLink ? (
+                <iframe
+                  width="100%"
+                  className="aspect-video"
+                  src={srcUrl ?? ""}
+                  title="YouTube video player"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                ></iframe>
+              ) : (
+                Episode && <AudioCard audio={Episode} />
+              )}
+            </div>
             <div className="flex justify-center flex-col">
               <h5 className="text-2xl font-bold text-center text-gray-700 dark:text-gray-200">
                 مشاركة الحلقة

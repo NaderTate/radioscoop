@@ -13,7 +13,6 @@ import { data, radioAcademy } from "./data";
 import { useFetchNavbarData } from "./_hooks/useFetchNavbarData";
 
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
-
 const Header = () => {
   const [open, setOpen] = useState(false);
   const { articleTypes, featureTypes, seasons } = useFetchNavbarData();

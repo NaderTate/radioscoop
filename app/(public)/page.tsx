@@ -16,6 +16,7 @@ export const metadata = {
 };
 
 async function Home() {
+  await new Promise((resolve) => setTimeout(resolve, 100000));
   const Episodes = await prisma.episode.findMany({
     where: {
       AND: [
