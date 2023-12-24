@@ -8,10 +8,10 @@ import Breadcrumbs from "@/components/public/Breadcrumbs";
 
 export const revalidate = 60;
 
-export async function generateStaticParams() {
-  const posts = await prisma.post.findMany();
-  return posts.map((post) => ({ id: post.id }));
-}
+// export async function generateStaticParams() {
+//   const posts = await prisma.post.findMany();
+//   return posts.map((post) => ({ id: post.id }));
+// }
 
 type Props = {
   params: { id: string };

@@ -7,10 +7,10 @@ import { getAnnouncerData } from "../utils";
 
 export const revalidate = 60;
 
-export async function generateStaticParams() {
-  const announcers = await prisma.author.findMany();
-  return announcers.map((announcer) => ({ id: announcer.id }));
-}
+// export async function generateStaticParams() {
+//   const announcers = await prisma.author.findMany();
+//   return announcers.map((announcer) => ({ id: announcer.id }));
+// }
 
 type Props = {
   params: { id: string };
