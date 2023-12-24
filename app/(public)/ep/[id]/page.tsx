@@ -10,9 +10,10 @@ import { getEpisodeData, getRelatedEpisodes } from "./utils";
 
 export const revalidate = 60;
 
- export async function generateStaticParams() {
- const products = await prisma.episode.findMany();
- return products.map((episode) => ({ id: episode.id }));
+export async function generateStaticParams() {
+  const products = await prisma.episode.findMany();
+  return products.map((episode) => ({ id: episode.id }));
+}
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
   try {
@@ -82,8 +83,10 @@ async function page({ params: { id } }: { params: { id: string } }) {
       Episode.category?.id,
       Episode.category?.authorId
     ));
+
   const srcMatch = Episode?.embedLink?.match(/<iframe.*?src=["'](.*?)["']/);
   const srcUrl = srcMatch && srcMatch[1];
+
   return (
     <>
       <div>
@@ -103,12 +106,12 @@ async function page({ params: { id } }: { params: { id: string } }) {
               {Episode && Episode.embedLink ? (
                 <iframe
                   width="100%"
-                  className="aspect-video"
+                  className="aspect-video rounded-md mb-5"
                   src={srcUrl ?? ""}
-                  title="YouTube video player"
+                  title={Episode?.category?.name}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
-                ></iframe>
+                />
               ) : (
                 Episode && <AudioCard audio={Episode} />
               )}
@@ -140,9 +143,7 @@ async function page({ params: { id } }: { params: { id: string } }) {
             )}
           </div>
         </div>
-        <div className="lg:pt-10">
-          <SidePanel />
-        </div>
+        <SidePanel />
       </section>
     </>
   );
