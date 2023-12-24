@@ -10,10 +10,10 @@ import { getEpisodeData, getRelatedEpisodes } from "./utils";
 
 export const revalidate = 60;
 
-export async function generateStaticParams() {
-  const products = await prisma.episode.findMany();
-  return products.map((episode) => ({ id: episode.id }));
-}
+// export async function generateStaticParams() {
+//   const products = await prisma.episode.findMany();
+//   return products.map((episode) => ({ id: episode.id }));
+// }
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
   try {
