@@ -27,6 +27,7 @@ type Props = {
     typeId: string | null;
     preparedBy: { name: string } | null;
     presenter: { name: string } | null;
+    embedLink: string | null;
   }[];
   presenters: { id: string; name: string }[];
   types: { id: string; name: string }[];
