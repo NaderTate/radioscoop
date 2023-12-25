@@ -12,6 +12,7 @@ export const useHanldeFeaturesData = (feature?: {
   link: string;
   img: string | null;
   typeId: string | null;
+  embedLink: string | null;
 }) => {
   const [featureData, setFeatureData] = useState(
     feature
@@ -26,13 +27,10 @@ export const useHanldeFeaturesData = (feature?: {
           link: "",
           img: "",
           typeId: "",
+          embedLink: "",
         }
   );
-  const missingData = !(
-    featureData.featureTitle &&
-    featureData.link &&
-    featureData.img
-  );
+  const missingData = !(featureData.featureTitle && featureData.img);
   const [uploadingImage, setUploadingImage] = useState(false);
 
   const handleUploadImage = async (images: File[]) => {
@@ -77,6 +75,7 @@ export const useHanldeFeaturesData = (feature?: {
         link: "",
         img: "",
         typeId: "",
+        embedLink: "",
       });
     }
   };

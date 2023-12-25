@@ -31,17 +31,6 @@ function AudioCard({ audio }: Props) {
   };
   return (
     <div className="my-12">
-      {audio.featured && (
-        <div
-          dir="rtl"
-          className="my-4 md:mr-10 text-center font-semibold flex flex-col gap-1"
-        >
-          <div className="">{audio.featureTitle}</div>
-          <div>{audio.category?.name}</div>
-          <div>اعداد {audio?.preparedBy?.name}</div>
-          <div>تقديم {audio?.presenter?.name}</div>
-        </div>
-      )}
       <div
         style={{
           backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.067), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7), black), url(${

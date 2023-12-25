@@ -31,6 +31,7 @@ type Props = {
     link: string;
     img: string | null;
     typeId: string | null;
+    embedLink: string | null;
   };
   presenters: { id: string; name: string }[];
   types: { id: string; name: string }[];
@@ -77,6 +78,14 @@ function FeatureForm({ feature, presenters, types }: Props) {
           label="الرابط (drive)"
           onValueChange={(e) => {
             setFeatureData({ ...featureData, link: e });
+          }}
+        />
+        <Input
+          variant="bordered"
+          defaultValue={featureData.embedLink || ""}
+          label=" (embed link) رابط الفيديو  "
+          onValueChange={(e) => {
+            setFeatureData({ ...featureData, embedLink: e });
           }}
         />
         <h1>الصورة</h1>

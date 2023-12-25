@@ -9,10 +9,11 @@ import { convertDriveLink } from "@/lib/utils";
 export const createFeature = async (featureData: {
   featureTitle: string | null;
   img: string | null;
-  link: string;
+  link?: string;
   preparedById: string | null;
   presenterId: string | null;
   typeId?: string | null;
+  embedLink?: string | null;
 }) => {
   try {
     await prisma.episode.create({
@@ -29,8 +30,9 @@ export const createFeature = async (featureData: {
         type: featureData.typeId
           ? { connect: { id: featureData.typeId } }
           : undefined,
-        link: convertDriveLink(featureData.link),
+        link: featureData.link ? convertDriveLink(featureData.link) : "",
         img: featureData.img,
+        embedLink: featureData.embedLink,
       },
     });
     revalidatePath("/dashboard/features");
@@ -45,10 +47,11 @@ export const updateFeature = async (
   featureData: {
     featureTitle: string | null;
     img: string | null;
-    link: string;
+    link?: string;
     preparedById: string | null;
     presenterId: string | null;
     typeId?: string | null;
+    embedLink?: string | null;
   }
 ) => {
   try {
@@ -67,8 +70,9 @@ export const updateFeature = async (
         type: featureData.typeId
           ? { connect: { id: featureData.typeId } }
           : undefined,
-        link: convertDriveLink(featureData.link),
+        link: featureData.link ? convertDriveLink(featureData.link) : "",
         img: featureData.img,
+        embedLink: featureData.embedLink,
       },
     });
     revalidatePath("/dashboard/features");

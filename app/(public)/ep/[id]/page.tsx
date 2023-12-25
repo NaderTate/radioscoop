@@ -102,6 +102,17 @@ async function page({ params: { id } }: { params: { id: string } }) {
       <section className="flex flex-col lg:flex-row-reverse justify-between">
         <div className="flex-1 flex justify-center">
           <div className="mx-auto md:mx-7 flex-1 max-w-screen-2xl ">
+            {Episode?.featured && (
+              <div
+                dir="rtl"
+                className="my-4 md:mr-10 text-center font-semibold flex flex-col gap-1"
+              >
+                <div>{Episode.featureTitle}</div>
+                <div>{Episode.category?.name}</div>
+                <div>اعداد {Episode?.preparedBy?.name}</div>
+                <div>تقديم {Episode?.presenter?.name}</div>
+              </div>
+            )}
             <div dir="ltr">
               {Episode && Episode.embedLink ? (
                 <iframe
