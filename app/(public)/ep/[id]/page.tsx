@@ -88,7 +88,7 @@ async function page({ params: { id } }: { params: { id: string } }) {
   const srcUrl = srcMatch && srcMatch[1];
 
   return (
-    <>
+    <div className="max-w-screen overflow-hidden">
       <div>
         <Breadcrumbs
           title={
@@ -156,7 +156,7 @@ async function page({ params: { id } }: { params: { id: string } }) {
         </div>
         <SidePanel />
       </section>
-    </>
+    </div>
   );
 }
 
