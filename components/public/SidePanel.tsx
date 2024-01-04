@@ -23,7 +23,7 @@ const SidePanel = () => {
   }, []);
 
   return (
-    <div className="lg:max-w-xs mb-4 m-auto lg:mr-2">
+    <div className="lg:max-w-xs mb-4  lg:mr-2">
       <div className="hidden lg:flex flex-col gap-3 ">
         {data?.map((item: Post, index: number) => (
           <div
