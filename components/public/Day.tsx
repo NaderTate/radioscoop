@@ -1,4 +1,3 @@
-// import Image from "next/image";
 import { Image as NUIImage } from "@nextui-org/image";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -50,7 +49,6 @@ function Day({ Day, Images }: Props) {
               return (
                 <SwiperSlide className="w-full" key={i}>
                   <NUIImage
-{/*                     as={Image} */}
                     width={200}
                     height={200}
                     className="w-full rounded-md hover:scale-[1.01] transition-transform"
