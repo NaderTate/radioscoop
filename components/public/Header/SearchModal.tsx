@@ -9,7 +9,6 @@ import {
   Input,
 } from "@nextui-org/react";
 import Link from "next/link";
-// import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 import { useFetchSearchResults } from "./_hooks/useFetchSearchResults";
@@ -86,7 +85,6 @@ function SearchModal() {
                         }}
                       >
                         <NUIImage
-{/*                           as={Image} */}
                           width={135}
                           height={135}
                           className="object-cover rounded-md aspect-square "
@@ -115,7 +113,6 @@ function SearchModal() {
                         }}
                       >
                         <NUIImage
-{/*                           as={Image} */}
                           width={135}
                           height={135}
                           className="object-contain rounded-md"

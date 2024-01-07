@@ -1,4 +1,3 @@
-// import Image from "next/image";
 import { Image as NUIImage } from "@nextui-org/image";
 
 import { Swiper, SwiperSlide } from "swiper/react";
