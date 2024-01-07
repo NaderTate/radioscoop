@@ -15,7 +15,7 @@ type Props = {
 
 function Day({ Day, Images }: Props) {
   return (
-    <div>
+    <>
       <div className="flex justify-center">
         <button className="text-white text-center border border-gray-300/30 rounded-md cursor-default border-b-0 px-5 rounded-b-none ">
           {Day}
@@ -50,7 +50,6 @@ function Day({ Day, Images }: Props) {
               return (
                 <SwiperSlide className="w-full" key={i}>
                   <NUIImage
-{/*                     as={Image} */}
                     width={200}
                     height={200}
                     className="w-full rounded-md hover:scale-[1.01] transition-transform"
@@ -62,7 +61,7 @@ function Day({ Day, Images }: Props) {
             })}
         </Swiper>
       </div>
-    </div>
+    </>
   );
 }
 export default Day;

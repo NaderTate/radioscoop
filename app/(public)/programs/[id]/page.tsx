@@ -19,12 +19,13 @@ export async function generateMetadata({ params }: Props) {
         id: true,
         name: true,
         img: true,
+        series: true,
       },
     });
     if (!program)
       return { title: "لا يوجد", description: "هذا البرنامج غير موجود" };
     return {
-      title: `برنامج ${program?.name}`,
+      title: `${program.series ? "مسلسل" : "برنامج"} ${program?.name}`,
       description:
         "راديو سكوب : اول راديو في مصر بنقل المتميزين من متتدربيه للاذاعات الكبرى اف ام  في مصر يمكن التواصل من خلال واتساب فيسبوك تويتر او انستاجرام او من خلال رقم الهاتف الجوال FM الكبرى",
       alternates: {
@@ -39,7 +40,7 @@ export async function generateMetadata({ params }: Props) {
         images: [program.img || "/logo.png"],
       },
       openGraph: {
-        title: `برنامج ${program?.name}`,
+        title: `${program.series ? "مسلسل" : "برنامج"} ${program?.name}`,
         images: [
           {
             url: program.img || "/logo.png",
@@ -67,6 +68,7 @@ async function Program({ params: { id }, searchParams }: Props) {
       month: {
         select: { name: true, year: { select: { year: true } } },
       },
+      series: true,
     },
   });
 
@@ -105,7 +107,7 @@ async function Program({ params: { id }, searchParams }: Props) {
     <div className="px-4 py-16 mx-auto sm:px-6 lg:px-8 sm:py-20">
       <div className="max-w-xl mx-auto text-center ">
         <h2 className="text-4xl font-bold tracking-tight sm:text-5xl mb-4">
-          برنامج {program?.name}
+          {program?.series ? "مسلسل" : "برنامج"} {program?.name}
         </h2>
         {program?.author?.name && (
           <div>
