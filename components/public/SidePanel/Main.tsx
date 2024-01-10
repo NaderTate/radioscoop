@@ -1,27 +1,19 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import Schedule from "./Schedule";
+import Schedule from "../Schedule";
 
 import "swiper/css";
 import "swiper/css/navigation";
 
-import { getSidePanelArticles } from "@/actions/articles";
-
 import { Post } from "@/app/types";
-
-const SidePanel = () => {
-  const [data, setData] = useState<Post[] | any>([]);
-  useEffect(() => {
-    getSidePanelArticles().then((res) => {
-      res && setData(res.Items);
-    });
-  }, []);
-
+type Props = {
+  data: Post[] | any;
+};
+const MainSidePanel = ({ data }: Props) => {
   return (
     <div className="lg:max-w-xs mb-4  lg:mr-2">
       <div className="hidden lg:flex flex-col gap-3 ">
@@ -89,4 +81,4 @@ const SidePanel = () => {
   );
 };
 
-export default SidePanel;
+export default MainSidePanel;
