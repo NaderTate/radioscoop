@@ -94,9 +94,8 @@ function Footer() {
                 width="500"
                 height="200"
                 id="gmap_canvas"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3450.8254546889375!2d31.374737600000003!3d30.127807699999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14581731eecfa951%3A0x5c1ff1b24a20810c!2z2KfYs9iq2YjYr9mK2Ygg2LLZitmGINiv2KfZiNivIHN0dWRpbyBQcm9zb3VuZCBaZWluIERhd29vZA!5e0!3m2!1sen!2seg!4v1676486562210!5m2!1sen!2seg"
-                scrolling="no"
-              ></iframe>
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d863.1330128014512!2d31.326910793252505!3d30.078945164646566!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583e3c670c68fd%3A0x7d07db0e78a6bee1!2sOn%20Track%20Studios!5e0!3m2!1sen!2seg!4v1707162793849!5m2!1sen!2seg"
+              />
 
               <iframe
                 className="w-full h-64 rounded-lg"
@@ -104,8 +103,7 @@ function Footer() {
                 height="200"
                 id="gmap_canvas"
                 src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3412.8337643811406!2d29.90245911514267!3d31.19762228147758!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzHCsDExJzUxLjQiTiAyOcKwNTQnMTYuNyJF!5e0!3m2!1sen!2seg!4v1676486451485!5m2!1sen!2seg"
-                scrolling="no"
-              ></iframe>
+              />
             </div>
           </div>
           <div className="grid grid-cols-1 gap-8 text-center lg:grid-cols-3 lg:text-left"></div>
