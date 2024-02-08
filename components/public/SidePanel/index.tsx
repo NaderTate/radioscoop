@@ -4,7 +4,7 @@ import { getSidePanelArticles } from "@/actions/articles";
 
 const SidePanel: NextPage = async () => {
   const sidebarArticles = await getSidePanelArticles();
-  return <MainSidePanel data={sidebarArticles?.Items} />;
+  return <MainSidePanel data={sidebarArticles} />;
 };
 
 export default SidePanel;

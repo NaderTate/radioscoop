@@ -21,11 +21,7 @@ export const useHandleEpisodeData = (episode?: {
       : { title: "", link: "", programId: "", embedLink: "" }
   );
 
-  const missingData = !(
-    episodeData.title &&
-    episodeData.link &&
-    episodeData.programId
-  );
+  const missingData = !(episodeData.title && episodeData.programId);
 
   const onSubmit = async () => {
     if (episode?.id) {

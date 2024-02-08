@@ -16,13 +16,13 @@ const PostCard = ({ title, src, deletePost }: Props) => {
         className="w-6 h-6 absolute right-0 top-0 bg-background rounded-bl-md cursor-pointer z-[2]"
       />
       <Image
-        width={200}
-        height={200}
+        width={100}
+        height={100}
         src={src}
         alt={title}
-        className="rounded-md object-contain m-auto"
+        className="rounded-md object-contain"
       />
-      <h3 className="text-center">{title}</h3>
+      <h3>{title}</h3>
     </div>
   );
 };

@@ -66,16 +66,18 @@ function FeatureForm({ feature, presenters, types }: Props) {
         </DialogHeader>
         <Input
           variant="bordered"
-          defaultValue={featureData.featureTitle || ""}
+          defaultValue={featureData.featureTitle as string}
           label="العنوان"
           onValueChange={(e) => {
+            console.log(featureData);
+
             setFeatureData({ ...featureData, featureTitle: e });
           }}
         />
         <Input
           variant="bordered"
           defaultValue={featureData.link}
-          label="الرابط (drive)"
+          label="الرابط"
           onValueChange={(e) => {
             setFeatureData({ ...featureData, link: e });
           }}

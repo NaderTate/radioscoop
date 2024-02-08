@@ -1,6 +1,5 @@
 "use client";
 
-import { ReverseAudioDriveLink } from "@/lib/utils";
 import { useState } from "react";
 
 import { createFeature, updateFeature } from "@/actions/features";
@@ -15,20 +14,15 @@ export const useHanldeFeaturesData = (feature?: {
   embedLink: string | null;
 }) => {
   const [featureData, setFeatureData] = useState(
-    feature
-      ? {
-          ...feature,
-          link: feature?.link ? ReverseAudioDriveLink(feature.link) : "",
-        }
-      : {
-          featureTitle: "",
-          preparedById: "",
-          presenterId: "",
-          link: "",
-          img: "",
-          typeId: "",
-          embedLink: "",
-        }
+    feature ?? {
+      featureTitle: "xx",
+      preparedById: "",
+      presenterId: "",
+      link: "",
+      img: "",
+      typeId: "",
+      embedLink: "",
+    }
   );
   const missingData = !(featureData.featureTitle && featureData.img);
   const [uploadingImage, setUploadingImage] = useState(false);
@@ -41,6 +35,7 @@ export const useHanldeFeaturesData = (feature?: {
     }
 
     setUploadingImage(true);
+
     const formData = new FormData();
     formData.append("file", image);
     formData.append("upload_preset", "features");

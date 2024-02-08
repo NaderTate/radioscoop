@@ -66,29 +66,24 @@ function Posts({ data }: Props) {
           </Command>
         )}
       </div>
-      <div
-        className="border border-muted-foreground rounded-md p-5 relative mt-5"
-        dir="ltr"
-      >
-        <div className="flex flex-wrap gap-5 items-center mt-10">
-          <ReactSortable
-            animation={150}
-            list={Data}
-            setList={setData}
-            className="flex flex-wrap gap-5 justify-start items-center mx-2"
-          >
-            {Data.map((post: Post) => (
-              <PostCard
-                key={post.id}
-                src={post.image}
-                title={post.title}
-                deletePost={() => {
-                  deletePost(post.id);
-                }}
-              />
-            ))}
-          </ReactSortable>
-        </div>
+      <div className="border-2 border-divider rounded-md p-5 mt-5">
+        <ReactSortable
+          animation={150}
+          list={Data}
+          setList={setData}
+          className="space-y-5"
+        >
+          {Data.map((post: Post) => (
+            <PostCard
+              key={post.id}
+              src={post.image}
+              title={post.title}
+              deletePost={() => {
+                deletePost(post.id);
+              }}
+            />
+          ))}
+        </ReactSortable>
       </div>
     </>
   );

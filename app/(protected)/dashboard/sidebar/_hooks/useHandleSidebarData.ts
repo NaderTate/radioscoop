@@ -33,7 +33,7 @@ export const useHandleSidebarData = (
 
   const onSubmit = async () => {
     setLoading(true);
-    await updateSidebar(Data.map((item: Post) => item));
+    await updateSidebar(Data.map((item: Post) => item.id));
     setLoading(false);
     toast({
       title: "تم الحفظ",

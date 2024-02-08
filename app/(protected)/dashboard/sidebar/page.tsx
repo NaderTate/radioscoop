@@ -1,14 +1,11 @@
 import prisma from "@/lib/prisma";
 
 import Posts from "./_components/Posts";
+import { getSidePanelArticles } from "@/actions/articles";
 
 async function page() {
-  const posts = await prisma.sideBar.findFirst({
-    select: {
-      Items: true,
-    },
-  });
-  return <Posts data={posts?.Items || []} />;
+  const postsData = await getSidePanelArticles();
+  return <Posts data={postsData} />;
 }
 
 export default page;

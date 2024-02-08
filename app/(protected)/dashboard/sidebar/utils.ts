@@ -28,15 +28,13 @@ export const search = async (e: string) => {
   return posts;
 };
 
-// update the sidebar items by receiving a list of IDs and making a relation between the posts and the sidebar
-export const updateSidebar = async (
-  data: { id: string; image: string; title: string }[]
-) => {
-  await prisma.sideBar.deleteMany();
+export const updateSidebar = async (data: string[]) => {
+  const deleteAll = prisma.sideBar.deleteMany();
 
-  await prisma.sideBar.create({
+  const create = prisma.sideBar.create({
     data: {
       Items: data,
     },
   });
+  await prisma.$transaction([deleteAll, create]);
 };

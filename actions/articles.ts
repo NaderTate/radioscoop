@@ -5,12 +5,30 @@ import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 
 export const getSidePanelArticles = async () => {
-  const posts = await prisma.sideBar.findFirst({
+  const postsData: { title: string; image: string }[] = [];
+  const postsIDs = await prisma.sideBar.findFirst({
+    orderBy: {
+      createdAt: "desc",
+    },
     select: {
       Items: true,
     },
   });
-  return posts;
+  if (!postsIDs) return;
+  for (const id of postsIDs.Items) {
+    const post = await prisma.post.findFirst({
+      where: {
+        id: id,
+      },
+      select: {
+        id: true,
+        title: true,
+        image: true,
+      },
+    });
+    post && postsData.push(post);
+  }
+  return postsData;
 };
 
 export const createNewArticle = async (articleData: {
