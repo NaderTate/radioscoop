@@ -15,7 +15,6 @@ export const useHandleSidebarData = (
 
   const [Data, setData] = useState(data);
 
-  const [searchTerms, setSearchTerms] = useState<string>("");
   const [searchResults, setSearchResults] = useState<
     { title: string; image: string; id: string }[]
   >([]);
@@ -44,7 +43,6 @@ export const useHandleSidebarData = (
     Data,
     setData,
     loading,
-    setSearchTerms,
     searchResults,
     setSearchResults,
     deletePost,
