@@ -4,8 +4,6 @@ import prisma from "@/lib/prisma";
 
 import { revalidatePath } from "next/cache";
 
-import { convertDriveLink } from "@/lib/utils";
-
 export const createFeature = async (featureData: {
   featureTitle: string | null;
   img: string | null;
@@ -30,7 +28,7 @@ export const createFeature = async (featureData: {
         type: featureData.typeId
           ? { connect: { id: featureData.typeId } }
           : undefined,
-        link: featureData.link ? convertDriveLink(featureData.link) : "",
+        link: featureData.link ?? "",
         img: featureData.img,
         embedLink: featureData.embedLink,
       },
@@ -70,7 +68,7 @@ export const updateFeature = async (
         type: featureData.typeId
           ? { connect: { id: featureData.typeId } }
           : undefined,
-        link: featureData.link ? convertDriveLink(featureData.link) : "",
+        link: featureData.link ?? "",
         img: featureData.img,
         embedLink: featureData.embedLink,
       },

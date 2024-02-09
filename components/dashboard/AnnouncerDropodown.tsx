@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Select from "react-select";
 
 import {
   Command,
@@ -22,18 +23,41 @@ import { AiOutlineCheck } from "react-icons/ai";
 import { LuChevronsUpDown } from "react-icons/lu";
 
 type Props = {
+  multi?: boolean;
   announcers: { id: string; name: string }[];
-  announcerIDs: string[] | null | undefined;
-  onSelect: (id: string) => void;
+  announcerIDs?: string[] | null | undefined;
+  announcerId?: string | null;
+  onSelectMulti?: (IDs: string[]) => void;
+  onSelect?: (Id: string) => void;
 };
-
 const AnnouncerDropodown = ({
-  announcerIDs: announcerId,
+  announcerIDs,
   announcers,
+  onSelectMulti,
+  announcerId,
   onSelect,
+  multi = false,
 }: Props) => {
   const [open, setOpen] = useState(false);
-
+  const allAnnoucers = announcers.map((announcer) => ({
+    label: announcer.name,
+    value: announcer.id,
+  }));
+  if (multi)
+    return (
+      <Select
+        placeholder="announcers"
+        defaultValue={allAnnoucers.filter((announcer) =>
+          announcerIDs?.includes(announcer.value)
+        )}
+        options={allAnnoucers}
+        onChange={(e) => {
+          onSelectMulti && onSelectMulti(e.map((item) => item.value));
+        }}
+        isMulti
+        isClearable
+      />
+    );
   return (
     <Popover open={open} modal onOpenChange={setOpen}>
       <PopoverTrigger asChild>
@@ -43,9 +67,9 @@ const AnnouncerDropodown = ({
           aria-expanded={open}
           className="w-[200px] justify-between"
         >
-          {/* {announcerId
+          {announcerId
             ? announcers.find((announcer) => announcer.id === announcerId)?.name
-            : "المذيع..."} */}
+            : "المذيع..."}
           <LuChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -61,16 +85,16 @@ const AnnouncerDropodown = ({
               <CommandItem
                 key={presenter.id}
                 onSelect={() => {
-                  onSelect(presenter.id);
+                  onSelect && onSelect(presenter.id);
                   setOpen(false);
                 }}
               >
-                {/* <AiOutlineCheck
+                <AiOutlineCheck
                   className={cn(
                     "mr-2 h-4 w-4",
                     announcerId === presenter.id ? "opacity-100" : "opacity-0"
                   )}
-                /> */}
+                />
                 {presenter.name}
               </CommandItem>
             ))}

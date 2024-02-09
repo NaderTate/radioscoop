@@ -72,13 +72,14 @@ function ProgramForm({ presenters, program }: Prop) {
             alt="img"
           />
         )}
-        {/* <AnnouncerDropodown
+        <AnnouncerDropodown
+          multi
           announcerIDs={programData.authorId}
           announcers={presenters}
-          onSelect={(id) => {
+          onSelectMulti={(id) => {
             setProgramData({ ...programData, authorId: id });
           }}
-        /> */}
+        />
         <DialogClose className="w-full" disabled={missingData}>
           <Button disabled={missingData} className="w-full" onClick={onSubmit}>
             {program?.id ? "تعديل" : "إضافة"}

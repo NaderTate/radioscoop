@@ -4,6 +4,7 @@ import Image from "next/image";
 import { signIn } from "next-auth/react";
 import { redirect } from "next/navigation";
 import { useSession } from "next-auth/react";
+import LoginFrom from "@/components/LoginFrom";
 
 const Page = () => {
   // get the session from the server side and redirect if user is logged in
@@ -34,29 +35,7 @@ const Page = () => {
           aria-label="Main"
           className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6"
         >
-          <div className="max-w-xl lg:max-w-3xl">
-            <div className="flex items-center ">
-              <h1 className="text-4xl font-bold tracking-wide">Radio Scoop</h1>
-            </div>
-
-            <h1 className="mt-6 text-2xl font-bold sm:text-3xl md:text-4xl">
-              Welcome to Radio scoop 🎙️
-            </h1>
-
-            <p className="mt-4 leading-relaxed ">
-              Please use your google account to access the dashboard
-            </p>
-            <button
-              onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
-              className="group relative inline-block overflow-hidden border border-indigo-600 px-8 py-3 focus:outline-none focus:ring"
-            >
-              <span className="absolute inset-y-0 left-0 w-[2px] bg-indigo-600 transition-all group-hover:w-full group-active:bg-indigo-500"></span>
-
-              <span className="relative text-sm font-medium text-indigo-600 transition-colors group-hover:text-white">
-                Sign in with Google
-              </span>
-            </button>
-          </div>
+          <LoginFrom />
         </main>
       </div>
     </div>

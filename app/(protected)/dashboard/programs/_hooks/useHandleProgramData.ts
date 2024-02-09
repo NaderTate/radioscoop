@@ -9,7 +9,11 @@ export const useHandleProgramData = (program?: {
   name: string;
   authorId: string[] | null | undefined;
 }) => {
-  const [programData, setProgramData] = useState(
+  const [programData, setProgramData] = useState<{
+    img: string;
+    name: string;
+    authorId: string[] | undefined | null;
+  }>(
     program || {
       img: "",
       name: "",

@@ -109,7 +109,6 @@ async function Program({ params: { id }, searchParams }: Props) {
       categoryId: id,
     },
   });
-  console.log(program?.author);
   return (
     <div className="px-4 py-16 mx-auto sm:px-6 lg:px-8 sm:py-20">
       <div className="max-w-xl mx-auto text-center ">
@@ -124,7 +123,7 @@ async function Program({ params: { id }, searchParams }: Props) {
               <Link
                 key={author.id}
                 href={{ pathname: `/announcers/${author?.id}` }}
-                className="text-center my-4 underline"
+                className="text-center my-4 underline ml-1"
               >
                 {author?.name}
               </Link>

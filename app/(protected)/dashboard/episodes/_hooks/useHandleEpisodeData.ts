@@ -3,7 +3,6 @@
 import { useState } from "react";
 
 import { createEpisode, updateEpisode } from "@/actions/episodes";
-import { ReverseAudioDriveLink } from "@/lib/utils";
 
 export const useHandleEpisodeData = (episode?: {
   id: string;
@@ -16,7 +15,7 @@ export const useHandleEpisodeData = (episode?: {
     episode
       ? {
           ...episode,
-          link: episode?.link ? ReverseAudioDriveLink(episode.link) : "",
+          link: episode?.link ?? "",
         }
       : { title: "", link: "", programId: "", embedLink: "" }
   );

@@ -2,7 +2,6 @@
 
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
-import { convertDriveLink } from "@/lib/utils";
 
 // create episode
 export const createEpisode = async (episodeData: {
@@ -14,7 +13,7 @@ export const createEpisode = async (episodeData: {
   const episode = await prisma.episode.create({
     data: {
       title: episodeData.title,
-      link: convertDriveLink(episodeData.link),
+      link: episodeData.link,
       embedLink: episodeData.embedLink,
       category: {
         connect: {
@@ -42,7 +41,7 @@ export const updateEpisode = async (
     },
     data: {
       title: episodeData.title,
-      link: convertDriveLink(episodeData.link),
+      link: episodeData.link,
       embedLink: episodeData.embedLink,
       category: {
         connect: {
