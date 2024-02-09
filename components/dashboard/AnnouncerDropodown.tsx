@@ -23,11 +23,15 @@ import { LuChevronsUpDown } from "react-icons/lu";
 
 type Props = {
   announcers: { id: string; name: string }[];
-  announcerId: string | null | undefined;
+  announcerIDs: string[] | null | undefined;
   onSelect: (id: string) => void;
 };
 
-const AnnouncerDropodown = ({ announcerId, announcers, onSelect }: Props) => {
+const AnnouncerDropodown = ({
+  announcerIDs: announcerId,
+  announcers,
+  onSelect,
+}: Props) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -39,9 +43,9 @@ const AnnouncerDropodown = ({ announcerId, announcers, onSelect }: Props) => {
           aria-expanded={open}
           className="w-[200px] justify-between"
         >
-          {announcerId
+          {/* {announcerId
             ? announcers.find((announcer) => announcer.id === announcerId)?.name
-            : "المذيع..."}
+            : "المذيع..."} */}
           <LuChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -61,12 +65,12 @@ const AnnouncerDropodown = ({ announcerId, announcers, onSelect }: Props) => {
                   setOpen(false);
                 }}
               >
-                <AiOutlineCheck
+                {/* <AiOutlineCheck
                   className={cn(
                     "mr-2 h-4 w-4",
                     announcerId === presenter.id ? "opacity-100" : "opacity-0"
                   )}
-                />
+                /> */}
                 {presenter.name}
               </CommandItem>
             ))}

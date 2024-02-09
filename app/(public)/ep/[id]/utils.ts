@@ -36,7 +36,7 @@ export const getEpisodeData = async (id: string) => {
 export const getRelatedEpisodes = async (
   episodeId: string,
   categoryId: string | null | undefined,
-  authorId: string | null | undefined
+  authorId: string[] | null | undefined
 ) => {
   const episodes = await prisma.episode.findMany({
     where: {
@@ -47,9 +47,11 @@ export const getRelatedEpisodes = async (
               categoryId,
             },
             {
-              category: {
-                authorId,
-              },
+              category: authorId
+                ? {
+                    authorId: { hasSome: authorId },
+                  }
+                : undefined,
             },
           ],
         },

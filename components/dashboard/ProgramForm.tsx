@@ -24,7 +24,7 @@ type Prop = {
     id: string;
     name: string;
     img: string;
-    authorId: string | null | undefined;
+    authorId: string[] | null | undefined;
   };
 };
 
@@ -72,13 +72,13 @@ function ProgramForm({ presenters, program }: Prop) {
             alt="img"
           />
         )}
-        <AnnouncerDropodown
-          announcerId={programData.authorId}
+        {/* <AnnouncerDropodown
+          announcerIDs={programData.authorId}
           announcers={presenters}
           onSelect={(id) => {
             setProgramData({ ...programData, authorId: id });
           }}
-        />
+        /> */}
         <DialogClose className="w-full" disabled={missingData}>
           <Button disabled={missingData} className="w-full" onClick={onSubmit}>
             {program?.id ? "تعديل" : "إضافة"}

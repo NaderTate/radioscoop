@@ -29,3 +29,9 @@ interface Month_ extends Month {
 interface Year_ extends Year {
   months: Month_[];
 }
+
+type category = {
+  name: string;
+  img: string;
+  author: { name: string }[];
+} | null;

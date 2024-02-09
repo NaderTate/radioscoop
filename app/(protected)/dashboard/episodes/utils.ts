@@ -19,8 +19,10 @@ export const getEpisodes = async (search: string, page: number) => {
         {
           category: {
             author: {
-              name: {
-                contains: search,
+              some: {
+                name: {
+                  contains: search,
+                },
               },
             },
           },

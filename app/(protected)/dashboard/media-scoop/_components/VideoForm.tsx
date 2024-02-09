@@ -81,13 +81,13 @@ function VideoForm({ announcers, video }: Props) {
                 setVideoData({ ...videoData, link: e });
               }}
             />
-            <AnnouncerDropodown
+            {/* <AnnouncerDropodown
               announcers={announcers}
-              announcerId={videoData?.presenterId}
+              announcerIDs={videoData?.presenterId}
               onSelect={(id) => {
                 setVideoData({ ...videoData, presenterId: id });
               }}
-            />
+            /> */}
           </div>
           <DialogClose className="w-full" disabled={missingData}>
             <Button

@@ -16,13 +16,10 @@ import EpisodeForm from "./EpisodeForm";
 import DeleteButton from "@/components/dashboard/ConfirmDelete";
 
 import { deleteEpisode } from "@/actions/episodes";
+import { category } from "@/app/types";
 
 interface EpisodesTableProps extends Episode {
-  category: {
-    name: string;
-    img: string;
-    author: { name: string } | null;
-  } | null;
+  category: category;
 }
 
 type Props = {
@@ -64,7 +61,9 @@ function EpisodesTable({ data, programs }: Props) {
               </TableCell>
               <TableCell>{ep.title}</TableCell>
               <TableCell>{ep?.category?.name}</TableCell>
-              <TableCell>{ep?.category?.author?.name}</TableCell>
+              <TableCell>
+                {ep?.category?.author.map((author) => author.name)}
+              </TableCell>
               <TableCell>
                 {new Date(ep.createdAt).toLocaleDateString("ar-EG", {
                   year: "numeric",

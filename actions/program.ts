@@ -38,7 +38,7 @@ export const addGeneralProgram = async (programId: string) => {
 export const createProgram = async (programData: {
   name: string;
   img: string;
-  authorId: string | null | undefined;
+  authorId: string[] | null | undefined;
 }) => {
   const program = await prisma.category.create({
     data: {
@@ -46,9 +46,7 @@ export const createProgram = async (programData: {
       img: programData.img,
       author: programData.authorId
         ? {
-            connect: {
-              id: programData.authorId,
-            },
+            connect: programData.authorId.map((id) => ({ id })),
           }
         : undefined,
     },
@@ -62,7 +60,7 @@ export const updateProgram = async (
   programData: {
     name: string;
     img: string;
-    authorId: string | null | undefined;
+    authorId: string[] | null | undefined;
   }
 ) => {
   const program = await prisma.category.update({
@@ -71,7 +69,9 @@ export const updateProgram = async (
       name: programData.name,
       img: programData.img,
       author: programData.authorId
-        ? { connect: { id: programData.authorId } }
+        ? {
+            connect: programData.authorId.map((id) => ({ id })),
+          }
         : undefined,
     },
   });

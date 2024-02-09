@@ -7,13 +7,13 @@ export const useHandleProgramData = (program?: {
   id: string;
   img: string;
   name: string;
-  authorId: string | null | undefined;
+  authorId: string[] | null | undefined;
 }) => {
   const [programData, setProgramData] = useState(
     program || {
       img: "",
       name: "",
-      authorId: "",
+      authorId: [],
     }
   );
 
@@ -55,7 +55,7 @@ export const useHandleProgramData = (program?: {
       setProgramData({
         img: "",
         name: "",
-        authorId: "",
+        authorId: [],
       });
     }
   };

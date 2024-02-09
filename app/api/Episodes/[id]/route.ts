@@ -78,7 +78,9 @@ export async function GET(
   const formattedEpisode = {
     ...episode,
     _id: episode?.id,
-    author: episode?.category?.author?.name,
+    author: episode?.category?.author
+      ?.map((author) => author?.name)
+      ?.join(", "),
     date: episode?.createdAt.toDateString(),
     title: episode?.featured ? episode?.featureTitle : episode?.title,
     category: episode?.category?.name,
@@ -87,7 +89,9 @@ export async function GET(
     return {
       ...episode,
       _id: episode?.id,
-      author: episode?.category?.author?.name,
+      author: episode?.category?.author
+        ?.map((author) => author?.name)
+        ?.join(", "),
       date: episode?.createdAt.toDateString(),
 
       title: episode?.featured ? episode?.featureTitle : episode?.title,

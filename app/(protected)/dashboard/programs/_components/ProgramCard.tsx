@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Image } from "@nextui-org/image";
 
 interface Program extends Category {
-  author: { name: string } | null;
+  author: { name: string }[] | null;
   month: { name: string; year: { year: string } } | null;
 }
 function ProgramCard({ program }: { program: Program }) {
@@ -27,7 +27,9 @@ function ProgramCard({ program }: { program: Program }) {
           <h5 className="text-sm text-white">{program.name}</h5>
 
           <p className="mt-1 text-xs text-gray-500">
-            {program.author ? program.author.name : "راديو سكوب"}
+            {program.author
+              ? program.author.map((author) => author.name)
+              : "راديو سكوب"}
           </p>
         </div>
       </div>

@@ -13,13 +13,10 @@ import "swiper/css/grid";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import { category } from "@/app/types";
 
 interface EpisodeData extends Episode {
-  category?: {
-    name: string;
-    img: string;
-    author: { name: string } | null;
-  } | null;
+  category: category;
 }
 
 type Props = {

@@ -87,13 +87,13 @@ function ArticleForm({ presenters, article, types, postMonths, years }: Props) {
                 setArticleData({ ...articleData, content: e.target.value })
               }
             />
-            <AnnouncerDropodown
+            {/* <AnnouncerDropodown
               announcers={presenters}
-              announcerId={articleData.presenterId}
+              announcerIDs={articleData.presenterId}
               onSelect={(id: string) => {
                 setArticleData({ ...articleData, presenterId: id });
               }}
-            />
+            /> */}
             <Categories
               types={types}
               typeId={articleData.typeId}

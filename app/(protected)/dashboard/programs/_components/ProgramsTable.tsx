@@ -21,8 +21,8 @@ type Props = {
     name: string;
     img: string;
     createdAt: Date;
-    authorId: string | null | undefined;
-    author: { name: string } | null;
+    authorId: string[] | null | undefined;
+    author: { name: string }[] | null;
     episodes: { id: string }[] | null;
     month: { name: string; year: { year: string } } | null;
   }[];
@@ -64,7 +64,9 @@ function ProgramsTable({ data, presenters }: Props) {
             <TableCell>
               {program?.month?.year.year} - {program?.month?.name}
             </TableCell>
-            <TableCell>{program?.author?.name}</TableCell>
+            <TableCell>
+              {program?.author?.map((author) => author.name)}
+            </TableCell>
             <TableCell>{program?.episodes?.length}</TableCell>
             <TableCell>
               {new Date(program.createdAt).toLocaleDateString("ar-EG", {

@@ -1,15 +1,22 @@
-import prisma from "@/lib/prisma";
-
 import Link from "next/link";
 
-import EpisodeCard from "@/components/public/EpisodeCard";
 import Pagination from "@/components/Pagination";
+import EpisodeCard from "@/components/public/EpisodeCard";
+
+import prisma from "@/lib/prisma";
 import { itemsToFetch } from "@/lib/globals";
 
 type Props = {
   params: { id: string };
   searchParams: { page: number };
 };
+
+export const revalidate = 60;
+
+export async function generateStaticParams() {
+  const programs = await prisma.category.findMany();
+  return programs.map((prgram) => ({ id: prgram.id }));
+}
 
 export async function generateMetadata({ params }: Props) {
   try {
@@ -102,24 +109,29 @@ async function Program({ params: { id }, searchParams }: Props) {
       categoryId: id,
     },
   });
-
+  console.log(program?.author);
   return (
     <div className="px-4 py-16 mx-auto sm:px-6 lg:px-8 sm:py-20">
       <div className="max-w-xl mx-auto text-center ">
         <h2 className="text-4xl font-bold tracking-tight sm:text-5xl mb-4">
           {program?.series ? "مسلسل" : "برنامج"} {program?.name}
         </h2>
-        {program?.author?.name && (
-          <div>
-            تقديم :{" "}
-            <Link
-              href={{ pathname: `/announcers/${program?.author?.id}` }}
-              className="text-center my-4 underline"
-            >
-              {program?.author?.name}
-            </Link>
-          </div>
+
+        {program?.author?.length && (
+          <>
+            تقديم :
+            {program?.author.map((author) => (
+              <Link
+                key={author.id}
+                href={{ pathname: `/announcers/${author?.id}` }}
+                className="text-center my-4 underline"
+              >
+                {author?.name}
+              </Link>
+            ))}
+          </>
         )}
+
         {program?.month?.name && program.month.year.year && (
           <p className="text-sm my-4">
             {program?.month?.year.year} / {program?.month?.name}

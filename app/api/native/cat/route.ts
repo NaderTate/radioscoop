@@ -46,7 +46,7 @@ export async function GET(request: NextRequest) {
     return {
       ...category,
       _id: category?.id,
-      author: category?.author?.name,
+      author: category?.author?.map((author) => author?.name).join(", "),
       month: category?.month?.name,
       year: category?.month?.year?.year,
     };

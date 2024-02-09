@@ -67,7 +67,9 @@ export async function GET(request: NextRequest) {
       category: episode.featured
         ? episode.featureTitle
         : episode?.category?.name,
-      author: episode?.category?.author?.name,
+      author: episode?.category?.author
+        ?.map((author) => author?.name)
+        .join(", "),
       date: episode?.createdAt.toDateString(),
     };
   });

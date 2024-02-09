@@ -33,7 +33,8 @@ model Author {
   name              String
   img               String?
   posts             Post[]
-  Categories        Category[]
+  Categories        Category[] @relation(fields: [categoriesId], references: [id])
+  categoriesId      String[]   @db.ObjectId
   PreparedFeatures  Episode[]  @relation("preparedFeature")
   PresentedFeatures Episode[]  @relation("presentedFeature")
   Videos            Video[]
@@ -45,8 +46,8 @@ model Category {
   id             String    @id @default(auto()) @map("_id") @db.ObjectId
   name           String
   img            String
-  authorId       String?   @db.ObjectId
-  author         Author?   @relation(fields: [authorId], references: [id])
+  author         Author[]  @relation(fields: [authorId], references: [id])
+  authorId       String[]  @db.ObjectId
   month          Month?    @relation(fields: [monthId], references: [id])
   monthId        String?   @db.ObjectId
   episodes       Episode[]
