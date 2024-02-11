@@ -37,13 +37,11 @@ async function GeneralProgram({ searchParams }: Props) {
   return (
     <div className="flex flex-col min-h-[90vh]">
       <div className="grow">
-        <div className="flex justify-center my-5">
-          <AddProgramModal />
-        </div>
+        <AddProgramModal />
         {programs.length > 0 ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
             {programs?.map((program) => (
-              <ProgramCard key={program.id} program={program} />
+              <ProgramCard isGeneral key={program.id} program={program} />
             ))}
           </div>
         ) : (

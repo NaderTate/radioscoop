@@ -23,7 +23,12 @@ const AddProgramModal = () => {
 
   return (
     <>
-      <Button color="primary" startContent={<GoPlusCircle />} onPress={onOpen}>
+      <Button
+        color="primary"
+        startContent={<GoPlusCircle />}
+        className="my-5"
+        onPress={onOpen}
+      >
         اضافة برنامج
       </Button>
       <Modal

@@ -85,7 +85,7 @@ function Schedule({ Days, title }: { Days: DayType[] | any; title: string }) {
               setDays([
                 ...days,
                 {
-                  id: days.length + 1,
+                  id: Math.ceil(Math.random() * 1000),
                   name: `day ${days.length + 1}`,
                   images: [],
                 },

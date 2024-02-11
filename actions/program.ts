@@ -35,6 +35,17 @@ export const addGeneralProgram = async (programId: string) => {
   return program;
 };
 
+export const removeGeneralProgram = async (programId: string) => {
+  const program = await prisma.category.update({
+    where: { id: programId },
+    data: {
+      generalProgram: false,
+    },
+  });
+  revalidatePath("/dashboard/generalProgram");
+  return program;
+};
+
 export const createProgram = async (programData: {
   name: string;
   img: string;

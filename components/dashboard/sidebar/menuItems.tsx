@@ -14,7 +14,7 @@ export const menuItems: Array<{
   icon?: React.ReactNode;
 }> = [
   {
-    title: "لوحة التحكم",
+    title: "الرئيسية",
     link: "/dashboard",
     icon: <BsFillPieChartFill />,
   },

@@ -7,7 +7,10 @@ import { Image } from "@nextui-org/image";
 
 import { RxCross2 } from "react-icons/rx";
 import { Button } from "@nextui-org/react";
-import { removeProgramFromSeries } from "@/actions/program";
+import {
+  removeGeneralProgram,
+  removeProgramFromSeries,
+} from "@/actions/program";
 
 interface Program extends Category {
   author: { name: string }[] | null;
@@ -16,19 +19,26 @@ interface Program extends Category {
 interface ProgramCardProps {
   program: Program;
   isSeries?: boolean;
+  isGeneral?: boolean;
 }
-function ProgramCard({ program, isSeries = false }: ProgramCardProps) {
+function ProgramCard({
+  program,
+  isSeries = false,
+  isGeneral = false,
+}: ProgramCardProps) {
   return (
     <Link href={{ pathname: `/programs/${program.id}` }}>
       <div className="block overflow-hidden rounded-2xl flex-1 relative">
-        {isSeries && (
+        {(isSeries || isGeneral) && (
           <Button
             isIconOnly
             variant="light"
             size="sm"
             onClick={async (e) => {
               e.preventDefault();
-              await removeProgramFromSeries(program.id);
+              isSeries
+                ? await removeProgramFromSeries(program.id)
+                : await removeGeneralProgram(program.id);
             }}
             className="z-20 absolute top-2 right-2 bg-gray-900 text-white rounded-full p-1"
           >
