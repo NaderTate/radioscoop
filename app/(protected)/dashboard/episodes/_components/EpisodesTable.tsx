@@ -62,7 +62,9 @@ function EpisodesTable({ data, programs }: Props) {
               <TableCell>{ep.title}</TableCell>
               <TableCell>{ep?.category?.name}</TableCell>
               <TableCell>
-                {ep?.category?.author.map((author) => author.name)}
+                {ep?.category?.author.map((author) => (
+                  <h1 key={author.name}>{author.name}</h1>
+                ))}
               </TableCell>
               <TableCell>
                 {new Date(ep.createdAt).toLocaleDateString("ar-EG", {

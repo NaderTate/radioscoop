@@ -65,7 +65,9 @@ function ProgramsTable({ data, presenters }: Props) {
               {program?.month?.year.year} - {program?.month?.name}
             </TableCell>
             <TableCell>
-              {program?.author?.map((author) => author.name)}
+              {program?.author?.map((author) => (
+                <h5 key={author.name}>{author.name}</h5>
+              ))}
             </TableCell>
             <TableCell>{program?.episodes?.length}</TableCell>
             <TableCell>

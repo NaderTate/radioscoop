@@ -31,8 +31,10 @@ function EpisodeCard({ ep }: Props) {
             {ep?.category?.name}
           </h5>
 
-          <h5 className="absolute bottom-4 right-4 text-sm font-bold text-ellipsis whitespace-nowrap overflow-hidden z-10">
-            {ep?.category?.author.map((author) => author.name)}{" "}
+          <h5 className="absolute flex gap-x-1 bottom-4 right-4 text-sm font-bold text-ellipsis whitespace-nowrap overflow-hidden z-10">
+            {ep?.category?.author.map((author) => (
+              <h1 key={author.name}>{author.name}</h1>
+            ))}
           </h5>
         </div>
       </Link>
