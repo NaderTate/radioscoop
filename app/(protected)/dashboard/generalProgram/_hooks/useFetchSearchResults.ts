@@ -18,16 +18,17 @@ export const useFetchSearchResults = () => {
 
   const debouncedSearch = debounce(async (searchQuery) => {
     if (searchQuery.length < 2) return;
+    setLoading(true);
     const data = await getPrograms(searchQuery);
+    setLoading(false);
+
     // Update the UI with the search results
     setSearchResults(data);
   }, 500);
 
   const addProgram = async (id: string) => {
-    setLoading(true);
     await addGeneralProgram(id);
     setSearchResults([]);
-    setLoading(false);
   };
 
   return { fetchResults, searchResults, loading, addProgram };

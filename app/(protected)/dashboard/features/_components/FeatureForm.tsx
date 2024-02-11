@@ -69,8 +69,6 @@ function FeatureForm({ feature, presenters, types }: Props) {
           defaultValue={featureData.featureTitle as string}
           label="العنوان"
           onValueChange={(e) => {
-            console.log(featureData);
-
             setFeatureData({ ...featureData, featureTitle: e });
           }}
         />

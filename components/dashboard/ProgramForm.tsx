@@ -54,7 +54,7 @@ function ProgramForm({ presenters, program }: Prop) {
         </DialogHeader>
         <Input
           variant="bordered"
-          defaultValue={program?.name}
+          value={programData?.name}
           label="الاسم"
           onValueChange={(e) => {
             setProgramData({ ...programData, name: e });

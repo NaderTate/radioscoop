@@ -99,3 +99,14 @@ export const addProgramToSeries = async (programId: string) => {
   revalidatePath("/dashboard/series");
   return program;
 };
+
+export const removeProgramFromSeries = async (programId: string) => {
+  const program = await prisma.category.update({
+    where: { id: programId },
+    data: {
+      series: false,
+    },
+  });
+  revalidatePath("/dashboard/series");
+  return program;
+};

@@ -1,16 +1,40 @@
+"use client";
+
 import { Category } from "@prisma/client";
 
 import Link from "next/link";
 import { Image } from "@nextui-org/image";
 
+import { RxCross2 } from "react-icons/rx";
+import { Button } from "@nextui-org/react";
+import { removeProgramFromSeries } from "@/actions/program";
+
 interface Program extends Category {
   author: { name: string }[] | null;
   month: { name: string; year: { year: string } } | null;
 }
-function ProgramCard({ program }: { program: Program }) {
+interface ProgramCardProps {
+  program: Program;
+  isSeries?: boolean;
+}
+function ProgramCard({ program, isSeries = false }: ProgramCardProps) {
   return (
     <Link href={{ pathname: `/programs/${program.id}` }}>
-      <div className="block overflow-hidden rounded-2xl flex-1 ">
+      <div className="block overflow-hidden rounded-2xl flex-1 relative">
+        {isSeries && (
+          <Button
+            isIconOnly
+            variant="light"
+            size="sm"
+            onClick={async (e) => {
+              e.preventDefault();
+              await removeProgramFromSeries(program.id);
+            }}
+            className="z-20 absolute top-2 right-2 bg-gray-900 text-white rounded-full p-1"
+          >
+            <RxCross2 />
+          </Button>
+        )}
         <Image
           width={350}
           height={350}

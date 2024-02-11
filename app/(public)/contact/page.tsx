@@ -53,12 +53,8 @@ function Contact() {
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     send("service_jubfdtu", "template_z41b9rc", toSend, "YxVJTObo3qKb33clB")
-      .then((response) => {
-        console.log("SUCCESS!", response.status, response.text);
-      })
-      .catch((err) => {
-        console.log("FAILED...", err);
-      });
+      .then((response) => {})
+      .catch((err) => {});
     setToSend({
       from_mail: "",
       message: "",

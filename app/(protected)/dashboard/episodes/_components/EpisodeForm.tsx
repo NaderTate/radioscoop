@@ -70,7 +70,6 @@ function EpisodeForm({ programs, episode }: Props) {
           defaultValue={episodeData.link}
           label="الرابط"
           onValueChange={(e) => {
-            console.log(e);
             setEpisodeData({ ...episodeData, link: e });
           }}
         />
@@ -79,8 +78,6 @@ function EpisodeForm({ programs, episode }: Props) {
           defaultValue={episodeData.embedLink || ""}
           label="رابط الفيديو (embed)"
           onValueChange={(e) => {
-            console.log(e);
-
             setEpisodeData({ ...episodeData, embedLink: e });
           }}
         />

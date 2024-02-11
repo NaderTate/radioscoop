@@ -5,8 +5,9 @@ import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 
 export const createNewAdmin = async (adminData: {
-  email: string;
   name: string;
+  email: string;
+  password: string;
 }) => {
   try {
     await prisma.admin.create({
@@ -24,8 +25,9 @@ export const createNewAdmin = async (adminData: {
 export const updateAdmin = async (
   id: string,
   adminData: {
-    email: string;
     name: string;
+    email: string;
+    password: string;
   }
 ) => {
   try {

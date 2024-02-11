@@ -37,9 +37,7 @@ async function Seriess({ searchParams }: Props) {
   return (
     <div className="flex flex-col min-h-[90vh]">
       <div className="grow">
-        <div className="flex justify-center ">
-          <AddProgramForm />
-        </div>
+        <AddProgramForm />
         {programs.length > 0 ? (
           <div>
             <h1 className="text-4xl font-bold tracking-tight mb-4">
@@ -47,7 +45,7 @@ async function Seriess({ searchParams }: Props) {
             </h1>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5">
               {programs?.map((program) => (
-                <ProgramCard key={program.id} program={program} />
+                <ProgramCard isSeries key={program.id} program={program} />
               ))}
             </div>
           </div>

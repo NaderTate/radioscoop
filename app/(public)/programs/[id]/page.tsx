@@ -116,7 +116,7 @@ async function Program({ params: { id }, searchParams }: Props) {
           {program?.series ? "مسلسل" : "برنامج"} {program?.name}
         </h2>
 
-        {program?.author?.length && (
+        {program?.author?.length && program.author.length > 0 && (
           <>
             تقديم :
             {program?.author.map((author) => (

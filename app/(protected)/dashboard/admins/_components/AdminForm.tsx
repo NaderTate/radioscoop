@@ -25,7 +25,6 @@ function AdminForm({ admin }: Props) {
   const { adminData, setAdminData, isPending, onSubmit } = useHandleAdminData({
     ...admin,
   });
-
   return (
     <>
       <Button
@@ -51,7 +50,7 @@ function AdminForm({ admin }: Props) {
                 <Input
                   variant="bordered"
                   label="الاسم"
-                  defaultValue={adminData.name}
+                  defaultValue={adminData.email}
                   onValueChange={(e) => {
                     setAdminData({ ...adminData, name: e });
                   }}
@@ -64,6 +63,14 @@ function AdminForm({ admin }: Props) {
                     setAdminData({ ...adminData, email: e });
                   }}
                 />
+                <Input
+                  variant="bordered"
+                  label="الباسوورد"
+                  defaultValue={adminData.password}
+                  onValueChange={(e) => {
+                    setAdminData({ ...adminData, password: e });
+                  }}
+                />
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="light" onPress={onClose}>
@@ -71,7 +78,9 @@ function AdminForm({ admin }: Props) {
                 </Button>
                 <Button
                   isLoading={isPending}
-                  isDisabled={isPending || !adminData.name || !adminData.email}
+                  isDisabled={
+                    isPending || !adminData.password || !adminData.email
+                  }
                   color="primary"
                   onPress={async () => {
                     await onSubmit();

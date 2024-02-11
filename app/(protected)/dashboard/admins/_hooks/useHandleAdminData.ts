@@ -8,15 +8,17 @@ export const useHandleAdminData = (admin?: {
   id?: string;
   name?: string;
   email?: string;
+  password?: string;
 }) => {
   const [adminData, setAdminData] = useState({
     name: admin?.name || "",
     email: admin?.email || "",
+    password: admin?.password || "",
   });
 
   const [isPending, startTransition] = useTransition();
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     startTransition(() => {
       if (admin?.id) {
         updateAdmin(admin.id, {
@@ -29,6 +31,7 @@ export const useHandleAdminData = (admin?: {
         setAdminData({
           name: "",
           email: "",
+          password: "",
         });
       }
     });

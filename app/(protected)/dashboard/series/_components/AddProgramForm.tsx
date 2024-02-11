@@ -52,7 +52,12 @@ const AddProgramModal = () => {
                     className="flex justify-between items-center"
                   >
                     <div className="flex items-center gap-3">
-                      <Image width={100} height={100} src={result.img} />
+                      <Image
+                        width={100}
+                        height={100}
+                        src={result.img}
+                        alt={result.name}
+                      />
                       <span>{result.name}</span>
                     </div>
                     <Button

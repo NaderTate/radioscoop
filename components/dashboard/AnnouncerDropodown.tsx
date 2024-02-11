@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Select from "react-select";
+import Select, { Theme } from "react-select";
 
 import {
   Command,
@@ -43,10 +43,36 @@ const AnnouncerDropodown = ({
     label: announcer.name,
     value: announcer.id,
   }));
+
   if (multi)
     return (
       <Select
-        placeholder="announcers"
+        className="text-white"
+        styles={{
+          control: (provided) => ({
+            ...provided,
+            backgroundColor: "transparent",
+            borderRadius: "0.65rem",
+            padding: "0.5rem",
+            color: "black",
+          }),
+          // chnage backround color of dropdown list
+          menu: (base) => ({
+            ...base,
+            backgroundColor: "#3f3f46",
+          }),
+          // remove the hover effect
+          option: (provided, state) => ({
+            ...provided,
+            backgroundColor: state.isFocused ? "#1f2937" : "#3f3f46",
+            color: "white",
+          }),
+          input: (provided, state) => ({
+            ...provided,
+            color: state.theme.colors.primary,
+          }),
+        }}
+        placeholder="المذيع..."
         defaultValue={allAnnoucers.filter((announcer) =>
           announcerIDs?.includes(announcer.value)
         )}
