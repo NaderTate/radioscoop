@@ -44,7 +44,7 @@ function ArticleForm({ presenters, article, types, postMonths, years }: Props) {
     <Dialog>
       <DialogTrigger asChild>
         {article?.id ? (
-          <FiEdit size={15} className="m-auto" />
+          <FiEdit size={15} className="m-auto cursor-pointer" />
         ) : (
           <Button size={"lg"}>إضافة مقالة</Button>
         )}

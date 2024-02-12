@@ -40,7 +40,10 @@ function VideoForm({ announcers, video }: Props) {
     <Dialog>
       <DialogTrigger asChild>
         {video?.id ? (
-          <FiEdit size={20} className="mr-2 h-4 w-4 shrink-0 opacity-50" />
+          <FiEdit
+            size={20}
+            className="mr-2 h-4 w-4 shrink-0 opacity-50 cursor-pointer"
+          />
         ) : (
           <Button size={"lg"}>
             إضافة فيديو <AiOutlinePlusCircle className="mr-2 h-4 w-4" />

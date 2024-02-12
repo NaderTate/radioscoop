@@ -35,7 +35,11 @@ function AdminForm({ admin }: Props) {
         onPress={onOpen}
         isIconOnly={admin ? false : true}
       >
-        {admin ? <FaRegEdit size={16} /> : "اضافة مشرف"}
+        {admin ? (
+          <FaRegEdit className="cursor-pointer" size={16} />
+        ) : (
+          "اضافة مشرف"
+        )}
       </Button>
       <Modal placeholder="center" isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>

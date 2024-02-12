@@ -51,7 +51,7 @@ function FeatureForm({ feature, presenters, types }: Props) {
     <Dialog>
       <DialogTrigger asChild>
         {feature?.id ? (
-          <FiEdit className="mr-2 h-4 w-4 shrink-0 opacity-50" />
+          <FiEdit className="mr-2 h-4 w-4 shrink-0 opacity-50 cursor-pointer" />
         ) : (
           <Button size={"lg"}>
             إضافة فيتشر <AiOutlinePlusCircle className="mr-2 h-4 w-4" />

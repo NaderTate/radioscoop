@@ -40,7 +40,7 @@ function PresenterForm({ announcer }: Props) {
     <Dialog>
       <DialogTrigger asChild>
         {announcer?.id ? (
-          <FiEdit className="mr-2 h-4 w-4 shrink-0 opacity-50" />
+          <FiEdit className="mr-2 h-4 w-4 shrink-0 opacity-50 cursor-pointer" />
         ) : (
           <Button size={"lg"}>
             إضافة مذيع <AiOutlinePlusCircle className="mr-2 h-4 w-4" />

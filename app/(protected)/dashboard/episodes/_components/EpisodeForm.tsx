@@ -41,7 +41,7 @@ function EpisodeForm({ programs, episode }: Props) {
     <Dialog>
       <DialogTrigger asChild>
         {episode?.id ? (
-          <FiEdit size={15} className=" opacity-50 m-auto" />
+          <FiEdit size={15} className=" opacity-50 m-auto cursor-pointer" />
         ) : (
           <Button size={"lg"}>
             إضافة حلقة <AiOutlinePlusCircle className="mr-2 h-4 w-4" />

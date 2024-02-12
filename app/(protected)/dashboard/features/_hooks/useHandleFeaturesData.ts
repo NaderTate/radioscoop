@@ -15,7 +15,7 @@ export const useHanldeFeaturesData = (feature?: {
 }) => {
   const [featureData, setFeatureData] = useState(
     feature ?? {
-      featureTitle: "xx",
+      featureTitle: "",
       preparedById: "",
       presenterId: "",
       link: "",
