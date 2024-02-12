@@ -38,13 +38,13 @@ function VideoForm({ announcers, video }: Props) {
   } = useHandleVideoData(video);
   return (
     <Dialog>
-      <DialogTrigger>
+      <DialogTrigger asChild>
         {video?.id ? (
           <FiEdit size={20} className="mr-2 h-4 w-4 shrink-0 opacity-50" />
         ) : (
-          <div className="bg-primary rounded-md text-secondary-50 p-3 flex items-center">
+          <Button size={"lg"}>
             إضافة فيديو <AiOutlinePlusCircle className="mr-2 h-4 w-4" />
-          </div>
+          </Button>
         )}
       </DialogTrigger>
       <DialogContent>
@@ -89,7 +89,7 @@ function VideoForm({ announcers, video }: Props) {
               }}
             />
           </div>
-          <DialogClose className="w-full" disabled={missingData}>
+          <DialogClose asChild className="w-full" disabled={missingData}>
             <Button
               disabled={missingData}
               className="w-full"

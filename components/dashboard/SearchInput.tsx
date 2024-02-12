@@ -26,6 +26,7 @@ const SearchInput = () => {
 
   return (
     <Input
+      size="sm"
       className="w-64 ml-10 sm:ml-0"
       variant="bordered"
       label="ابحث..."

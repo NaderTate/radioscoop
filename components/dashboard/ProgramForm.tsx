@@ -39,13 +39,11 @@ function ProgramForm({ presenters, program }: Prop) {
   } = useHandleProgramData(program);
   return (
     <Dialog>
-      <DialogTrigger>
+      <DialogTrigger asChild>
         {program?.id ? (
           <FiEdit className="mr-2 h-4 w-4 shrink-0 opacity-50" />
         ) : (
-          <div className="bg-primary rounded-md text-secondary-50 p-3 flex items-center">
-            إضافة برنامج
-          </div>
+          <Button size={"lg"}>إضافة برنامج</Button>
         )}
       </DialogTrigger>
       <DialogContent>
@@ -80,7 +78,7 @@ function ProgramForm({ presenters, program }: Prop) {
             setProgramData({ ...programData, authorId: id });
           }}
         />
-        <DialogClose className="w-full" disabled={missingData}>
+        <DialogClose asChild className="w-full" disabled={missingData}>
           <Button disabled={missingData} className="w-full" onClick={onSubmit}>
             {program?.id ? "تعديل" : "إضافة"}
           </Button>

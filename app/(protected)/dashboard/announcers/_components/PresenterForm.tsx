@@ -38,13 +38,13 @@ function PresenterForm({ announcer }: Props) {
 
   return (
     <Dialog>
-      <DialogTrigger>
+      <DialogTrigger asChild>
         {announcer?.id ? (
           <FiEdit className="mr-2 h-4 w-4 shrink-0 opacity-50" />
         ) : (
-          <div className="bg-primary rounded-md text-secondary-50 p-3 flex items-center">
+          <Button size={"lg"}>
             إضافة مذيع <AiOutlinePlusCircle className="mr-2 h-4 w-4" />
-          </div>
+          </Button>
         )}
       </DialogTrigger>
       <DialogContent>
@@ -76,7 +76,11 @@ function PresenterForm({ announcer }: Props) {
                 alt="img"
               />
             )}
-            <DialogClose disabled={!announcerData.name} className="w-full">
+            <DialogClose
+              asChild
+              disabled={!announcerData.name}
+              className="w-full"
+            >
               <Button
                 disabled={!announcerData.name}
                 color="primary"

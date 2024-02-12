@@ -3,14 +3,9 @@ import prisma from "@/lib/prisma";
 import BarChart from "./_components/charts/bar-chart";
 import CountCard from "./count-card";
 
-import { RiAdminLine } from "react-icons/ri";
-import { HiSpeakerphone } from "react-icons/hi";
-import { AiOutlineTable } from "react-icons/ai";
 import { SiAirplayaudio } from "react-icons/si";
-import { ImListNumbered } from "react-icons/im";
-import { TbCategoryFilled } from "react-icons/tb";
 import { LuPersonStanding } from "react-icons/lu";
-import { BsFillPieChartFill } from "react-icons/bs";
+import { TbCategoryFilled } from "react-icons/tb";
 import { MdArticle, MdOndemandVideo, MdOutlineAudioFile } from "react-icons/md";
 
 async function Dashboard() {

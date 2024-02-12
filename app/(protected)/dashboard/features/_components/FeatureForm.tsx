@@ -49,13 +49,13 @@ function FeatureForm({ feature, presenters, types }: Props) {
 
   return (
     <Dialog>
-      <DialogTrigger>
+      <DialogTrigger asChild>
         {feature?.id ? (
           <FiEdit className="mr-2 h-4 w-4 shrink-0 opacity-50" />
         ) : (
-          <div className="bg-primary rounded-md text-secondary-50 p-3 flex items-center">
+          <Button size={"lg"}>
             إضافة فيتشر <AiOutlinePlusCircle className="mr-2 h-4 w-4" />
-          </div>
+          </Button>
         )}
       </DialogTrigger>
       <DialogContent className="overflow-auto h-full max-h-[80vh]">
@@ -121,7 +121,7 @@ function FeatureForm({ feature, presenters, types }: Props) {
             setFeatureData({ ...featureData, typeId: e });
           }}
         />
-        <DialogClose disabled={missingData}>
+        <DialogClose asChild disabled={missingData}>
           <Button
             disabled={missingData}
             className="block w-full"

@@ -25,13 +25,13 @@ const YearForm = ({ year }: Props) => {
   const { yearData, setYearData, onSubmit } = useHanldeYearData(year);
   return (
     <Dialog>
-      <DialogTrigger className={`${year && "absolute top-0 right-0"}`}>
+      <DialogTrigger asChild className={`${year && "absolute top-0 right-0"}`}>
         {year ? (
           <TiEdit className="cursor-pointer" size={20} />
         ) : (
-          <div className="bg-primary p-2 text-secondary-50 rounded-md flex items-center">
+          <Button size={"lg"}>
             اضافة سنة <AiOutlinePlusCircle size={25} />
-          </div>
+          </Button>
         )}
       </DialogTrigger>
       <DialogContent>

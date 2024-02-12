@@ -8,6 +8,7 @@ import {
   Tooltip,
   Legend,
   BarElement,
+  BarController,
 } from "chart.js";
 import { Chart } from "react-chartjs-2";
 
@@ -15,6 +16,7 @@ ChartJS.register(
   CategoryScale,
   LinearScale,
   BarElement,
+  BarController,
   Title,
   Tooltip,
   Legend

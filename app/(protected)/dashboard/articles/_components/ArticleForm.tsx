@@ -42,13 +42,11 @@ function ArticleForm({ presenters, article, types, postMonths, years }: Props) {
 
   return (
     <Dialog>
-      <DialogTrigger>
+      <DialogTrigger asChild>
         {article?.id ? (
           <FiEdit size={15} className="m-auto" />
         ) : (
-          <div className="bg-primary rounded-md text-secondary-50 p-3">
-            إضافة مقالة
-          </div>
+          <Button size={"lg"}>إضافة مقالة</Button>
         )}
       </DialogTrigger>
       <DialogContent className="overflow-auto h-full max-h-[80vh]">
@@ -111,6 +109,7 @@ function ArticleForm({ presenters, article, types, postMonths, years }: Props) {
             />
           </div>
           <DialogClose
+            asChild
             disabled={
               !articleData.image || !articleData.content || !articleData.title
             }
