@@ -62,7 +62,7 @@ const MainSidePanel = ({ data }: Props) => {
               slidesPerView: 2,
             },
           }}
-        ><SwiperSlide key={index + item.title}>
+        ><SwiperSlide>
               <Link href={{ pathname: `/programs/65edfaa78f6ab857b61515f4` }}>
                 <div
                   style={{
