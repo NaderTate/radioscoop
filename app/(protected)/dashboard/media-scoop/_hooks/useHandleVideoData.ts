@@ -20,9 +20,8 @@ export const useHandleVideoData = (video?: Video) => {
 
     setUploadingImage(true);
     const formData = new FormData();
-    formData.append("file", image);
-    formData.append("upload_preset", "videos");
-    await fetch("/api/cloudinary", {
+    formData.append("source", image);
+    const res = await fetch("/api/lensdump", {
       method: "POST",
       body: formData,
     })

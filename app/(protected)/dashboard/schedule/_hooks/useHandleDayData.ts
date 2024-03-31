@@ -14,9 +14,8 @@ export const useHandleDayData = (images: { id: string; link: string }[]) => {
     setUploading(true);
     for (let i = 0; i < file.length; i++) {
       const formData = new FormData();
-      formData.append("file", file[i]);
-      formData.append("upload_preset", "schedule");
-      const res = await fetch("/api/cloudinary", {
+      formData.append("source", file[i]);
+      const res = await fetch("/api/lensdump", {
         method: "POST",
         body: formData,
       });
