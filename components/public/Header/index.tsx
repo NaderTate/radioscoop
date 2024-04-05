@@ -52,6 +52,62 @@ const Header = () => {
             <NavLink label="الصفحة الرئيسية" link="/" />
             <NavItem label="أكاديمية الراديو">
               <NavContent>
+                <NavItem label="مجلة سكوب">
+                  <NavContent>
+                    {articleTypes.map((type, i) => {
+                      if (type.seasons.length === 0) {
+                        return (
+                          <NavLink
+                            key={type.id}
+                            label={type.name}
+                            link={`/articles`}
+                            queries={{ type: type.id }}
+                          />
+                        );
+                      } else {
+                        return (
+                          <NavItem key={type.id} label={type.name}>
+                            <NavContent>
+                              {type.seasons.map((season, i) => {
+                                if (season.months.length === 0) {
+                                  return (
+                                    <NavLink
+                                      key={season.year}
+                                      label={season.year}
+                                      link={`/articles`}
+                                      queries={{ type: type.id }}
+                                    />
+                                  );
+                                } else {
+                                  return (
+                                    <NavItem
+                                      key={season.year}
+                                      label={season.year}
+                                    >
+                                      <NavContent>
+                                        {season.months.map((month) => (
+                                          <NavLink
+                                            key={month.id}
+                                            label={`شهر ${month.name}`}
+                                            link={`/articles`}
+                                            queries={{
+                                              type: type.id,
+                                              month: month.id,
+                                            }}
+                                          />
+                                        ))}
+                                      </NavContent>
+                                    </NavItem>
+                                  );
+                                }
+                              })}
+                            </NavContent>
+                          </NavItem>
+                        );
+                      }
+                    })}
+                  </NavContent>
+                </NavItem>
                 {radioAcademy.map((subItem, i) => (
                   <NavLink key={i} label={subItem.title} link={subItem.link} />
                 ))}
@@ -67,7 +123,6 @@ const Header = () => {
                     key={type.id}
                   />
                 ))}
-                <NavLink label="مسلسلات FM" link="/series" />
                 <NavLink label="ميديا سكووب" link="/media-scoop" />
                 <NavLink label="البرنامج العام" link="/generalProgram" />
                 {seasons?.map((season, i) => (
@@ -86,59 +141,7 @@ const Header = () => {
                 ))}
               </NavContent>
             </NavItem>
-            <NavItem label="مجلة سكوب">
-              <NavContent>
-                {articleTypes.map((type, i) => {
-                  if (type.seasons.length === 0) {
-                    return (
-                      <NavLink
-                        key={type.id}
-                        label={type.name}
-                        link={`/articles`}
-                        queries={{ type: type.id }}
-                      />
-                    );
-                  } else {
-                    return (
-                      <NavItem key={type.id} label={type.name}>
-                        <NavContent>
-                          {type.seasons.map((season, i) => {
-                            if (season.months.length === 0) {
-                              return (
-                                <NavLink
-                                  key={season.year}
-                                  label={season.year}
-                                  link={`/articles`}
-                                  queries={{ type: type.id }}
-                                />
-                              );
-                            } else {
-                              return (
-                                <NavItem key={season.year} label={season.year}>
-                                  <NavContent>
-                                    {season.months.map((month) => (
-                                      <NavLink
-                                        key={month.id}
-                                        label={`شهر ${month.name}`}
-                                        link={`/articles`}
-                                        queries={{
-                                          type: type.id,
-                                          month: month.id,
-                                        }}
-                                      />
-                                    ))}
-                                  </NavContent>
-                                </NavItem>
-                              );
-                            }
-                          })}
-                        </NavContent>
-                      </NavItem>
-                    );
-                  }
-                })}
-              </NavContent>
-            </NavItem>
+
             {data.map((item, i) => (
               <NavLink label={item.title} link={item.link} key={i} />
             ))}

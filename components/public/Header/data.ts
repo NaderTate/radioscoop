@@ -1,4 +1,5 @@
 export const data = [
+  { title: "مسلسلات FM", link: "/series" },
   { title: "للاستماع والتعليق", link: "/comment" },
   { title: "تواصل معنا", link: "/contact" },
 ];
