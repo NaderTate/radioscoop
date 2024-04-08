@@ -57,12 +57,12 @@ const Contact = () => {
       <div className=" mt-5 text-center md:text-base lg:text-lg">
         <div rel="noopener noreferrer">
           للاستفسار :
-          <a href="tel:+01555868717" target="_blank" rel="noopener noreferrer">
+          <a href="tel:+01114510001" target="_blank" rel="noopener noreferrer">
             01114510001
           </a>
           -
-          <a href="tel:+201555868717" target="_blank" rel="noopener noreferrer">
-            01555868717
+          <a href="tel:+201288711140" target="_blank" rel="noopener noreferrer">
+            01288711140
           </a>
         </div>
       </div>
