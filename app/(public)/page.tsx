@@ -92,12 +92,6 @@ async function Home() {
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
         ></iframe>
-        <h1 className="font-semibold ">
-          اسمعونا يومياً على #راديو_مصر 88.7 فى مسلسل #بنات_ذوات الساعه ٤ قبل
-          الفطار برعاية #راديو_سكووب بطولة الفنان #كريم_عفيفي والفنانة القديرة
-          #انعام_سالوسة والفنان مجدي عبد الحليم اخراج عمرو عبده دياب والاشراف
-          الاذاعي احمد اسماعيل
-        </h1>
       </div>
       {/* <Link href="/articles/655083ccb67e7e9d49578abb">
         <img
