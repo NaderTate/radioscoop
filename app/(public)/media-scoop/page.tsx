@@ -10,21 +10,24 @@ export const metadata = {
 };
 
 type Props = {
-  searchParams: { page: number };
+  searchParams: { page: number; type?: "podcast" };
 };
 
 async function page({ searchParams }: Props) {
-  const { page } = searchParams;
+  const { page, type } = searchParams;
 
   const videos = await prisma.video.findMany({
     take: itemsToFetch,
     skip: ((page ?? 1) - 1) * itemsToFetch,
+    where: { isPodcast: type == "podcast" },
     orderBy: {
       id: "desc",
     },
   });
 
-  const count = await prisma.video.count();
+  const count = await prisma.video.count({
+    where: { isPodcast: type == "podcast" },
+  });
 
   return (
     <>

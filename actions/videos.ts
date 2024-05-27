@@ -9,6 +9,7 @@ export const addVideo = async (videoData: {
   link: string;
   image: string;
   announcerId: string | null;
+  isPodcast: boolean | null;
 }) => {
   try {
     await prisma.video.create({
@@ -16,6 +17,7 @@ export const addVideo = async (videoData: {
         title: videoData.title,
         link: videoData.link,
         image: videoData.image,
+        isPodcast: videoData.isPodcast,
         presenter: videoData.announcerId
           ? {
               connect: {
@@ -39,6 +41,7 @@ export const updateVideo = async (
     link: string;
     image: string;
     announcerId?: string | null;
+    isPodcast?: boolean | null;
   }
 ) => {
   try {
@@ -50,6 +53,7 @@ export const updateVideo = async (
         title: videoData.title,
         link: videoData.link,
         image: videoData.image,
+        isPodcast: videoData.isPodcast,
         presenter: videoData.announcerId
           ? {
               connect: {

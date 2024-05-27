@@ -124,6 +124,11 @@ const Header = () => {
                   />
                 ))}
                 <NavLink label="ميديا سكووب" link="/media-scoop" />
+                <NavLink
+                  label="البودكاست"
+                  link="/media-scoop"
+                  queries={{ type: "podcast" }}
+                />
                 <NavLink label="البرنامج العام" link="/generalProgram" />
                 {seasons?.map((season, i) => (
                   <NavItem key={i} label={`برامج ${season.year}`}>

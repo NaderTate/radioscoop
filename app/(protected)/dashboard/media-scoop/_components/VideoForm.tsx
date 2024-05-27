@@ -3,6 +3,7 @@
 import { Video } from "@prisma/client";
 
 import Image from "next/image";
+import { Checkbox } from "@nextui-org/checkbox";
 import { Input, Spinner } from "@nextui-org/react";
 import { DialogClose } from "@radix-ui/react-dialog";
 
@@ -91,6 +92,14 @@ function VideoForm({ announcers, video }: Props) {
                 setVideoData({ ...videoData, presenterId: id });
               }}
             />
+            <Checkbox
+              defaultSelected={videoData?.isPodcast || false}
+              onValueChange={(e) => {
+                setVideoData({ ...videoData, isPodcast: e });
+              }}
+            >
+              بودكاست؟
+            </Checkbox>
           </div>
           <DialogClose asChild className="w-full" disabled={missingData}>
             <Button

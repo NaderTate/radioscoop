@@ -115,6 +115,7 @@ model Video {
   image       String
   link        String
   presenter   Author?  @relation(fields: [presenterId], references: [id])
+  isPodcast   Boolean? @default(false)
   presenterId String?  @db.ObjectId
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
