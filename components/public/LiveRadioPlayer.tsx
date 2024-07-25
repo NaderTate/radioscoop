@@ -41,7 +41,7 @@ const LiveRadioPlayer = () => {
           <div className="mt-10">
             <AudioPlayer
               // autoPlay
-              src="https://mystation.micast.media/radio/8190/radio.mp3"
+              src="https://a6.asurahosting.com:7040/radio.mp3"
               onPlay={() => setPlay(true)}
               onPause={() => setPlay(false)}
               showSkipControls
