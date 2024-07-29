@@ -36,9 +36,7 @@ export async function generateMetadata({ params: { id } }: Props) {
         description: "راديو سكووب",
         images: [
           {
-            url:
-              announcer?.img ||
-              "https://res.cloudinary.com/ddcjbeysn/image/upload/v1699813302/person-placeholder-image_hrwla9.png",
+            url: announcer?.img || "https://b.l3n.co/i/SqybT1.png",
             width: 800,
             height: 600,
           },
@@ -48,9 +46,7 @@ export async function generateMetadata({ params: { id } }: Props) {
         title: announcer?.name,
         images: [
           {
-            url:
-              announcer?.img ||
-              "https://res.cloudinary.com/ddcjbeysn/image/upload/v1699813302/person-placeholder-image_hrwla9.png",
+            url: announcer?.img || "https://b.l3n.co/i/SqybT1.png",
             width: 800,
             height: 600,
           },
@@ -70,10 +66,7 @@ async function Announcer({ params: { id } }: Props) {
   return (
     <div className="pb-10">
       <ImagesSection
-        image={
-          announcer?.img ||
-          "https://res.cloudinary.com/ddcjbeysn/image/upload/v1699813302/person-placeholder-image_hrwla9.png"
-        }
+        image={announcer?.img || "https://b.l3n.co/i/SqybT1.png"}
       />
       <h1 className="text-center text-xl mt-5 font-semibold">
         {announcer?.name}

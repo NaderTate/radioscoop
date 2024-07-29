@@ -15,10 +15,10 @@ function ImagesSection({ image }: { image: string }) {
     <>
       <div className="flex justify-center">
         <Image
-          src="https://res.cloudinary.com/ddcjbeysn/image/upload/v1699518962/assets/294423928_376764924602881_6195196421443861263_n_z7lh3y.png"
           alt="cover"
           width={1500}
           height={400}
+          src="https://b.l3n.co/i/SB2Yqz.png"
           className="object-cover h-48 sm:h-96 w-screen brightness-90 shadow-lg shadow-blue-400/50 "
         />
       </div>
@@ -29,7 +29,7 @@ function ImagesSection({ image }: { image: string }) {
           alt=""
           width={200}
           height={200}
-          className="object-contain rounded-md w-40 sm:w-[20vw] -mt-24 shadow-lg shadow-blue-400/50 z-10 sticky cursor-pointer hover:scale-[1.02] transition-transform duration-300"
+          className="object-contain rounded-full w-40 sm:w-[20vw] -mt-24 shadow-lg shadow-blue-400/50 z-10 sticky cursor-pointer hover:scale-[1.02] transition-transform duration-300"
         />
       </div>
       <Modal placement="center" isOpen={isOpen} onOpenChange={onOpenChange}>

@@ -47,28 +47,28 @@ async function Home() {
       },
     },
   });
-  const series = await prisma.episode.findMany({
-    where: {
-      categoryId: "65edfaa78f6ab857b61515f4",
-    },
-    take: 20,
-    orderBy: {
-      id: "desc",
-    },
-    include: {
-      category: {
-        select: {
-          name: true,
-          img: true,
-          author: {
-            select: {
-              name: true,
-            },
-          },
-        },
-      },
-    },
-  });
+  // const series = await prisma.episode.findMany({
+  //   where: {
+  //     categoryId: "65edfaa78f6ab857b61515f4",
+  //   },
+  //   take: 20,
+  //   orderBy: {
+  //     id: "desc",
+  //   },
+  //   include: {
+  //     category: {
+  //       select: {
+  //         name: true,
+  //         img: true,
+  //         author: {
+  //           select: {
+  //             name: true,
+  //           },
+  //         },
+  //       },
+  //     },
+  //   },
+  // });
   const schedule = await prisma.schedule.findFirst({
     select: {
       Days: true,
@@ -109,11 +109,11 @@ async function Home() {
         </div>
 
         <div className="lg:col-span-4 lg:border-r border-gray-800 dark:border-gray-300 ">
-          <EpisodesSection
+          {/* <EpisodesSection
             title=" مسلسل  بنات ذوات"
             data={series}
             seeAll="/programs/65edfaa78f6ab857b61515f4"
-          />
+          /> */}
           <EpisodesSection title="أحدث الحلقات" data={Episodes} seeAll="/ep" />
           <Schedule Days={schedule?.Days} title={schedule?.title as string} />
         </div>
