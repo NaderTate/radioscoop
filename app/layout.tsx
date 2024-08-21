@@ -44,6 +44,13 @@ export default async function RootLayout({
 
   return (
     <html lang="ar">
+      <head>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3057604953416694"
+          crossOrigin="anonymous"
+        ></script>
+      </head>
       <body dir="rtl" className={changa.className}>
         <ClientProviders session={session}>{children}</ClientProviders>
       </body>
