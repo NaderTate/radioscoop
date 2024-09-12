@@ -8,9 +8,9 @@ import { Input, Spinner, Textarea } from "@nextui-org/react";
 
 import {
   Dialog,
-  DialogContent,
-  DialogHeader,
   DialogTitle,
+  DialogHeader,
+  DialogContent,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import Months from "./dropdowns/Months";
