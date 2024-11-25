@@ -15,7 +15,14 @@ type Props = {
 function EpisodeCard({ ep }: Props) {
   return (
     <div className="relative aspect-square ">
-      <Link href={{ pathname: `/ep/${ep.id}` }}>
+      <Link
+        target={ep.embedLink?.includes("facebook") ? "_blank" : "_self"}
+        href={{
+          pathname: ep.embedLink?.includes("facebook")
+            ? ep.embedLink
+            : `/ep/${ep.id}`,
+        }}
+      >
         <Image
           src={ep.img ? ep.img : ep?.category?.img}
           className="aspect-square object-cover brightness-[.6]"
