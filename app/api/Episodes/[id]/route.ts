@@ -11,6 +11,7 @@ export async function GET(
     select: {
       id: true,
       title: true,
+      embedLink: true,
       img: true,
       link: true,
       createdAt: true,

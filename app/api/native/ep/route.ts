@@ -13,6 +13,7 @@ export async function GET(request: NextRequest) {
     },
     select: {
       id: true,
+      embedLink: true,
       title: true,
       img: true,
       link: true,
