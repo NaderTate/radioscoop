@@ -1,7 +1,5 @@
 import prisma from "@/lib/prisma";
 
-import Link from "next/link";
-
 import Contact from "@/components/public/Contact";
 import Schedule from "@/components/public/Schedule";
 import SidePanel from "@/components/public/SidePanel";
@@ -83,15 +81,20 @@ async function Home() {
         <Contact />
       </div>
       <div className="p-10 flex flex-col items-center lg:hidden">
-        <iframe
-          className="mx-auto rounded-md aspect-video"
+        {/* <iframe
+          className="mx-auto rounded-md "
           width="100%"
-          height="350"
-          src="https://www.youtube.com/embed/ZCZTM3BD02k?si=h-Fiso4MwQAex7Lh"
+          height="720"
+          src="https://www.facebook.com/plugins/video.php?height=476&href=https%3A%2F%2Fwww.facebook.com%2F88.7fmPrograms%2Fvideos%2F622461510383473%2F&show_text=false&width=357&t=0"
           title="YouTube video player"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
-        ></iframe>
+        ></iframe> */}
+        <video
+          src="/ad-video.mp4"
+          controls
+          className="w-full rounded-md"
+        ></video>
       </div>
       {/* <Link href="/articles/655083ccb67e7e9d49578abb">
         <img

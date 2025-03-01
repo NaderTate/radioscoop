@@ -29,17 +29,19 @@ model Episode {
 }
 
 model Author {
-  id                String     @id @default(auto()) @map("_id") @db.ObjectId
+  id                String           @id @default(auto()) @map("_id") @db.ObjectId
   name              String
   img               String?
   posts             Post[]
-  Categories        Category[] @relation(fields: [categoriesId], references: [id])
-  categoriesId      String[]   @db.ObjectId
-  PreparedFeatures  Episode[]  @relation("preparedFeature")
-  PresentedFeatures Episode[]  @relation("presentedFeature")
+  Categories        Category[]       @relation(fields: [categoriesId], references: [id])
+  categoriesId      String[]         @db.ObjectId
+  PreparedFeatures  Episode[]        @relation("preparedFeature")
+  PresentedFeatures Episode[]        @relation("presentedFeature")
   Videos            Video[]
-  createdAt         DateTime   @default(now())
-  updatedAt         DateTime   @updatedAt
+  // Relation to the join model for promos
+  promoPresenters   PromoPresenter[]
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
 }
 
 model Category {
@@ -51,10 +53,33 @@ model Category {
   month          Month?    @relation(fields: [monthId], references: [id])
   monthId        String?   @db.ObjectId
   episodes       Episode[]
+  promos         Promo[] // relation to Promo
   generalProgram Boolean?  @default(false)
   series         Boolean?  @default(false)
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
+}
+
+model Promo {
+  id         String           @id @default(auto()) @map("_id") @db.ObjectId
+  image      String?
+  link       String
+  category   Category         @relation(fields: [categoryId], references: [id])
+  categoryId String           @db.ObjectId
+  // Explicit relation via the join model
+  presenters PromoPresenter[]
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+}
+
+model PromoPresenter {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  promo       Promo    @relation(fields: [promoId], references: [id])
+  promoId     String   @db.ObjectId
+  presenter   Author   @relation(fields: [presenterId], references: [id])
+  presenterId String   @db.ObjectId
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model Post {

@@ -51,6 +51,7 @@ export const getArticleTypes = async () => {
       },
     },
   });
+
   // format the array so that I get the following:
   // name, id, the years and the months of each year
   const FormattedArticleTypes = articleTypes.map((item) => {
@@ -83,6 +84,36 @@ export const getArticleTypes = async () => {
     };
   });
   return FormattedArticleTypes;
+};
+
+export const getSeries = async () => {
+  const series = await prisma.category.findMany({
+    where: { series: true },
+    orderBy: { id: "desc" },
+    select: {
+      name: true,
+      id: true,
+    },
+  });
+  return series;
+};
+
+export const getPromos = async () => {
+  const promos = await prisma.promo.findMany({
+    distinct: ["categoryId"],
+    select: {
+      category: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+  return promos;
 };
 
 // search programs and authors

@@ -2,7 +2,13 @@
 
 import { useEffect, useState } from "react";
 
-import { getFeatureTypes, getArticleTypes, getSeasons } from "../utils";
+import {
+  getFeatureTypes,
+  getArticleTypes,
+  getSeasons,
+  getSeries,
+  getPromos,
+} from "../utils";
 
 import { HeaderProps } from "@/app/types";
 
@@ -11,6 +17,8 @@ export const useFetchNavbarData = () => {
     featureTypes: [],
     seasons: [],
     articleTypes: [],
+    series: [],
+    promos: [],
   } as HeaderProps);
 
   useEffect(() => {
@@ -18,7 +26,9 @@ export const useFetchNavbarData = () => {
       const featureTypes = await getFeatureTypes();
       const seasons = await getSeasons();
       const articleTypes = await getArticleTypes();
-      setHeaderData({ featureTypes, seasons, articleTypes });
+      const series = await getSeries();
+      const promos = await getPromos();
+      setHeaderData({ featureTypes, seasons, articleTypes, series, promos });
     };
     fetchData();
   }, []);

@@ -8,18 +8,20 @@ interface Post {
   title: string;
   image: string;
 }
+import {
+  getPromos,
+  getArticleTypes,
+  getFeatureTypes,
+  getSeasons,
+  getSeries,
+} from "@/components/public/Header/utils";
 
 type HeaderProps = {
-  featureTypes: { id: string; name: string }[];
-  articleTypes: {
-    name: string;
-    id: string;
-    seasons: {
-      year: number;
-      months: { id: string; name: string }[];
-    }[];
-  }[];
-  seasons: { year: string; months: { id: string; name: string }[] }[];
+  featureTypes: Awaited<ReturnType<typeof getFeatureTypes>>;
+  articleTypes: Awaited<ReturnType<typeof getArticleTypes>>;
+  seasons: Awaited<ReturnType<typeof getSeasons>>;
+  series: Awaited<ReturnType<typeof getSeries>>;
+  promos: Awaited<ReturnType<typeof getPromos>>;
 };
 import { Category, Month, Year } from "@prisma/client";
 

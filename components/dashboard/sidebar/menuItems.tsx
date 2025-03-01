@@ -6,7 +6,12 @@ import { ImListNumbered } from "react-icons/im";
 import { TbCategoryFilled } from "react-icons/tb";
 import { LuPersonStanding } from "react-icons/lu";
 import { BsFillPieChartFill } from "react-icons/bs";
-import { MdArticle, MdOndemandVideo, MdOutlineAudioFile } from "react-icons/md";
+import {
+  MdArticle,
+  MdOndemandVideo,
+  MdOutlineAudioFile,
+  MdSpatialAudioOff,
+} from "react-icons/md";
 
 export const menuItems: Array<{
   title: string;
@@ -37,6 +42,11 @@ export const menuItems: Array<{
     title: "المواسم",
     link: "/dashboard/seasons",
     icon: <ImListNumbered />,
+  },
+  {
+    title: "البروموهات",
+    link: "/dashboard/promos",
+    icon: <MdSpatialAudioOff />,
   },
 
   {

@@ -17,19 +17,16 @@ const MainSidePanel = ({ data }: Props) => {
   return (
     <div className="lg:max-w-xs mb-4  lg:mr-2">
       <div className="hidden lg:flex flex-col gap-3 ">
-        <div
-            className="rounded-lg sm:h-auto flex flex-col justify-between shadow-xl bg-slate-700 hover:scale-[1.01] cursor-pointer w-full"
-          >
-            <Link href={{ pathname: `/programs/65edfaa78f6ab857b61515f4` }}>
-              <div className="w-full rounded-lg p-3 shadow-sm ">
-                <img
-                  src="https://res.cloudinary.com/dyzykrlnd/image/upload/v1710098353/IMG_8624_pyli1g.webp"
-                  className=" object-contain w-full rounded-lg "
-                />
-              </div>
-            </Link>
-         
-          </div>
+        <div className="rounded-lg sm:h-auto flex flex-col justify-between shadow-xl bg-slate-700 hover:scale-[1.01] cursor-pointer w-full">
+          <Link href={{ pathname: `/programs/67c2f44626a0ed1d15a24ea8` }}>
+            <div className="w-full rounded-lg p-3 shadow-sm ">
+              <img
+                src="https://b.l3n.co/i/YuQdF7.jpg"
+                className=" object-contain w-full rounded-lg "
+              />
+            </div>
+          </Link>
+        </div>
         {data?.map((item: Post, index: number) => (
           <div
             key={index + item.title}
@@ -62,21 +59,21 @@ const MainSidePanel = ({ data }: Props) => {
               slidesPerView: 2,
             },
           }}
-        ><SwiperSlide>
-              <Link href={{ pathname: `/programs/65edfaa78f6ab857b61515f4` }}>
-                <div
-                  style={{
-                    backgroundImage: `url(https://res.cloudinary.com/dyzykrlnd/image/upload/v1710098353/IMG_8624_pyli1g.webp})`,
-                    backgroundSize: "contain",
-                    backgroundRepeat: "no-repeat",
-                    backgroundPosition: "center",
-                    margin: "auto",
-                  }}
-                  className="rounded-lg h-80 sm:m-2 w-72 justify-end flex flex-col p-2 shadow-xl hover:scale-[1.01] cursor-pointer"
-                >
-                </div>
-              </Link>
-            </SwiperSlide>
+        >
+          <SwiperSlide>
+            <Link href={{ pathname: `/programs/67c2f44626a0ed1d15a24ea8` }}>
+              <div
+                style={{
+                  backgroundImage: `url(https://b.l3n.co/i/YuQdF7.jpg)`,
+                  backgroundSize: "contain",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center",
+                  margin: "auto",
+                }}
+                className="rounded-lg h-80 sm:m-2 w-72 justify-end flex flex-col p-2 shadow-xl hover:scale-[1.01] cursor-pointer"
+              ></div>
+            </Link>
+          </SwiperSlide>
           {data.map((item: Post, index: number) => (
             <SwiperSlide key={index + item.title}>
               <Link href={{ pathname: `/articles/${item.id}` }}>

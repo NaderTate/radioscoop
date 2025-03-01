@@ -15,7 +15,8 @@ import { useFetchNavbarData } from "./_hooks/useFetchNavbarData";
 import { HiOutlineMenuAlt3 } from "react-icons/hi";
 const Header = () => {
   const [open, setOpen] = useState(false);
-  const { articleTypes, featureTypes, seasons } = useFetchNavbarData();
+  const { articleTypes, featureTypes, seasons, series, promos } =
+    useFetchNavbarData();
 
   return (
     <header className="bg-[#194F88]">
@@ -143,6 +144,25 @@ const Header = () => {
                       ))}
                     </NavContent>
                   </NavItem>
+                ))}
+              </NavContent>
+            </NavItem>
+            <NavItem label="مسلسلات FM">
+              <NavContent>
+                {series.map((item) => (
+                  <NavLink
+                    key={item.id}
+                    label={item.name}
+                    link={`/programs/${item.id}`}
+                  />
+                ))}
+                {promos.map((promo) => (
+                  <NavLink
+                    key={promo.category.id}
+                    link={`/promos`}
+                    label={`بروموهات ${promo.category.name}`}
+                    queries={{ category: promo.category.id }}
+                  />
                 ))}
               </NavContent>
             </NavItem>
