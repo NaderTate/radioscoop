@@ -3,8 +3,15 @@ import prisma from "@/lib/prisma";
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const sk = Number(searchParams.get("page")) || 1;
+  const search = searchParams.get("search") || "";
   const itemsToShow = 20;
   const categories = await prisma.category.findMany({
+    where: {
+      name: {
+        contains: search,
+        mode: "insensitive",
+      },
+    },
     select: {
       id: true,
       img: true,

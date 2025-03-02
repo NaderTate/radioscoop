@@ -2,15 +2,30 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
+
   const sk = Number(searchParams.get("page")) || 1;
   const search = searchParams.get("search") || "";
+  const program = searchParams.get("program") || "";
+
   const itemsToShow = 20;
+
+  const filterQuery: { [key: string]: any } = {};
+  if (search) {
+    filterQuery["category"] = {
+      name: {
+        contains: search,
+        mode: "insensitive",
+      },
+    };
+  }
+  if (program) {
+    filterQuery["category"] = {
+      id: program,
+    };
+  }
+
   const episodes = await prisma.episode.findMany({
-    where: {
-      category: search
-        ? { name: { contains: search, mode: "insensitive" } }
-        : undefined,
-    },
+    where: filterQuery,
     select: {
       id: true,
       embedLink: true,
@@ -39,14 +54,7 @@ export async function GET(request: NextRequest) {
     take: itemsToShow,
   });
   const count = await prisma.episode.count({
-    where: {
-      category: {
-        name: {
-          contains: search,
-          mode: "insensitive",
-        },
-      },
-    },
+    where: filterQuery,
   });
   const pages = Array.from({ length: Math.ceil(count / 20) }, (_, i) => i + 1);
   const pagenatedArray = (arr: Array<number>, p: number) => {
