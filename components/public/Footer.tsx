@@ -94,7 +94,7 @@ function Footer() {
                 width="500"
                 height="200"
                 id="gmap_canvas"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d863.1330128014512!2d31.326910793252505!3d30.078945164646566!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583e3c670c68fd%3A0x7d07db0e78a6bee1!2sOn%20Track%20Studios!5e0!3m2!1sen!2seg!4v1707162793849!5m2!1sen!2seg"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3452.4820046436735!2d31.326392600000005!3d30.080379100000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583f0040631709%3A0xe377e47a57a3c6f3!2sradio%20scoop!5e0!3m2!1sen!2seg!4v1741737608194!5m2!1sen!2seg"
               />
 
               <iframe
