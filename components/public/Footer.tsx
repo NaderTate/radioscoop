@@ -102,7 +102,7 @@ function Footer() {
                 width="500"
                 height="200"
                 id="gmap_canvas"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d213.1977570901111!2d29.96619445352809!3d31.243879891960518!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14f5c57780dc1087%3A0x7e634c737ccf9125!2z2YfZiNmFINiv2YrYstin2YrZhg!5e0!3m2!1sen!2seg!4v1712591557020!5m2!1sen!2seg"
+                src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3412.8341686281874!2d29.902063975598733!3d31.197611074363437!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzHCsDExJzUxLjQiTiAyOcKwNTQnMTYuNyJF!5e0!3m2!1sen!2seg!4v1741738551176!5m2!1sen!2seg"
               />
             </div>
           </div>
