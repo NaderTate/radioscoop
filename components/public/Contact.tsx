@@ -30,7 +30,7 @@ const Contact = () => {
                 حمل تطبيق راديو سكووب الان من جوجل بلاي
               </p>
             </div>
-            <div className="flex mt-6 sm:mt-0 gap-3 justify-center">
+            <div className="flex mt-6 sm:mt-0 gap-3 justify-center items-center">
               <div className=" flex-shrink-0">
                 <Image
                   alt="logo"
@@ -40,13 +40,13 @@ const Contact = () => {
                   height={60}
                 />
               </div>
-              <div className="bg-white rounded-2xl w-16 h-16 p-1">
+              <div className=" rounded-2xl  p-1">
                 <Image
                   alt="logo"
-                  className="bg-white"
-                  src="/logo.png"
-                  width={54}
-                  height={54}
+                  className=""
+                  src="/new-logo-white.png"
+                  width={69}
+                  height={69}
                 />
               </div>
             </div>

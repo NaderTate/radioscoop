@@ -31,13 +31,13 @@ const Header = () => {
               الي الاذاعات ال FM الكبرى
             </p>
           </div>
-          <div className="w-20 md:w-auto rounded-xl bg-slate-50">
+          <div className="w-20 md:w-auto rounded-xl ">
             <Link href={{ pathname: "/" }}>
               <Image
                 alt="Radio scoop"
-                src="/logo.png"
-                width={100}
-                height={100}
+                src="/new-logo-white.png"
+                width={150}
+                height={150}
               />
             </Link>
           </div>
