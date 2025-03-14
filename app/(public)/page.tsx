@@ -91,7 +91,7 @@ async function Home() {
           allowFullScreen
         ></iframe> */}
         <video
-          src="/ad-video.mp4"
+          src="https://files.catbox.moe/2jghnc.mp4"
           controls
           className="w-full rounded-md"
         ></video>
