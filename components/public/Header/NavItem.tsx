@@ -2,7 +2,10 @@ import Link from "next/link";
 
 import { BiSolidChevronDown } from "react-icons/bi";
 
-type Props = { children: React.ReactNode; label: string | number };
+type Props = {
+  children: React.ReactNode;
+  label: string | number;
+};
 
 const NavItem = ({ children, label }: Props) => {
   return (
@@ -36,24 +39,24 @@ const NavLink = ({
   label,
   link,
   queries,
+  isExternal,
 }: {
   label: string | number;
   link: string;
   queries?: {};
+  isExternal?: boolean;
 }) => {
+  const className =
+    "block whitespace-nowrap overflow-ellipsis px-4 group py-2 text-sm font-semibold rounded-lg text-slate-100 flex-grow hover:text-white hover:bg-[#848da065] border-b border-b-slate-700 md:border-0 lg:text-md xl:text-lg";
+  if (isExternal) {
+    return (
+      <a target="_blank" href={link} className={className}>
+        {label}
+      </a>
+    );
+  }
   return (
-    <Link
-      onClick={() => {
-        const details = document.querySelectorAll("details");
-        details.forEach((detail) => {
-          detail.removeAttribute("open");
-        });
-      }}
-      href={{ pathname: link, query: queries }}
-      className={
-        "block whitespace-nowrap overflow-ellipsis px-4 group py-2 text-sm font-semibold rounded-lg text-slate-100 flex-grow hover:text-white hover:bg-[#848da065] border-b border-b-slate-700 md:border-0 lg:text-md xl:text-lg"
-      }
-    >
+    <Link href={{ pathname: link, query: queries }} className={className}>
       {label}
     </Link>
   );

@@ -116,15 +116,24 @@ const Header = () => {
             </NavItem>
             <NavItem label="البرامج">
               <NavContent>
-                {featureTypes.map((type) => (
-                  <NavLink
-                    label={type.name}
-                    link={`/features`}
-                    queries={{ type: type.id }}
-                    key={type.id}
-                  />
-                ))}
+                <NavItem label="الفيتشرات">
+                  <NavContent>
+                    {featureTypes.map((type) => (
+                      <NavLink
+                        label={type.name}
+                        link={`/features`}
+                        queries={{ type: type.id }}
+                        key={type.id}
+                      />
+                    ))}
+                  </NavContent>
+                </NavItem>
                 <NavLink label="ميديا سكووب" link="/media-scoop" />
+                <NavLink
+                  isExternal
+                  label="ما وراء الجريمة"
+                  link="https://www.facebook.com/share/1EhoqdKhNV/?mibextid=wwXIfr"
+                />
                 <NavLink
                   label="البودكاست"
                   link="/media-scoop"
